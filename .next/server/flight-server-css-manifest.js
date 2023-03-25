@@ -1,0 +1,14 @@
+self.__RSC_CSS_MANIFEST={
+  "__entry_css_mods__": {
+    "/Users/valentin.bourreau/Sites/personal-finance/app/page": [
+      "/Users/valentin.bourreau/Sites/personal-finance/app/page.module.css",
+      "/Users/valentin.bourreau/Sites/personal-finance/app/globals.css"
+    ]
+  },
+  "/Users/valentin.bourreau/Sites/personal-finance/app/page.tsx": [
+    "/Users/valentin.bourreau/Sites/personal-finance/app/page.module.css"
+  ],
+  "/Users/valentin.bourreau/Sites/personal-finance/app/layout.tsx": [
+    "/Users/valentin.bourreau/Sites/personal-finance/app/globals.css"
+  ]
+}
