@@ -1,29 +1,23 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import type { FC } from 'react';
 import { Toaster } from 'react-hot-toast';
-import { NhostClient, NhostProvider } from '@nhost/react'
+import { NhostProvider } from '@nhost/react'
 import 'antd/dist/reset.css';
 import './App.css';
 import { NhostApolloProvider } from '@nhost/react-apollo'
 import Main from './main';
-
-const nhost = new NhostClient({
-  subdomain: process.env.REACT_APP_NHOST_SUBDOMAIN,
-  region: process.env.REACT_APP_NHOST_REGION
-})
-
-const Spinner = () => {
-  return <h1>🌀 Loading...</h1>
-}
+import { nhost } from './utils/nhost';
+import { QueryClientProvider } from '@tanstack/react-query'
+import { queryClient } from './utils/react-query-client'
 
 const App: FC = () => {
   return (
     <div className="App">
       <NhostProvider nhost={nhost}>
         <NhostApolloProvider nhost={nhost}>
-          <Suspense fallback={<Spinner />}>
+          <QueryClientProvider client={queryClient}>
             <Main />
-          </Suspense>
+          </QueryClientProvider>
         </NhostApolloProvider>
       </NhostProvider>
       <Toaster />

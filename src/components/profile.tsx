@@ -2,43 +2,25 @@ import styles from '../styles/profile.module.css';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import Input from './input';
-import { gql, useMutation, useQuery } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import { toast } from 'react-hot-toast'
-import { useUserId } from '@nhost/react';
 import type { User } from '../user.model';
+import { graphql } from '../gql/gql';
+import { useOutletContext } from 'react-router-dom';
 
-const UPDATE_USER_MUTATION = gql`
-  mutation ($id: uuid!, $displayName: String!, $metadata: jsonb) {
+const UPDATE_USER_MUTATION = graphql(`
+  mutation UpdateUser($id: uuid!, $displayName: String!, $metadata: jsonb) {
     updateUser(pk_columns: { id: $id }, _set: { displayName: $displayName, metadata: $metadata }) {
       id
       displayName
       metadata
     }
   }
-`
+`)
 
 const Profile = () => {
-    // TODO: typing context
-    const id = useUserId()
+  const { user } = useOutletContext<{ user: User }>();
 
-    const GET_USER_QUERY = gql`
-      query GetUser($id: uuid!) {
-        user(id: $id) {
-          id
-          email
-          displayName
-          metadata
-          avatarUrl
-        }
-      }
-    `
-  
-    const { loading, error, data } = useQuery<{ user: User }>(GET_USER_QUERY, {
-      variables: { id },
-      skip: !id
-    });
-    const user = data?.user;
-    console.log('user', user)
     const [mutateUser, { loading: updatingProfile }] = useMutation(UPDATE_USER_MUTATION)
 
   const updateUserProfile = async (e: FormEvent<HTMLFormElement>) => {
