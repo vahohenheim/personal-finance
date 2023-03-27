@@ -1,10 +1,10 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import App from './app';
 import reportWebVitals from './reportWebVitals';
 import SignUp from './components/sign-up';
-import SignIn from './components/sign-in';
+import SignIn from './components/sign-in/sign-in';
 import {
   BrowserRouter,
   Routes,
