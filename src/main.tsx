@@ -1,12 +1,11 @@
 import React from 'react';
 import type { FC } from 'react';
-import 'antd/dist/reset.css';
-import './App.css';
 import { Outlet } from 'react-router-dom'
-import Header from './components/header';
+import Header from './components/header/header';
 import { useUserId } from '@nhost/react'
 import { gql, useQuery } from '@apollo/client'
 import { User } from './user.model';
+import Footer from './components/footer/footer';
 
 const Main: FC = () => {
   const id = useUserId()
@@ -34,12 +33,14 @@ const Main: FC = () => {
   return (
     <>
         <Header user={user} />
-        {error ? (
-            <p>Something went wrong. Try to refresh the page.</p>
-        ) : !loading ? (
-            <Outlet context={{ user }} />
-        ) : <p>loading</p>}
-        <footer>Valentin Bourreau </footer>
+        <main className='main'>
+          {error ? (
+              <p>Something went wrong. Try to refresh the page.</p>
+          ) : !loading ? (
+              <Outlet context={{ user }} />
+          ) : <p>loading</p>}
+        </main>
+        <Footer />
     </>
   )
 
