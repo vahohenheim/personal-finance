@@ -30,7 +30,6 @@ const SignIn = () => {
 	const disableForm = isLoading || needsEmailVerification;
 
 	const onFinish = (values: { email: string; password: string }) => {
-		console.log('Received values of form: ', values);
 		signInEmailPassword(values.email, values.password);
 	};
 

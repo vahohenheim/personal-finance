@@ -3,8 +3,9 @@ import type { FC } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import type { User } from '../user.model';
 import { Helmet } from 'react-helmet';
-import Transactions from './transactions';
 import AddTransaction from './add-transation';
+import Transactions from './transactions/transations';
+import styles from './dashboard.module.css';
 
 const Dashboard: FC = () => {
 	const { user } = useOutletContext<{ user: User }>();
@@ -15,10 +16,13 @@ const Dashboard: FC = () => {
 				<title>dashboard | finance</title>
 			</Helmet>
 
-			<div>
-				<h1>Dashboard of {user?.displayName}</h1>
-				<Transactions />
-				<AddTransaction />
+			<div className="container center-block">
+				<section className={styles.section}>
+					<Transactions />
+				</section>
+				<section className={styles.section}>
+					<AddTransaction />
+				</section>
 			</div>
 		</>
 	);

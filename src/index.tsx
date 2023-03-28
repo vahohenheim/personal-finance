@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
+import 'antd/dist/reset.css';
 import './index.css';
 import App from './app';
 import reportWebVitals from './reportWebVitals';
@@ -9,6 +10,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ProtectedRoute from './components/protected-route';
 import Profile from './components/profile';
 import Dashboard from './components/dashboard';
+import * as dayjs from 'dayjs';
+import 'dayjs/locale/en';
+
+dayjs.locale('en');
 
 const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement

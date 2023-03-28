@@ -6,6 +6,7 @@ import { queryClient } from '../utils/react-query-client';
 import toast from 'react-hot-toast';
 import { useOutletContext } from 'react-router-dom';
 import { User } from '../user.model';
+import { Button, Form, Input, Radio, Select, InputNumber } from 'antd';
 
 const INSERT_TRANSACTION_MUTATION = graphql(`
 	mutation InsertTransaction($transaction: transactions_insert_input!) {
@@ -29,10 +30,6 @@ const INSERT_TRANSACTION_MUTATION = graphql(`
 const AddTransaction = () => {
 	const { user } = useOutletContext<{ user: User }>();
 
-	const [amount, setAmount] = useState(0);
-	const [label, setLabel] = useState('');
-	const [budgetId, setBudgetId] = useState('month');
-
 	const insertTransaction = useMutation({
 		mutationFn: (transaction: {
 			amount: number;
@@ -54,22 +51,21 @@ const AddTransaction = () => {
 		},
 	});
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-
-		console.log('e', e, amount, label, budgetId);
-
-		if (!amount || !label || !budgetId) {
-			return;
-		}
-
+	const onFinish = (values: {
+		label: string;
+		transation_type: string;
+		budget_type: string;
+		budget_id: string;
+		company_id: string;
+		amount: number;
+	}) => {
 		try {
-			const transaction = { label, amount, budget_id: budgetId };
-			const insert = insertTransaction.mutate(transaction);
-			console.log('insert', insert);
-			setAmount(0);
-			setLabel('');
-			setBudgetId('month');
+			const transaction = {
+				label: values.label,
+				amount: values.amount,
+				budget_id: values.budget_id,
+			};
+			insertTransaction.mutate(transaction);
 			toast.success('Add transaction successfully', {
 				id: 'addTransaction',
 			});
@@ -83,47 +79,75 @@ const AddTransaction = () => {
 		<div>
 			<h2>New Transaction</h2>
 			<div>
-				<form onSubmit={handleSubmit} className="space-y-4">
-					<div>
-						<label
-							htmlFor="email"
-							className="block text-sm font-medium text-gray-700"
-						>
-							Transaction
-						</label>
-						<div className="mt-1">
-							<input
-								type="text"
-								placeholder="Label"
-								value={label}
-								onChange={(e) => setLabel(e.target.value)}
-							/>
-							<input
-								type="number"
-								placeholder="Amount"
-								value={amount}
-								onChange={(e) =>
-									setAmount(Number(e.target.value))
-								}
-							/>
-							<select
-								onChange={(e) => setBudgetId(e.target.value)}
-							>
-								<option value="month">Month</option>
-								<option value="annual">Annual</option>
-								<option value="Project">Project</option>
-							</select>
-						</div>
-					</div>
-					<div>
-						<button
-							type="submit"
-							disabled={insertTransaction.isLoading}
-						>
-							Add
-						</button>
-					</div>
-				</form>
+				<Form
+					layout="vertical"
+					initialValues={{
+						transation_type: 'spent',
+						budget_type: 'month',
+					}}
+					onFinish={onFinish}
+				>
+					<Form.Item
+						label="Define transaction"
+						name="transation_type"
+					>
+						<Radio.Group>
+							<Radio.Button value="spent">spent</Radio.Button>
+							<Radio.Button value="entry">entry</Radio.Button>
+						</Radio.Group>
+					</Form.Item>
+					<Form.Item label="Select type" name="budget_type">
+						<Radio.Group>
+							<Radio.Button value="month">month</Radio.Button>
+							<Radio.Button value="annual">annual</Radio.Button>
+							<Radio.Button value="project">project</Radio.Button>
+						</Radio.Group>
+					</Form.Item>
+					<Form.Item label="Select budget" name="budget_id">
+						<Select>
+							<Select.Option value="demo">Demo</Select.Option>
+							<Select.Option value="demo2">Demo2</Select.Option>
+							<Select.Option value="demo3">Demo3</Select.Option>
+						</Select>
+					</Form.Item>
+					<Form.Item label="Select company" name="company_id">
+						<Select
+							showSearch
+							placeholder="typing company name"
+							optionFilterProp="children"
+							filterOption={(input, option) =>
+								(option?.label ?? '')
+									.toLowerCase()
+									.includes(input.toLowerCase())
+							}
+							options={[
+								{
+									value: 'jack',
+									label: 'Jack',
+								},
+								{
+									value: 'lucy',
+									label: 'Lucy',
+								},
+								{
+									value: 'tom',
+									label: 'Tom',
+								},
+							]}
+						/>
+					</Form.Item>
+					<Form.Item label="Define label" name="label">
+						<Input placeholder="typing transaction label" />
+					</Form.Item>
+					<Form.Item label="Amount" name="amount">
+						<InputNumber placeholder="typing transaction label" />
+					</Form.Item>
+					<Form.Item>
+						<Button type="primary" block htmlType="submit">
+							add transaction
+						</Button>
+					</Form.Item>
+				</Form>
 			</div>
 		</div>
 	);
