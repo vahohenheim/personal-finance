@@ -1,13 +1,6 @@
 import styles from '../styles/spinner.module.css';
+import { FC } from 'react';
 
-import classNames from 'classnames';
-
-const Spinner = ({ size = '' }) => (
-  <span
-    className={classNames(
-      size === 'sm' ? styles['spinner-sm'] : styles.spinner
-    )}
-  />
-);
+const Spinner: FC = () => <span className={styles.spinner} />;
 
 export default Spinner;
