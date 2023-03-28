@@ -1,21 +1,22 @@
-import { nhost } from './nhost'
-import { GraphQLClient } from 'graphql-request'
+import { nhost } from './nhost';
+import { GraphQLClient } from 'graphql-request';
 
 type AuthHeaderProps = {
-  authorization?: string
-}
+	authorization?: string;
+};
 
 export const gqlClient = new GraphQLClient(nhost.graphql.getUrl(), {
-  headers: () => {
-    const authHeaders = {} as AuthHeaderProps
+	headers: () => {
+		const authHeaders = {} as AuthHeaderProps;
 
-    if (nhost.auth.isAuthenticated()) {
-      authHeaders['authorization'] = `Bearer ${nhost.auth.getAccessToken()}`
-    }
+		if (nhost.auth.isAuthenticated()) {
+			const token = nhost.auth.getAccessToken() || '';
+			authHeaders.authorization = `Bearer ${token}`;
+		}
 
-    return {
-      'Content-Type': 'application/json',
-      ...authHeaders,
-    }
-  },
-})
+		return {
+			'Content-Type': 'application/json',
+			...authHeaders,
+		};
+	},
+});

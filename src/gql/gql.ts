@@ -13,10 +13,10 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  mutation InsertTransaction($transaction: transactions_insert_input!) {\n    insert_transactions(objects: [$transaction]) {\n        affected_rows\n        returning {\n            id\n            amount\n            budget_id\n            label\n            type\n            created_at\n            updated_at\n            id\n            user_id\n        }\n    }\n  }\n": types.InsertTransactionDocument,
-    "\n  mutation UpdateUser($id: uuid!, $displayName: String!, $metadata: jsonb) {\n    updateUser(pk_columns: { id: $id }, _set: { displayName: $displayName, metadata: $metadata }) {\n      id\n      displayName\n      metadata\n    }\n  }\n": types.UpdateUserDocument,
-    "\n  query GetTransactions {\n    transactions(order_by: { created_at: desc }) {\n        amount\n        budget_id\n        label\n        type\n        created_at\n        updated_at\n        id\n        user_id\n    }\n  }\n": types.GetTransactionsDocument,
-    "\n    query GetUser($id: uuid!) {\n      user(id: $id) {\n        id\n        email\n        displayName\n        metadata\n        avatarUrl\n      }\n    }\n  ": types.GetUserDocument,
+    "\n\tmutation InsertTransaction($transaction: transactions_insert_input!) {\n\t\tinsert_transactions(objects: [$transaction]) {\n\t\t\taffected_rows\n\t\t\treturning {\n\t\t\t\tid\n\t\t\t\tamount\n\t\t\t\tbudget_id\n\t\t\t\tlabel\n\t\t\t\ttype\n\t\t\t\tcreated_at\n\t\t\t\tupdated_at\n\t\t\t\tid\n\t\t\t\tuser_id\n\t\t\t}\n\t\t}\n\t}\n": types.InsertTransactionDocument,
+    "\n\tmutation UpdateUser($id: uuid!, $displayName: String!, $metadata: jsonb) {\n\t\tupdateUser(\n\t\t\tpk_columns: { id: $id }\n\t\t\t_set: { displayName: $displayName, metadata: $metadata }\n\t\t) {\n\t\t\tid\n\t\t\tdisplayName\n\t\t\tmetadata\n\t\t}\n\t}\n": types.UpdateUserDocument,
+    "\n\tquery GetTransactions {\n\t\ttransactions(order_by: { created_at: desc }) {\n\t\t\tamount\n\t\t\tbudget_id\n\t\t\tlabel\n\t\t\ttype\n\t\t\tcreated_at\n\t\t\tupdated_at\n\t\t\tid\n\t\t\tuser_id\n\t\t}\n\t}\n": types.GetTransactionsDocument,
+    "\n\t\tquery GetUser($id: uuid!) {\n\t\t\tuser(id: $id) {\n\t\t\t\tid\n\t\t\t\temail\n\t\t\t\tdisplayName\n\t\t\t\tmetadata\n\t\t\t\tavatarUrl\n\t\t\t}\n\t\t}\n\t": types.GetUserDocument,
 };
 
 /**
@@ -36,19 +36,19 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  mutation InsertTransaction($transaction: transactions_insert_input!) {\n    insert_transactions(objects: [$transaction]) {\n        affected_rows\n        returning {\n            id\n            amount\n            budget_id\n            label\n            type\n            created_at\n            updated_at\n            id\n            user_id\n        }\n    }\n  }\n"): (typeof documents)["\n  mutation InsertTransaction($transaction: transactions_insert_input!) {\n    insert_transactions(objects: [$transaction]) {\n        affected_rows\n        returning {\n            id\n            amount\n            budget_id\n            label\n            type\n            created_at\n            updated_at\n            id\n            user_id\n        }\n    }\n  }\n"];
+export function graphql(source: "\n\tmutation InsertTransaction($transaction: transactions_insert_input!) {\n\t\tinsert_transactions(objects: [$transaction]) {\n\t\t\taffected_rows\n\t\t\treturning {\n\t\t\t\tid\n\t\t\t\tamount\n\t\t\t\tbudget_id\n\t\t\t\tlabel\n\t\t\t\ttype\n\t\t\t\tcreated_at\n\t\t\t\tupdated_at\n\t\t\t\tid\n\t\t\t\tuser_id\n\t\t\t}\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation InsertTransaction($transaction: transactions_insert_input!) {\n\t\tinsert_transactions(objects: [$transaction]) {\n\t\t\taffected_rows\n\t\t\treturning {\n\t\t\t\tid\n\t\t\t\tamount\n\t\t\t\tbudget_id\n\t\t\t\tlabel\n\t\t\t\ttype\n\t\t\t\tcreated_at\n\t\t\t\tupdated_at\n\t\t\t\tid\n\t\t\t\tuser_id\n\t\t\t}\n\t\t}\n\t}\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  mutation UpdateUser($id: uuid!, $displayName: String!, $metadata: jsonb) {\n    updateUser(pk_columns: { id: $id }, _set: { displayName: $displayName, metadata: $metadata }) {\n      id\n      displayName\n      metadata\n    }\n  }\n"): (typeof documents)["\n  mutation UpdateUser($id: uuid!, $displayName: String!, $metadata: jsonb) {\n    updateUser(pk_columns: { id: $id }, _set: { displayName: $displayName, metadata: $metadata }) {\n      id\n      displayName\n      metadata\n    }\n  }\n"];
+export function graphql(source: "\n\tmutation UpdateUser($id: uuid!, $displayName: String!, $metadata: jsonb) {\n\t\tupdateUser(\n\t\t\tpk_columns: { id: $id }\n\t\t\t_set: { displayName: $displayName, metadata: $metadata }\n\t\t) {\n\t\t\tid\n\t\t\tdisplayName\n\t\t\tmetadata\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation UpdateUser($id: uuid!, $displayName: String!, $metadata: jsonb) {\n\t\tupdateUser(\n\t\t\tpk_columns: { id: $id }\n\t\t\t_set: { displayName: $displayName, metadata: $metadata }\n\t\t) {\n\t\t\tid\n\t\t\tdisplayName\n\t\t\tmetadata\n\t\t}\n\t}\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query GetTransactions {\n    transactions(order_by: { created_at: desc }) {\n        amount\n        budget_id\n        label\n        type\n        created_at\n        updated_at\n        id\n        user_id\n    }\n  }\n"): (typeof documents)["\n  query GetTransactions {\n    transactions(order_by: { created_at: desc }) {\n        amount\n        budget_id\n        label\n        type\n        created_at\n        updated_at\n        id\n        user_id\n    }\n  }\n"];
+export function graphql(source: "\n\tquery GetTransactions {\n\t\ttransactions(order_by: { created_at: desc }) {\n\t\t\tamount\n\t\t\tbudget_id\n\t\t\tlabel\n\t\t\ttype\n\t\t\tcreated_at\n\t\t\tupdated_at\n\t\t\tid\n\t\t\tuser_id\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery GetTransactions {\n\t\ttransactions(order_by: { created_at: desc }) {\n\t\t\tamount\n\t\t\tbudget_id\n\t\t\tlabel\n\t\t\ttype\n\t\t\tcreated_at\n\t\t\tupdated_at\n\t\t\tid\n\t\t\tuser_id\n\t\t}\n\t}\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n    query GetUser($id: uuid!) {\n      user(id: $id) {\n        id\n        email\n        displayName\n        metadata\n        avatarUrl\n      }\n    }\n  "): (typeof documents)["\n    query GetUser($id: uuid!) {\n      user(id: $id) {\n        id\n        email\n        displayName\n        metadata\n        avatarUrl\n      }\n    }\n  "];
+export function graphql(source: "\n\t\tquery GetUser($id: uuid!) {\n\t\t\tuser(id: $id) {\n\t\t\t\tid\n\t\t\t\temail\n\t\t\t\tdisplayName\n\t\t\t\tmetadata\n\t\t\t\tavatarUrl\n\t\t\t}\n\t\t}\n\t"): (typeof documents)["\n\t\tquery GetUser($id: uuid!) {\n\t\t\tuser(id: $id) {\n\t\t\t\tid\n\t\t\t\temail\n\t\t\t\tdisplayName\n\t\t\t\tmetadata\n\t\t\t\tavatarUrl\n\t\t\t}\n\t\t}\n\t"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
