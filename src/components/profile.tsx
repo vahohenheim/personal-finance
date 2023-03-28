@@ -1,12 +1,12 @@
-import styles from '../styles/profile.module.css';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { Helmet } from 'react-helmet';
-import Input from './input';
 import { useMutation } from '@apollo/client';
 import { toast } from 'react-hot-toast';
 import type { User } from '../user.model';
 import { graphql } from '../gql/gql';
 import { useOutletContext } from 'react-router-dom';
+import { Form, Input, Button } from 'antd';
+import styles from './dashboard.module.css';
 
 const UPDATE_USER_MUTATION = graphql(`
 	mutation UpdateUser($id: uuid!, $displayName: String!, $metadata: jsonb) {
@@ -37,17 +37,20 @@ const Profile = () => {
 	const [mutateUser, { loading: updatingProfile }] =
 		useMutation(UPDATE_USER_MUTATION);
 
-	const updateUserProfile = async (e: FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-
+	const onFinish = async (values: {
+		firstName: string;
+		lastName: string;
+		email: string;
+	}) => {
 		try {
 			await mutateUser({
 				variables: {
 					id: user?.id,
-					displayName: `${firstName} ${lastName}`.trim(),
+					displayName:
+						`${values.firstName} ${values.lastName}`.trim(),
 					metadata: {
-						firstName,
-						lastName,
+						firstName: values.firstName,
+						lastName: values.lastName,
 					},
 				},
 			});
@@ -63,56 +66,32 @@ const Profile = () => {
 				<title>profile - finance</title>
 			</Helmet>
 
-			<div className={styles.container}>
-				<div className={styles.info}>
+			<div className="container center-block">
+				<section className={styles.section}>
 					<h2>Profile</h2>
-					<p>Update your personal information.</p>
-				</div>
-
-				<div className={styles.card}>
-					<form onSubmit={updateUserProfile} className={styles.form}>
-						<div className={styles['form-fields']}>
-							<div className={styles['input-group']}>
-								<Input
-									type="text"
-									label="First name"
-									value={firstName}
-									onChange={(
-										e: ChangeEvent<HTMLInputElement>
-									) => setFirstName(e.target.value)}
-									required
-								/>
-								<Input
-									type="text"
-									label="Last name"
-									value={lastName}
-									onChange={(
-										e: ChangeEvent<HTMLInputElement>
-									) => setLastName(e.target.value)}
-									required
-								/>
-							</div>
-							<div className={styles['input-email-wrapper']}>
-								<Input
-									type="email"
-									label="Email address"
-									value={user?.email}
-									readOnly
-								/>
-							</div>
-						</div>
-
-						<div className={styles['form-footer']}>
-							<button
-								type="submit"
-								disabled={!isProfileFormDirty}
-								className={styles.button}
-							>
-								Update
-							</button>
-						</div>
-					</form>
-				</div>
+					<div>
+						<Form
+							layout="vertical"
+							initialValues={{
+								firstName: user?.metadata?.firstName,
+								lastName: user?.metadata?.lastName,
+							}}
+							onFinish={onFinish}
+						>
+							<Form.Item label="first name" name="firstName">
+								<Input placeholder="typing transaction label" />
+							</Form.Item>
+							<Form.Item label="last name" name="lastName">
+								<Input placeholder="typing transaction label" />
+							</Form.Item>
+							<Form.Item>
+								<Button type="primary" block htmlType="submit">
+									update profile
+								</Button>
+							</Form.Item>
+						</Form>
+					</div>
+				</section>
 			</div>
 		</>
 	);

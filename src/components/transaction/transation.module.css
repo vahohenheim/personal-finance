@@ -1,0 +1,50 @@
+.card {
+    max-width: 500px;
+}
+
+.body {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 100%;
+    background: rgba(55, 58, 66, 0.4);
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.title {
+    margin-left: var(--gui-gutter-sm);
+}
+
+.budget {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    color: #FFFFFF;
+    margin-bottom: var(--gui-gutter-xs);
+}
+
+.label {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FFFFFF;
+}
+
+.amount {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: right;
+    color: #FFFFFF;
+}

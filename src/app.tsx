@@ -2,8 +2,6 @@ import React from 'react';
 import type { FC } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { NhostProvider } from '@nhost/react';
-import 'antd/dist/reset.css';
-import './app.css';
 import { NhostApolloProvider } from '@nhost/react-apollo';
 import Main from './main';
 import { nhost } from './utils/nhost';

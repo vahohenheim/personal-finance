@@ -1,0 +1,22 @@
+.title {
+    text-align: left;
+    margin-bottom: var(--gui-gutter-base);
+}
+
+.list {
+    display: grid;
+    gap: var(--gui-gutter-base);
+}
+
+.month {
+    margin-bottom: var(--gui-gutter-base);
+
+}
+
+.day {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 15px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: var(--gui-gutter-base);
+}
