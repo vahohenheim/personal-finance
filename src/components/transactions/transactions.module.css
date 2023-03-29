@@ -1,22 +1,25 @@
 .title {
     text-align: left;
-    margin-bottom: var(--gui-gutter-base);
+    margin-bottom: 0;
 }
 
 .list {
-    display: grid;
-    gap: var(--gui-gutter-base);
 }
 
 .month {
-    margin-bottom: var(--gui-gutter-base);
-
-}
+    margin-top: var(--gui-gutter-base);
+    }
 
 .day {
+    margin-top: var(--gui-gutter-base);
+    display: grid;
+    gap: var(--gui-gutter-base);
+    margin-bottom: var(--gui-gutter-lg);
+}
+
+.day>p {
     font-weight: 400;
     font-size: 14px;
     line-height: 15px;
     color: rgba(255, 255, 255, 0.6);
-    margin-bottom: var(--gui-gutter-base);
 }

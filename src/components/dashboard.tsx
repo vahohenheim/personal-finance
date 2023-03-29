@@ -5,7 +5,7 @@ import type { User } from '../user.model';
 import { Helmet } from 'react-helmet';
 import AddTransaction from './add-transation';
 import Transactions from './transactions/transations';
-import styles from './dashboard.module.css';
+import { SectionComponent } from './section/section';
 
 const Dashboard: FC = () => {
 	const { user } = useOutletContext<{ user: User }>();
@@ -15,14 +15,13 @@ const Dashboard: FC = () => {
 			<Helmet>
 				<title>dashboard | finance</title>
 			</Helmet>
-
 			<div className="container center-block">
-				<section className={styles.section}>
+				<SectionComponent>
 					<Transactions />
-				</section>
-				<section className={styles.section}>
+				</SectionComponent>
+				<SectionComponent>
 					<AddTransaction />
-				</section>
+				</SectionComponent>
 			</div>
 		</>
 	);

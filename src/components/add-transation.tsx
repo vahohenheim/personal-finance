@@ -29,6 +29,7 @@ const INSERT_TRANSACTION_MUTATION = graphql(`
 
 const AddTransaction = () => {
 	const { user } = useOutletContext<{ user: User }>();
+	const [form] = Form.useForm();
 
 	const insertTransaction = useMutation({
 		mutationFn: (transaction: {
@@ -69,6 +70,7 @@ const AddTransaction = () => {
 			toast.success('Add transaction successfully', {
 				id: 'addTransaction',
 			});
+			form.resetFields();
 		} catch (error) {
 			toast.error('Unable to add transation', { id: 'addTransaction' });
 			console.error(error);
@@ -80,6 +82,7 @@ const AddTransaction = () => {
 			<h2>New Transaction</h2>
 			<div>
 				<Form
+					form={form}
 					layout="vertical"
 					initialValues={{
 						transation_type: 'spent',

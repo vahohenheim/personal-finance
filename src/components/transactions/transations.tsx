@@ -43,38 +43,80 @@ const Transactions = () => {
 
 	const transactions = data.transactions;
 
-	const aggregateByDay = () => {};
-
-	const aggregateByMonth = (acc: { [key: number]: any }, cur: any) => {
-		const date = dayjs(cur.created_at as string);
-		if (!acc[date.month()]) {
-			acc[date.month()] = [cur];
+	const aggregateByDay = (acc: { [key: string]: any }, cur: any) => {
+		const date = dayjs(cur.created_at as string).format('YYYY-MM-DD');
+		//`${date.month() + 1}-${date.day() + 1}-${date.year()}`;
+		if (!acc[date]) {
+			acc[date] = [cur];
 		} else {
-			acc[date.month()].push(cur);
+			acc[date].push(cur);
 		}
 		return acc;
 	};
 
 	const currentMonth = dayjs().month();
 
-	const transationsByMonth = transactions.reduce<{ [key: number]: any }>(
-		aggregateByMonth,
+	const transactionByDay = transactions.reduce<{ [key: string]: any }>(
+		aggregateByDay,
 		{}
 	);
 
-	console.log('transationsByMonth', transationsByMonth);
+	const transactionByDayByMonth = Object.keys(transactionByDay).reduce(
+		(acc: { [key: string]: any }, day: string) => {
+			const date = dayjs(day).format('YYYY-MM');
+			if (!acc[date]) {
+				acc[date] = {
+					[day]: transactionByDay[day],
+				};
+			} else {
+				acc[date] = {
+					...acc[date],
+					[day]: transactionByDay[day],
+				};
+			}
+			return acc;
+		},
+		{}
+	);
+
+	console.log('transactionByDay', transactionByDay);
+
+	console.log('transationsByMonth', transactionByDayByMonth);
 
 	return (
 		<div>
 			<h2 className={styles.title}>Transactions</h2>
-			<h3 className={styles.month}>this month, march 2023</h3>
-			<p className={styles.day}>26 Thuesday, March</p>
+
 			<div className={styles.list}>
-				{(transactions || []).map((transaction) => (
-					<TransationComponent
-						key={transaction.id}
-						transation={transaction}
-					/>
+				{(Object.keys(transactionByDayByMonth) || []).map((month) => (
+					<div key={month} className={styles.month}>
+						<h3>
+							this month,{' '}
+							{dayjs(month).format('MMMM YYYY').toLowerCase()}
+						</h3>
+						{Object.keys(
+							transactionByDayByMonth[month] as {
+								[key: string]: any;
+							}
+						).map((day) => (
+							<div key={day} className={styles.day}>
+								<p>
+									{dayjs(day)
+										.format('DD dddd, MMMM')
+										.toLowerCase()}
+								</p>
+								{transactionByDayByMonth[month][day].map(
+									(transation: any) => (
+										<div key={transation.id}>
+											<TransationComponent
+												transation={transation}
+											/>
+										</div>
+									)
+								)}
+							</div>
+						))}
+					</div>
 				))}
 			</div>
 		</div>
