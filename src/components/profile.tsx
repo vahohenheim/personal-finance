@@ -6,7 +6,7 @@ import type { User } from '../user.model';
 import { graphql } from '../gql/gql';
 import { useOutletContext } from 'react-router-dom';
 import { Form, Input, Button } from 'antd';
-import styles from './dashboard.module.css';
+import { SectionComponent } from './section/section';
 
 const UPDATE_USER_MUTATION = graphql(`
 	mutation UpdateUser($id: uuid!, $displayName: String!, $metadata: jsonb) {
@@ -67,7 +67,7 @@ const Profile = () => {
 			</Helmet>
 
 			<div className="container center-block">
-				<section className={styles.section}>
+				<SectionComponent>
 					<h2>Profile</h2>
 					<div>
 						<Form
@@ -91,7 +91,7 @@ const Profile = () => {
 							</Form.Item>
 						</Form>
 					</div>
-				</section>
+				</SectionComponent>
 			</div>
 		</>
 	);

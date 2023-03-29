@@ -1,5 +1,5 @@
 .section {
-    margin: var(--gui-gutter-2xl) 0;
+    margin: var(--gui-gutter-xl) 0 var(--gui-gutter-2xl) 0;
 }
 
 @media (max-width: 500px) {
