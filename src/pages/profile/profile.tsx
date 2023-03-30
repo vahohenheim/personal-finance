@@ -1,12 +1,11 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useMutation } from '@apollo/client';
 import { toast } from 'react-hot-toast';
-import type { User } from '../user.model';
-import { graphql } from '../gql/gql';
+import type { User } from '../../user.model';
+import { graphql } from '../../gql/gql';
 import { useOutletContext } from 'react-router-dom';
 import { Form, Input, Button } from 'antd';
-import { SectionComponent } from './section/section';
+import Section from '../../components/section/section';
 
 const UPDATE_USER_MUTATION = graphql(`
 	mutation UpdateUser($id: uuid!, $displayName: String!, $metadata: jsonb) {
@@ -21,18 +20,8 @@ const UPDATE_USER_MUTATION = graphql(`
 	}
 `);
 
-const Profile = () => {
+const ProfilePage = () => {
 	const { user } = useOutletContext<{ user: User }>();
-	const [firstName, setFirstName] = useState<string>(
-		user?.metadata?.firstName || ''
-	);
-	const [lastName, setLastName] = useState<string>(
-		user?.metadata?.lastName || ''
-	);
-
-	const isFirstNameDirty = firstName !== user?.metadata?.firstName;
-	const isLastNameDirty = lastName !== user?.metadata?.lastName;
-	const isProfileFormDirty = isFirstNameDirty || isLastNameDirty;
 
 	const [mutateUser, { loading: updatingProfile }] =
 		useMutation(UPDATE_USER_MUTATION);
@@ -67,7 +56,7 @@ const Profile = () => {
 			</Helmet>
 
 			<div className="container center-block">
-				<SectionComponent>
+				<Section>
 					<h2>Profile</h2>
 					<div>
 						<Form
@@ -85,16 +74,20 @@ const Profile = () => {
 								<Input placeholder="typing transaction label" />
 							</Form.Item>
 							<Form.Item>
-								<Button type="primary" block htmlType="submit">
+								<Button
+									type="primary"
+									htmlType="submit"
+									block={true}
+								>
 									update profile
 								</Button>
 							</Form.Item>
 						</Form>
 					</div>
-				</SectionComponent>
+				</Section>
 			</div>
 		</>
 	);
 };
 
-export default Profile;
+export default ProfilePage;

@@ -1,17 +1,25 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'antd/dist/reset.css';
-import './index.css';
+import './styles/index.css';
 import App from './app';
 import reportWebVitals from './reportWebVitals';
-import SignUp from './components/sign-up';
-import SignIn from './components/sign-in/sign-in';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import ProtectedRoute from './components/protected-route';
-import Profile from './components/profile';
-import Dashboard from './components/dashboard';
+import {
+	BrowserRouter,
+	Routes,
+	Route,
+	ScrollRestoration,
+} from 'react-router-dom';
 import * as dayjs from 'dayjs';
 import 'dayjs/locale/en';
+import AddTransactionPage from './pages/add-transaction/add-transaction';
+import DashboardPage from './pages/dashboard/dashboard';
+import ProfilePage from './pages/profile/profile';
+import RegisterPage from './pages/register/register';
+import LoginPage from './pages/login/login';
+import ProtectedRoute from './components/protected-route/protected-route';
+import TransactionsPage from './pages/transactions/transactions';
+import TransactionPage from './pages/transaction/transaction';
 
 dayjs.locale('en');
 
@@ -28,7 +36,31 @@ root.render(
 						index
 						element={
 							<ProtectedRoute>
-								<Dashboard />
+								<DashboardPage />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path="add-transaction"
+						element={
+							<ProtectedRoute>
+								<AddTransactionPage />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path="transactions"
+						element={
+							<ProtectedRoute>
+								<TransactionsPage />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path="transaction/:id"
+						element={
+							<ProtectedRoute>
+								<TransactionPage />
 							</ProtectedRoute>
 						}
 					/>
@@ -36,12 +68,12 @@ root.render(
 						path="profile"
 						element={
 							<ProtectedRoute>
-								<Profile />
+								<ProfilePage />
 							</ProtectedRoute>
 						}
 					/>
-					<Route path="sign-up" element={<SignUp />} />
-					<Route path="sign-in" element={<SignIn />} />
+					<Route path="register" element={<RegisterPage />} />
+					<Route path="login" element={<LoginPage />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

@@ -1,12 +1,13 @@
 html {
   --gui-background-color: #111111;
   --gui-text-color: #FFFFFF;
+  --gui-color-primary: #1668dc;
 
   --gui-text-font-size: 14px;
 
   --gui-header-height: 50px;
   --gui-footer-height: 50px;
-  
+
   --gui-grid-width-xs: 100%;
   --gui-grid-width-sm: 540px;
   --gui-grid-width-md: 720px;
@@ -50,6 +51,7 @@ h3,
 h4,
 h5 {
   font-weight: 700;
+  margin-bottom: 0;
 }
 
 p {
@@ -73,6 +75,7 @@ main {
   margin-left: auto;
   margin-right: auto;
 }
+
 /* ANT DESIGN OVERWRITES */
 .ant-card {
   background: rgba(48, 48, 48, 0.15);
