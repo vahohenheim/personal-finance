@@ -1,4 +1,3 @@
-import React from 'react';
 import type { FC } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { NhostProvider } from '@nhost/react';
@@ -11,7 +10,7 @@ import { ConfigProvider, theme } from 'antd';
 
 const App: FC = () => {
 	return (
-		<div className="App">
+		<>
 			<NhostProvider nhost={nhost}>
 				<NhostApolloProvider nhost={nhost}>
 					<QueryClientProvider client={queryClient}>
@@ -26,7 +25,7 @@ const App: FC = () => {
 				</NhostApolloProvider>
 			</NhostProvider>
 			<Toaster />
-		</div>
+		</>
 	);
 };
 

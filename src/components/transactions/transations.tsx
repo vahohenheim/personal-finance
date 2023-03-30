@@ -4,10 +4,12 @@ import { gqlClient } from '../../utils/graphql-client';
 import { TransationComponent } from '../transaction/transaction';
 import styles from './transactions.module.css';
 import dayjs from 'dayjs';
+import { FC } from 'react';
+import type { Transactions } from '../../gql/graphql';
 
 const GET_TRANSACTIONS_QUERY = graphql(`
-	query GetTransactions {
-		transactions(order_by: { created_at: desc }) {
+	query GetTransactions($limit: Int!) {
+		transactions(order_by: { created_at: desc }, limit: $limit) {
 			amount
 			budget_id
 			label
@@ -20,11 +22,14 @@ const GET_TRANSACTIONS_QUERY = graphql(`
 	}
 `);
 
-const Transactions = () => {
+const TransactionsComponent: FC<{ limit: number }> = ({ limit }) => {
 	const { data, isLoading, isError, error } = useQuery({
 		queryKey: ['transactions'],
 		queryFn: async () => {
-			return gqlClient.request(GET_TRANSACTIONS_QUERY);
+			return gqlClient.request<
+				{ transactions: Array<Transactions> },
+				{ limit: number }
+			>(GET_TRANSACTIONS_QUERY, { limit });
 		},
 	});
 
@@ -43,9 +48,11 @@ const Transactions = () => {
 
 	const transactions = data.transactions;
 
-	const aggregateByDay = (acc: { [key: string]: any }, cur: any) => {
+	const aggregateByDay = (
+		acc: Record<string, Array<Transactions>>,
+		cur: Transactions
+	) => {
 		const date = dayjs(cur.created_at as string).format('YYYY-MM-DD');
-		//`${date.month() + 1}-${date.day() + 1}-${date.year()}`;
 		if (!acc[date]) {
 			acc[date] = [cur];
 		} else {
@@ -54,68 +61,64 @@ const Transactions = () => {
 		return acc;
 	};
 
-	const currentMonth = dayjs().month();
+	const transactionByDay = transactions.reduce<
+		Record<string, Array<Transactions>>
+	>(aggregateByDay, {});
 
-	const transactionByDay = transactions.reduce<{ [key: string]: any }>(
-		aggregateByDay,
-		{}
-	);
+	const aggregateByDayByMonth = (
+		acc: Record<string, Record<string, Array<Transactions>>>,
+		day: string
+	) => {
+		const date = dayjs(day).format('YYYY-MM');
+		if (!acc[date]) {
+			acc[date] = {
+				[day]: transactionByDay[day],
+			};
+		} else {
+			acc[date] = {
+				...acc[date],
+				[day]: transactionByDay[day],
+			};
+		}
+		return acc;
+	};
 
 	const transactionByDayByMonth = Object.keys(transactionByDay).reduce(
-		(acc: { [key: string]: any }, day: string) => {
-			const date = dayjs(day).format('YYYY-MM');
-			if (!acc[date]) {
-				acc[date] = {
-					[day]: transactionByDay[day],
-				};
-			} else {
-				acc[date] = {
-					...acc[date],
-					[day]: transactionByDay[day],
-				};
-			}
-			return acc;
-		},
+		aggregateByDayByMonth,
 		{}
 	);
 
-	console.log('transactionByDay', transactionByDay);
-
-	console.log('transationsByMonth', transactionByDayByMonth);
+	const currentMonth = dayjs().format('YYYY-MM');
 
 	return (
 		<div>
-			<h2 className={styles.title}>Transactions</h2>
-
 			<div className={styles.list}>
 				{(Object.keys(transactionByDayByMonth) || []).map((month) => (
 					<div key={month} className={styles.month}>
 						<h3>
-							this month,{' '}
+							{currentMonth === month ? 'this month, ' : ''}
 							{dayjs(month).format('MMMM YYYY').toLowerCase()}
 						</h3>
-						{Object.keys(
-							transactionByDayByMonth[month] as {
-								[key: string]: any;
-							}
-						).map((day) => (
-							<div key={day} className={styles.day}>
-								<p>
-									{dayjs(day)
-										.format('DD dddd, MMMM')
-										.toLowerCase()}
-								</p>
-								{transactionByDayByMonth[month][day].map(
-									(transation: any) => (
-										<div key={transation.id}>
-											<TransationComponent
-												transation={transation}
-											/>
-										</div>
-									)
-								)}
-							</div>
-						))}
+						{Object.keys(transactionByDayByMonth[month]).map(
+							(day) => (
+								<div key={day} className={styles.day}>
+									<p>
+										{dayjs(day)
+											.format('DD dddd, MMMM')
+											.toLowerCase()}
+									</p>
+									{transactionByDayByMonth[month][day].map(
+										(transation) => (
+											<div key={transation.id as string}>
+												<TransationComponent
+													transation={transation}
+												/>
+											</div>
+										)
+									)}
+								</div>
+							)
+						)}
 					</div>
 				))}
 			</div>
@@ -123,4 +126,4 @@ const Transactions = () => {
 	);
 };
 
-export default Transactions;
+export default TransactionsComponent;

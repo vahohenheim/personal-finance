@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import type { FC } from 'react';
 import type { User } from '../../user.model';
 import { useSignOut } from '@nhost/react';
@@ -16,6 +16,10 @@ const Header: FC<{ user: User }> = ({ user }) => {
 		{
 			label: 'dashboard',
 			key: '/',
+		},
+		{
+			label: 'transactions',
+			key: '/transactions',
 		},
 		{
 			label: 'profile',

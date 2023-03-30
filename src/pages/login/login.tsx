@@ -1,4 +1,4 @@
-import styles from './sign-in.module.css';
+import styles from './login.module.css';
 import { useSignInEmailPassword } from '@nhost/react';
 import { Link, Navigate } from 'react-router-dom';
 import {
@@ -9,7 +9,7 @@ import {
 } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
 
-const SignIn = () => {
+const LoginPage = () => {
 	const {
 		signInEmailPassword,
 		isLoading,
@@ -94,18 +94,22 @@ const SignIn = () => {
 						type="primary"
 						htmlType="submit"
 						loading={isLoading}
-						className={styles.button}
+						block={true}
 					>
 						access to your account
 					</Button>
 				</Form.Item>
 
 				<Form.Item>
-					Or <Link to="/sign-up">register now!</Link>
+					<Link to="/register">
+						<Button type="link" block={true}>
+							create a account
+						</Button>
+					</Link>
 				</Form.Item>
 			</Form>
 		</div>
 	);
 };
 
-export default SignIn;
+export default LoginPage;

@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { graphql } from '../gql/gql';
-import { gqlClient } from '../utils/graphql-client';
-import { queryClient } from '../utils/react-query-client';
+import { graphql } from '../../gql/gql';
+import { gqlClient } from '../../utils/graphql-client';
+import { queryClient } from '../../utils/react-query-client';
 import toast from 'react-hot-toast';
 import { useOutletContext } from 'react-router-dom';
-import { User } from '../user.model';
+import { User } from '../../user.model';
 import { Button, Form, Input, Radio, Select, InputNumber } from 'antd';
 
 const INSERT_TRANSACTION_MUTATION = graphql(`
