@@ -12,6 +12,8 @@ import {
 } from 'react-router-dom';
 import * as dayjs from 'dayjs';
 import 'dayjs/locale/en';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
 import AddTransactionPage from './pages/add-transaction/add-transaction';
 import DashboardPage from './pages/dashboard/dashboard';
 import ProfilePage from './pages/profile/profile';
@@ -22,6 +24,8 @@ import TransactionsPage from './pages/transactions/transactions';
 import TransactionPage from './pages/transaction/transaction';
 
 dayjs.locale('en');
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement

@@ -1,9 +1,41 @@
 .header {
-    height: var(--gui-footer-height);
+    height: var(--gui-header-height);
     background: rgba(25, 27, 31, 0.4);
     backdrop-filter: blur(8px);
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-end;
 }
 
-.nav {
+@media (max-width: 500px) {
+    .header {
+        padding: 0 var(--gui-gutter-base);
+        height: var(--gui-header-mobile-height);
+    }
+}
+
+
+.container {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--gui-header-height);
+    flex-grow: 1;
+    }
+
+    .menu {
+        display: flex;
+        gap: var(--gui-gutter-lg);
+    }
+
+    .profile {
+        height: 30px;
+        width: 30px;
+        border-radius: 100%;
+        background: rgba(55, 58, 66, 0.4);
+        transition: border var(--gui-transition-duration-very-fast) ease-in-out;
+    }
+
+    .profile.active {
+        border: 1px var(--gui-color-primary) solid;
 }

@@ -1,59 +1,52 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { FC } from 'react';
 import type { User } from '../../user.model';
-import { useSignOut } from '@nhost/react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styles from './header.module.css';
-import type { MenuProps } from 'antd';
-import { Menu } from 'antd';
+import classNames from 'classnames';
+import LinkComponent from '../link/link';
 
 const Header: FC<{ user: User }> = ({ user }) => {
-	const { signOut } = useSignOut();
-	const navigate = useNavigate();
 	const [current, setCurrent] = useState('/');
+	const location = useLocation();
 
-	const MENU_ITEMS: MenuProps['items'] = [
-		{
-			label: 'dashboard',
-			key: '/',
-		},
-		{
-			label: 'transactions',
-			key: '/transactions',
-		},
-		{
-			label: 'profile',
-			key: '/profile',
-		},
-		{
-			label: 'logout',
-			key: '',
-			onClick: () => signOut(),
-		},
-	];
-
-	const onClick: MenuProps['onClick'] = (info) => {
-		console.log('click ', info);
-		if (info.key) {
-			setCurrent(info.key);
-			navigate(info.key, { replace: true });
-		}
-	};
+	useEffect(() => {
+		setCurrent(location.pathname);
+	}, [location]);
 
 	return (
 		<header className={styles.header}>
-			<div className="container center-block">
-				{user ? (
-					<Menu
-						onClick={onClick}
-						selectedKeys={[current]}
-						mode="horizontal"
-						items={MENU_ITEMS}
-					/>
-				) : (
-					<></>
-				)}
-			</div>
+			{user ? (
+				<div
+					className={classNames(
+						styles.container,
+						'container center-block'
+					)}
+				>
+					<div className={styles.menu}>
+						<LinkComponent active={current === '/'} to={'/'}>
+							🖥 dashboard
+						</LinkComponent>
+						<LinkComponent
+							active={current === '/transactions'}
+							to={'/transactions'}
+						>
+							💳 transactions
+						</LinkComponent>
+					</div>
+					<div className={styles.right}>
+						<Link to={'/profile'}>
+							<div
+								className={classNames(styles.profile, {
+									[styles.active]: current === '/profile',
+								})}
+							></div>
+						</Link>
+					</div>
+				</div>
+			) : (
+				<></>
+			)}
 		</header>
 	);
 };

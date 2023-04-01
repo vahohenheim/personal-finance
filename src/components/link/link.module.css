@@ -1,0 +1,13 @@
+.link {
+    color: var(--gui-color-white);
+    text-decoration: none;
+    transition: color var(--gui-transition-duration-very-fast) ease-in-out;
+}
+
+.link:hover {
+    color: var(--gui-color-primary-active-darken);
+}
+
+.link.active {
+    color: var(--gui-color-primary);
+}

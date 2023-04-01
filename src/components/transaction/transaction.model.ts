@@ -1,5 +1,5 @@
-import { Transactions } from '../../gql/graphql';
+import { Transaction } from '../../gql/graphql';
 
 export type TransactionComponentProps = {
-	transation: Transactions;
+	transaction: Transaction;
 };

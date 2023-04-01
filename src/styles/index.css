@@ -2,11 +2,16 @@ html {
   --gui-background-color: #111111;
   --gui-text-color: #FFFFFF;
   --gui-color-primary: #1668dc;
+  --gui-color-primary-active-darken: #15417e;
+  --gui-color-border: #303030;
 
   --gui-text-font-size: 14px;
 
   --gui-header-height: 50px;
+  --gui-header-mobile-height: 110px;
+
   --gui-footer-height: 50px;
+  --gui-footer-mobile-height: 80px;
 
   --gui-grid-width-xs: 100%;
   --gui-grid-width-sm: 540px;
@@ -26,6 +31,11 @@ html {
   --gui-gutter-4xl: 80px;
   --gui-gutter-5xl: 96px;
   --gui-gutter-6xl: 112px;
+--gui-transition-duration-very-fast: 100ms;
+--gui-transition-duration-fast: 200ms;
+--gui-transition-duration-normal: 300ms;
+--gui-transition-duration-slow: 400ms;
+--gui-transition-duration-very-slow: 500ms;
 }
 
 html,
@@ -63,8 +73,14 @@ code {
     monospace;
 }
 
-main {
+.main {
   min-height: calc(100vh - var(--gui-header-height) - var(--gui-footer-height));
+}
+
+@media (max-width: 500px) {
+  .main {
+    min-height: calc(100vh - var(--gui-header-mobile-height) - var(--gui-footer-mobile-height));
+  }
 }
 
 .container {
@@ -79,7 +95,7 @@ main {
 /* ANT DESIGN OVERWRITES */
 .ant-card {
   background: rgba(48, 48, 48, 0.15);
-  border: 1px solid #303030;
+  border: 1px solid var(--gui-color-border);
   backdrop-filter: blur(8px);
 }
 

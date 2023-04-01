@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 import styles from './title.module.css';
 
-const Title: FC<{
+const TitleComponent: FC<{
 	heading: 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
 	children: ReactNode;
 	action?: ReactNode;
@@ -16,4 +16,4 @@ const Title: FC<{
 	);
 };
 
-export default Title;
+export default TitleComponent;
