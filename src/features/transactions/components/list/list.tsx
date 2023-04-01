@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import { graphql } from '../../gql/gql';
-import { gqlClient } from '../../utils/graphql-client';
-import TransactionComponent from '../transaction/transaction';
-import styles from './transactions.module.css';
+import { graphql } from '../../../../gql/gql';
+import { gqlClient } from '../../../../utils/graphql-client';
+import ItemTransactionComponent from '../item/item';
+import styles from './list.module.css';
 import dayjs from 'dayjs';
 import { FC } from 'react';
-import type { Transaction } from '../../gql/graphql';
+import type { Transaction } from '../../../../gql/graphql';
 import { Empty } from 'antd';
 
 const GET_TRANSACTIONS_QUERY = graphql(`
@@ -29,7 +29,7 @@ const GET_TRANSACTIONS_QUERY = graphql(`
 	}
 `);
 
-const TransactionsComponent: FC<{ limit: number }> = ({ limit }) => {
+const ListTransactionsComponent: FC<{ limit: number }> = ({ limit }) => {
 	const getTransactions = useQuery({
 		queryKey: ['transactions'],
 		queryFn: async () => {
@@ -125,7 +125,7 @@ const TransactionsComponent: FC<{ limit: number }> = ({ limit }) => {
 									{transactionByDayByMonth[month][day].map(
 										(transaction) => (
 											<div key={transaction.id as string}>
-												<TransactionComponent
+												<ItemTransactionComponent
 													transaction={transaction}
 												/>
 											</div>
@@ -141,4 +141,4 @@ const TransactionsComponent: FC<{ limit: number }> = ({ limit }) => {
 	);
 };
 
-export default TransactionsComponent;
+export default ListTransactionsComponent;

@@ -8,6 +8,7 @@ import {
 	EyeTwoTone,
 } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
+import toast from 'react-hot-toast';
 
 const LoginPage = () => {
 	const {
@@ -30,7 +31,13 @@ const LoginPage = () => {
 	const disableForm = isLoading || needsEmailVerification;
 
 	const onFinish = (values: { email: string; password: string }) => {
-		signInEmailPassword(values.email, values.password);
+		signInEmailPassword(values.email, values.password).then(() => {
+			toast('Welcome back', {
+				id: 'welcome-back',
+				icon: '👋',
+				duration: 1500,
+			});
+		});
 	};
 
 	if (needsEmailVerification) {

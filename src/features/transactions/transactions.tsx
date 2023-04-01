@@ -3,9 +3,9 @@ import { Link, useOutletContext } from 'react-router-dom';
 import type { User } from '../../user.model';
 import { Helmet } from 'react-helmet';
 import Section from '../../components/section/section';
-import Transactions from '../../components/transactions/transations';
 import { Button } from 'antd';
 import Title from '../../components/title/title';
+import ListTransactionsComponent from './components/list/list';
 
 const TransactionsPage: FC = () => {
 	const { user } = useOutletContext<{ user: User }>();
@@ -20,7 +20,7 @@ const TransactionsPage: FC = () => {
 					<Title
 						heading={'h2'}
 						action={
-							<Link to="/add-transaction">
+							<Link to="/transactions/add">
 								<Button type="primary" block={true}>
 									Add transaction
 								</Button>
@@ -29,7 +29,7 @@ const TransactionsPage: FC = () => {
 					>
 						Transactions
 					</Title>
-					<Transactions limit={100} />
+					<ListTransactionsComponent limit={100} />
 				</Section>
 			</div>
 		</>

@@ -5,6 +5,10 @@
     display: flex;
     flex-wrap: wrap;
     align-content: flex-end;
+    position: sticky;
+    top: 0;
+    overflow-y: scroll;
+    max-width: 100vw;
 }
 
 @media (max-width: 500px) {
@@ -14,8 +18,20 @@
     }
 }
 
+.header::after {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    right: 0;
+    /*background: linear-gradient(blue, pink);*/
+    height: 100%;
+    width: var(--gui-gutter-base);
+    z-index: 2;
+}
+
 
 .container {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -23,8 +39,11 @@
     flex-grow: 1;
     }
 
+
+
     .menu {
         display: flex;
+        align-items: center;
         gap: var(--gui-gutter-lg);
     }
 

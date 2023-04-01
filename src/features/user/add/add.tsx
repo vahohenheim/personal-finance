@@ -1,9 +1,9 @@
 import { useSignUpEmailPassword } from '@nhost/react';
 import { Link, Navigate } from 'react-router-dom';
 import { Form, Input, Button } from 'antd';
-import styles from './register.module.css';
+import styles from './add.module.css';
 
-const RegisterPage = () => {
+const AddUserPage = () => {
 	const {
 		signUpEmailPassword,
 		isLoading,
@@ -114,4 +114,4 @@ const RegisterPage = () => {
 	);
 };
 
-export default RegisterPage;
+export default AddUserPage;
