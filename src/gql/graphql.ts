@@ -15,8 +15,8 @@ export type Scalars = {
   bigint: any;
   bytea: any;
   citext: any;
+  float8: any;
   jsonb: any;
-  numeric: any;
   timestamptz: any;
   uuid: any;
 };
@@ -1978,6 +1978,677 @@ export type Buckets_Variance_Fields = {
   minUploadFileSize?: Maybe<Scalars['Float']>;
 };
 
+/** columns and relationships of "budget" */
+export type Budget = {
+  __typename?: 'budget';
+  /** An array relationship */
+  budget_months: Array<Budget_Month>;
+  /** An aggregate relationship */
+  budget_months_aggregate: Budget_Month_Aggregate;
+  created_at: Scalars['timestamptz'];
+  id: Scalars['uuid'];
+  label: Scalars['String'];
+  /** An array relationship */
+  transactions: Array<Transaction>;
+  /** An aggregate relationship */
+  transactions_aggregate: Transaction_Aggregate;
+  updated_at: Scalars['timestamptz'];
+};
+
+
+/** columns and relationships of "budget" */
+export type BudgetBudget_MonthsArgs = {
+  distinct_on?: InputMaybe<Array<Budget_Month_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Budget_Month_Order_By>>;
+  where?: InputMaybe<Budget_Month_Bool_Exp>;
+};
+
+
+/** columns and relationships of "budget" */
+export type BudgetBudget_Months_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Budget_Month_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Budget_Month_Order_By>>;
+  where?: InputMaybe<Budget_Month_Bool_Exp>;
+};
+
+
+/** columns and relationships of "budget" */
+export type BudgetTransactionsArgs = {
+  distinct_on?: InputMaybe<Array<Transaction_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Transaction_Order_By>>;
+  where?: InputMaybe<Transaction_Bool_Exp>;
+};
+
+
+/** columns and relationships of "budget" */
+export type BudgetTransactions_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Transaction_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Transaction_Order_By>>;
+  where?: InputMaybe<Transaction_Bool_Exp>;
+};
+
+/** aggregated selection of "budget" */
+export type Budget_Aggregate = {
+  __typename?: 'budget_aggregate';
+  aggregate?: Maybe<Budget_Aggregate_Fields>;
+  nodes: Array<Budget>;
+};
+
+/** aggregate fields of "budget" */
+export type Budget_Aggregate_Fields = {
+  __typename?: 'budget_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Budget_Max_Fields>;
+  min?: Maybe<Budget_Min_Fields>;
+};
+
+
+/** aggregate fields of "budget" */
+export type Budget_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Budget_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "budget". All fields are combined with a logical 'AND'. */
+export type Budget_Bool_Exp = {
+  _and?: InputMaybe<Array<Budget_Bool_Exp>>;
+  _not?: InputMaybe<Budget_Bool_Exp>;
+  _or?: InputMaybe<Array<Budget_Bool_Exp>>;
+  budget_months?: InputMaybe<Budget_Month_Bool_Exp>;
+  budget_months_aggregate?: InputMaybe<Budget_Month_Aggregate_Bool_Exp>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  label?: InputMaybe<String_Comparison_Exp>;
+  transactions?: InputMaybe<Transaction_Bool_Exp>;
+  transactions_aggregate?: InputMaybe<Transaction_Aggregate_Bool_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "budget" */
+export enum Budget_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  BudgetPkey = 'budget_pkey'
+}
+
+/** input type for inserting data into table "budget" */
+export type Budget_Insert_Input = {
+  budget_months?: InputMaybe<Budget_Month_Arr_Rel_Insert_Input>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  label?: InputMaybe<Scalars['String']>;
+  transactions?: InputMaybe<Transaction_Arr_Rel_Insert_Input>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type Budget_Max_Fields = {
+  __typename?: 'budget_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['uuid']>;
+  label?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate min on columns */
+export type Budget_Min_Fields = {
+  __typename?: 'budget_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['uuid']>;
+  label?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** columns and relationships of "budget_month" */
+export type Budget_Month = {
+  __typename?: 'budget_month';
+  amount: Scalars['float8'];
+  /** An object relationship */
+  budget: Budget;
+  budget_id: Scalars['uuid'];
+  created_at: Scalars['timestamptz'];
+  month: Scalars['String'];
+  updated_at: Scalars['timestamptz'];
+};
+
+/** aggregated selection of "budget_month" */
+export type Budget_Month_Aggregate = {
+  __typename?: 'budget_month_aggregate';
+  aggregate?: Maybe<Budget_Month_Aggregate_Fields>;
+  nodes: Array<Budget_Month>;
+};
+
+export type Budget_Month_Aggregate_Bool_Exp = {
+  avg?: InputMaybe<Budget_Month_Aggregate_Bool_Exp_Avg>;
+  corr?: InputMaybe<Budget_Month_Aggregate_Bool_Exp_Corr>;
+  count?: InputMaybe<Budget_Month_Aggregate_Bool_Exp_Count>;
+  covar_samp?: InputMaybe<Budget_Month_Aggregate_Bool_Exp_Covar_Samp>;
+  max?: InputMaybe<Budget_Month_Aggregate_Bool_Exp_Max>;
+  min?: InputMaybe<Budget_Month_Aggregate_Bool_Exp_Min>;
+  stddev_samp?: InputMaybe<Budget_Month_Aggregate_Bool_Exp_Stddev_Samp>;
+  sum?: InputMaybe<Budget_Month_Aggregate_Bool_Exp_Sum>;
+  var_samp?: InputMaybe<Budget_Month_Aggregate_Bool_Exp_Var_Samp>;
+};
+
+export type Budget_Month_Aggregate_Bool_Exp_Avg = {
+  arguments: Budget_Month_Select_Column_Budget_Month_Aggregate_Bool_Exp_Avg_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Budget_Month_Bool_Exp>;
+  predicate: Float8_Comparison_Exp;
+};
+
+export type Budget_Month_Aggregate_Bool_Exp_Corr = {
+  arguments: Budget_Month_Aggregate_Bool_Exp_Corr_Arguments;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Budget_Month_Bool_Exp>;
+  predicate: Float8_Comparison_Exp;
+};
+
+export type Budget_Month_Aggregate_Bool_Exp_Corr_Arguments = {
+  X: Budget_Month_Select_Column_Budget_Month_Aggregate_Bool_Exp_Corr_Arguments_Columns;
+  Y: Budget_Month_Select_Column_Budget_Month_Aggregate_Bool_Exp_Corr_Arguments_Columns;
+};
+
+export type Budget_Month_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Budget_Month_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Budget_Month_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+export type Budget_Month_Aggregate_Bool_Exp_Covar_Samp = {
+  arguments: Budget_Month_Aggregate_Bool_Exp_Covar_Samp_Arguments;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Budget_Month_Bool_Exp>;
+  predicate: Float8_Comparison_Exp;
+};
+
+export type Budget_Month_Aggregate_Bool_Exp_Covar_Samp_Arguments = {
+  X: Budget_Month_Select_Column_Budget_Month_Aggregate_Bool_Exp_Covar_Samp_Arguments_Columns;
+  Y: Budget_Month_Select_Column_Budget_Month_Aggregate_Bool_Exp_Covar_Samp_Arguments_Columns;
+};
+
+export type Budget_Month_Aggregate_Bool_Exp_Max = {
+  arguments: Budget_Month_Select_Column_Budget_Month_Aggregate_Bool_Exp_Max_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Budget_Month_Bool_Exp>;
+  predicate: Float8_Comparison_Exp;
+};
+
+export type Budget_Month_Aggregate_Bool_Exp_Min = {
+  arguments: Budget_Month_Select_Column_Budget_Month_Aggregate_Bool_Exp_Min_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Budget_Month_Bool_Exp>;
+  predicate: Float8_Comparison_Exp;
+};
+
+export type Budget_Month_Aggregate_Bool_Exp_Stddev_Samp = {
+  arguments: Budget_Month_Select_Column_Budget_Month_Aggregate_Bool_Exp_Stddev_Samp_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Budget_Month_Bool_Exp>;
+  predicate: Float8_Comparison_Exp;
+};
+
+export type Budget_Month_Aggregate_Bool_Exp_Sum = {
+  arguments: Budget_Month_Select_Column_Budget_Month_Aggregate_Bool_Exp_Sum_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Budget_Month_Bool_Exp>;
+  predicate: Float8_Comparison_Exp;
+};
+
+export type Budget_Month_Aggregate_Bool_Exp_Var_Samp = {
+  arguments: Budget_Month_Select_Column_Budget_Month_Aggregate_Bool_Exp_Var_Samp_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Budget_Month_Bool_Exp>;
+  predicate: Float8_Comparison_Exp;
+};
+
+/** aggregate fields of "budget_month" */
+export type Budget_Month_Aggregate_Fields = {
+  __typename?: 'budget_month_aggregate_fields';
+  avg?: Maybe<Budget_Month_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Budget_Month_Max_Fields>;
+  min?: Maybe<Budget_Month_Min_Fields>;
+  stddev?: Maybe<Budget_Month_Stddev_Fields>;
+  stddev_pop?: Maybe<Budget_Month_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Budget_Month_Stddev_Samp_Fields>;
+  sum?: Maybe<Budget_Month_Sum_Fields>;
+  var_pop?: Maybe<Budget_Month_Var_Pop_Fields>;
+  var_samp?: Maybe<Budget_Month_Var_Samp_Fields>;
+  variance?: Maybe<Budget_Month_Variance_Fields>;
+};
+
+
+/** aggregate fields of "budget_month" */
+export type Budget_Month_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Budget_Month_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "budget_month" */
+export type Budget_Month_Aggregate_Order_By = {
+  avg?: InputMaybe<Budget_Month_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Budget_Month_Max_Order_By>;
+  min?: InputMaybe<Budget_Month_Min_Order_By>;
+  stddev?: InputMaybe<Budget_Month_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Budget_Month_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Budget_Month_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Budget_Month_Sum_Order_By>;
+  var_pop?: InputMaybe<Budget_Month_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Budget_Month_Var_Samp_Order_By>;
+  variance?: InputMaybe<Budget_Month_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "budget_month" */
+export type Budget_Month_Arr_Rel_Insert_Input = {
+  data: Array<Budget_Month_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Budget_Month_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Budget_Month_Avg_Fields = {
+  __typename?: 'budget_month_avg_fields';
+  amount?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "budget_month" */
+export type Budget_Month_Avg_Order_By = {
+  amount?: InputMaybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "budget_month". All fields are combined with a logical 'AND'. */
+export type Budget_Month_Bool_Exp = {
+  _and?: InputMaybe<Array<Budget_Month_Bool_Exp>>;
+  _not?: InputMaybe<Budget_Month_Bool_Exp>;
+  _or?: InputMaybe<Array<Budget_Month_Bool_Exp>>;
+  amount?: InputMaybe<Float8_Comparison_Exp>;
+  budget?: InputMaybe<Budget_Bool_Exp>;
+  budget_id?: InputMaybe<Uuid_Comparison_Exp>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  month?: InputMaybe<String_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "budget_month" */
+export enum Budget_Month_Constraint {
+  /** unique or primary key constraint on columns "month", "budget_id" */
+  BudgetMonthPkey = 'budget_month_pkey'
+}
+
+/** input type for incrementing numeric columns in table "budget_month" */
+export type Budget_Month_Inc_Input = {
+  amount?: InputMaybe<Scalars['float8']>;
+};
+
+/** input type for inserting data into table "budget_month" */
+export type Budget_Month_Insert_Input = {
+  amount?: InputMaybe<Scalars['float8']>;
+  budget?: InputMaybe<Budget_Obj_Rel_Insert_Input>;
+  budget_id?: InputMaybe<Scalars['uuid']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  month?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type Budget_Month_Max_Fields = {
+  __typename?: 'budget_month_max_fields';
+  amount?: Maybe<Scalars['float8']>;
+  budget_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  month?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** order by max() on columns of table "budget_month" */
+export type Budget_Month_Max_Order_By = {
+  amount?: InputMaybe<Order_By>;
+  budget_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  month?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Budget_Month_Min_Fields = {
+  __typename?: 'budget_month_min_fields';
+  amount?: Maybe<Scalars['float8']>;
+  budget_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  month?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** order by min() on columns of table "budget_month" */
+export type Budget_Month_Min_Order_By = {
+  amount?: InputMaybe<Order_By>;
+  budget_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  month?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "budget_month" */
+export type Budget_Month_Mutation_Response = {
+  __typename?: 'budget_month_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Budget_Month>;
+};
+
+/** on_conflict condition type for table "budget_month" */
+export type Budget_Month_On_Conflict = {
+  constraint: Budget_Month_Constraint;
+  update_columns?: Array<Budget_Month_Update_Column>;
+  where?: InputMaybe<Budget_Month_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "budget_month". */
+export type Budget_Month_Order_By = {
+  amount?: InputMaybe<Order_By>;
+  budget?: InputMaybe<Budget_Order_By>;
+  budget_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  month?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: budget_month */
+export type Budget_Month_Pk_Columns_Input = {
+  budget_id: Scalars['uuid'];
+  month: Scalars['String'];
+};
+
+/** select columns of table "budget_month" */
+export enum Budget_Month_Select_Column {
+  /** column name */
+  Amount = 'amount',
+  /** column name */
+  BudgetId = 'budget_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Month = 'month',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** select "budget_month_aggregate_bool_exp_avg_arguments_columns" columns of table "budget_month" */
+export enum Budget_Month_Select_Column_Budget_Month_Aggregate_Bool_Exp_Avg_Arguments_Columns {
+  /** column name */
+  Amount = 'amount'
+}
+
+/** select "budget_month_aggregate_bool_exp_corr_arguments_columns" columns of table "budget_month" */
+export enum Budget_Month_Select_Column_Budget_Month_Aggregate_Bool_Exp_Corr_Arguments_Columns {
+  /** column name */
+  Amount = 'amount'
+}
+
+/** select "budget_month_aggregate_bool_exp_covar_samp_arguments_columns" columns of table "budget_month" */
+export enum Budget_Month_Select_Column_Budget_Month_Aggregate_Bool_Exp_Covar_Samp_Arguments_Columns {
+  /** column name */
+  Amount = 'amount'
+}
+
+/** select "budget_month_aggregate_bool_exp_max_arguments_columns" columns of table "budget_month" */
+export enum Budget_Month_Select_Column_Budget_Month_Aggregate_Bool_Exp_Max_Arguments_Columns {
+  /** column name */
+  Amount = 'amount'
+}
+
+/** select "budget_month_aggregate_bool_exp_min_arguments_columns" columns of table "budget_month" */
+export enum Budget_Month_Select_Column_Budget_Month_Aggregate_Bool_Exp_Min_Arguments_Columns {
+  /** column name */
+  Amount = 'amount'
+}
+
+/** select "budget_month_aggregate_bool_exp_stddev_samp_arguments_columns" columns of table "budget_month" */
+export enum Budget_Month_Select_Column_Budget_Month_Aggregate_Bool_Exp_Stddev_Samp_Arguments_Columns {
+  /** column name */
+  Amount = 'amount'
+}
+
+/** select "budget_month_aggregate_bool_exp_sum_arguments_columns" columns of table "budget_month" */
+export enum Budget_Month_Select_Column_Budget_Month_Aggregate_Bool_Exp_Sum_Arguments_Columns {
+  /** column name */
+  Amount = 'amount'
+}
+
+/** select "budget_month_aggregate_bool_exp_var_samp_arguments_columns" columns of table "budget_month" */
+export enum Budget_Month_Select_Column_Budget_Month_Aggregate_Bool_Exp_Var_Samp_Arguments_Columns {
+  /** column name */
+  Amount = 'amount'
+}
+
+/** input type for updating data in table "budget_month" */
+export type Budget_Month_Set_Input = {
+  amount?: InputMaybe<Scalars['float8']>;
+  budget_id?: InputMaybe<Scalars['uuid']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  month?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** aggregate stddev on columns */
+export type Budget_Month_Stddev_Fields = {
+  __typename?: 'budget_month_stddev_fields';
+  amount?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "budget_month" */
+export type Budget_Month_Stddev_Order_By = {
+  amount?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Budget_Month_Stddev_Pop_Fields = {
+  __typename?: 'budget_month_stddev_pop_fields';
+  amount?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "budget_month" */
+export type Budget_Month_Stddev_Pop_Order_By = {
+  amount?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Budget_Month_Stddev_Samp_Fields = {
+  __typename?: 'budget_month_stddev_samp_fields';
+  amount?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "budget_month" */
+export type Budget_Month_Stddev_Samp_Order_By = {
+  amount?: InputMaybe<Order_By>;
+};
+
+/** Streaming cursor of the table "budget_month" */
+export type Budget_Month_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Budget_Month_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Budget_Month_Stream_Cursor_Value_Input = {
+  amount?: InputMaybe<Scalars['float8']>;
+  budget_id?: InputMaybe<Scalars['uuid']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  month?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** aggregate sum on columns */
+export type Budget_Month_Sum_Fields = {
+  __typename?: 'budget_month_sum_fields';
+  amount?: Maybe<Scalars['float8']>;
+};
+
+/** order by sum() on columns of table "budget_month" */
+export type Budget_Month_Sum_Order_By = {
+  amount?: InputMaybe<Order_By>;
+};
+
+/** update columns of table "budget_month" */
+export enum Budget_Month_Update_Column {
+  /** column name */
+  Amount = 'amount',
+  /** column name */
+  BudgetId = 'budget_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Month = 'month',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+export type Budget_Month_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Budget_Month_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Budget_Month_Set_Input>;
+  where: Budget_Month_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Budget_Month_Var_Pop_Fields = {
+  __typename?: 'budget_month_var_pop_fields';
+  amount?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "budget_month" */
+export type Budget_Month_Var_Pop_Order_By = {
+  amount?: InputMaybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Budget_Month_Var_Samp_Fields = {
+  __typename?: 'budget_month_var_samp_fields';
+  amount?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "budget_month" */
+export type Budget_Month_Var_Samp_Order_By = {
+  amount?: InputMaybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Budget_Month_Variance_Fields = {
+  __typename?: 'budget_month_variance_fields';
+  amount?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "budget_month" */
+export type Budget_Month_Variance_Order_By = {
+  amount?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "budget" */
+export type Budget_Mutation_Response = {
+  __typename?: 'budget_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Budget>;
+};
+
+/** input type for inserting object relation for remote table "budget" */
+export type Budget_Obj_Rel_Insert_Input = {
+  data: Budget_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Budget_On_Conflict>;
+};
+
+/** on_conflict condition type for table "budget" */
+export type Budget_On_Conflict = {
+  constraint: Budget_Constraint;
+  update_columns?: Array<Budget_Update_Column>;
+  where?: InputMaybe<Budget_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "budget". */
+export type Budget_Order_By = {
+  budget_months_aggregate?: InputMaybe<Budget_Month_Aggregate_Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  label?: InputMaybe<Order_By>;
+  transactions_aggregate?: InputMaybe<Transaction_Aggregate_Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: budget */
+export type Budget_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "budget" */
+export enum Budget_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Label = 'label',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "budget" */
+export type Budget_Set_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  label?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** Streaming cursor of the table "budget" */
+export type Budget_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Budget_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Budget_Stream_Cursor_Value_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  label?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** update columns of table "budget" */
+export enum Budget_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Label = 'label',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+export type Budget_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Budget_Set_Input>;
+  where: Budget_Bool_Exp;
+};
+
 /** Boolean expression to compare columns of type "bytea". All fields are combined with logical 'AND'. */
 export type Bytea_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['bytea']>;
@@ -2022,6 +2693,210 @@ export type Citext_Comparison_Exp = {
   _regex?: InputMaybe<Scalars['citext']>;
   /** does the column match the given SQL regular expression */
   _similar?: InputMaybe<Scalars['citext']>;
+};
+
+/** columns and relationships of "company" */
+export type Company = {
+  __typename?: 'company';
+  created_at: Scalars['timestamptz'];
+  id: Scalars['uuid'];
+  label: Scalars['String'];
+  logo?: Maybe<Scalars['String']>;
+  /** An array relationship */
+  transactions: Array<Transaction>;
+  /** An aggregate relationship */
+  transactions_aggregate: Transaction_Aggregate;
+  updated_at: Scalars['timestamptz'];
+};
+
+
+/** columns and relationships of "company" */
+export type CompanyTransactionsArgs = {
+  distinct_on?: InputMaybe<Array<Transaction_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Transaction_Order_By>>;
+  where?: InputMaybe<Transaction_Bool_Exp>;
+};
+
+
+/** columns and relationships of "company" */
+export type CompanyTransactions_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Transaction_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Transaction_Order_By>>;
+  where?: InputMaybe<Transaction_Bool_Exp>;
+};
+
+/** aggregated selection of "company" */
+export type Company_Aggregate = {
+  __typename?: 'company_aggregate';
+  aggregate?: Maybe<Company_Aggregate_Fields>;
+  nodes: Array<Company>;
+};
+
+/** aggregate fields of "company" */
+export type Company_Aggregate_Fields = {
+  __typename?: 'company_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Company_Max_Fields>;
+  min?: Maybe<Company_Min_Fields>;
+};
+
+
+/** aggregate fields of "company" */
+export type Company_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Company_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "company". All fields are combined with a logical 'AND'. */
+export type Company_Bool_Exp = {
+  _and?: InputMaybe<Array<Company_Bool_Exp>>;
+  _not?: InputMaybe<Company_Bool_Exp>;
+  _or?: InputMaybe<Array<Company_Bool_Exp>>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  label?: InputMaybe<String_Comparison_Exp>;
+  logo?: InputMaybe<String_Comparison_Exp>;
+  transactions?: InputMaybe<Transaction_Bool_Exp>;
+  transactions_aggregate?: InputMaybe<Transaction_Aggregate_Bool_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "company" */
+export enum Company_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  CompaniesPkey = 'companies_pkey'
+}
+
+/** input type for inserting data into table "company" */
+export type Company_Insert_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  label?: InputMaybe<Scalars['String']>;
+  logo?: InputMaybe<Scalars['String']>;
+  transactions?: InputMaybe<Transaction_Arr_Rel_Insert_Input>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type Company_Max_Fields = {
+  __typename?: 'company_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['uuid']>;
+  label?: Maybe<Scalars['String']>;
+  logo?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate min on columns */
+export type Company_Min_Fields = {
+  __typename?: 'company_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['uuid']>;
+  label?: Maybe<Scalars['String']>;
+  logo?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** response of any mutation on the table "company" */
+export type Company_Mutation_Response = {
+  __typename?: 'company_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Company>;
+};
+
+/** input type for inserting object relation for remote table "company" */
+export type Company_Obj_Rel_Insert_Input = {
+  data: Company_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Company_On_Conflict>;
+};
+
+/** on_conflict condition type for table "company" */
+export type Company_On_Conflict = {
+  constraint: Company_Constraint;
+  update_columns?: Array<Company_Update_Column>;
+  where?: InputMaybe<Company_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "company". */
+export type Company_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  label?: InputMaybe<Order_By>;
+  logo?: InputMaybe<Order_By>;
+  transactions_aggregate?: InputMaybe<Transaction_Aggregate_Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: company */
+export type Company_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "company" */
+export enum Company_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Label = 'label',
+  /** column name */
+  Logo = 'logo',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "company" */
+export type Company_Set_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  label?: InputMaybe<Scalars['String']>;
+  logo?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** Streaming cursor of the table "company" */
+export type Company_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Company_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Company_Stream_Cursor_Value_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  label?: InputMaybe<Scalars['String']>;
+  logo?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** update columns of table "company" */
+export enum Company_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Label = 'label',
+  /** column name */
+  Logo = 'logo',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+export type Company_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Company_Set_Input>;
+  where: Company_Bool_Exp;
 };
 
 /** ordering argument of a cursor */
@@ -2454,6 +3329,19 @@ export type Files_Variance_Order_By = {
   size?: InputMaybe<Order_By>;
 };
 
+/** Boolean expression to compare columns of type "float8". All fields are combined with logical 'AND'. */
+export type Float8_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['float8']>;
+  _gt?: InputMaybe<Scalars['float8']>;
+  _gte?: InputMaybe<Scalars['float8']>;
+  _in?: InputMaybe<Array<Scalars['float8']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['float8']>;
+  _lte?: InputMaybe<Scalars['float8']>;
+  _neq?: InputMaybe<Scalars['float8']>;
+  _nin?: InputMaybe<Array<Scalars['float8']>>;
+};
+
 export type Jsonb_Cast_Exp = {
   String?: InputMaybe<String_Comparison_Exp>;
 };
@@ -2525,10 +3413,22 @@ export type Mutation_Root = {
   deleteUser?: Maybe<Users>;
   /** delete data from the table: "auth.users" */
   deleteUsers?: Maybe<Users_Mutation_Response>;
-  /** delete data from the table: "transactions" */
-  delete_transactions?: Maybe<Transactions_Mutation_Response>;
-  /** delete single row from the table: "transactions" */
-  delete_transactions_by_pk?: Maybe<Transactions>;
+  /** delete data from the table: "budget" */
+  delete_budget?: Maybe<Budget_Mutation_Response>;
+  /** delete single row from the table: "budget" */
+  delete_budget_by_pk?: Maybe<Budget>;
+  /** delete data from the table: "budget_month" */
+  delete_budget_month?: Maybe<Budget_Month_Mutation_Response>;
+  /** delete single row from the table: "budget_month" */
+  delete_budget_month_by_pk?: Maybe<Budget_Month>;
+  /** delete data from the table: "company" */
+  delete_company?: Maybe<Company_Mutation_Response>;
+  /** delete single row from the table: "company" */
+  delete_company_by_pk?: Maybe<Company>;
+  /** delete data from the table: "transaction" */
+  delete_transaction?: Maybe<Transaction_Mutation_Response>;
+  /** delete single row from the table: "transaction" */
+  delete_transaction_by_pk?: Maybe<Transaction>;
   /** insert a single row into the table: "auth.providers" */
   insertAuthProvider?: Maybe<AuthProviders>;
   /** insert a single row into the table: "auth.provider_requests" */
@@ -2569,10 +3469,22 @@ export type Mutation_Root = {
   insertUser?: Maybe<Users>;
   /** insert data into the table: "auth.users" */
   insertUsers?: Maybe<Users_Mutation_Response>;
-  /** insert data into the table: "transactions" */
-  insert_transactions?: Maybe<Transactions_Mutation_Response>;
-  /** insert a single row into the table: "transactions" */
-  insert_transactions_one?: Maybe<Transactions>;
+  /** insert data into the table: "budget" */
+  insert_budget?: Maybe<Budget_Mutation_Response>;
+  /** insert data into the table: "budget_month" */
+  insert_budget_month?: Maybe<Budget_Month_Mutation_Response>;
+  /** insert a single row into the table: "budget_month" */
+  insert_budget_month_one?: Maybe<Budget_Month>;
+  /** insert a single row into the table: "budget" */
+  insert_budget_one?: Maybe<Budget>;
+  /** insert data into the table: "company" */
+  insert_company?: Maybe<Company_Mutation_Response>;
+  /** insert a single row into the table: "company" */
+  insert_company_one?: Maybe<Company>;
+  /** insert data into the table: "transaction" */
+  insert_transaction?: Maybe<Transaction_Mutation_Response>;
+  /** insert a single row into the table: "transaction" */
+  insert_transaction_one?: Maybe<Transaction>;
   /** update single row of the table: "auth.providers" */
   updateAuthProvider?: Maybe<AuthProviders>;
   /** update single row of the table: "auth.provider_requests" */
@@ -2629,14 +3541,32 @@ export type Mutation_Root = {
   update_authUserSecurityKeys_many?: Maybe<Array<Maybe<AuthUserSecurityKeys_Mutation_Response>>>;
   /** update multiples rows of table: "storage.buckets" */
   update_buckets_many?: Maybe<Array<Maybe<Buckets_Mutation_Response>>>;
+  /** update data of the table: "budget" */
+  update_budget?: Maybe<Budget_Mutation_Response>;
+  /** update single row of the table: "budget" */
+  update_budget_by_pk?: Maybe<Budget>;
+  /** update multiples rows of table: "budget" */
+  update_budget_many?: Maybe<Array<Maybe<Budget_Mutation_Response>>>;
+  /** update data of the table: "budget_month" */
+  update_budget_month?: Maybe<Budget_Month_Mutation_Response>;
+  /** update single row of the table: "budget_month" */
+  update_budget_month_by_pk?: Maybe<Budget_Month>;
+  /** update multiples rows of table: "budget_month" */
+  update_budget_month_many?: Maybe<Array<Maybe<Budget_Month_Mutation_Response>>>;
+  /** update data of the table: "company" */
+  update_company?: Maybe<Company_Mutation_Response>;
+  /** update single row of the table: "company" */
+  update_company_by_pk?: Maybe<Company>;
+  /** update multiples rows of table: "company" */
+  update_company_many?: Maybe<Array<Maybe<Company_Mutation_Response>>>;
   /** update multiples rows of table: "storage.files" */
   update_files_many?: Maybe<Array<Maybe<Files_Mutation_Response>>>;
-  /** update data of the table: "transactions" */
-  update_transactions?: Maybe<Transactions_Mutation_Response>;
-  /** update single row of the table: "transactions" */
-  update_transactions_by_pk?: Maybe<Transactions>;
-  /** update multiples rows of table: "transactions" */
-  update_transactions_many?: Maybe<Array<Maybe<Transactions_Mutation_Response>>>;
+  /** update data of the table: "transaction" */
+  update_transaction?: Maybe<Transaction_Mutation_Response>;
+  /** update single row of the table: "transaction" */
+  update_transaction_by_pk?: Maybe<Transaction>;
+  /** update multiples rows of table: "transaction" */
+  update_transaction_many?: Maybe<Array<Maybe<Transaction_Mutation_Response>>>;
   /** update multiples rows of table: "auth.users" */
   update_users_many?: Maybe<Array<Maybe<Users_Mutation_Response>>>;
 };
@@ -2763,13 +3693,50 @@ export type Mutation_RootDeleteUsersArgs = {
 
 
 /** mutation root */
-export type Mutation_RootDelete_TransactionsArgs = {
-  where: Transactions_Bool_Exp;
+export type Mutation_RootDelete_BudgetArgs = {
+  where: Budget_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Transactions_By_PkArgs = {
+export type Mutation_RootDelete_Budget_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Budget_MonthArgs = {
+  where: Budget_Month_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Budget_Month_By_PkArgs = {
+  budget_id: Scalars['uuid'];
+  month: Scalars['String'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_CompanyArgs = {
+  where: Company_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Company_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_TransactionArgs = {
+  where: Transaction_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Transaction_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
@@ -2915,16 +3882,58 @@ export type Mutation_RootInsertUsersArgs = {
 
 
 /** mutation root */
-export type Mutation_RootInsert_TransactionsArgs = {
-  objects: Array<Transactions_Insert_Input>;
-  on_conflict?: InputMaybe<Transactions_On_Conflict>;
+export type Mutation_RootInsert_BudgetArgs = {
+  objects: Array<Budget_Insert_Input>;
+  on_conflict?: InputMaybe<Budget_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Transactions_OneArgs = {
-  object: Transactions_Insert_Input;
-  on_conflict?: InputMaybe<Transactions_On_Conflict>;
+export type Mutation_RootInsert_Budget_MonthArgs = {
+  objects: Array<Budget_Month_Insert_Input>;
+  on_conflict?: InputMaybe<Budget_Month_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Budget_Month_OneArgs = {
+  object: Budget_Month_Insert_Input;
+  on_conflict?: InputMaybe<Budget_Month_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Budget_OneArgs = {
+  object: Budget_Insert_Input;
+  on_conflict?: InputMaybe<Budget_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_CompanyArgs = {
+  objects: Array<Company_Insert_Input>;
+  on_conflict?: InputMaybe<Company_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Company_OneArgs = {
+  object: Company_Insert_Input;
+  on_conflict?: InputMaybe<Company_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_TransactionArgs = {
+  objects: Array<Transaction_Insert_Input>;
+  on_conflict?: InputMaybe<Transaction_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Transaction_OneArgs = {
+  object: Transaction_Insert_Input;
+  on_conflict?: InputMaybe<Transaction_On_Conflict>;
 };
 
 
@@ -3143,49 +4152,98 @@ export type Mutation_RootUpdate_Buckets_ManyArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_BudgetArgs = {
+  _set?: InputMaybe<Budget_Set_Input>;
+  where: Budget_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Budget_By_PkArgs = {
+  _set?: InputMaybe<Budget_Set_Input>;
+  pk_columns: Budget_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Budget_ManyArgs = {
+  updates: Array<Budget_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Budget_MonthArgs = {
+  _inc?: InputMaybe<Budget_Month_Inc_Input>;
+  _set?: InputMaybe<Budget_Month_Set_Input>;
+  where: Budget_Month_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Budget_Month_By_PkArgs = {
+  _inc?: InputMaybe<Budget_Month_Inc_Input>;
+  _set?: InputMaybe<Budget_Month_Set_Input>;
+  pk_columns: Budget_Month_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Budget_Month_ManyArgs = {
+  updates: Array<Budget_Month_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_CompanyArgs = {
+  _set?: InputMaybe<Company_Set_Input>;
+  where: Company_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Company_By_PkArgs = {
+  _set?: InputMaybe<Company_Set_Input>;
+  pk_columns: Company_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Company_ManyArgs = {
+  updates: Array<Company_Updates>;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_Files_ManyArgs = {
   updates: Array<Files_Updates>;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_TransactionsArgs = {
-  _inc?: InputMaybe<Transactions_Inc_Input>;
-  _set?: InputMaybe<Transactions_Set_Input>;
-  where: Transactions_Bool_Exp;
+export type Mutation_RootUpdate_TransactionArgs = {
+  _inc?: InputMaybe<Transaction_Inc_Input>;
+  _set?: InputMaybe<Transaction_Set_Input>;
+  where: Transaction_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Transactions_By_PkArgs = {
-  _inc?: InputMaybe<Transactions_Inc_Input>;
-  _set?: InputMaybe<Transactions_Set_Input>;
-  pk_columns: Transactions_Pk_Columns_Input;
+export type Mutation_RootUpdate_Transaction_By_PkArgs = {
+  _inc?: InputMaybe<Transaction_Inc_Input>;
+  _set?: InputMaybe<Transaction_Set_Input>;
+  pk_columns: Transaction_Pk_Columns_Input;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Transactions_ManyArgs = {
-  updates: Array<Transactions_Updates>;
+export type Mutation_RootUpdate_Transaction_ManyArgs = {
+  updates: Array<Transaction_Updates>;
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdate_Users_ManyArgs = {
   updates: Array<Users_Updates>;
-};
-
-/** Boolean expression to compare columns of type "numeric". All fields are combined with logical 'AND'. */
-export type Numeric_Comparison_Exp = {
-  _eq?: InputMaybe<Scalars['numeric']>;
-  _gt?: InputMaybe<Scalars['numeric']>;
-  _gte?: InputMaybe<Scalars['numeric']>;
-  _in?: InputMaybe<Array<Scalars['numeric']>>;
-  _is_null?: InputMaybe<Scalars['Boolean']>;
-  _lt?: InputMaybe<Scalars['numeric']>;
-  _lte?: InputMaybe<Scalars['numeric']>;
-  _neq?: InputMaybe<Scalars['numeric']>;
-  _nin?: InputMaybe<Array<Scalars['numeric']>>;
 };
 
 /** column ordering options */
@@ -3254,6 +4312,24 @@ export type Query_Root = {
   buckets: Array<Buckets>;
   /** fetch aggregated fields from the table: "storage.buckets" */
   bucketsAggregate: Buckets_Aggregate;
+  /** fetch data from the table: "budget" */
+  budget: Array<Budget>;
+  /** fetch aggregated fields from the table: "budget" */
+  budget_aggregate: Budget_Aggregate;
+  /** fetch data from the table: "budget" using primary key columns */
+  budget_by_pk?: Maybe<Budget>;
+  /** fetch data from the table: "budget_month" */
+  budget_month: Array<Budget_Month>;
+  /** fetch aggregated fields from the table: "budget_month" */
+  budget_month_aggregate: Budget_Month_Aggregate;
+  /** fetch data from the table: "budget_month" using primary key columns */
+  budget_month_by_pk?: Maybe<Budget_Month>;
+  /** fetch data from the table: "company" */
+  company: Array<Company>;
+  /** fetch aggregated fields from the table: "company" */
+  company_aggregate: Company_Aggregate;
+  /** fetch data from the table: "company" using primary key columns */
+  company_by_pk?: Maybe<Company>;
   /** fetch data from the table: "storage.files" using primary key columns */
   file?: Maybe<Files>;
   /** An array relationship */
@@ -3261,11 +4337,11 @@ export type Query_Root = {
   /** fetch aggregated fields from the table: "storage.files" */
   filesAggregate: Files_Aggregate;
   /** An array relationship */
-  transactions: Array<Transactions>;
+  transaction: Array<Transaction>;
   /** An aggregate relationship */
-  transactions_aggregate: Transactions_Aggregate;
-  /** fetch data from the table: "transactions" using primary key columns */
-  transactions_by_pk?: Maybe<Transactions>;
+  transaction_aggregate: Transaction_Aggregate;
+  /** fetch data from the table: "transaction" using primary key columns */
+  transaction_by_pk?: Maybe<Transaction>;
   /** fetch data from the table: "auth.users" using primary key columns */
   user?: Maybe<Users>;
   /** fetch data from the table: "auth.users" */
@@ -3459,6 +4535,76 @@ export type Query_RootBucketsAggregateArgs = {
 };
 
 
+export type Query_RootBudgetArgs = {
+  distinct_on?: InputMaybe<Array<Budget_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Budget_Order_By>>;
+  where?: InputMaybe<Budget_Bool_Exp>;
+};
+
+
+export type Query_RootBudget_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Budget_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Budget_Order_By>>;
+  where?: InputMaybe<Budget_Bool_Exp>;
+};
+
+
+export type Query_RootBudget_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Query_RootBudget_MonthArgs = {
+  distinct_on?: InputMaybe<Array<Budget_Month_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Budget_Month_Order_By>>;
+  where?: InputMaybe<Budget_Month_Bool_Exp>;
+};
+
+
+export type Query_RootBudget_Month_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Budget_Month_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Budget_Month_Order_By>>;
+  where?: InputMaybe<Budget_Month_Bool_Exp>;
+};
+
+
+export type Query_RootBudget_Month_By_PkArgs = {
+  budget_id: Scalars['uuid'];
+  month: Scalars['String'];
+};
+
+
+export type Query_RootCompanyArgs = {
+  distinct_on?: InputMaybe<Array<Company_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Company_Order_By>>;
+  where?: InputMaybe<Company_Bool_Exp>;
+};
+
+
+export type Query_RootCompany_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Company_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Company_Order_By>>;
+  where?: InputMaybe<Company_Bool_Exp>;
+};
+
+
+export type Query_RootCompany_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
 export type Query_RootFileArgs = {
   id: Scalars['uuid'];
 };
@@ -3482,25 +4628,25 @@ export type Query_RootFilesAggregateArgs = {
 };
 
 
-export type Query_RootTransactionsArgs = {
-  distinct_on?: InputMaybe<Array<Transactions_Select_Column>>;
+export type Query_RootTransactionArgs = {
+  distinct_on?: InputMaybe<Array<Transaction_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Transactions_Order_By>>;
-  where?: InputMaybe<Transactions_Bool_Exp>;
+  order_by?: InputMaybe<Array<Transaction_Order_By>>;
+  where?: InputMaybe<Transaction_Bool_Exp>;
 };
 
 
-export type Query_RootTransactions_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Transactions_Select_Column>>;
+export type Query_RootTransaction_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Transaction_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Transactions_Order_By>>;
-  where?: InputMaybe<Transactions_Bool_Exp>;
+  order_by?: InputMaybe<Array<Transaction_Order_By>>;
+  where?: InputMaybe<Transaction_Bool_Exp>;
 };
 
 
-export type Query_RootTransactions_By_PkArgs = {
+export type Query_RootTransaction_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
@@ -3593,6 +4739,30 @@ export type Subscription_Root = {
   bucketsAggregate: Buckets_Aggregate;
   /** fetch data from the table in a streaming manner: "storage.buckets" */
   buckets_stream: Array<Buckets>;
+  /** fetch data from the table: "budget" */
+  budget: Array<Budget>;
+  /** fetch aggregated fields from the table: "budget" */
+  budget_aggregate: Budget_Aggregate;
+  /** fetch data from the table: "budget" using primary key columns */
+  budget_by_pk?: Maybe<Budget>;
+  /** fetch data from the table: "budget_month" */
+  budget_month: Array<Budget_Month>;
+  /** fetch aggregated fields from the table: "budget_month" */
+  budget_month_aggregate: Budget_Month_Aggregate;
+  /** fetch data from the table: "budget_month" using primary key columns */
+  budget_month_by_pk?: Maybe<Budget_Month>;
+  /** fetch data from the table in a streaming manner: "budget_month" */
+  budget_month_stream: Array<Budget_Month>;
+  /** fetch data from the table in a streaming manner: "budget" */
+  budget_stream: Array<Budget>;
+  /** fetch data from the table: "company" */
+  company: Array<Company>;
+  /** fetch aggregated fields from the table: "company" */
+  company_aggregate: Company_Aggregate;
+  /** fetch data from the table: "company" using primary key columns */
+  company_by_pk?: Maybe<Company>;
+  /** fetch data from the table in a streaming manner: "company" */
+  company_stream: Array<Company>;
   /** fetch data from the table: "storage.files" using primary key columns */
   file?: Maybe<Files>;
   /** An array relationship */
@@ -3602,13 +4772,13 @@ export type Subscription_Root = {
   /** fetch data from the table in a streaming manner: "storage.files" */
   files_stream: Array<Files>;
   /** An array relationship */
-  transactions: Array<Transactions>;
+  transaction: Array<Transaction>;
   /** An aggregate relationship */
-  transactions_aggregate: Transactions_Aggregate;
-  /** fetch data from the table: "transactions" using primary key columns */
-  transactions_by_pk?: Maybe<Transactions>;
-  /** fetch data from the table in a streaming manner: "transactions" */
-  transactions_stream: Array<Transactions>;
+  transaction_aggregate: Transaction_Aggregate;
+  /** fetch data from the table: "transaction" using primary key columns */
+  transaction_by_pk?: Maybe<Transaction>;
+  /** fetch data from the table in a streaming manner: "transaction" */
+  transaction_stream: Array<Transaction>;
   /** fetch data from the table: "auth.users" using primary key columns */
   user?: Maybe<Users>;
   /** fetch data from the table: "auth.users" */
@@ -3860,6 +5030,97 @@ export type Subscription_RootBuckets_StreamArgs = {
 };
 
 
+export type Subscription_RootBudgetArgs = {
+  distinct_on?: InputMaybe<Array<Budget_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Budget_Order_By>>;
+  where?: InputMaybe<Budget_Bool_Exp>;
+};
+
+
+export type Subscription_RootBudget_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Budget_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Budget_Order_By>>;
+  where?: InputMaybe<Budget_Bool_Exp>;
+};
+
+
+export type Subscription_RootBudget_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootBudget_MonthArgs = {
+  distinct_on?: InputMaybe<Array<Budget_Month_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Budget_Month_Order_By>>;
+  where?: InputMaybe<Budget_Month_Bool_Exp>;
+};
+
+
+export type Subscription_RootBudget_Month_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Budget_Month_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Budget_Month_Order_By>>;
+  where?: InputMaybe<Budget_Month_Bool_Exp>;
+};
+
+
+export type Subscription_RootBudget_Month_By_PkArgs = {
+  budget_id: Scalars['uuid'];
+  month: Scalars['String'];
+};
+
+
+export type Subscription_RootBudget_Month_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Budget_Month_Stream_Cursor_Input>>;
+  where?: InputMaybe<Budget_Month_Bool_Exp>;
+};
+
+
+export type Subscription_RootBudget_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Budget_Stream_Cursor_Input>>;
+  where?: InputMaybe<Budget_Bool_Exp>;
+};
+
+
+export type Subscription_RootCompanyArgs = {
+  distinct_on?: InputMaybe<Array<Company_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Company_Order_By>>;
+  where?: InputMaybe<Company_Bool_Exp>;
+};
+
+
+export type Subscription_RootCompany_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Company_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Company_Order_By>>;
+  where?: InputMaybe<Company_Bool_Exp>;
+};
+
+
+export type Subscription_RootCompany_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootCompany_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Company_Stream_Cursor_Input>>;
+  where?: InputMaybe<Company_Bool_Exp>;
+};
+
+
 export type Subscription_RootFileArgs = {
   id: Scalars['uuid'];
 };
@@ -3890,33 +5151,33 @@ export type Subscription_RootFiles_StreamArgs = {
 };
 
 
-export type Subscription_RootTransactionsArgs = {
-  distinct_on?: InputMaybe<Array<Transactions_Select_Column>>;
+export type Subscription_RootTransactionArgs = {
+  distinct_on?: InputMaybe<Array<Transaction_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Transactions_Order_By>>;
-  where?: InputMaybe<Transactions_Bool_Exp>;
+  order_by?: InputMaybe<Array<Transaction_Order_By>>;
+  where?: InputMaybe<Transaction_Bool_Exp>;
 };
 
 
-export type Subscription_RootTransactions_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Transactions_Select_Column>>;
+export type Subscription_RootTransaction_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Transaction_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Transactions_Order_By>>;
-  where?: InputMaybe<Transactions_Bool_Exp>;
+  order_by?: InputMaybe<Array<Transaction_Order_By>>;
+  where?: InputMaybe<Transaction_Bool_Exp>;
 };
 
 
-export type Subscription_RootTransactions_By_PkArgs = {
+export type Subscription_RootTransaction_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
 
-export type Subscription_RootTransactions_StreamArgs = {
+export type Subscription_RootTransaction_StreamArgs = {
   batch_size: Scalars['Int'];
-  cursor: Array<InputMaybe<Transactions_Stream_Cursor_Input>>;
-  where?: InputMaybe<Transactions_Bool_Exp>;
+  cursor: Array<InputMaybe<Transaction_Stream_Cursor_Input>>;
+  where?: InputMaybe<Transaction_Bool_Exp>;
 };
 
 
@@ -3962,373 +5223,533 @@ export type Timestamptz_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['timestamptz']>>;
 };
 
-/** columns and relationships of "transactions" */
-export type Transactions = {
-  __typename?: 'transactions';
-  amount: Scalars['numeric'];
-  budget_id: Scalars['String'];
+/** columns and relationships of "transaction" */
+export type Transaction = {
+  __typename?: 'transaction';
+  amount: Scalars['float8'];
+  /** An object relationship */
+  budget: Budget;
+  budget_id: Scalars['uuid'];
+  /** An object relationship */
+  company: Company;
+  company_id: Scalars['uuid'];
   created_at: Scalars['timestamptz'];
+  date?: Maybe<Scalars['timestamptz']>;
   id: Scalars['uuid'];
   label: Scalars['String'];
-  type: Scalars['String'];
+  transaction_type: Scalars['String'];
   updated_at: Scalars['timestamptz'];
   /** An object relationship */
   user: Users;
   user_id: Scalars['uuid'];
 };
 
-/** aggregated selection of "transactions" */
-export type Transactions_Aggregate = {
-  __typename?: 'transactions_aggregate';
-  aggregate?: Maybe<Transactions_Aggregate_Fields>;
-  nodes: Array<Transactions>;
+/** aggregated selection of "transaction" */
+export type Transaction_Aggregate = {
+  __typename?: 'transaction_aggregate';
+  aggregate?: Maybe<Transaction_Aggregate_Fields>;
+  nodes: Array<Transaction>;
 };
 
-export type Transactions_Aggregate_Bool_Exp = {
-  count?: InputMaybe<Transactions_Aggregate_Bool_Exp_Count>;
+export type Transaction_Aggregate_Bool_Exp = {
+  avg?: InputMaybe<Transaction_Aggregate_Bool_Exp_Avg>;
+  corr?: InputMaybe<Transaction_Aggregate_Bool_Exp_Corr>;
+  count?: InputMaybe<Transaction_Aggregate_Bool_Exp_Count>;
+  covar_samp?: InputMaybe<Transaction_Aggregate_Bool_Exp_Covar_Samp>;
+  max?: InputMaybe<Transaction_Aggregate_Bool_Exp_Max>;
+  min?: InputMaybe<Transaction_Aggregate_Bool_Exp_Min>;
+  stddev_samp?: InputMaybe<Transaction_Aggregate_Bool_Exp_Stddev_Samp>;
+  sum?: InputMaybe<Transaction_Aggregate_Bool_Exp_Sum>;
+  var_samp?: InputMaybe<Transaction_Aggregate_Bool_Exp_Var_Samp>;
 };
 
-export type Transactions_Aggregate_Bool_Exp_Count = {
-  arguments?: InputMaybe<Array<Transactions_Select_Column>>;
+export type Transaction_Aggregate_Bool_Exp_Avg = {
+  arguments: Transaction_Select_Column_Transaction_Aggregate_Bool_Exp_Avg_Arguments_Columns;
   distinct?: InputMaybe<Scalars['Boolean']>;
-  filter?: InputMaybe<Transactions_Bool_Exp>;
+  filter?: InputMaybe<Transaction_Bool_Exp>;
+  predicate: Float8_Comparison_Exp;
+};
+
+export type Transaction_Aggregate_Bool_Exp_Corr = {
+  arguments: Transaction_Aggregate_Bool_Exp_Corr_Arguments;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Transaction_Bool_Exp>;
+  predicate: Float8_Comparison_Exp;
+};
+
+export type Transaction_Aggregate_Bool_Exp_Corr_Arguments = {
+  X: Transaction_Select_Column_Transaction_Aggregate_Bool_Exp_Corr_Arguments_Columns;
+  Y: Transaction_Select_Column_Transaction_Aggregate_Bool_Exp_Corr_Arguments_Columns;
+};
+
+export type Transaction_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Transaction_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Transaction_Bool_Exp>;
   predicate: Int_Comparison_Exp;
 };
 
-/** aggregate fields of "transactions" */
-export type Transactions_Aggregate_Fields = {
-  __typename?: 'transactions_aggregate_fields';
-  avg?: Maybe<Transactions_Avg_Fields>;
+export type Transaction_Aggregate_Bool_Exp_Covar_Samp = {
+  arguments: Transaction_Aggregate_Bool_Exp_Covar_Samp_Arguments;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Transaction_Bool_Exp>;
+  predicate: Float8_Comparison_Exp;
+};
+
+export type Transaction_Aggregate_Bool_Exp_Covar_Samp_Arguments = {
+  X: Transaction_Select_Column_Transaction_Aggregate_Bool_Exp_Covar_Samp_Arguments_Columns;
+  Y: Transaction_Select_Column_Transaction_Aggregate_Bool_Exp_Covar_Samp_Arguments_Columns;
+};
+
+export type Transaction_Aggregate_Bool_Exp_Max = {
+  arguments: Transaction_Select_Column_Transaction_Aggregate_Bool_Exp_Max_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Transaction_Bool_Exp>;
+  predicate: Float8_Comparison_Exp;
+};
+
+export type Transaction_Aggregate_Bool_Exp_Min = {
+  arguments: Transaction_Select_Column_Transaction_Aggregate_Bool_Exp_Min_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Transaction_Bool_Exp>;
+  predicate: Float8_Comparison_Exp;
+};
+
+export type Transaction_Aggregate_Bool_Exp_Stddev_Samp = {
+  arguments: Transaction_Select_Column_Transaction_Aggregate_Bool_Exp_Stddev_Samp_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Transaction_Bool_Exp>;
+  predicate: Float8_Comparison_Exp;
+};
+
+export type Transaction_Aggregate_Bool_Exp_Sum = {
+  arguments: Transaction_Select_Column_Transaction_Aggregate_Bool_Exp_Sum_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Transaction_Bool_Exp>;
+  predicate: Float8_Comparison_Exp;
+};
+
+export type Transaction_Aggregate_Bool_Exp_Var_Samp = {
+  arguments: Transaction_Select_Column_Transaction_Aggregate_Bool_Exp_Var_Samp_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Transaction_Bool_Exp>;
+  predicate: Float8_Comparison_Exp;
+};
+
+/** aggregate fields of "transaction" */
+export type Transaction_Aggregate_Fields = {
+  __typename?: 'transaction_aggregate_fields';
+  avg?: Maybe<Transaction_Avg_Fields>;
   count: Scalars['Int'];
-  max?: Maybe<Transactions_Max_Fields>;
-  min?: Maybe<Transactions_Min_Fields>;
-  stddev?: Maybe<Transactions_Stddev_Fields>;
-  stddev_pop?: Maybe<Transactions_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Transactions_Stddev_Samp_Fields>;
-  sum?: Maybe<Transactions_Sum_Fields>;
-  var_pop?: Maybe<Transactions_Var_Pop_Fields>;
-  var_samp?: Maybe<Transactions_Var_Samp_Fields>;
-  variance?: Maybe<Transactions_Variance_Fields>;
+  max?: Maybe<Transaction_Max_Fields>;
+  min?: Maybe<Transaction_Min_Fields>;
+  stddev?: Maybe<Transaction_Stddev_Fields>;
+  stddev_pop?: Maybe<Transaction_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Transaction_Stddev_Samp_Fields>;
+  sum?: Maybe<Transaction_Sum_Fields>;
+  var_pop?: Maybe<Transaction_Var_Pop_Fields>;
+  var_samp?: Maybe<Transaction_Var_Samp_Fields>;
+  variance?: Maybe<Transaction_Variance_Fields>;
 };
 
 
-/** aggregate fields of "transactions" */
-export type Transactions_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Transactions_Select_Column>>;
+/** aggregate fields of "transaction" */
+export type Transaction_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Transaction_Select_Column>>;
   distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
-/** order by aggregate values of table "transactions" */
-export type Transactions_Aggregate_Order_By = {
-  avg?: InputMaybe<Transactions_Avg_Order_By>;
+/** order by aggregate values of table "transaction" */
+export type Transaction_Aggregate_Order_By = {
+  avg?: InputMaybe<Transaction_Avg_Order_By>;
   count?: InputMaybe<Order_By>;
-  max?: InputMaybe<Transactions_Max_Order_By>;
-  min?: InputMaybe<Transactions_Min_Order_By>;
-  stddev?: InputMaybe<Transactions_Stddev_Order_By>;
-  stddev_pop?: InputMaybe<Transactions_Stddev_Pop_Order_By>;
-  stddev_samp?: InputMaybe<Transactions_Stddev_Samp_Order_By>;
-  sum?: InputMaybe<Transactions_Sum_Order_By>;
-  var_pop?: InputMaybe<Transactions_Var_Pop_Order_By>;
-  var_samp?: InputMaybe<Transactions_Var_Samp_Order_By>;
-  variance?: InputMaybe<Transactions_Variance_Order_By>;
+  max?: InputMaybe<Transaction_Max_Order_By>;
+  min?: InputMaybe<Transaction_Min_Order_By>;
+  stddev?: InputMaybe<Transaction_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Transaction_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Transaction_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Transaction_Sum_Order_By>;
+  var_pop?: InputMaybe<Transaction_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Transaction_Var_Samp_Order_By>;
+  variance?: InputMaybe<Transaction_Variance_Order_By>;
 };
 
-/** input type for inserting array relation for remote table "transactions" */
-export type Transactions_Arr_Rel_Insert_Input = {
-  data: Array<Transactions_Insert_Input>;
+/** input type for inserting array relation for remote table "transaction" */
+export type Transaction_Arr_Rel_Insert_Input = {
+  data: Array<Transaction_Insert_Input>;
   /** upsert condition */
-  on_conflict?: InputMaybe<Transactions_On_Conflict>;
+  on_conflict?: InputMaybe<Transaction_On_Conflict>;
 };
 
 /** aggregate avg on columns */
-export type Transactions_Avg_Fields = {
-  __typename?: 'transactions_avg_fields';
+export type Transaction_Avg_Fields = {
+  __typename?: 'transaction_avg_fields';
   amount?: Maybe<Scalars['Float']>;
 };
 
-/** order by avg() on columns of table "transactions" */
-export type Transactions_Avg_Order_By = {
+/** order by avg() on columns of table "transaction" */
+export type Transaction_Avg_Order_By = {
   amount?: InputMaybe<Order_By>;
 };
 
-/** Boolean expression to filter rows from the table "transactions". All fields are combined with a logical 'AND'. */
-export type Transactions_Bool_Exp = {
-  _and?: InputMaybe<Array<Transactions_Bool_Exp>>;
-  _not?: InputMaybe<Transactions_Bool_Exp>;
-  _or?: InputMaybe<Array<Transactions_Bool_Exp>>;
-  amount?: InputMaybe<Numeric_Comparison_Exp>;
-  budget_id?: InputMaybe<String_Comparison_Exp>;
+/** Boolean expression to filter rows from the table "transaction". All fields are combined with a logical 'AND'. */
+export type Transaction_Bool_Exp = {
+  _and?: InputMaybe<Array<Transaction_Bool_Exp>>;
+  _not?: InputMaybe<Transaction_Bool_Exp>;
+  _or?: InputMaybe<Array<Transaction_Bool_Exp>>;
+  amount?: InputMaybe<Float8_Comparison_Exp>;
+  budget?: InputMaybe<Budget_Bool_Exp>;
+  budget_id?: InputMaybe<Uuid_Comparison_Exp>;
+  company?: InputMaybe<Company_Bool_Exp>;
+  company_id?: InputMaybe<Uuid_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  date?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   label?: InputMaybe<String_Comparison_Exp>;
-  type?: InputMaybe<String_Comparison_Exp>;
+  transaction_type?: InputMaybe<String_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   user?: InputMaybe<Users_Bool_Exp>;
   user_id?: InputMaybe<Uuid_Comparison_Exp>;
 };
 
-/** unique or primary key constraints on table "transactions" */
-export enum Transactions_Constraint {
+/** unique or primary key constraints on table "transaction" */
+export enum Transaction_Constraint {
   /** unique or primary key constraint on columns "id" */
   TransactionPkey = 'transaction_pkey'
 }
 
-/** input type for incrementing numeric columns in table "transactions" */
-export type Transactions_Inc_Input = {
-  amount?: InputMaybe<Scalars['numeric']>;
+/** input type for incrementing numeric columns in table "transaction" */
+export type Transaction_Inc_Input = {
+  amount?: InputMaybe<Scalars['float8']>;
 };
 
-/** input type for inserting data into table "transactions" */
-export type Transactions_Insert_Input = {
-  amount?: InputMaybe<Scalars['numeric']>;
-  budget_id?: InputMaybe<Scalars['String']>;
+/** input type for inserting data into table "transaction" */
+export type Transaction_Insert_Input = {
+  amount?: InputMaybe<Scalars['float8']>;
+  budget?: InputMaybe<Budget_Obj_Rel_Insert_Input>;
+  budget_id?: InputMaybe<Scalars['uuid']>;
+  company?: InputMaybe<Company_Obj_Rel_Insert_Input>;
+  company_id?: InputMaybe<Scalars['uuid']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
+  date?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
   label?: InputMaybe<Scalars['String']>;
-  type?: InputMaybe<Scalars['String']>;
+  transaction_type?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
   user_id?: InputMaybe<Scalars['uuid']>;
 };
 
 /** aggregate max on columns */
-export type Transactions_Max_Fields = {
-  __typename?: 'transactions_max_fields';
-  amount?: Maybe<Scalars['numeric']>;
-  budget_id?: Maybe<Scalars['String']>;
+export type Transaction_Max_Fields = {
+  __typename?: 'transaction_max_fields';
+  amount?: Maybe<Scalars['float8']>;
+  budget_id?: Maybe<Scalars['uuid']>;
+  company_id?: Maybe<Scalars['uuid']>;
   created_at?: Maybe<Scalars['timestamptz']>;
+  date?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   label?: Maybe<Scalars['String']>;
-  type?: Maybe<Scalars['String']>;
+  transaction_type?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['uuid']>;
 };
 
-/** order by max() on columns of table "transactions" */
-export type Transactions_Max_Order_By = {
+/** order by max() on columns of table "transaction" */
+export type Transaction_Max_Order_By = {
   amount?: InputMaybe<Order_By>;
   budget_id?: InputMaybe<Order_By>;
+  company_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
+  date?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   label?: InputMaybe<Order_By>;
-  type?: InputMaybe<Order_By>;
+  transaction_type?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
   user_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
-export type Transactions_Min_Fields = {
-  __typename?: 'transactions_min_fields';
-  amount?: Maybe<Scalars['numeric']>;
-  budget_id?: Maybe<Scalars['String']>;
+export type Transaction_Min_Fields = {
+  __typename?: 'transaction_min_fields';
+  amount?: Maybe<Scalars['float8']>;
+  budget_id?: Maybe<Scalars['uuid']>;
+  company_id?: Maybe<Scalars['uuid']>;
   created_at?: Maybe<Scalars['timestamptz']>;
+  date?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   label?: Maybe<Scalars['String']>;
-  type?: Maybe<Scalars['String']>;
+  transaction_type?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['uuid']>;
 };
 
-/** order by min() on columns of table "transactions" */
-export type Transactions_Min_Order_By = {
+/** order by min() on columns of table "transaction" */
+export type Transaction_Min_Order_By = {
   amount?: InputMaybe<Order_By>;
   budget_id?: InputMaybe<Order_By>;
+  company_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
+  date?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   label?: InputMaybe<Order_By>;
-  type?: InputMaybe<Order_By>;
+  transaction_type?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
   user_id?: InputMaybe<Order_By>;
 };
 
-/** response of any mutation on the table "transactions" */
-export type Transactions_Mutation_Response = {
-  __typename?: 'transactions_mutation_response';
+/** response of any mutation on the table "transaction" */
+export type Transaction_Mutation_Response = {
+  __typename?: 'transaction_mutation_response';
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int'];
   /** data from the rows affected by the mutation */
-  returning: Array<Transactions>;
+  returning: Array<Transaction>;
 };
 
-/** on_conflict condition type for table "transactions" */
-export type Transactions_On_Conflict = {
-  constraint: Transactions_Constraint;
-  update_columns?: Array<Transactions_Update_Column>;
-  where?: InputMaybe<Transactions_Bool_Exp>;
+/** on_conflict condition type for table "transaction" */
+export type Transaction_On_Conflict = {
+  constraint: Transaction_Constraint;
+  update_columns?: Array<Transaction_Update_Column>;
+  where?: InputMaybe<Transaction_Bool_Exp>;
 };
 
-/** Ordering options when selecting data from "transactions". */
-export type Transactions_Order_By = {
+/** Ordering options when selecting data from "transaction". */
+export type Transaction_Order_By = {
   amount?: InputMaybe<Order_By>;
+  budget?: InputMaybe<Budget_Order_By>;
   budget_id?: InputMaybe<Order_By>;
+  company?: InputMaybe<Company_Order_By>;
+  company_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
+  date?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   label?: InputMaybe<Order_By>;
-  type?: InputMaybe<Order_By>;
+  transaction_type?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
   user?: InputMaybe<Users_Order_By>;
   user_id?: InputMaybe<Order_By>;
 };
 
-/** primary key columns input for table: transactions */
-export type Transactions_Pk_Columns_Input = {
+/** primary key columns input for table: transaction */
+export type Transaction_Pk_Columns_Input = {
   id: Scalars['uuid'];
 };
 
-/** select columns of table "transactions" */
-export enum Transactions_Select_Column {
+/** select columns of table "transaction" */
+export enum Transaction_Select_Column {
   /** column name */
   Amount = 'amount',
   /** column name */
   BudgetId = 'budget_id',
   /** column name */
+  CompanyId = 'company_id',
+  /** column name */
   CreatedAt = 'created_at',
+  /** column name */
+  Date = 'date',
   /** column name */
   Id = 'id',
   /** column name */
   Label = 'label',
   /** column name */
-  Type = 'type',
+  TransactionType = 'transaction_type',
   /** column name */
   UpdatedAt = 'updated_at',
   /** column name */
   UserId = 'user_id'
 }
 
-/** input type for updating data in table "transactions" */
-export type Transactions_Set_Input = {
-  amount?: InputMaybe<Scalars['numeric']>;
-  budget_id?: InputMaybe<Scalars['String']>;
+/** select "transaction_aggregate_bool_exp_avg_arguments_columns" columns of table "transaction" */
+export enum Transaction_Select_Column_Transaction_Aggregate_Bool_Exp_Avg_Arguments_Columns {
+  /** column name */
+  Amount = 'amount'
+}
+
+/** select "transaction_aggregate_bool_exp_corr_arguments_columns" columns of table "transaction" */
+export enum Transaction_Select_Column_Transaction_Aggregate_Bool_Exp_Corr_Arguments_Columns {
+  /** column name */
+  Amount = 'amount'
+}
+
+/** select "transaction_aggregate_bool_exp_covar_samp_arguments_columns" columns of table "transaction" */
+export enum Transaction_Select_Column_Transaction_Aggregate_Bool_Exp_Covar_Samp_Arguments_Columns {
+  /** column name */
+  Amount = 'amount'
+}
+
+/** select "transaction_aggregate_bool_exp_max_arguments_columns" columns of table "transaction" */
+export enum Transaction_Select_Column_Transaction_Aggregate_Bool_Exp_Max_Arguments_Columns {
+  /** column name */
+  Amount = 'amount'
+}
+
+/** select "transaction_aggregate_bool_exp_min_arguments_columns" columns of table "transaction" */
+export enum Transaction_Select_Column_Transaction_Aggregate_Bool_Exp_Min_Arguments_Columns {
+  /** column name */
+  Amount = 'amount'
+}
+
+/** select "transaction_aggregate_bool_exp_stddev_samp_arguments_columns" columns of table "transaction" */
+export enum Transaction_Select_Column_Transaction_Aggregate_Bool_Exp_Stddev_Samp_Arguments_Columns {
+  /** column name */
+  Amount = 'amount'
+}
+
+/** select "transaction_aggregate_bool_exp_sum_arguments_columns" columns of table "transaction" */
+export enum Transaction_Select_Column_Transaction_Aggregate_Bool_Exp_Sum_Arguments_Columns {
+  /** column name */
+  Amount = 'amount'
+}
+
+/** select "transaction_aggregate_bool_exp_var_samp_arguments_columns" columns of table "transaction" */
+export enum Transaction_Select_Column_Transaction_Aggregate_Bool_Exp_Var_Samp_Arguments_Columns {
+  /** column name */
+  Amount = 'amount'
+}
+
+/** input type for updating data in table "transaction" */
+export type Transaction_Set_Input = {
+  amount?: InputMaybe<Scalars['float8']>;
+  budget_id?: InputMaybe<Scalars['uuid']>;
+  company_id?: InputMaybe<Scalars['uuid']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
+  date?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
   label?: InputMaybe<Scalars['String']>;
-  type?: InputMaybe<Scalars['String']>;
+  transaction_type?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   user_id?: InputMaybe<Scalars['uuid']>;
 };
 
 /** aggregate stddev on columns */
-export type Transactions_Stddev_Fields = {
-  __typename?: 'transactions_stddev_fields';
+export type Transaction_Stddev_Fields = {
+  __typename?: 'transaction_stddev_fields';
   amount?: Maybe<Scalars['Float']>;
 };
 
-/** order by stddev() on columns of table "transactions" */
-export type Transactions_Stddev_Order_By = {
+/** order by stddev() on columns of table "transaction" */
+export type Transaction_Stddev_Order_By = {
   amount?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
-export type Transactions_Stddev_Pop_Fields = {
-  __typename?: 'transactions_stddev_pop_fields';
+export type Transaction_Stddev_Pop_Fields = {
+  __typename?: 'transaction_stddev_pop_fields';
   amount?: Maybe<Scalars['Float']>;
 };
 
-/** order by stddev_pop() on columns of table "transactions" */
-export type Transactions_Stddev_Pop_Order_By = {
+/** order by stddev_pop() on columns of table "transaction" */
+export type Transaction_Stddev_Pop_Order_By = {
   amount?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
-export type Transactions_Stddev_Samp_Fields = {
-  __typename?: 'transactions_stddev_samp_fields';
+export type Transaction_Stddev_Samp_Fields = {
+  __typename?: 'transaction_stddev_samp_fields';
   amount?: Maybe<Scalars['Float']>;
 };
 
-/** order by stddev_samp() on columns of table "transactions" */
-export type Transactions_Stddev_Samp_Order_By = {
+/** order by stddev_samp() on columns of table "transaction" */
+export type Transaction_Stddev_Samp_Order_By = {
   amount?: InputMaybe<Order_By>;
 };
 
-/** Streaming cursor of the table "transactions" */
-export type Transactions_Stream_Cursor_Input = {
+/** Streaming cursor of the table "transaction" */
+export type Transaction_Stream_Cursor_Input = {
   /** Stream column input with initial value */
-  initial_value: Transactions_Stream_Cursor_Value_Input;
+  initial_value: Transaction_Stream_Cursor_Value_Input;
   /** cursor ordering */
   ordering?: InputMaybe<Cursor_Ordering>;
 };
 
 /** Initial value of the column from where the streaming should start */
-export type Transactions_Stream_Cursor_Value_Input = {
-  amount?: InputMaybe<Scalars['numeric']>;
-  budget_id?: InputMaybe<Scalars['String']>;
+export type Transaction_Stream_Cursor_Value_Input = {
+  amount?: InputMaybe<Scalars['float8']>;
+  budget_id?: InputMaybe<Scalars['uuid']>;
+  company_id?: InputMaybe<Scalars['uuid']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
+  date?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
   label?: InputMaybe<Scalars['String']>;
-  type?: InputMaybe<Scalars['String']>;
+  transaction_type?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   user_id?: InputMaybe<Scalars['uuid']>;
 };
 
 /** aggregate sum on columns */
-export type Transactions_Sum_Fields = {
-  __typename?: 'transactions_sum_fields';
-  amount?: Maybe<Scalars['numeric']>;
+export type Transaction_Sum_Fields = {
+  __typename?: 'transaction_sum_fields';
+  amount?: Maybe<Scalars['float8']>;
 };
 
-/** order by sum() on columns of table "transactions" */
-export type Transactions_Sum_Order_By = {
+/** order by sum() on columns of table "transaction" */
+export type Transaction_Sum_Order_By = {
   amount?: InputMaybe<Order_By>;
 };
 
-/** update columns of table "transactions" */
-export enum Transactions_Update_Column {
+/** update columns of table "transaction" */
+export enum Transaction_Update_Column {
   /** column name */
   Amount = 'amount',
   /** column name */
   BudgetId = 'budget_id',
   /** column name */
+  CompanyId = 'company_id',
+  /** column name */
   CreatedAt = 'created_at',
+  /** column name */
+  Date = 'date',
   /** column name */
   Id = 'id',
   /** column name */
   Label = 'label',
   /** column name */
-  Type = 'type',
+  TransactionType = 'transaction_type',
   /** column name */
   UpdatedAt = 'updated_at',
   /** column name */
   UserId = 'user_id'
 }
 
-export type Transactions_Updates = {
+export type Transaction_Updates = {
   /** increments the numeric columns with given value of the filtered values */
-  _inc?: InputMaybe<Transactions_Inc_Input>;
+  _inc?: InputMaybe<Transaction_Inc_Input>;
   /** sets the columns of the filtered rows to the given values */
-  _set?: InputMaybe<Transactions_Set_Input>;
-  where: Transactions_Bool_Exp;
+  _set?: InputMaybe<Transaction_Set_Input>;
+  where: Transaction_Bool_Exp;
 };
 
 /** aggregate var_pop on columns */
-export type Transactions_Var_Pop_Fields = {
-  __typename?: 'transactions_var_pop_fields';
+export type Transaction_Var_Pop_Fields = {
+  __typename?: 'transaction_var_pop_fields';
   amount?: Maybe<Scalars['Float']>;
 };
 
-/** order by var_pop() on columns of table "transactions" */
-export type Transactions_Var_Pop_Order_By = {
+/** order by var_pop() on columns of table "transaction" */
+export type Transaction_Var_Pop_Order_By = {
   amount?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
-export type Transactions_Var_Samp_Fields = {
-  __typename?: 'transactions_var_samp_fields';
+export type Transaction_Var_Samp_Fields = {
+  __typename?: 'transaction_var_samp_fields';
   amount?: Maybe<Scalars['Float']>;
 };
 
-/** order by var_samp() on columns of table "transactions" */
-export type Transactions_Var_Samp_Order_By = {
+/** order by var_samp() on columns of table "transaction" */
+export type Transaction_Var_Samp_Order_By = {
   amount?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
-export type Transactions_Variance_Fields = {
-  __typename?: 'transactions_variance_fields';
+export type Transaction_Variance_Fields = {
+  __typename?: 'transaction_variance_fields';
   amount?: Maybe<Scalars['Float']>;
 };
 
-/** order by variance() on columns of table "transactions" */
-export type Transactions_Variance_Order_By = {
+/** order by variance() on columns of table "transaction" */
+export type Transaction_Variance_Order_By = {
   amount?: InputMaybe<Order_By>;
 };
 
@@ -4374,9 +5795,13 @@ export type Users = {
   ticketExpiresAt: Scalars['timestamptz'];
   totpSecret?: Maybe<Scalars['String']>;
   /** An array relationship */
-  transactions: Array<Transactions>;
+  transaction: Array<Transaction>;
   /** An aggregate relationship */
-  transactions_aggregate: Transactions_Aggregate;
+  transaction_aggregate: Transaction_Aggregate;
+  /** An array relationship */
+  transactions: Array<Transaction>;
+  /** An aggregate relationship */
+  transactions_aggregate: Transaction_Aggregate;
   updatedAt: Scalars['timestamptz'];
   /** An array relationship */
   userProviders: Array<AuthUserProviders>;
@@ -4452,22 +5877,42 @@ export type UsersSecurityKeys_AggregateArgs = {
 
 
 /** User account information. Don't modify its structure as Hasura Auth relies on it to function properly. */
-export type UsersTransactionsArgs = {
-  distinct_on?: InputMaybe<Array<Transactions_Select_Column>>;
+export type UsersTransactionArgs = {
+  distinct_on?: InputMaybe<Array<Transaction_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Transactions_Order_By>>;
-  where?: InputMaybe<Transactions_Bool_Exp>;
+  order_by?: InputMaybe<Array<Transaction_Order_By>>;
+  where?: InputMaybe<Transaction_Bool_Exp>;
+};
+
+
+/** User account information. Don't modify its structure as Hasura Auth relies on it to function properly. */
+export type UsersTransaction_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Transaction_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Transaction_Order_By>>;
+  where?: InputMaybe<Transaction_Bool_Exp>;
+};
+
+
+/** User account information. Don't modify its structure as Hasura Auth relies on it to function properly. */
+export type UsersTransactionsArgs = {
+  distinct_on?: InputMaybe<Array<Transaction_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Transaction_Order_By>>;
+  where?: InputMaybe<Transaction_Bool_Exp>;
 };
 
 
 /** User account information. Don't modify its structure as Hasura Auth relies on it to function properly. */
 export type UsersTransactions_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Transactions_Select_Column>>;
+  distinct_on?: InputMaybe<Array<Transaction_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Transactions_Order_By>>;
-  where?: InputMaybe<Transactions_Bool_Exp>;
+  order_by?: InputMaybe<Array<Transaction_Order_By>>;
+  where?: InputMaybe<Transaction_Bool_Exp>;
 };
 
 
@@ -4594,8 +6039,10 @@ export type Users_Bool_Exp = {
   ticket?: InputMaybe<String_Comparison_Exp>;
   ticketExpiresAt?: InputMaybe<Timestamptz_Comparison_Exp>;
   totpSecret?: InputMaybe<String_Comparison_Exp>;
-  transactions?: InputMaybe<Transactions_Bool_Exp>;
-  transactions_aggregate?: InputMaybe<Transactions_Aggregate_Bool_Exp>;
+  transaction?: InputMaybe<Transaction_Bool_Exp>;
+  transaction_aggregate?: InputMaybe<Transaction_Aggregate_Bool_Exp>;
+  transactions?: InputMaybe<Transaction_Bool_Exp>;
+  transactions_aggregate?: InputMaybe<Transaction_Aggregate_Bool_Exp>;
   updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>;
   userProviders?: InputMaybe<AuthUserProviders_Bool_Exp>;
   userProviders_aggregate?: InputMaybe<AuthUserProviders_Aggregate_Bool_Exp>;
@@ -4656,7 +6103,8 @@ export type Users_Insert_Input = {
   ticket?: InputMaybe<Scalars['String']>;
   ticketExpiresAt?: InputMaybe<Scalars['timestamptz']>;
   totpSecret?: InputMaybe<Scalars['String']>;
-  transactions?: InputMaybe<Transactions_Arr_Rel_Insert_Input>;
+  transaction?: InputMaybe<Transaction_Arr_Rel_Insert_Input>;
+  transactions?: InputMaybe<Transaction_Arr_Rel_Insert_Input>;
   updatedAt?: InputMaybe<Scalars['timestamptz']>;
   userProviders?: InputMaybe<AuthUserProviders_Arr_Rel_Insert_Input>;
 };
@@ -4812,7 +6260,8 @@ export type Users_Order_By = {
   ticket?: InputMaybe<Order_By>;
   ticketExpiresAt?: InputMaybe<Order_By>;
   totpSecret?: InputMaybe<Order_By>;
-  transactions_aggregate?: InputMaybe<Transactions_Aggregate_Order_By>;
+  transaction_aggregate?: InputMaybe<Transaction_Aggregate_Order_By>;
+  transactions_aggregate?: InputMaybe<Transaction_Aggregate_Order_By>;
   updatedAt?: InputMaybe<Order_By>;
   userProviders_aggregate?: InputMaybe<AuthUserProviders_Aggregate_Order_By>;
 };
@@ -5055,18 +6504,39 @@ export type Uuid_Comparison_Exp = {
 };
 
 export type InsertTransactionMutationVariables = Exact<{
-  transaction: Transactions_Insert_Input;
+  transaction: Transaction_Insert_Input;
 }>;
 
 
-export type InsertTransactionMutation = { __typename?: 'mutation_root', insert_transactions?: { __typename?: 'transactions_mutation_response', affected_rows: number, returning: Array<{ __typename?: 'transactions', id: any, amount: any, budget_id: string, label: string, type: string, created_at: any, updated_at: any, user_id: any }> } | null };
+export type InsertTransactionMutation = { __typename?: 'mutation_root', insert_transaction?: { __typename?: 'transaction_mutation_response', affected_rows: number, returning: Array<{ __typename?: 'transaction', id: any, label: string, amount: any, budget_id: any, company_id: any, user_id: any, transaction_type: string, date?: any | null, created_at: any, updated_at: any }> } | null };
+
+export type GetCompaniesQueryVariables = Exact<{
+  limit: Scalars['Int'];
+}>;
+
+
+export type GetCompaniesQuery = { __typename?: 'query_root', company: Array<{ __typename?: 'company', id: any, label: string, logo?: string | null }> };
+
+export type GetBudgetsQueryVariables = Exact<{
+  limit: Scalars['Int'];
+}>;
+
+
+export type GetBudgetsQuery = { __typename?: 'query_root', budget: Array<{ __typename?: 'budget', id: any, label: string }> };
+
+export type InsertCompanyMutationVariables = Exact<{
+  company: Company_Insert_Input;
+}>;
+
+
+export type InsertCompanyMutation = { __typename?: 'mutation_root', insert_company?: { __typename?: 'company_mutation_response', affected_rows: number, returning: Array<{ __typename?: 'company', id: any, label: string }> } | null };
 
 export type GetTransactionsQueryVariables = Exact<{
   limit: Scalars['Int'];
 }>;
 
 
-export type GetTransactionsQuery = { __typename?: 'query_root', transactions: Array<{ __typename?: 'transactions', amount: any, budget_id: string, label: string, type: string, created_at: any, updated_at: any, id: any, user_id: any }> };
+export type GetTransactionsQuery = { __typename?: 'query_root', transaction: Array<{ __typename?: 'transaction', amount: any, label: string, transaction_type: string, created_at: any, updated_at: any, id: any, user_id: any, budget: { __typename?: 'budget', label: string }, company: { __typename?: 'company', label: string, logo?: string | null } }> };
 
 export type GetUserQueryVariables = Exact<{
   id: Scalars['uuid'];
@@ -5089,11 +6559,14 @@ export type GetTransactionQueryVariables = Exact<{
 }>;
 
 
-export type GetTransactionQuery = { __typename?: 'query_root', transactions: Array<{ __typename?: 'transactions', amount: any, budget_id: string, label: string, type: string, created_at: any, updated_at: any, id: any, user_id: any }> };
+export type GetTransactionQuery = { __typename?: 'query_root', transaction: Array<{ __typename?: 'transaction', amount: any, label: string, transaction_type: string, created_at: any, updated_at: any, id: any, user_id: any, company: { __typename?: 'company', label: string, logo?: string | null }, budget: { __typename?: 'budget', label: string } }> };
 
 
-export const InsertTransactionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"InsertTransaction"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"transaction"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"transactions_insert_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_transactions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"objects"},"value":{"kind":"ListValue","values":[{"kind":"Variable","name":{"kind":"Name","value":"transaction"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}},{"kind":"Field","name":{"kind":"Name","value":"returning"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"budget_id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}}]}}]}}]}}]} as unknown as DocumentNode<InsertTransactionMutation, InsertTransactionMutationVariables>;
-export const GetTransactionsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetTransactions"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"transactions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"created_at"},"value":{"kind":"EnumValue","value":"desc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"budget_id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}}]}}]}}]} as unknown as DocumentNode<GetTransactionsQuery, GetTransactionsQueryVariables>;
+export const InsertTransactionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"InsertTransaction"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"transaction"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"transaction_insert_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_transaction"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"objects"},"value":{"kind":"ListValue","values":[{"kind":"Variable","name":{"kind":"Name","value":"transaction"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}},{"kind":"Field","name":{"kind":"Name","value":"returning"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"budget_id"}},{"kind":"Field","name":{"kind":"Name","value":"company_id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"transaction_type"}},{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}}]}}]}}]}}]} as unknown as DocumentNode<InsertTransactionMutation, InsertTransactionMutationVariables>;
+export const GetCompaniesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCompanies"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"company"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"label"},"value":{"kind":"EnumValue","value":"asc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}}]}}]} as unknown as DocumentNode<GetCompaniesQuery, GetCompaniesQueryVariables>;
+export const GetBudgetsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetBudgets"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"budget"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"label"},"value":{"kind":"EnumValue","value":"asc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}}]}}]} as unknown as DocumentNode<GetBudgetsQuery, GetBudgetsQueryVariables>;
+export const InsertCompanyDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"InsertCompany"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"company"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"company_insert_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_company"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"objects"},"value":{"kind":"ListValue","values":[{"kind":"Variable","name":{"kind":"Name","value":"company"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}},{"kind":"Field","name":{"kind":"Name","value":"returning"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}}]}}]}}]} as unknown as DocumentNode<InsertCompanyMutation, InsertCompanyMutationVariables>;
+export const GetTransactionsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetTransactions"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"transaction"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"created_at"},"value":{"kind":"EnumValue","value":"desc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"budget"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}}]}},{"kind":"Field","name":{"kind":"Name","value":"company"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"transaction_type"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}}]}}]}}]} as unknown as DocumentNode<GetTransactionsQuery, GetTransactionsQueryVariables>;
 export const GetUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"avatarUrl"}}]}}]}}]} as unknown as DocumentNode<GetUserQuery, GetUserQueryVariables>;
 export const UpdateUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"displayName"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"metadata"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"jsonb"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateUser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"pk_columns"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"displayName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"displayName"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"metadata"},"value":{"kind":"Variable","name":{"kind":"Name","value":"metadata"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}}]}}]}}]} as unknown as DocumentNode<UpdateUserMutation, UpdateUserMutationVariables>;
-export const GetTransactionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetTransaction"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"transactions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"budget_id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}}]}}]}}]} as unknown as DocumentNode<GetTransactionQuery, GetTransactionQueryVariables>;
+export const GetTransactionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetTransaction"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"transaction"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"company"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}},{"kind":"Field","name":{"kind":"Name","value":"budget"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}}]}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"transaction_type"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}}]}}]}}]} as unknown as DocumentNode<GetTransactionQuery, GetTransactionQueryVariables>;

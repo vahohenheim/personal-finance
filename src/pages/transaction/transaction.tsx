@@ -2,20 +2,28 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { graphql } from '../../gql/gql';
 import { gqlClient } from '../../utils/graphql-client';
-import { Transactions } from '../../gql/graphql';
+import { Company, Transaction } from '../../gql/graphql';
 import Title from '../../components/title/title';
 import { Helmet } from 'react-helmet';
 import Section from '../../components/section/section';
 import { Button } from 'antd';
 import dayjs from 'dayjs';
+import { formatCurrency } from '../../utils/format-currency';
+import styles from './transaction.module.css';
 
 const GET_TRANSACTION_QUERY = graphql(`
 	query GetTransaction($id: uuid!) {
-		transactions(where: { id: { _eq: $id } }) {
+		transaction(where: { id: { _eq: $id } }) {
 			amount
-			budget_id
+			company {
+				label
+				logo
+			}
+			budget {
+				label
+			}
 			label
-			type
+			transaction_type
 			created_at
 			updated_at
 			id
@@ -27,12 +35,12 @@ const GET_TRANSACTION_QUERY = graphql(`
 const TransactionPage = () => {
 	const { id } = useParams();
 
-	const { data, isLoading, isError, error } = useQuery({
+	const getTransaction = useQuery({
 		queryKey: [`transation-${id || ''}`],
 		enabled: !!id,
 		queryFn: () => {
 			return gqlClient.request<
-				{ transactions: Array<Transactions> },
+				{ transaction: Array<Transaction> },
 				{ id: string }
 			>(GET_TRANSACTION_QUERY, {
 				id: id || '',
@@ -40,38 +48,58 @@ const TransactionPage = () => {
 		},
 	});
 
-	if (isLoading) {
+	const transaction = getTransaction?.data?.transaction[0];
+
+	if (getTransaction.isLoading) {
 		return <div>Loading...</div>;
 	}
 
-	if (isError) {
-		console.error(error);
+	if (getTransaction.isError) {
+		console.error(getTransaction.error);
 		return <div>Error</div>;
 	}
 
-	if (!data) {
+	if (!getTransaction.data) {
 		return <div>No data</div>;
 	}
-
-	const transaction = data.transactions[0];
 
 	return (
 		<>
 			<Helmet>
-				<title>transaction {transaction.label} - finance</title>
+				<title>transaction {transaction?.label || ''} - finance</title>
 			</Helmet>
 
 			<div className="container center-block">
 				<Section>
-					<Title heading={'h2'}>
-						Transaction : {transaction.label}
+					<Title heading="h2">
+						Transaction : {transaction?.label}
 					</Title>
-					<p>amount : {transaction.amount}</p>
-					<p>type: {transaction.type}</p>
-					<p>
-						date :{' '}
-						{dayjs(transaction.created_at).format('DD MMMM YYYY')}
-					</p>
+					<div className={styles.infos}>
+						<div className={styles.info}>
+							<p>type</p>
+							<p>{transaction?.transaction_type}</p>
+						</div>
+						<div className={styles.info}>
+							<p>company</p>
+							<p>{transaction?.company?.label}</p>
+						</div>
+						<div className={styles.info}>
+							<p>budget</p>
+							<p>{transaction?.budget?.label}</p>
+						</div>
+						<div className={styles.info}>
+							<p>date</p>
+							<p>
+								{dayjs(transaction?.date).format(
+									'DD MMMM YYYY'
+								)}
+							</p>
+						</div>
+						<div className={styles.info}>
+							<p>amount</p>
+							<p>{formatCurrency(transaction?.amount)}</p>
+						</div>
+					</div>
 					<Button type="link" block={true}>
 						update
 					</Button>

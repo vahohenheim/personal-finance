@@ -1,19 +1,26 @@
 import { useQuery } from '@tanstack/react-query';
 import { graphql } from '../../gql/gql';
 import { gqlClient } from '../../utils/graphql-client';
-import { TransationComponent } from '../transaction/transaction';
+import TransactionComponent from '../transaction/transaction';
 import styles from './transactions.module.css';
 import dayjs from 'dayjs';
 import { FC } from 'react';
-import type { Transactions } from '../../gql/graphql';
+import type { Transaction } from '../../gql/graphql';
+import { Empty } from 'antd';
 
 const GET_TRANSACTIONS_QUERY = graphql(`
 	query GetTransactions($limit: Int!) {
-		transactions(order_by: { created_at: desc }, limit: $limit) {
+		transaction(order_by: { created_at: desc }, limit: $limit) {
 			amount
-			budget_id
+			budget {
+				label
+			}
+			company {
+				label
+				logo
+			}
 			label
-			type
+			transaction_type
 			created_at
 			updated_at
 			id
@@ -23,34 +30,42 @@ const GET_TRANSACTIONS_QUERY = graphql(`
 `);
 
 const TransactionsComponent: FC<{ limit: number }> = ({ limit }) => {
-	const { data, isLoading, isError, error } = useQuery({
+	const getTransactions = useQuery({
 		queryKey: ['transactions'],
 		queryFn: async () => {
 			return gqlClient.request<
-				{ transactions: Array<Transactions> },
+				{ transaction: Array<Transaction> },
 				{ limit: number }
 			>(GET_TRANSACTIONS_QUERY, { limit });
 		},
 	});
 
-	if (isLoading) {
+	if (getTransactions.isLoading) {
 		return <div>Loading...</div>;
 	}
 
-	if (isError) {
-		console.error(error);
+	if (getTransactions.isError) {
+		console.error(getTransactions.error);
 		return <div>Error</div>;
 	}
 
-	if (!data) {
+	if (!getTransactions.data) {
 		return <div>No data</div>;
 	}
 
-	const transactions = data.transactions;
+	if (getTransactions.data.transaction.length === 0) {
+		return (
+			<div className={styles.empty}>
+				<Empty description={'Any transaction'} />
+			</div>
+		);
+	}
+
+	const transactions = getTransactions.data.transaction;
 
 	const aggregateByDay = (
-		acc: Record<string, Array<Transactions>>,
-		cur: Transactions
+		acc: Record<string, Array<Transaction>>,
+		cur: Transaction
 	) => {
 		const date = dayjs(cur.created_at as string).format('YYYY-MM-DD');
 		if (!acc[date]) {
@@ -62,11 +77,11 @@ const TransactionsComponent: FC<{ limit: number }> = ({ limit }) => {
 	};
 
 	const transactionByDay = transactions.reduce<
-		Record<string, Array<Transactions>>
+		Record<string, Array<Transaction>>
 	>(aggregateByDay, {});
 
 	const aggregateByDayByMonth = (
-		acc: Record<string, Record<string, Array<Transactions>>>,
+		acc: Record<string, Record<string, Array<Transaction>>>,
 		day: string
 	) => {
 		const date = dayjs(day).format('YYYY-MM');
@@ -108,10 +123,10 @@ const TransactionsComponent: FC<{ limit: number }> = ({ limit }) => {
 											.toLowerCase()}
 									</p>
 									{transactionByDayByMonth[month][day].map(
-										(transation) => (
-											<div key={transation.id as string}>
-												<TransationComponent
-													transation={transation}
+										(transaction) => (
+											<div key={transaction.id as string}>
+												<TransactionComponent
+													transaction={transaction}
 												/>
 											</div>
 										)

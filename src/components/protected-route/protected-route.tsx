@@ -1,7 +1,9 @@
 import { useAuthenticationStatus } from '@nhost/react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { ReactNode, Fragment } from 'react';
-import { Spin } from 'antd';
+import SpinnerComponent from '../spinner/spinner';
+import styles from './protected-route.module.css';
+import classNames from 'classnames';
 
 const ProtectedRoute = ({ children }: { children: ReactNode }) => {
 	const { isAuthenticated, isLoading } = useAuthenticationStatus();
@@ -9,8 +11,8 @@ const ProtectedRoute = ({ children }: { children: ReactNode }) => {
 
 	if (isLoading) {
 		return (
-			<div>
-				<Spin />
+			<div className={classNames(styles.loading, 'main')}>
+				<SpinnerComponent />
 			</div>
 		);
 	}

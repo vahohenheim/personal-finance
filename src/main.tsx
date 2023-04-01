@@ -37,7 +37,7 @@ const Main: FC = () => {
 		},
 		onSuccess: () => {
 			toast('Welcome back', {
-				id: 'welcome',
+				id: 'welcome-back',
 				icon: '👋',
 				duration: 1500,
 			});

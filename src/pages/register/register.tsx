@@ -23,9 +23,9 @@ const RegisterPage = () => {
 		firstName: string;
 		lastName: string;
 		email: string;
-		password: string;
+		'new-password': string;
 	}) => {
-		void signUpEmailPassword(values.email, values.password, {
+		void signUpEmailPassword(values.email, values['new-password'], {
 			displayName: `${values.firstName} ${values.lastName}`.trim(),
 			metadata: {
 				firstName: values.firstName,
@@ -82,7 +82,7 @@ const RegisterPage = () => {
 				</Form.Item>
 				<Form.Item
 					label="password"
-					name="password"
+					name="new-password"
 					rules={[
 						{
 							required: true,
@@ -90,7 +90,7 @@ const RegisterPage = () => {
 						},
 					]}
 				>
-					<Input disabled={disableForm} />
+					<Input.Password disabled={disableForm} />
 				</Form.Item>
 				<Form.Item>
 					<Button

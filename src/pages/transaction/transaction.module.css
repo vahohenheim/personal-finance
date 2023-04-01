@@ -1,0 +1,7 @@
+.info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: var(--gui-gutter-sm);
+    padding-bottom: var(--gui-gutter-sm);
+}

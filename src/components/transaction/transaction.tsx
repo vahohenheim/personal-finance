@@ -3,25 +3,27 @@ import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { formatCurrency } from '../../utils/format-currency';
 import { TransactionComponentProps } from './transaction.model';
-import styles from './transation.module.css';
+import styles from './transaction.module.css';
 
-export const TransationComponent: FC<TransactionComponentProps> = ({
-	transation,
+const TransactionComponent: FC<TransactionComponentProps> = ({
+	transaction,
 }) => {
-	const amount = formatCurrency(transation.amount);
+	const amount = formatCurrency(transaction.amount);
 
 	return (
 		<Link
 			className={styles.link}
-			to={`/transaction/${transation.id as string}`}
+			to={`/transaction/${transaction.id as string}`}
 		>
 			<Card className={styles.card}>
 				<div className={styles.body}>
 					<div className={styles.content}>
 						<div className={styles.avatar}></div>
 						<div className={styles.title}>
-							<p className={styles.budget}>🌮 food</p>
-							<p className={styles.label}>{transation.label}</p>
+							<p className={styles.budget}>
+								{transaction?.budget?.label}
+							</p>
+							<p className={styles.label}>{transaction?.label}</p>
 						</div>
 					</div>
 					<div className={styles.amount}>
@@ -32,3 +34,5 @@ export const TransationComponent: FC<TransactionComponentProps> = ({
 		</Link>
 	);
 };
+
+export default TransactionComponent;

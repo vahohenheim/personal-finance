@@ -1,8 +1,8 @@
 import { FC, ReactNode } from 'react';
 import styles from './section.module.css';
 
-const Section: FC<{ children: ReactNode }> = ({ children }) => {
+const SectionComponent: FC<{ children: ReactNode }> = ({ children }) => {
 	return <section className={styles.section}>{children}</section>;
 };
 
-export default Section;
+export default SectionComponent;
