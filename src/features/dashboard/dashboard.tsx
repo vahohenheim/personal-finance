@@ -1,6 +1,5 @@
 import type { FC } from 'react';
-import { Link, useOutletContext } from 'react-router-dom';
-import type { User } from '../../user.model';
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Section from '../../components/section/section';
 import { Button } from 'antd';
@@ -8,8 +7,6 @@ import Title from '../../components/title/title';
 import ListTransactionsComponent from '../transactions/components/list/list';
 
 const DashboardPage: FC = () => {
-	const { user } = useOutletContext<{ user: User }>();
-
 	return (
 		<>
 			<Helmet>
@@ -27,9 +24,9 @@ const DashboardPage: FC = () => {
 					>
 						Last transactions
 					</Title>
-					<ListTransactionsComponent limit={5} />
+					<ListTransactionsComponent limit={4} />
 					<Link to="/transactions/add">
-						<Button type="primary" block={true}>
+						<Button type="primary" block={true} size="large">
 							Add transaction
 						</Button>
 					</Link>

@@ -5,10 +5,42 @@ import { Link, useLocation } from 'react-router-dom';
 import styles from './header.module.css';
 import classNames from 'classnames';
 import LinkComponent from '../link/link';
+import { useUserId } from '@nhost/react';
+import { graphql } from '../../gql/gql';
+import { gqlClient } from '../../utils/graphql-client';
+import { useQuery } from '@tanstack/react-query';
 
-const Header: FC<{ user: User }> = ({ user }) => {
+const GET_USER_QUERY = graphql(`
+	query GetUser($id: uuid!) {
+		user(id: $id) {
+			id
+			email
+			displayName
+			metadata
+			avatarUrl
+		}
+	}
+`);
+
+const Header: FC = () => {
 	const [current, setCurrent] = useState('/');
+	const id = useUserId() as string;
 	const location = useLocation();
+
+	const { data, isLoading, isError, error } = useQuery({
+		queryKey: ['user'],
+		enabled: !!id,
+		queryFn: () => {
+			return gqlClient.request<{ user: User }, { id: string }>(
+				GET_USER_QUERY,
+				{
+					id,
+				}
+			);
+		},
+	});
+
+	const user = data?.user;
 
 	useEffect(() => {
 		setCurrent(location.pathname.split('/')[1]);
@@ -29,6 +61,11 @@ const Header: FC<{ user: User }> = ({ user }) => {
 								className={classNames(styles.profile, {
 									[styles.active]: current === 'user',
 								})}
+								style={{
+									backgroundImage: `url(${
+										user?.avatarUrl || ''
+									})`,
+								}}
 							></div>
 						</Link>
 						<LinkComponent active={current === ''} to={'/'}>

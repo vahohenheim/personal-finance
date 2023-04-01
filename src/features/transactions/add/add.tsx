@@ -1,10 +1,9 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { graphql } from '../../../gql/gql';
 import { gqlClient } from '../../../utils/graphql-client';
 import { queryClient } from '../../../utils/react-query-client';
 import toast from 'react-hot-toast';
-import { useNavigate, useOutletContext } from 'react-router-dom';
-import { User } from '../../../user.model';
+import { useNavigate } from 'react-router-dom';
 import { Form } from 'antd';
 import type {
 	Company_Insert_Input,
@@ -14,6 +13,9 @@ import FormTransactionComponent from '../components/form/form';
 import { Helmet } from 'react-helmet';
 import SectionComponent from '../../../components/section/section';
 import TitleComponent from '../../../components/title/title';
+import { useUserId } from '@nhost/react';
+import dayjs from 'dayjs';
+import { FormTransactionValues } from '../components/form/form.model';
 
 const INSERT_TRANSACTION_MUTATION = graphql(`
 	mutation InsertTransaction($transaction: transaction_insert_input!) {
@@ -42,13 +44,14 @@ const INSERT_COMPANY_MUTATION = graphql(`
 			returning {
 				id
 				label
+				logo
 			}
 		}
 	}
 `);
 
 const AddTransactionPage = () => {
-	const { user } = useOutletContext<{ user: User }>();
+	const id = useUserId() as string;
 	const [form] = Form.useForm();
 	const navigate = useNavigate();
 
@@ -61,7 +64,7 @@ const AddTransactionPage = () => {
 					label: transaction.label,
 					transaction_type: transaction.transaction_type,
 					company_id: transaction.company_id,
-					user_id: user?.id,
+					user_id: id,
 				},
 			});
 		},
@@ -84,15 +87,7 @@ const AddTransactionPage = () => {
 		},
 	});
 
-	const onFinish = (values: {
-		label: string;
-		transaction_type: string;
-		budget_type: string;
-		budget_id: string;
-		company_id: string;
-		date: string;
-		amount: number;
-	}) => {
+	const onFinish = (values: FormTransactionValues) => {
 		try {
 			const transaction: Transaction_Insert_Input = {
 				label: values.label,
@@ -125,7 +120,15 @@ const AddTransactionPage = () => {
 					<TitleComponent heading="h2">
 						Add a transaction
 					</TitleComponent>
-					<FormTransactionComponent onFinish={onFinish} form={form} />
+					<FormTransactionComponent
+						onFinish={onFinish}
+						form={form}
+						initialValues={{
+							transaction_type: 'spent',
+							budget_type: 'month',
+							date: dayjs(),
+						}}
+					/>
 				</SectionComponent>
 			</div>
 		</>

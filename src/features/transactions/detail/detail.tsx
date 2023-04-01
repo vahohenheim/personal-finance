@@ -10,16 +10,19 @@ import { Button } from 'antd';
 import dayjs from 'dayjs';
 import { formatCurrency } from '../../../utils/format-currency';
 import styles from './detail.module.css';
+import LinkComponent from '../../../components/link/link';
 
 const GET_TRANSACTION_QUERY = graphql(`
 	query GetTransaction($id: uuid!) {
 		transaction(where: { id: { _eq: $id } }) {
 			amount
 			company {
+				id
 				label
 				logo
 			}
 			budget {
+				id
 				label
 			}
 			label
@@ -81,7 +84,14 @@ const DetailTransactionPage = () => {
 						</div>
 						<div className={styles.info}>
 							<p>company</p>
-							<p>{transaction?.company?.label}</p>
+							<LinkComponent
+								active={true}
+								to={`/companies/${
+									transaction?.company?.id as string
+								}`}
+							>
+								{transaction?.company?.label}
+							</LinkComponent>
 						</div>
 						<div className={styles.info}>
 							<p>budget</p>
@@ -100,10 +110,10 @@ const DetailTransactionPage = () => {
 							<p>{formatCurrency(transaction?.amount)}</p>
 						</div>
 					</div>
-					<Button type="link" block={true}>
+					<Button type="link" block={true} size="large">
 						update
 					</Button>
-					<Button type="link" block={true} danger>
+					<Button type="link" block={true} danger size="large">
 						delete
 					</Button>
 				</Section>

@@ -1,0 +1,5 @@
+.transactions {
+    display: grid;
+    gap: var(--gui-gutter-base);
+    margin-bottom: var(--gui-gutter-lg);
+}

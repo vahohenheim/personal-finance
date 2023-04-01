@@ -1,6 +1,5 @@
 import type { FC } from 'react';
-import { Link, useOutletContext } from 'react-router-dom';
-import type { User } from '../../user.model';
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Section from '../../components/section/section';
 import { Button } from 'antd';
@@ -8,8 +7,6 @@ import Title from '../../components/title/title';
 import ListTransactionsComponent from './components/list/list';
 
 const TransactionsPage: FC = () => {
-	const { user } = useOutletContext<{ user: User }>();
-
 	return (
 		<>
 			<Helmet>

@@ -5,9 +5,9 @@ import { graphql } from '../../../gql/gql';
 import { useOutletContext } from 'react-router-dom';
 import { Form, Input, Button } from 'antd';
 import Section from '../../../components/section/section';
-import { useSignOut } from '@nhost/react';
+import { useSignOut, useUserId } from '@nhost/react';
 import Title from '../../../components/title/title';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { Users_Set_Input, Users_Update_Column } from '../../../gql/graphql';
 import { gqlClient } from '../../../utils/graphql-client';
 import { queryClient } from '../../../utils/react-query-client';
@@ -25,9 +25,36 @@ const UPDATE_USER_MUTATION = graphql(`
 	}
 `);
 
+const GET_USER_QUERY = graphql(`
+	query GetUser($id: uuid!) {
+		user(id: $id) {
+			id
+			email
+			displayName
+			metadata
+			avatarUrl
+		}
+	}
+`);
+
 const EditUserPage = () => {
 	const { signOut } = useSignOut();
-	const { user } = useOutletContext<{ user: User }>();
+	const id = useUserId() as string;
+
+	const getUser = useQuery({
+		queryKey: ['user'],
+		enabled: !!id,
+		queryFn: () => {
+			return gqlClient.request<{ user: User }, { id: string }>(
+				GET_USER_QUERY,
+				{
+					id,
+				}
+			);
+		},
+	});
+
+	const user = getUser.data?.user;
 
 	const updateUser = useMutation({
 		mutationFn: (userUpdated: Users_Set_Input) => {
@@ -82,16 +109,17 @@ const EditUserPage = () => {
 							onFinish={onFinish}
 						>
 							<Form.Item label="display name" name="displayName">
-								<Input />
+								<Input size="large" />
 							</Form.Item>
 							<Form.Item label="firstname" name="firstName">
-								<Input />
+								<Input size="large" />
 							</Form.Item>
 							<Form.Item label="lastname" name="lastName">
-								<Input />
+								<Input size="large" />
 							</Form.Item>
 							<Form.Item>
 								<Button
+									size="large"
 									type="primary"
 									htmlType="submit"
 									block={true}
@@ -101,9 +129,13 @@ const EditUserPage = () => {
 							</Form.Item>
 							<Form.Item>
 								<Button
-									type={'link'}
+									size="large"
+									type="link"
 									block={true}
-									onClick={() => signOut()}
+									onClick={() => {
+										signOut();
+										queryClient.invalidateQueries(['user']);
+									}}
 								>
 									logout
 								</Button>

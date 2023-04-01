@@ -1,4 +1,5 @@
 import { FormInstance } from 'antd/es/form/Form';
+import { Dayjs } from 'dayjs';
 
 export type FormTransactionValues = {
 	label: string;
@@ -6,11 +7,12 @@ export type FormTransactionValues = {
 	budget_type: string;
 	budget_id: string;
 	company_id: string;
-	date: string;
+	date: string | Dayjs;
 	amount: number;
 };
 
 export type FormTransactionComponentProps = {
 	onFinish: (values: FormTransactionValues) => void;
 	form: FormInstance<FormTransactionValues>;
+	initialValues?: Partial<FormTransactionValues>;
 };

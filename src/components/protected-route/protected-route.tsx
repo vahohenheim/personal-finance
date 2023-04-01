@@ -1,11 +1,11 @@
 import { useAuthenticationStatus } from '@nhost/react';
-import { Navigate, useLocation } from 'react-router-dom';
-import { ReactNode, Fragment } from 'react';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import { Fragment } from 'react';
 import SpinnerComponent from '../spinner/spinner';
 import styles from './protected-route.module.css';
 import classNames from 'classnames';
 
-const ProtectedRoute = ({ children }: { children: ReactNode }) => {
+const ProtectedRoute = () => {
 	const { isAuthenticated, isLoading } = useAuthenticationStatus();
 	const location = useLocation();
 
@@ -21,7 +21,11 @@ const ProtectedRoute = ({ children }: { children: ReactNode }) => {
 		return <Navigate to="/login" state={{ from: location }} replace />;
 	}
 
-	return <Fragment>{children}</Fragment>;
+	return (
+		<Fragment>
+			<Outlet />
+		</Fragment>
+	);
 };
 
 export default ProtectedRoute;
