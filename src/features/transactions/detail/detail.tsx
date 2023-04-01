@@ -1,15 +1,15 @@
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { graphql } from '../../gql/gql';
-import { gqlClient } from '../../utils/graphql-client';
-import { Company, Transaction } from '../../gql/graphql';
-import Title from '../../components/title/title';
+import { graphql } from '../../../gql/gql';
+import { gqlClient } from '../../../utils/graphql-client';
+import type { Transaction } from '../../../gql/graphql';
+import TitleComponent from '../../../components/title/title';
 import { Helmet } from 'react-helmet';
-import Section from '../../components/section/section';
+import Section from '../../../components/section/section';
 import { Button } from 'antd';
 import dayjs from 'dayjs';
-import { formatCurrency } from '../../utils/format-currency';
-import styles from './transaction.module.css';
+import { formatCurrency } from '../../../utils/format-currency';
+import styles from './detail.module.css';
 
 const GET_TRANSACTION_QUERY = graphql(`
 	query GetTransaction($id: uuid!) {
@@ -32,7 +32,7 @@ const GET_TRANSACTION_QUERY = graphql(`
 	}
 `);
 
-const TransactionPage = () => {
+const DetailTransactionPage = () => {
 	const { id } = useParams();
 
 	const getTransaction = useQuery({
@@ -71,9 +71,9 @@ const TransactionPage = () => {
 
 			<div className="container center-block">
 				<Section>
-					<Title heading="h2">
-						Transaction : {transaction?.label}
-					</Title>
+					<TitleComponent heading="h2" center={true}>
+						{transaction?.label}
+					</TitleComponent>
 					<div className={styles.infos}>
 						<div className={styles.info}>
 							<p>type</p>
@@ -90,7 +90,7 @@ const TransactionPage = () => {
 						<div className={styles.info}>
 							<p>date</p>
 							<p>
-								{dayjs(transaction?.date).format(
+								{dayjs(transaction?.date as string).format(
 									'DD MMMM YYYY'
 								)}
 							</p>
@@ -112,4 +112,4 @@ const TransactionPage = () => {
 	);
 };
 
-export default TransactionPage;
+export default DetailTransactionPage;

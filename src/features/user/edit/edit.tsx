@@ -1,16 +1,16 @@
 import { Helmet } from 'react-helmet';
 import { toast } from 'react-hot-toast';
-import type { User } from '../../user.model';
-import { graphql } from '../../gql/gql';
+import type { User } from '../../../user.model';
+import { graphql } from '../../../gql/gql';
 import { useOutletContext } from 'react-router-dom';
 import { Form, Input, Button } from 'antd';
-import Section from '../../components/section/section';
+import Section from '../../../components/section/section';
 import { useSignOut } from '@nhost/react';
-import Title from '../../components/title/title';
+import Title from '../../../components/title/title';
 import { useMutation } from '@tanstack/react-query';
-import { Users_Set_Input, Users_Update_Column } from '../../gql/graphql';
-import { gqlClient } from '../../utils/graphql-client';
-import { queryClient } from '../../utils/react-query-client';
+import { Users_Set_Input, Users_Update_Column } from '../../../gql/graphql';
+import { gqlClient } from '../../../utils/graphql-client';
+import { queryClient } from '../../../utils/react-query-client';
 
 const UPDATE_USER_MUTATION = graphql(`
 	mutation UpdateUser($id: uuid!, $displayName: String!, $metadata: jsonb) {
@@ -25,7 +25,7 @@ const UPDATE_USER_MUTATION = graphql(`
 	}
 `);
 
-const ProfilePage = () => {
+const EditUserPage = () => {
 	const { signOut } = useSignOut();
 	const { user } = useOutletContext<{ user: User }>();
 
@@ -116,4 +116,4 @@ const ProfilePage = () => {
 	);
 };
 
-export default ProfilePage;
+export default EditUserPage;

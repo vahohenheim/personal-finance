@@ -4,24 +4,19 @@ import 'antd/dist/reset.css';
 import './styles/index.css';
 import App from './app';
 import reportWebVitals from './reportWebVitals';
-import {
-	BrowserRouter,
-	Routes,
-	Route,
-	ScrollRestoration,
-} from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import * as dayjs from 'dayjs';
 import 'dayjs/locale/en';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
-import AddTransactionPage from './pages/add-transaction/add-transaction';
-import DashboardPage from './pages/dashboard/dashboard';
-import ProfilePage from './pages/profile/profile';
-import RegisterPage from './pages/register/register';
-import LoginPage from './pages/login/login';
+import DashboardPage from './features/dashboard/dashboard';
 import ProtectedRoute from './components/protected-route/protected-route';
-import TransactionsPage from './pages/transactions/transactions';
-import TransactionPage from './pages/transaction/transaction';
+import AddTransactionPage from './features/transactions/add/add';
+import TransactionsPage from './features/transactions/transactions';
+import DetailTransactionPage from './features/transactions/detail/detail';
+import EditUserPage from './features/user/edit/edit';
+import AddUserPage from './features/user/add/add';
+import LoginPage from './features/user/login/login';
 
 dayjs.locale('en');
 dayjs.extend(utc);
@@ -45,7 +40,7 @@ root.render(
 						}
 					/>
 					<Route
-						path="add-transaction"
+						path="transactions/add"
 						element={
 							<ProtectedRoute>
 								<AddTransactionPage />
@@ -61,22 +56,22 @@ root.render(
 						}
 					/>
 					<Route
-						path="transaction/:id"
+						path="transactions/:id"
 						element={
 							<ProtectedRoute>
-								<TransactionPage />
+								<DetailTransactionPage />
 							</ProtectedRoute>
 						}
 					/>
 					<Route
-						path="profile"
+						path="user/edit"
 						element={
 							<ProtectedRoute>
-								<ProfilePage />
+								<EditUserPage />
 							</ProtectedRoute>
 						}
 					/>
-					<Route path="register" element={<RegisterPage />} />
+					<Route path="register" element={<AddUserPage />} />
 					<Route path="login" element={<LoginPage />} />
 				</Route>
 			</Routes>

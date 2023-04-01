@@ -11,7 +11,7 @@ const Header: FC<{ user: User }> = ({ user }) => {
 	const location = useLocation();
 
 	useEffect(() => {
-		setCurrent(location.pathname);
+		setCurrent(location.pathname.split('/')[1]);
 	}, [location]);
 
 	return (
@@ -24,24 +24,34 @@ const Header: FC<{ user: User }> = ({ user }) => {
 					)}
 				>
 					<div className={styles.menu}>
-						<LinkComponent active={current === '/'} to={'/'}>
-							🖥 dashboard
-						</LinkComponent>
-						<LinkComponent
-							active={current === '/transactions'}
-							to={'/transactions'}
-						>
-							💳 transactions
-						</LinkComponent>
-					</div>
-					<div className={styles.right}>
-						<Link to={'/profile'}>
+						<Link to={'/user/edit'}>
 							<div
 								className={classNames(styles.profile, {
-									[styles.active]: current === '/profile',
+									[styles.active]: current === 'user',
 								})}
 							></div>
 						</Link>
+						<LinkComponent active={current === ''} to={'/'}>
+							🖥&nbsp;dashboard
+						</LinkComponent>
+						<LinkComponent
+							active={current === 'transactions'}
+							to={'/transactions'}
+						>
+							💳&nbsp;transactions
+						</LinkComponent>
+						<LinkComponent
+							active={current === 'companies'}
+							to={'/companies'}
+						>
+							🏢&nbsp;companies
+						</LinkComponent>
+						<LinkComponent
+							active={current === 'budgets'}
+							to={'/budgets'}
+						>
+							💰&nbsp;budgets
+						</LinkComponent>
 					</div>
 				</div>
 			) : (

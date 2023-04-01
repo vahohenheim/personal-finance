@@ -5,3 +5,6 @@
     justify-content: space-between;
     margin-bottom: var(--gui-gutter-base);
 }
+.center {
+    justify-content: center;
+}

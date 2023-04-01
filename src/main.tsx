@@ -35,13 +35,6 @@ const Main: FC = () => {
 				}
 			);
 		},
-		onSuccess: () => {
-			toast('Welcome back', {
-				id: 'welcome-back',
-				icon: '👋',
-				duration: 1500,
-			});
-		},
 	});
 
 	const user = data?.user;
