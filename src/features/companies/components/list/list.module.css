@@ -1,0 +1,8 @@
+.empty {
+    margin: var(--gui-gutter-2xl) 0;
+}
+
+.list {
+    display: grid;
+    gap: var(--gui-gutter-base);
+}

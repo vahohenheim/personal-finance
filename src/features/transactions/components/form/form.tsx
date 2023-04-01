@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { graphql } from '../../../../gql/gql';
 import { gqlClient } from '../../../../utils/graphql-client';
-import { useNavigate, useOutletContext } from 'react-router-dom';
 import {
 	Button,
 	Form,
@@ -17,7 +16,7 @@ import { FormTransactionComponentProps } from './form.model';
 import { FC } from 'react';
 
 const GET_COMPANY_QUERY = graphql(`
-	query GetCompanies($limit: Int!) {
+	query GetLiteCompanies($limit: Int!) {
 		company(order_by: { label: asc }, limit: $limit) {
 			id
 			label
@@ -38,6 +37,7 @@ const GET_BUDGET_QUERY = graphql(`
 const FormTransactionComponent: FC<FormTransactionComponentProps> = ({
 	onFinish,
 	form,
+	initialValues,
 }) => {
 	const getCompanies = useQuery({
 		queryKey: ['companies'],
@@ -76,14 +76,11 @@ const FormTransactionComponent: FC<FormTransactionComponentProps> = ({
 		<Form
 			form={form}
 			layout="vertical"
-			initialValues={{
-				transaction_type: 'spent',
-				budget_type: 'month',
-			}}
+			initialValues={initialValues}
 			onFinish={onFinish}
 		>
 			<Form.Item label="Define transaction" name="transaction_type">
-				<Radio.Group>
+				<Radio.Group size="large">
 					<Radio.Button value="spent">spent</Radio.Button>
 					<Radio.Button value="entry">entry</Radio.Button>
 				</Radio.Group>
@@ -96,11 +93,22 @@ const FormTransactionComponent: FC<FormTransactionComponentProps> = ({
 						</Radio.Group>
 					</Form.Item>*/}
 			<Form.Item label="Select budget" name="budget_id">
-				<Select options={budgetsItems}></Select>
+				<Select
+					showSearch
+					size="large"
+					optionFilterProp="children"
+					filterOption={(input, option) =>
+						(option?.label || '')
+							.toLowerCase()
+							.includes(input.toLowerCase())
+					}
+					options={budgetsItems}
+				></Select>
 			</Form.Item>
 			<Form.Item label="Select company" name="company_id">
 				<Select
 					showSearch
+					size="large"
 					placeholder="typing company name"
 					optionFilterProp="children"
 					filterOption={(input, option) =>
@@ -112,7 +120,7 @@ const FormTransactionComponent: FC<FormTransactionComponentProps> = ({
 				/>
 			</Form.Item>
 			<Form.Item label="Define label" name="label">
-				<Input placeholder="typing transaction label" />
+				<Input size="large" placeholder="typing transaction label" />
 			</Form.Item>
 			<Form.Item label="Amount" name="amount">
 				<InputNumber
@@ -124,13 +132,13 @@ const FormTransactionComponent: FC<FormTransactionComponentProps> = ({
 			</Form.Item>
 			<Form.Item label="Date" name="date">
 				<DatePicker
-					defaultValue={dayjs()}
+					size="large"
 					placeholder="typing date"
 					style={{ width: '100%' }}
 				/>
 			</Form.Item>
 			<Form.Item>
-				<Button type="primary" block htmlType="submit">
+				<Button type="primary" block htmlType="submit" size="large">
 					add transaction
 				</Button>
 			</Form.Item>

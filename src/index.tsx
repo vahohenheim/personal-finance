@@ -17,6 +17,9 @@ import DetailTransactionPage from './features/transactions/detail/detail';
 import EditUserPage from './features/user/edit/edit';
 import AddUserPage from './features/user/add/add';
 import LoginPage from './features/user/login/login';
+import CompaniesPage from './features/companies/companies';
+import DetailCompanyPage from './features/companies/detail/detail';
+import AddCompanyPage from './features/companies/add/add';
 
 dayjs.locale('en');
 dayjs.extend(utc);
@@ -31,46 +34,35 @@ root.render(
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<App />}>
-					<Route
-						index
-						element={
-							<ProtectedRoute>
-								<DashboardPage />
-							</ProtectedRoute>
-						}
-					/>
-					<Route
-						path="transactions/add"
-						element={
-							<ProtectedRoute>
-								<AddTransactionPage />
-							</ProtectedRoute>
-						}
-					/>
-					<Route
-						path="transactions"
-						element={
-							<ProtectedRoute>
-								<TransactionsPage />
-							</ProtectedRoute>
-						}
-					/>
-					<Route
-						path="transactions/:id"
-						element={
-							<ProtectedRoute>
-								<DetailTransactionPage />
-							</ProtectedRoute>
-						}
-					/>
-					<Route
-						path="user/edit"
-						element={
-							<ProtectedRoute>
-								<EditUserPage />
-							</ProtectedRoute>
-						}
-					/>
+					<Route element={<ProtectedRoute />}>
+						<Route index element={<DashboardPage />} />
+						<Route
+							path="transactions"
+							element={<TransactionsPage />}
+						></Route>
+						<Route
+							path="transactions/add"
+							element={<AddTransactionPage />}
+						/>
+						<Route
+							path="transactions/:id"
+							element={<DetailTransactionPage />}
+						/>
+						<Route
+							path="companies"
+							element={<CompaniesPage />}
+						></Route>
+						<Route
+							path="companies/add"
+							element={<AddCompanyPage />}
+						/>
+						<Route
+							path="companies/:id"
+							element={<DetailCompanyPage />}
+						/>
+						<Route path="user/edit" element={<EditUserPage />} />
+					</Route>
+
 					<Route path="register" element={<AddUserPage />} />
 					<Route path="login" element={<LoginPage />} />
 				</Route>

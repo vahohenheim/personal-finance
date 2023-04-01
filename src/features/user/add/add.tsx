@@ -57,7 +57,7 @@ const AddUserPage = () => {
 						},
 					]}
 				>
-					<Input />
+					<Input size="large" />
 				</Form.Item>
 				<Form.Item
 					label="lastname"
@@ -69,7 +69,7 @@ const AddUserPage = () => {
 						},
 					]}
 				>
-					<Input />
+					<Input size="large" />
 				</Form.Item>
 				<Form.Item
 					label="mail address"
@@ -78,7 +78,7 @@ const AddUserPage = () => {
 						{ required: true, message: 'Please input your email' },
 					]}
 				>
-					<Input disabled={disableForm} />
+					<Input size="large" disabled={disableForm} />
 				</Form.Item>
 				<Form.Item
 					label="password"
@@ -90,7 +90,7 @@ const AddUserPage = () => {
 						},
 					]}
 				>
-					<Input.Password disabled={disableForm} />
+					<Input.Password size="large" disabled={disableForm} />
 				</Form.Item>
 				<Form.Item>
 					<Button
@@ -98,13 +98,14 @@ const AddUserPage = () => {
 						htmlType="submit"
 						loading={isLoading}
 						block={true}
+						size="large"
 					>
 						create a account
 					</Button>
 				</Form.Item>
 				<Form.Item>
 					<Link to="/login">
-						<Button type="link" block={true}>
+						<Button type="link" block={true} size="large">
 							connexion
 						</Button>
 					</Link>

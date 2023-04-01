@@ -66,6 +66,7 @@ const LoginPage = () => {
 					]}
 				>
 					<Input
+						size="large"
 						prefix={<UserOutlined />}
 						disabled={disableForm}
 						placeholder="mail address"
@@ -82,6 +83,7 @@ const LoginPage = () => {
 				>
 					<Input.Password
 						prefix={<LockOutlined />}
+						size="large"
 						type="password"
 						placeholder="password"
 						iconRender={(visible: boolean) =>
@@ -98,6 +100,7 @@ const LoginPage = () => {
 				</Form.Item>
 				<Form.Item>
 					<Button
+						size="large"
 						type="primary"
 						htmlType="submit"
 						loading={isLoading}
@@ -109,7 +112,7 @@ const LoginPage = () => {
 
 				<Form.Item>
 					<Link to="/register">
-						<Button type="link" block={true}>
+						<Button size="large" type="link" block={true}>
 							create a account
 						</Button>
 					</Link>

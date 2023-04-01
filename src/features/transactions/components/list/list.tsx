@@ -29,14 +29,17 @@ const GET_TRANSACTIONS_QUERY = graphql(`
 	}
 `);
 
-const ListTransactionsComponent: FC<{ limit: number }> = ({ limit }) => {
+const ListTransactionsComponent: FC<{ limit: number; company_id?: string }> = ({
+	limit,
+	company_id,
+}) => {
 	const getTransactions = useQuery({
 		queryKey: ['transactions'],
 		queryFn: async () => {
 			return gqlClient.request<
 				{ transaction: Array<Transaction> },
-				{ limit: number }
-			>(GET_TRANSACTIONS_QUERY, { limit });
+				{ limit: number; company_id?: string }
+			>(GET_TRANSACTIONS_QUERY, { limit, company_id });
 		},
 	});
 
