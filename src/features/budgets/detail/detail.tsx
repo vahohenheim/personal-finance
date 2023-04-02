@@ -8,9 +8,10 @@ import Section from '../../../components/section/section';
 import styles from './detail.module.css';
 import LinkComponent from '../../../components/link/link';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import type { Budget, Budget_Month } from '../../../gql/graphql';
+import type { Budget } from '../../../gql/graphql';
 import { formatCurrency } from '../../../utils/format-currency';
 import dayjs from 'dayjs';
+import ListTransactionsComponent from '../../transactions/components/list/list';
 
 const GET_BUDGET_QUERY = graphql(`
 	query GetBudget($id: uuid!) {
@@ -19,7 +20,26 @@ const GET_BUDGET_QUERY = graphql(`
 			label
 			budget_months {
 				amount
-				month
+			}
+			transactions {
+				amount
+				budget {
+					id
+					label
+					budget_months {
+						month_id
+					}
+				}
+				company {
+					label
+					logo
+				}
+				label
+				transaction_type
+				created_at
+				updated_at
+				id
+				user_id
 			}
 		}
 	}
@@ -75,11 +95,6 @@ const DetailBudgetPage = () => {
 		);
 	};
 
-	const getMonth = (budgetMonth: Budget_Month) => {
-		const splitedMonth = budgetMonth.month.split('-');
-		return `${splitedMonth[0]}-01-${splitedMonth[1]}`;
-	};
-
 	return (
 		<>
 			<Helmet>
@@ -94,13 +109,17 @@ const DetailBudgetPage = () => {
 					{budget?.budget_months.map((budgetMonth, index) => (
 						<div className={styles.info} key={index}>
 							<p>
-								{dayjs(getMonth(budgetMonth))
+								{dayjs(budgetMonth?.month?.start_at as string)
 									.format('MMMM YYYY')
 									.toLowerCase()}
 							</p>
 							<p>{formatCurrency(budgetMonth.amount)}</p>
 						</div>
 					))}
+					<ListTransactionsComponent
+						transactions={budget?.transactions}
+						loading={getBudget.isLoading}
+					/>
 				</Section>
 			</div>
 		</>

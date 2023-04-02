@@ -7,68 +7,23 @@ import dayjs from 'dayjs';
 import { FC } from 'react';
 import type { Transaction } from '../../../../gql/graphql';
 import { Empty } from 'antd';
+import type { ListTransactionsComponentProps } from './list.model';
 
-const GET_TRANSACTIONS_QUERY = graphql(`
-	query GetTransactions($limit: Int!) {
-		transaction(order_by: { created_at: desc }, limit: $limit) {
-			amount
-			budget {
-				id
-				label
-				budget_months {
-					month
-				}
-			}
-			company {
-				label
-				logo
-			}
-			label
-			transaction_type
-			created_at
-			updated_at
-			id
-			user_id
-		}
-	}
-`);
-
-const ListTransactionsComponent: FC<{ limit: number; company_id?: string }> = ({
-	limit,
-	company_id,
+const ListTransactionsComponent: FC<ListTransactionsComponentProps> = ({
+	transactions = [],
+	loading = false,
 }) => {
-	const getTransactions = useQuery({
-		queryKey: ['transactions'],
-		queryFn: async () => {
-			return gqlClient.request<
-				{ transaction: Array<Transaction> },
-				{ limit: number; company_id?: string }
-			>(GET_TRANSACTIONS_QUERY, { limit: 100, company_id });
-		},
-	});
-
-	if (!getTransactions?.data?.transaction || getTransactions.isLoading) {
-		return <div>Loading...</div>;
+	if (loading) {
+		return <p>Loading...</p>;
 	}
 
-	if (getTransactions.isError) {
-		console.error(getTransactions.error);
-		return <div>Error</div>;
-	}
-
-	if (!getTransactions.data) {
-		return <div>No data</div>;
-	}
-
-	if (getTransactions?.data?.transaction?.length === 0) {
+	if (!transactions || transactions.length === 0) {
 		return (
 			<div className={styles.empty}>
 				<Empty description={'Any transaction'} />
 			</div>
 		);
 	}
-
-	const transactions = getTransactions.data.transaction.slice(0, limit);
 
 	const aggregateByDay = (
 		acc: Record<string, Array<Transaction>>,

@@ -10,6 +10,7 @@ import ItemTransactionComponent from '../../transactions/components/item/item';
 import styles from './detail.module.css';
 import LinkComponent from '../../../components/link/link';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import ListTransactionsComponent from '../../transactions/components/list/list';
 
 const GET_COMPANY_QUERY = graphql(`
 	query GetCompany($id: uuid!) {
@@ -91,15 +92,10 @@ const DetailCompanyPage = () => {
 						{company?.label}
 					</TitleComponent>
 					<TitleComponent heading="h3">Transactions</TitleComponent>
-					<div className={styles.transactions}>
-						{company?.transactions.map((transaction) => (
-							<div key={transaction.id as string}>
-								<ItemTransactionComponent
-									transaction={transaction}
-								/>
-							</div>
-						))}
-					</div>
+					<ListTransactionsComponent
+						transactions={company?.transactions}
+						loading={getCompany.isLoading}
+					/>
 				</Section>
 			</div>
 		</>
