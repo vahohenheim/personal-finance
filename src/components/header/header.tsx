@@ -72,6 +72,12 @@ const Header: FC = () => {
 							🖥&nbsp;dashboard
 						</LinkComponent>
 						<LinkComponent
+							active={current === 'budgets'}
+							to={'/budgets'}
+						>
+							💰&nbsp;budgets
+						</LinkComponent>
+						<LinkComponent
 							active={current === 'transactions'}
 							to={'/transactions'}
 						>
@@ -82,12 +88,6 @@ const Header: FC = () => {
 							to={'/companies'}
 						>
 							🏢&nbsp;companies
-						</LinkComponent>
-						<LinkComponent
-							active={current === 'budgets'}
-							to={'/budgets'}
-						>
-							💰&nbsp;budgets
 						</LinkComponent>
 					</div>
 				</div>

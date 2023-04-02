@@ -6,9 +6,10 @@ import type { Company } from '../../../gql/graphql';
 import TitleComponent from '../../../components/title/title';
 import { Helmet } from 'react-helmet';
 import Section from '../../../components/section/section';
-import { Button } from 'antd';
 import ItemTransactionComponent from '../../transactions/components/item/item';
 import styles from './detail.module.css';
+import LinkComponent from '../../../components/link/link';
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 
 const GET_COMPANY_QUERY = graphql(`
 	query GetCompany($id: uuid!) {
@@ -67,6 +68,17 @@ const DetailCompanyPage = () => {
 		return <div>No data</div>;
 	}
 
+	const CompanyActions = () => {
+		return (
+			<div className={styles.actions}>
+				<LinkComponent to={`/companies/${company?.id as string}/edit`}>
+					<EditOutlined className={styles.edit} />
+				</LinkComponent>
+				<DeleteOutlined className={styles.delete} />
+			</div>
+		);
+	};
+
 	return (
 		<>
 			<Helmet>
@@ -75,7 +87,7 @@ const DetailCompanyPage = () => {
 
 			<div className="container center-block">
 				<Section>
-					<TitleComponent heading="h2">
+					<TitleComponent heading="h2" action={<CompanyActions />}>
 						{company?.label}
 					</TitleComponent>
 					<TitleComponent heading="h3">Transactions</TitleComponent>
@@ -88,12 +100,6 @@ const DetailCompanyPage = () => {
 							</div>
 						))}
 					</div>
-					<Button type="link" block={true} size="large">
-						update
-					</Button>
-					<Button type="link" block={true} danger size="large">
-						delete
-					</Button>
 				</Section>
 			</div>
 		</>
