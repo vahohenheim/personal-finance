@@ -11,11 +11,14 @@ import InfosComponent from '../../../../components/infos/infos';
 import { formatCurrency } from '../../../../utils/format-currency';
 
 const GET_BUDGETS_QUERY = graphql(`
-	query GetMonthBudgets($limit: Int!, $month: String!) {
+	query GetMonthBudgets($limit: Int!) {
 		budget(order_by: { label: asc }, limit: $limit) {
-			budget_months(where: { month: { _eq: $month } }) {
+			budget_months {
 				amount
-				month
+				month {
+					start_at
+					end_at
+				}
 			}
 			id
 			label
@@ -31,7 +34,11 @@ const GET_TRANSACTIONS_QUERY = graphql(`
 				id
 				label
 				budget_months {
-					month
+					amount
+					month {
+						start_at
+						end_at
+					}
 				}
 			}
 			company {
@@ -58,8 +65,8 @@ const ListBudgetsComponent: FC<{ limit: number; month?: string }> = ({
 		queryFn: async () => {
 			return gqlClient.request<
 				{ budget: Array<Budget> },
-				{ limit: number; month?: string }
-			>(GET_BUDGETS_QUERY, { limit: 100, month: currentMonth });
+				{ limit: number }
+			>(GET_BUDGETS_QUERY, { limit: 100 });
 		},
 	});
 
