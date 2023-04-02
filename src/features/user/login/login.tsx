@@ -48,7 +48,7 @@ const LoginPage = () => {
 	}
 
 	return (
-		<div>
+		<div className={styles.login}>
 			<div className={styles.logo}>
 				<p>🏛</p>
 				<p>finance</p>

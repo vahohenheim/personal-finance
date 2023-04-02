@@ -6,11 +6,12 @@ import type { Transaction } from '../../../gql/graphql';
 import TitleComponent from '../../../components/title/title';
 import { Helmet } from 'react-helmet';
 import Section from '../../../components/section/section';
-import { Button } from 'antd';
 import dayjs from 'dayjs';
 import { formatCurrency } from '../../../utils/format-currency';
 import styles from './detail.module.css';
 import LinkComponent from '../../../components/link/link';
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import InfosComponent from '../../../components/infos/infos';
 
 const GET_TRANSACTION_QUERY = graphql(`
 	query GetTransaction($id: uuid!) {
@@ -66,6 +67,19 @@ const DetailTransactionPage = () => {
 		return <div>No data</div>;
 	}
 
+	const TransactionActions = () => {
+		return (
+			<div className={styles.actions}>
+				<LinkComponent
+					to={`/transactions/${transaction?.id as string}/edit`}
+				>
+					<EditOutlined className={styles.edit} />
+				</LinkComponent>
+				<DeleteOutlined className={styles.delete} />
+			</div>
+		);
+	};
+
 	return (
 		<>
 			<Helmet>
@@ -74,48 +88,56 @@ const DetailTransactionPage = () => {
 
 			<div className="container center-block">
 				<Section>
-					<TitleComponent heading="h2" center={true}>
+					<TitleComponent
+						heading="h2"
+						action={<TransactionActions />}
+					>
 						{transaction?.label}
 					</TitleComponent>
-					<div className={styles.infos}>
-						<div className={styles.info}>
-							<p>type</p>
-							<p>{transaction?.transaction_type}</p>
-						</div>
-						<div className={styles.info}>
-							<p>company</p>
-							<LinkComponent
-								active={true}
-								to={`/companies/${
-									transaction?.company?.id as string
-								}`}
-							>
-								{transaction?.company?.label}
-							</LinkComponent>
-						</div>
-						<div className={styles.info}>
-							<p>budget</p>
-							<p>{transaction?.budget?.label}</p>
-						</div>
-						<div className={styles.info}>
-							<p>date</p>
-							<p>
-								{dayjs(transaction?.date as string).format(
-									'DD MMMM YYYY'
-								)}
-							</p>
-						</div>
-						<div className={styles.info}>
-							<p>amount</p>
-							<p>{formatCurrency(transaction?.amount)}</p>
-						</div>
-					</div>
-					<Button type="link" block={true} size="large">
-						update
-					</Button>
-					<Button type="link" block={true} danger size="large">
-						delete
-					</Button>
+					<InfosComponent
+						infos={[
+							{
+								label: 'type',
+								value: transaction?.transaction_type,
+							},
+							{
+								label: 'company',
+								value: (
+									<LinkComponent
+										active={true}
+										to={`/companies/${
+											transaction?.company?.id as string
+										}`}
+									>
+										{transaction?.company?.label}
+									</LinkComponent>
+								),
+							},
+							{
+								label: 'budget',
+								value: (
+									<LinkComponent
+										active={true}
+										to={`/budgets/${
+											transaction?.budget?.id as string
+										}`}
+									>
+										{transaction?.budget?.label}
+									</LinkComponent>
+								),
+							},
+							{
+								label: 'date',
+								value: dayjs(
+									transaction?.date as string
+								).format('DD MMMM YYYY'),
+							},
+							{
+								label: 'amount',
+								value: formatCurrency(transaction?.amount),
+							},
+						]}
+					/>
 				</Section>
 			</div>
 		</>

@@ -51,14 +51,12 @@ const ListCompaniesComponent = () => {
 	const companies = getCompanies.data.company;
 
 	return (
-		<div>
-			<div className={styles.list}>
-				{companies.map((company) => (
-					<div key={company.id as string}>
-						<ItemCompanyComponent company={company} />
-					</div>
-				))}
-			</div>
+		<div className={styles.list}>
+			{companies.map((company) => (
+				<div key={company.id as string}>
+					<ItemCompanyComponent company={company} />
+				</div>
+			))}
 		</div>
 	);
 };

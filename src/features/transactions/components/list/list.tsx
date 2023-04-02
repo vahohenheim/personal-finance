@@ -13,7 +13,11 @@ const GET_TRANSACTIONS_QUERY = graphql(`
 		transaction(order_by: { created_at: desc }, limit: $limit) {
 			amount
 			budget {
+				id
 				label
+				budget_months {
+					month
+				}
 			}
 			company {
 				label
@@ -39,11 +43,11 @@ const ListTransactionsComponent: FC<{ limit: number; company_id?: string }> = ({
 			return gqlClient.request<
 				{ transaction: Array<Transaction> },
 				{ limit: number; company_id?: string }
-			>(GET_TRANSACTIONS_QUERY, { limit, company_id });
+			>(GET_TRANSACTIONS_QUERY, { limit: 100, company_id });
 		},
 	});
 
-	if (getTransactions.isLoading) {
+	if (!getTransactions?.data?.transaction || getTransactions.isLoading) {
 		return <div>Loading...</div>;
 	}
 
@@ -56,7 +60,7 @@ const ListTransactionsComponent: FC<{ limit: number; company_id?: string }> = ({
 		return <div>No data</div>;
 	}
 
-	if (getTransactions.data.transaction.length === 0) {
+	if (getTransactions?.data?.transaction?.length === 0) {
 		return (
 			<div className={styles.empty}>
 				<Empty description={'Any transaction'} />
@@ -64,7 +68,7 @@ const ListTransactionsComponent: FC<{ limit: number; company_id?: string }> = ({
 		);
 	}
 
-	const transactions = getTransactions.data.transaction;
+	const transactions = getTransactions.data.transaction.slice(0, limit);
 
 	const aggregateByDay = (
 		acc: Record<string, Array<Transaction>>,
@@ -109,37 +113,33 @@ const ListTransactionsComponent: FC<{ limit: number; company_id?: string }> = ({
 	const currentMonth = dayjs().format('YYYY-MM');
 
 	return (
-		<div>
-			<div className={styles.list}>
-				{(Object.keys(transactionByDayByMonth) || []).map((month) => (
-					<div key={month} className={styles.month}>
-						<h3>
-							{currentMonth === month ? 'this month, ' : ''}
-							{dayjs(month).format('MMMM YYYY').toLowerCase()}
-						</h3>
-						{Object.keys(transactionByDayByMonth[month]).map(
-							(day) => (
-								<div key={day} className={styles.day}>
-									<p>
-										{dayjs(day)
-											.format('DD dddd, MMMM')
-											.toLowerCase()}
-									</p>
-									{transactionByDayByMonth[month][day].map(
-										(transaction) => (
-											<div key={transaction.id as string}>
-												<ItemTransactionComponent
-													transaction={transaction}
-												/>
-											</div>
-										)
-									)}
-								</div>
-							)
-						)}
-					</div>
-				))}
-			</div>
+		<div className={styles.list}>
+			{(Object.keys(transactionByDayByMonth) || []).map((month) => (
+				<div key={month} className={styles.month}>
+					<h3>
+						{currentMonth === month ? 'this month, ' : ''}
+						{dayjs(month).format('MMMM YYYY').toLowerCase()}
+					</h3>
+					{Object.keys(transactionByDayByMonth[month]).map((day) => (
+						<div key={day} className={styles.day}>
+							<p>
+								{dayjs(day)
+									.format('DD dddd, MMMM')
+									.toLowerCase()}
+							</p>
+							{transactionByDayByMonth[month][day].map(
+								(transaction) => (
+									<div key={transaction.id as string}>
+										<ItemTransactionComponent
+											transaction={transaction}
+										/>
+									</div>
+								)
+							)}
+						</div>
+					))}
+				</div>
+			))}
 		</div>
 	);
 };

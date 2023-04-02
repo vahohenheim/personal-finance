@@ -20,6 +20,8 @@ import LoginPage from './features/user/login/login';
 import CompaniesPage from './features/companies/companies';
 import DetailCompanyPage from './features/companies/detail/detail';
 import AddCompanyPage from './features/companies/add/add';
+import BudgetsPage from './features/budgets/budgets';
+import DetailBudgetPage from './features/budgets/detail/detail';
 
 dayjs.locale('en');
 dayjs.extend(utc);
@@ -36,6 +38,11 @@ root.render(
 				<Route path="/" element={<App />}>
 					<Route element={<ProtectedRoute />}>
 						<Route index element={<DashboardPage />} />
+						<Route path="budgets" element={<BudgetsPage />}></Route>
+						<Route
+							path="budgets/:id"
+							element={<DetailBudgetPage />}
+						></Route>
 						<Route
 							path="transactions"
 							element={<TransactionsPage />}

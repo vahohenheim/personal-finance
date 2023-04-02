@@ -1,6 +1,6 @@
 import styles from './footer.module.css';
 
-const Footer = () => {
+const FooterLayout = () => {
 	return (
 		<footer className={styles.footer}>
 			<div className={`container center-block ${styles.container}`}>
@@ -12,4 +12,4 @@ const Footer = () => {
 	);
 };
 
-export default Footer;
+export default FooterLayout;

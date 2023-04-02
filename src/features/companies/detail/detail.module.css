@@ -3,3 +3,15 @@
     gap: var(--gui-gutter-base);
     margin-bottom: var(--gui-gutter-lg);
 }
+.actions {
+    display: flex;
+    gap: var(--gui-gutter-base);
+}
+
+.edit {
+    color: var(--gui-color-primary);
+}
+
+.delete {
+    color: var(--gui-color-danger);
+}

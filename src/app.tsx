@@ -5,8 +5,8 @@ import { nhost } from './utils/nhost';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './utils/react-query-client';
 import { ConfigProvider, theme } from 'antd';
-import Header from './components/header/header';
-import Footer from './components/footer/footer';
+import HeaderLayout from './layouts/header/header';
+import FooterLayout from './layouts/footer/footer';
 import { Outlet } from 'react-router-dom';
 
 const App: FC = () => {
@@ -19,11 +19,11 @@ const App: FC = () => {
 							algorithm: theme.darkAlgorithm,
 						}}
 					>
-						<Header />
+						<HeaderLayout />
 						<main className="main">
 							<Outlet />
 						</main>
-						<Footer />
+						<FooterLayout />
 					</ConfigProvider>
 				</QueryClientProvider>
 			</NhostProvider>
