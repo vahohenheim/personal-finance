@@ -37,25 +37,25 @@
     justify-content: space-between;
     height: var(--gui-header-height);
     flex-grow: 1;
-    }
+}
 
-    .menu {
-        display: flex;
-        align-items: center;
-        gap: var(--gui-gutter-lg);
-    }
+.menu {
+    display: flex;
+    align-items: center;
+    gap: var(--gui-gutter-lg);
+}
 
-    .profile {
-        height: 30px;
-        width: 30px;
-        border-radius: 100%;
-        background: rgba(55, 58, 66, 0.4);
-        transition: border var(--gui-transition-duration-very-fast) ease-in-out;
-        background-position: center;
-        background-size: cover;
-        border: 1px var(--gui-color-border) solid;
-    }
+.avatar {
+    height: 30px;
+    width: 30px;
+    border-radius: 100%;
+    background: rgba(55, 58, 66, 0.4);
+    transition: border var(--gui-transition-duration-very-fast) ease-in-out;
+    background-position: center;
+    background-size: cover;
+    border: 1px var(--gui-color-border) solid;
+}
 
-    .profile.active {
-        border: 1px var(--gui-color-primary) solid;
+.avatar.active {
+    border: 1px var(--gui-color-primary) solid;
 }
