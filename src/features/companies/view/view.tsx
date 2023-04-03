@@ -2,12 +2,12 @@ import { useQuery } from '@tanstack/react-query';
 import { Button } from 'antd';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
-import SectionComponent from '../../components/section/section';
-import TitleComponent from '../../components/title/title';
-import { graphql } from '../../gql/gql';
-import type { Company } from '../../gql/graphql';
-import { gqlClient } from '../../utils/graphql-client';
-import ListCompaniesComponent from './components/list/list';
+import SectionComponent from '../../../components/section/section';
+import TitleComponent from '../../../components/title/title';
+import { graphql } from '../../../gql/gql';
+import type { Company } from '../../../gql/graphql';
+import { gqlClient } from '../../../utils/graphql-client';
+import ListCompaniesComponent from '../components/list/list';
 
 const GET_COMPANIES_QUERY = graphql(`
 	query GetCompanies($limit: Int!) {
@@ -19,7 +19,7 @@ const GET_COMPANIES_QUERY = graphql(`
 	}
 `);
 
-const CompaniesPage = () => {
+const ViewCompaniesPage = () => {
 	const getCompanies = useQuery({
 		queryKey: ['companies'],
 		queryFn: async () => {
@@ -59,4 +59,4 @@ const CompaniesPage = () => {
 	);
 };
 
-export default CompaniesPage;
+export default ViewCompaniesPage;

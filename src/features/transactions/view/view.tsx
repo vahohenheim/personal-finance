@@ -1,14 +1,14 @@
 import type { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import Section from '../../components/section/section';
+import Section from '../../../components/section/section';
 import { Button } from 'antd';
-import Title from '../../components/title/title';
-import ListTransactionsComponent from './components/list/list';
-import { graphql } from '../../gql/gql';
-import { gqlClient } from '../../utils/graphql-client';
+import Title from '../../../components/title/title';
+import ListTransactionsComponent from '../components/list/list';
+import { graphql } from '../../../gql/gql';
+import { gqlClient } from '../../../utils/graphql-client';
 import { useQuery } from '@tanstack/react-query';
-import { Transaction } from '../../gql/graphql';
+import { Transaction } from '../../../gql/graphql';
 
 const GET_TRANSACTIONS_QUERY = graphql(`
 	query GetTransactions($limit: Int!) {
@@ -43,7 +43,7 @@ const GET_TRANSACTIONS_QUERY = graphql(`
 	}
 `);
 
-const TransactionsPage: FC = () => {
+const ViewTransactionsPage: FC = () => {
 	const getTransactions = useQuery({
 		queryKey: ['transactions'],
 		queryFn: async () => {
@@ -83,4 +83,4 @@ const TransactionsPage: FC = () => {
 	);
 };
 
-export default TransactionsPage;
+export default ViewTransactionsPage;

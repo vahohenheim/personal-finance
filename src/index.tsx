@@ -12,15 +12,15 @@ import timezone from 'dayjs/plugin/timezone';
 import DashboardPage from './features/dashboard/dashboard';
 import ProtectedRoute from './components/protected-route/protected-route';
 import AddTransactionPage from './features/transactions/add/add';
-import TransactionsPage from './features/transactions/transactions';
+import ViewTransactionsPage from './features/transactions/view/view';
 import DetailTransactionPage from './features/transactions/detail/detail';
 import EditUserPage from './features/user/edit/edit';
 import AddUserPage from './features/user/add/add';
 import LoginPage from './features/user/login/login';
-import CompaniesPage from './features/companies/companies';
+import ViewCompaniesPage from './features/companies/view/view';
 import DetailCompanyPage from './features/companies/detail/detail';
 import AddCompanyPage from './features/companies/add/add';
-import BudgetsPage from './features/budgets/budgets';
+import ViewBudgetsPage from './features/budgets/view/view';
 import DetailBudgetPage from './features/budgets/detail/detail';
 
 dayjs.locale('en');
@@ -38,14 +38,17 @@ root.render(
 				<Route path="/" element={<App />}>
 					<Route element={<ProtectedRoute />}>
 						<Route index element={<DashboardPage />} />
-						<Route path="budgets" element={<BudgetsPage />}></Route>
+						<Route
+							path="budgets"
+							element={<ViewBudgetsPage />}
+						></Route>
 						<Route
 							path="budgets/:id"
 							element={<DetailBudgetPage />}
 						></Route>
 						<Route
 							path="transactions"
-							element={<TransactionsPage />}
+							element={<ViewTransactionsPage />}
 						></Route>
 						<Route
 							path="transactions/add"
@@ -57,7 +60,7 @@ root.render(
 						/>
 						<Route
 							path="companies"
-							element={<CompaniesPage />}
+							element={<ViewCompaniesPage />}
 						></Route>
 						<Route
 							path="companies/add"

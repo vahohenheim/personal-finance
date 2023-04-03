@@ -2,12 +2,12 @@ import { useQuery } from '@tanstack/react-query';
 import { Button } from 'antd';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
-import SectionComponent from '../../components/section/section';
-import TitleComponent from '../../components/title/title';
-import { graphql } from '../../gql/gql';
-import type { Budget } from '../../gql/graphql';
-import { gqlClient } from '../../utils/graphql-client';
-import ListBudgetsComponent from './components/list/list';
+import SectionComponent from '../../../components/section/section';
+import TitleComponent from '../../../components/title/title';
+import { graphql } from '../../../gql/gql';
+import type { Budget } from '../../../gql/graphql';
+import { gqlClient } from '../../../utils/graphql-client';
+import ListBudgetsComponent from '../components/list/list';
 
 const GET_BUDGETS_QUERY = graphql(`
 	query GetMonthBudgets($limit: Int!) {
@@ -55,7 +55,7 @@ const GET_BUDGETS_QUERY = graphql(`
 	}
 `);
 
-const BudgetsPage = () => {
+const ViewBudgetsPage = () => {
 	const getBudgets = useQuery({
 		queryKey: ['month-budgets'],
 		queryFn: async () => {
@@ -95,4 +95,4 @@ const BudgetsPage = () => {
 	);
 };
 
-export default BudgetsPage;
+export default ViewBudgetsPage;
