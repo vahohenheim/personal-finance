@@ -17,7 +17,7 @@ const GET_COMPANY_QUERY = graphql(`
 			id
 			label
 			logo
-			transactions {
+			transactions(order_by: { date: desc }) {
 				amount
 				company {
 					label
