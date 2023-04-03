@@ -17,6 +17,10 @@ const GET_TRANSACTIONS_DASHOBARD_QUERY = graphql(`
 			budget {
 				id
 				label
+				icon
+				budget_type {
+					color
+				}
 				budget_months {
 					amount
 					month {

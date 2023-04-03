@@ -36,7 +36,9 @@ const ItemBudgetComponent: FC<ItemBudgetComponentProps> = ({
 				})}
 			>
 				<div className={styles.body}>
-					<p className={styles.label}>{budget?.label}</p>
+					<p className={styles.label}>
+						{budget?.icon} {budget?.label}
+					</p>
 					<p className={styles.amount}>
 						<span className={styles.current}>
 							{formatCurrency(amountTransactions)}

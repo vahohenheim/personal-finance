@@ -12,7 +12,7 @@ import { formatCurrency } from '../../../../utils/format-currency';
 
 const GET_BUDGETS_QUERY = graphql(`
 	query GetMonthBudgets($limit: Int!) {
-		budget(order_by: { label: asc }, limit: $limit) {
+		budget(order_by: { priority: asc }, limit: $limit) {
 			budget_months {
 				amount
 				month {
@@ -22,6 +22,8 @@ const GET_BUDGETS_QUERY = graphql(`
 			}
 			id
 			label
+			priority
+			icon
 		}
 	}
 `);
@@ -33,6 +35,10 @@ const GET_TRANSACTIONS_QUERY = graphql(`
 			budget {
 				id
 				label
+				icon
+				budget_type {
+					color
+				}
 				budget_months {
 					amount
 					month {

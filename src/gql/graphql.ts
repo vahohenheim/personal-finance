@@ -1985,9 +1985,14 @@ export type Budget = {
   budget_months: Array<Budget_Month>;
   /** An aggregate relationship */
   budget_months_aggregate: Budget_Month_Aggregate;
+  /** An object relationship */
+  budget_type: Budget_Type;
+  budget_type_id: Scalars['uuid'];
   created_at: Scalars['timestamptz'];
+  icon: Scalars['String'];
   id: Scalars['uuid'];
   label: Scalars['String'];
+  priority: Scalars['Int'];
   /** An array relationship */
   transactions: Array<Transaction>;
   /** An aggregate relationship */
@@ -2045,12 +2050,31 @@ export type Budget_Aggregate = {
   nodes: Array<Budget>;
 };
 
+export type Budget_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Budget_Aggregate_Bool_Exp_Count>;
+};
+
+export type Budget_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Budget_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Budget_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "budget" */
 export type Budget_Aggregate_Fields = {
   __typename?: 'budget_aggregate_fields';
+  avg?: Maybe<Budget_Avg_Fields>;
   count: Scalars['Int'];
   max?: Maybe<Budget_Max_Fields>;
   min?: Maybe<Budget_Min_Fields>;
+  stddev?: Maybe<Budget_Stddev_Fields>;
+  stddev_pop?: Maybe<Budget_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Budget_Stddev_Samp_Fields>;
+  sum?: Maybe<Budget_Sum_Fields>;
+  var_pop?: Maybe<Budget_Var_Pop_Fields>;
+  var_samp?: Maybe<Budget_Var_Samp_Fields>;
+  variance?: Maybe<Budget_Variance_Fields>;
 };
 
 
@@ -2060,6 +2084,39 @@ export type Budget_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
+/** order by aggregate values of table "budget" */
+export type Budget_Aggregate_Order_By = {
+  avg?: InputMaybe<Budget_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Budget_Max_Order_By>;
+  min?: InputMaybe<Budget_Min_Order_By>;
+  stddev?: InputMaybe<Budget_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Budget_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Budget_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Budget_Sum_Order_By>;
+  var_pop?: InputMaybe<Budget_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Budget_Var_Samp_Order_By>;
+  variance?: InputMaybe<Budget_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "budget" */
+export type Budget_Arr_Rel_Insert_Input = {
+  data: Array<Budget_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Budget_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Budget_Avg_Fields = {
+  __typename?: 'budget_avg_fields';
+  priority?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "budget" */
+export type Budget_Avg_Order_By = {
+  priority?: InputMaybe<Order_By>;
+};
+
 /** Boolean expression to filter rows from the table "budget". All fields are combined with a logical 'AND'. */
 export type Budget_Bool_Exp = {
   _and?: InputMaybe<Array<Budget_Bool_Exp>>;
@@ -2067,9 +2124,13 @@ export type Budget_Bool_Exp = {
   _or?: InputMaybe<Array<Budget_Bool_Exp>>;
   budget_months?: InputMaybe<Budget_Month_Bool_Exp>;
   budget_months_aggregate?: InputMaybe<Budget_Month_Aggregate_Bool_Exp>;
+  budget_type?: InputMaybe<Budget_Type_Bool_Exp>;
+  budget_type_id?: InputMaybe<Uuid_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  icon?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   label?: InputMaybe<String_Comparison_Exp>;
+  priority?: InputMaybe<Int_Comparison_Exp>;
   transactions?: InputMaybe<Transaction_Bool_Exp>;
   transactions_aggregate?: InputMaybe<Transaction_Aggregate_Bool_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
@@ -2083,12 +2144,21 @@ export enum Budget_Constraint {
   BudgetPkey = 'budget_pkey'
 }
 
+/** input type for incrementing numeric columns in table "budget" */
+export type Budget_Inc_Input = {
+  priority?: InputMaybe<Scalars['Int']>;
+};
+
 /** input type for inserting data into table "budget" */
 export type Budget_Insert_Input = {
   budget_months?: InputMaybe<Budget_Month_Arr_Rel_Insert_Input>;
+  budget_type?: InputMaybe<Budget_Type_Obj_Rel_Insert_Input>;
+  budget_type_id?: InputMaybe<Scalars['uuid']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
+  icon?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   label?: InputMaybe<Scalars['String']>;
+  priority?: InputMaybe<Scalars['Int']>;
   transactions?: InputMaybe<Transaction_Arr_Rel_Insert_Input>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
@@ -2098,21 +2168,51 @@ export type Budget_Insert_Input = {
 /** aggregate max on columns */
 export type Budget_Max_Fields = {
   __typename?: 'budget_max_fields';
+  budget_type_id?: Maybe<Scalars['uuid']>;
   created_at?: Maybe<Scalars['timestamptz']>;
+  icon?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   label?: Maybe<Scalars['String']>;
+  priority?: Maybe<Scalars['Int']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['uuid']>;
+};
+
+/** order by max() on columns of table "budget" */
+export type Budget_Max_Order_By = {
+  budget_type_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  icon?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  label?: InputMaybe<Order_By>;
+  priority?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
 export type Budget_Min_Fields = {
   __typename?: 'budget_min_fields';
+  budget_type_id?: Maybe<Scalars['uuid']>;
   created_at?: Maybe<Scalars['timestamptz']>;
+  icon?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   label?: Maybe<Scalars['String']>;
+  priority?: Maybe<Scalars['Int']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['uuid']>;
+};
+
+/** order by min() on columns of table "budget" */
+export type Budget_Min_Order_By = {
+  budget_type_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  icon?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  label?: InputMaybe<Order_By>;
+  priority?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "budget_month" */
@@ -2644,9 +2744,13 @@ export type Budget_On_Conflict = {
 /** Ordering options when selecting data from "budget". */
 export type Budget_Order_By = {
   budget_months_aggregate?: InputMaybe<Budget_Month_Aggregate_Order_By>;
+  budget_type?: InputMaybe<Budget_Type_Order_By>;
+  budget_type_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
+  icon?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   label?: InputMaybe<Order_By>;
+  priority?: InputMaybe<Order_By>;
   transactions_aggregate?: InputMaybe<Transaction_Aggregate_Order_By>;
   updated_at?: InputMaybe<Order_By>;
   user?: InputMaybe<Users_Order_By>;
@@ -2661,11 +2765,17 @@ export type Budget_Pk_Columns_Input = {
 /** select columns of table "budget" */
 export enum Budget_Select_Column {
   /** column name */
+  BudgetTypeId = 'budget_type_id',
+  /** column name */
   CreatedAt = 'created_at',
+  /** column name */
+  Icon = 'icon',
   /** column name */
   Id = 'id',
   /** column name */
   Label = 'label',
+  /** column name */
+  Priority = 'priority',
   /** column name */
   UpdatedAt = 'updated_at',
   /** column name */
@@ -2674,11 +2784,47 @@ export enum Budget_Select_Column {
 
 /** input type for updating data in table "budget" */
 export type Budget_Set_Input = {
+  budget_type_id?: InputMaybe<Scalars['uuid']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
+  icon?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   label?: InputMaybe<Scalars['String']>;
+  priority?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   user_id?: InputMaybe<Scalars['uuid']>;
+};
+
+/** aggregate stddev on columns */
+export type Budget_Stddev_Fields = {
+  __typename?: 'budget_stddev_fields';
+  priority?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "budget" */
+export type Budget_Stddev_Order_By = {
+  priority?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Budget_Stddev_Pop_Fields = {
+  __typename?: 'budget_stddev_pop_fields';
+  priority?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "budget" */
+export type Budget_Stddev_Pop_Order_By = {
+  priority?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Budget_Stddev_Samp_Fields = {
+  __typename?: 'budget_stddev_samp_fields';
+  priority?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "budget" */
+export type Budget_Stddev_Samp_Order_By = {
+  priority?: InputMaybe<Order_By>;
 };
 
 /** Streaming cursor of the table "budget" */
@@ -2691,15 +2837,175 @@ export type Budget_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Budget_Stream_Cursor_Value_Input = {
+  budget_type_id?: InputMaybe<Scalars['uuid']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
+  icon?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   label?: InputMaybe<Scalars['String']>;
+  priority?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   user_id?: InputMaybe<Scalars['uuid']>;
 };
 
-/** update columns of table "budget" */
-export enum Budget_Update_Column {
+/** aggregate sum on columns */
+export type Budget_Sum_Fields = {
+  __typename?: 'budget_sum_fields';
+  priority?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "budget" */
+export type Budget_Sum_Order_By = {
+  priority?: InputMaybe<Order_By>;
+};
+
+/** columns and relationships of "budget_type" */
+export type Budget_Type = {
+  __typename?: 'budget_type';
+  /** An array relationship */
+  budgets: Array<Budget>;
+  /** An aggregate relationship */
+  budgets_aggregate: Budget_Aggregate;
+  color: Scalars['String'];
+  created_at: Scalars['timestamptz'];
+  id: Scalars['uuid'];
+  label: Scalars['String'];
+  updated_at: Scalars['timestamptz'];
+};
+
+
+/** columns and relationships of "budget_type" */
+export type Budget_TypeBudgetsArgs = {
+  distinct_on?: InputMaybe<Array<Budget_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Budget_Order_By>>;
+  where?: InputMaybe<Budget_Bool_Exp>;
+};
+
+
+/** columns and relationships of "budget_type" */
+export type Budget_TypeBudgets_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Budget_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Budget_Order_By>>;
+  where?: InputMaybe<Budget_Bool_Exp>;
+};
+
+/** aggregated selection of "budget_type" */
+export type Budget_Type_Aggregate = {
+  __typename?: 'budget_type_aggregate';
+  aggregate?: Maybe<Budget_Type_Aggregate_Fields>;
+  nodes: Array<Budget_Type>;
+};
+
+/** aggregate fields of "budget_type" */
+export type Budget_Type_Aggregate_Fields = {
+  __typename?: 'budget_type_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Budget_Type_Max_Fields>;
+  min?: Maybe<Budget_Type_Min_Fields>;
+};
+
+
+/** aggregate fields of "budget_type" */
+export type Budget_Type_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Budget_Type_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "budget_type". All fields are combined with a logical 'AND'. */
+export type Budget_Type_Bool_Exp = {
+  _and?: InputMaybe<Array<Budget_Type_Bool_Exp>>;
+  _not?: InputMaybe<Budget_Type_Bool_Exp>;
+  _or?: InputMaybe<Array<Budget_Type_Bool_Exp>>;
+  budgets?: InputMaybe<Budget_Bool_Exp>;
+  budgets_aggregate?: InputMaybe<Budget_Aggregate_Bool_Exp>;
+  color?: InputMaybe<String_Comparison_Exp>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  label?: InputMaybe<String_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "budget_type" */
+export enum Budget_Type_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  BudgetTypePkey = 'budget_type_pkey'
+}
+
+/** input type for inserting data into table "budget_type" */
+export type Budget_Type_Insert_Input = {
+  budgets?: InputMaybe<Budget_Arr_Rel_Insert_Input>;
+  color?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  label?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type Budget_Type_Max_Fields = {
+  __typename?: 'budget_type_max_fields';
+  color?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['uuid']>;
+  label?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate min on columns */
+export type Budget_Type_Min_Fields = {
+  __typename?: 'budget_type_min_fields';
+  color?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['uuid']>;
+  label?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** response of any mutation on the table "budget_type" */
+export type Budget_Type_Mutation_Response = {
+  __typename?: 'budget_type_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Budget_Type>;
+};
+
+/** input type for inserting object relation for remote table "budget_type" */
+export type Budget_Type_Obj_Rel_Insert_Input = {
+  data: Budget_Type_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Budget_Type_On_Conflict>;
+};
+
+/** on_conflict condition type for table "budget_type" */
+export type Budget_Type_On_Conflict = {
+  constraint: Budget_Type_Constraint;
+  update_columns?: Array<Budget_Type_Update_Column>;
+  where?: InputMaybe<Budget_Type_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "budget_type". */
+export type Budget_Type_Order_By = {
+  budgets_aggregate?: InputMaybe<Budget_Aggregate_Order_By>;
+  color?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  label?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: budget_type */
+export type Budget_Type_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "budget_type" */
+export enum Budget_Type_Select_Column {
+  /** column name */
+  Color = 'color',
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
@@ -2707,15 +3013,114 @@ export enum Budget_Update_Column {
   /** column name */
   Label = 'label',
   /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "budget_type" */
+export type Budget_Type_Set_Input = {
+  color?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  label?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** Streaming cursor of the table "budget_type" */
+export type Budget_Type_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Budget_Type_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Budget_Type_Stream_Cursor_Value_Input = {
+  color?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  label?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** update columns of table "budget_type" */
+export enum Budget_Type_Update_Column {
+  /** column name */
+  Color = 'color',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Label = 'label',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+export type Budget_Type_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Budget_Type_Set_Input>;
+  where: Budget_Type_Bool_Exp;
+};
+
+/** update columns of table "budget" */
+export enum Budget_Update_Column {
+  /** column name */
+  BudgetTypeId = 'budget_type_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Icon = 'icon',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Label = 'label',
+  /** column name */
+  Priority = 'priority',
+  /** column name */
   UpdatedAt = 'updated_at',
   /** column name */
   UserId = 'user_id'
 }
 
 export type Budget_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Budget_Inc_Input>;
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<Budget_Set_Input>;
   where: Budget_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Budget_Var_Pop_Fields = {
+  __typename?: 'budget_var_pop_fields';
+  priority?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "budget" */
+export type Budget_Var_Pop_Order_By = {
+  priority?: InputMaybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Budget_Var_Samp_Fields = {
+  __typename?: 'budget_var_samp_fields';
+  priority?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "budget" */
+export type Budget_Var_Samp_Order_By = {
+  priority?: InputMaybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Budget_Variance_Fields = {
+  __typename?: 'budget_variance_fields';
+  priority?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "budget" */
+export type Budget_Variance_Order_By = {
+  priority?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to compare columns of type "bytea". All fields are combined with logical 'AND'. */
@@ -3739,6 +4144,10 @@ export type Mutation_Root = {
   delete_budget_month?: Maybe<Budget_Month_Mutation_Response>;
   /** delete single row from the table: "budget_month" */
   delete_budget_month_by_pk?: Maybe<Budget_Month>;
+  /** delete data from the table: "budget_type" */
+  delete_budget_type?: Maybe<Budget_Type_Mutation_Response>;
+  /** delete single row from the table: "budget_type" */
+  delete_budget_type_by_pk?: Maybe<Budget_Type>;
   /** delete data from the table: "company" */
   delete_company?: Maybe<Company_Mutation_Response>;
   /** delete single row from the table: "company" */
@@ -3803,6 +4212,10 @@ export type Mutation_Root = {
   insert_budget_month_one?: Maybe<Budget_Month>;
   /** insert a single row into the table: "budget" */
   insert_budget_one?: Maybe<Budget>;
+  /** insert data into the table: "budget_type" */
+  insert_budget_type?: Maybe<Budget_Type_Mutation_Response>;
+  /** insert a single row into the table: "budget_type" */
+  insert_budget_type_one?: Maybe<Budget_Type>;
   /** insert data into the table: "company" */
   insert_company?: Maybe<Company_Mutation_Response>;
   /** insert a single row into the table: "company" */
@@ -3887,6 +4300,12 @@ export type Mutation_Root = {
   update_budget_month_by_pk?: Maybe<Budget_Month>;
   /** update multiples rows of table: "budget_month" */
   update_budget_month_many?: Maybe<Array<Maybe<Budget_Month_Mutation_Response>>>;
+  /** update data of the table: "budget_type" */
+  update_budget_type?: Maybe<Budget_Type_Mutation_Response>;
+  /** update single row of the table: "budget_type" */
+  update_budget_type_by_pk?: Maybe<Budget_Type>;
+  /** update multiples rows of table: "budget_type" */
+  update_budget_type_many?: Maybe<Array<Maybe<Budget_Type_Mutation_Response>>>;
   /** update data of the table: "company" */
   update_company?: Maybe<Company_Mutation_Response>;
   /** update single row of the table: "company" */
@@ -4060,6 +4479,18 @@ export type Mutation_RootDelete_Budget_MonthArgs = {
 export type Mutation_RootDelete_Budget_Month_By_PkArgs = {
   budget_id: Scalars['uuid'];
   month_id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Budget_TypeArgs = {
+  where: Budget_Type_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Budget_Type_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -4277,6 +4708,20 @@ export type Mutation_RootInsert_Budget_Month_OneArgs = {
 export type Mutation_RootInsert_Budget_OneArgs = {
   object: Budget_Insert_Input;
   on_conflict?: InputMaybe<Budget_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Budget_TypeArgs = {
+  objects: Array<Budget_Type_Insert_Input>;
+  on_conflict?: InputMaybe<Budget_Type_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Budget_Type_OneArgs = {
+  object: Budget_Type_Insert_Input;
+  on_conflict?: InputMaybe<Budget_Type_On_Conflict>;
 };
 
 
@@ -4552,6 +4997,7 @@ export type Mutation_RootUpdate_Buckets_ManyArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdate_BudgetArgs = {
+  _inc?: InputMaybe<Budget_Inc_Input>;
   _set?: InputMaybe<Budget_Set_Input>;
   where: Budget_Bool_Exp;
 };
@@ -4559,6 +5005,7 @@ export type Mutation_RootUpdate_BudgetArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdate_Budget_By_PkArgs = {
+  _inc?: InputMaybe<Budget_Inc_Input>;
   _set?: InputMaybe<Budget_Set_Input>;
   pk_columns: Budget_Pk_Columns_Input;
 };
@@ -4589,6 +5036,26 @@ export type Mutation_RootUpdate_Budget_Month_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_Budget_Month_ManyArgs = {
   updates: Array<Budget_Month_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Budget_TypeArgs = {
+  _set?: InputMaybe<Budget_Type_Set_Input>;
+  where: Budget_Type_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Budget_Type_By_PkArgs = {
+  _set?: InputMaybe<Budget_Type_Set_Input>;
+  pk_columns: Budget_Type_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Budget_Type_ManyArgs = {
+  updates: Array<Budget_Type_Updates>;
 };
 
 
@@ -4765,6 +5232,12 @@ export type Query_Root = {
   budget_month_aggregate: Budget_Month_Aggregate;
   /** fetch data from the table: "budget_month" using primary key columns */
   budget_month_by_pk?: Maybe<Budget_Month>;
+  /** fetch data from the table: "budget_type" */
+  budget_type: Array<Budget_Type>;
+  /** fetch aggregated fields from the table: "budget_type" */
+  budget_type_aggregate: Budget_Type_Aggregate;
+  /** fetch data from the table: "budget_type" using primary key columns */
+  budget_type_by_pk?: Maybe<Budget_Type>;
   /** fetch data from the table: "company" */
   company: Array<Company>;
   /** fetch aggregated fields from the table: "company" */
@@ -5035,6 +5508,29 @@ export type Query_RootBudget_Month_By_PkArgs = {
 };
 
 
+export type Query_RootBudget_TypeArgs = {
+  distinct_on?: InputMaybe<Array<Budget_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Budget_Type_Order_By>>;
+  where?: InputMaybe<Budget_Type_Bool_Exp>;
+};
+
+
+export type Query_RootBudget_Type_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Budget_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Budget_Type_Order_By>>;
+  where?: InputMaybe<Budget_Type_Bool_Exp>;
+};
+
+
+export type Query_RootBudget_Type_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
 export type Query_RootCompanyArgs = {
   distinct_on?: InputMaybe<Array<Company_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -5255,6 +5751,14 @@ export type Subscription_Root = {
   budget_month_stream: Array<Budget_Month>;
   /** fetch data from the table in a streaming manner: "budget" */
   budget_stream: Array<Budget>;
+  /** fetch data from the table: "budget_type" */
+  budget_type: Array<Budget_Type>;
+  /** fetch aggregated fields from the table: "budget_type" */
+  budget_type_aggregate: Budget_Type_Aggregate;
+  /** fetch data from the table: "budget_type" using primary key columns */
+  budget_type_by_pk?: Maybe<Budget_Type>;
+  /** fetch data from the table in a streaming manner: "budget_type" */
+  budget_type_stream: Array<Budget_Type>;
   /** fetch data from the table: "company" */
   company: Array<Company>;
   /** fetch aggregated fields from the table: "company" */
@@ -5604,6 +6108,36 @@ export type Subscription_RootBudget_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Budget_Stream_Cursor_Input>>;
   where?: InputMaybe<Budget_Bool_Exp>;
+};
+
+
+export type Subscription_RootBudget_TypeArgs = {
+  distinct_on?: InputMaybe<Array<Budget_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Budget_Type_Order_By>>;
+  where?: InputMaybe<Budget_Type_Bool_Exp>;
+};
+
+
+export type Subscription_RootBudget_Type_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Budget_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Budget_Type_Order_By>>;
+  where?: InputMaybe<Budget_Type_Bool_Exp>;
+};
+
+
+export type Subscription_RootBudget_Type_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootBudget_Type_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Budget_Type_Stream_Cursor_Input>>;
+  where?: InputMaybe<Budget_Type_Bool_Exp>;
 };
 
 
@@ -7551,14 +8085,14 @@ export type GetMonthBudgetsQueryVariables = Exact<{
 }>;
 
 
-export type GetMonthBudgetsQuery = { __typename?: 'query_root', budget: Array<{ __typename?: 'budget', id: any, label: string, budget_months: Array<{ __typename?: 'budget_month', amount: any, month: { __typename?: 'month', start_at: any, end_at: any } }> }> };
+export type GetMonthBudgetsQuery = { __typename?: 'query_root', budget: Array<{ __typename?: 'budget', id: any, label: string, priority: number, icon: string, budget_months: Array<{ __typename?: 'budget_month', amount: any, month: { __typename?: 'month', start_at: any, end_at: any } }> }> };
 
 export type GetTransactionsQueryVariables = Exact<{
   limit: Scalars['Int'];
 }>;
 
 
-export type GetTransactionsQuery = { __typename?: 'query_root', transaction: Array<{ __typename?: 'transaction', amount: any, label: string, transaction_type: string, created_at: any, updated_at: any, id: any, user_id: any, budget: { __typename?: 'budget', id: any, label: string, budget_months: Array<{ __typename?: 'budget_month', amount: any, month: { __typename?: 'month', start_at: any, end_at: any } }> }, company: { __typename?: 'company', label: string, logo?: string | null } }> };
+export type GetTransactionsQuery = { __typename?: 'query_root', transaction: Array<{ __typename?: 'transaction', amount: any, label: string, transaction_type: string, created_at: any, updated_at: any, id: any, user_id: any, budget: { __typename?: 'budget', id: any, label: string, icon: string, budget_type: { __typename?: 'budget_type', color: string }, budget_months: Array<{ __typename?: 'budget_month', amount: any, month: { __typename?: 'month', start_at: any, end_at: any } }> }, company: { __typename?: 'company', label: string, logo?: string | null } }> };
 
 export type GetBudgetQueryVariables = Exact<{
   id: Scalars['uuid'];
@@ -7593,7 +8127,7 @@ export type GetTransactionsDashboardQueryVariables = Exact<{
 }>;
 
 
-export type GetTransactionsDashboardQuery = { __typename?: 'query_root', transaction: Array<{ __typename?: 'transaction', amount: any, label: string, transaction_type: string, created_at: any, updated_at: any, id: any, user_id: any, budget: { __typename?: 'budget', id: any, label: string, budget_months: Array<{ __typename?: 'budget_month', amount: any, month: { __typename?: 'month', start_at: any, end_at: any } }> }, company: { __typename?: 'company', label: string, logo?: string | null } }> };
+export type GetTransactionsDashboardQuery = { __typename?: 'query_root', transaction: Array<{ __typename?: 'transaction', amount: any, label: string, transaction_type: string, created_at: any, updated_at: any, id: any, user_id: any, budget: { __typename?: 'budget', id: any, label: string, icon: string, budget_type: { __typename?: 'budget_type', color: string }, budget_months: Array<{ __typename?: 'budget_month', amount: any, month: { __typename?: 'month', start_at: any, end_at: any } }> }, company: { __typename?: 'company', label: string, logo?: string | null } }> };
 
 export type InsertTransactionMutationVariables = Exact<{
   transaction: Transaction_Insert_Input;
@@ -7640,13 +8174,13 @@ export type GetUserQueryVariables = Exact<{
 export type GetUserQuery = { __typename?: 'query_root', user?: { __typename?: 'users', id: any, email?: any | null, displayName: string, metadata?: any | null, avatarUrl: string } | null };
 
 
-export const GetMonthBudgetsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetMonthBudgets"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"budget"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"label"},"value":{"kind":"EnumValue","value":"asc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"budget_months"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"month"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"start_at"}},{"kind":"Field","name":{"kind":"Name","value":"end_at"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}}]}}]} as unknown as DocumentNode<GetMonthBudgetsQuery, GetMonthBudgetsQueryVariables>;
-export const GetTransactionsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetTransactions"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"transaction"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"created_at"},"value":{"kind":"EnumValue","value":"desc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"budget"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"budget_months"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"month"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"start_at"}},{"kind":"Field","name":{"kind":"Name","value":"end_at"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"company"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"transaction_type"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}}]}}]}}]} as unknown as DocumentNode<GetTransactionsQuery, GetTransactionsQueryVariables>;
+export const GetMonthBudgetsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetMonthBudgets"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"budget"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"priority"},"value":{"kind":"EnumValue","value":"asc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"budget_months"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"month"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"start_at"}},{"kind":"Field","name":{"kind":"Name","value":"end_at"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"priority"}},{"kind":"Field","name":{"kind":"Name","value":"icon"}}]}}]}}]} as unknown as DocumentNode<GetMonthBudgetsQuery, GetMonthBudgetsQueryVariables>;
+export const GetTransactionsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetTransactions"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"transaction"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"created_at"},"value":{"kind":"EnumValue","value":"desc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"budget"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"icon"}},{"kind":"Field","name":{"kind":"Name","value":"budget_type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"color"}}]}},{"kind":"Field","name":{"kind":"Name","value":"budget_months"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"month"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"start_at"}},{"kind":"Field","name":{"kind":"Name","value":"end_at"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"company"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"transaction_type"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}}]}}]}}]} as unknown as DocumentNode<GetTransactionsQuery, GetTransactionsQueryVariables>;
 export const GetBudgetDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetBudget"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"budget"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"budget_months"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}}]}},{"kind":"Field","name":{"kind":"Name","value":"transactions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"budget"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"budget_months"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"month_id"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"company"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"transaction_type"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}}]}}]}}]}}]} as unknown as DocumentNode<GetBudgetQuery, GetBudgetQueryVariables>;
 export const InsertCompanyDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"InsertCompany"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"company"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"company_insert_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_company"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"objects"},"value":{"kind":"ListValue","values":[{"kind":"Variable","name":{"kind":"Name","value":"company"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}},{"kind":"Field","name":{"kind":"Name","value":"returning"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}}]}}]}}]} as unknown as DocumentNode<InsertCompanyMutation, InsertCompanyMutationVariables>;
 export const GetCompaniesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCompanies"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"company"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"created_at"},"value":{"kind":"EnumValue","value":"desc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}}]}}]} as unknown as DocumentNode<GetCompaniesQuery, GetCompaniesQueryVariables>;
 export const GetCompanyDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCompany"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"company"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}},{"kind":"Field","name":{"kind":"Name","value":"transactions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"company"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}},{"kind":"Field","name":{"kind":"Name","value":"budget"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}}]}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"transaction_type"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}}]}}]}}]}}]} as unknown as DocumentNode<GetCompanyQuery, GetCompanyQueryVariables>;
-export const GetTransactionsDashboardDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetTransactionsDashboard"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"transaction"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"created_at"},"value":{"kind":"EnumValue","value":"desc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"budget"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"budget_months"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"month"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"start_at"}},{"kind":"Field","name":{"kind":"Name","value":"end_at"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"company"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"transaction_type"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}}]}}]}}]} as unknown as DocumentNode<GetTransactionsDashboardQuery, GetTransactionsDashboardQueryVariables>;
+export const GetTransactionsDashboardDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetTransactionsDashboard"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"transaction"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"created_at"},"value":{"kind":"EnumValue","value":"desc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"budget"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"icon"}},{"kind":"Field","name":{"kind":"Name","value":"budget_type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"color"}}]}},{"kind":"Field","name":{"kind":"Name","value":"budget_months"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"month"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"start_at"}},{"kind":"Field","name":{"kind":"Name","value":"end_at"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"company"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"transaction_type"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}}]}}]}}]} as unknown as DocumentNode<GetTransactionsDashboardQuery, GetTransactionsDashboardQueryVariables>;
 export const InsertTransactionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"InsertTransaction"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"transaction"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"transaction_insert_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_transaction"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"objects"},"value":{"kind":"ListValue","values":[{"kind":"Variable","name":{"kind":"Name","value":"transaction"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}},{"kind":"Field","name":{"kind":"Name","value":"returning"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"budget_id"}},{"kind":"Field","name":{"kind":"Name","value":"company_id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"transaction_type"}},{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}}]}}]}}]}}]} as unknown as DocumentNode<InsertTransactionMutation, InsertTransactionMutationVariables>;
 export const GetLiteCompaniesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetLiteCompanies"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"company"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"label"},"value":{"kind":"EnumValue","value":"asc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}}]}}]} as unknown as DocumentNode<GetLiteCompaniesQuery, GetLiteCompaniesQueryVariables>;
 export const GetBudgetsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetBudgets"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"budget"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"label"},"value":{"kind":"EnumValue","value":"asc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}}]}}]} as unknown as DocumentNode<GetBudgetsQuery, GetBudgetsQueryVariables>;

@@ -14,11 +14,29 @@
     justify-content: space-between;
 }
 
-.avatar {
+.budget {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
     width: 34px;
     height: 34px;
     border-radius: 100%;
     background: rgba(55, 58, 66, 0.4);
+}
+
+.budgetBackground {
+    position: absolute;
+    border-radius: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: .2;
+}
+
+.budgetIcon {
+    z-index: 2;
 }
 
 .content {
@@ -31,7 +49,7 @@
     margin-left: var(--gui-gutter-sm);
 }
 
-.budget {
+.company {
     font-weight: 600;
     font-size: 12px;
     line-height: 15px;
@@ -40,10 +58,14 @@
 }
 
 .label {
+    max-width: calc(100vw - 160px);
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
     color: #FFFFFF;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .amount {
