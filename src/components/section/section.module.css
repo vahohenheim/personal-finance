@@ -1,9 +1,9 @@
 .section {
-    padding-top: var(--gui-gutter-xl);
-    padding-bottom: var(--gui-gutter-2xl);
+    margin-top: var(--gui-gutter-xl);
+    margin-bottom: var(--gui-gutter-xl);
 }
 
-@media (max-width: 500px) {
+@media (max-width: 960px) {
     .section {
         padding-left: var(--gui-gutter-base);
         padding-right: var(--gui-gutter-base);

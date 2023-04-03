@@ -37,6 +37,7 @@ const AddCompanyPage = () => {
 				company: {
 					label: company.label,
 					logo: company.logo,
+					user_id: id,
 				},
 			});
 		},

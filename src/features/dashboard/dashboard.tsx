@@ -17,6 +17,10 @@ const GET_TRANSACTIONS_DASHOBARD_QUERY = graphql(`
 			budget {
 				id
 				label
+				icon
+				budget_type {
+					color
+				}
 				budget_months {
 					amount
 					month {
@@ -68,6 +72,13 @@ const DashboardPage: FC = () => {
 			</Helmet>
 			<div className="container center-block">
 				<Section>
+					<Link to="/transactions/add">
+						<Button type="primary" block={true} size="large">
+							Add transaction
+						</Button>
+					</Link>
+				</Section>
+				<Section>
 					<Title
 						heading={'h2'}
 						action={
@@ -85,11 +96,6 @@ const DashboardPage: FC = () => {
 						)}
 						loading={getTransactions?.isLoading}
 					/>
-					<Link to="/transactions/add">
-						<Button type="primary" block={true} size="large">
-							Add transaction
-						</Button>
-					</Link>
 				</Section>
 			</div>
 		</>

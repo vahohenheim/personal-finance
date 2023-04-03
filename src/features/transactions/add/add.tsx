@@ -60,7 +60,7 @@ const AddTransactionPage = () => {
 			return gqlClient.request(INSERT_TRANSACTION_MUTATION, {
 				transaction: {
 					amount: transaction.amount,
-					budget_id: transaction.budget_id,
+					budget_id: transaction.budget_id || null,
 					label: transaction.label,
 					transaction_type: transaction.transaction_type,
 					company_id: transaction.company_id,

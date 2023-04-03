@@ -10,8 +10,20 @@
 
 .list {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: var(--gui-gutter-base);
+    }
+
+    @media (max-width: 800px) {
+        .list {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .list {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 .month {
