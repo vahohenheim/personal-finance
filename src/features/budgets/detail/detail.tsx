@@ -21,7 +21,7 @@ const GET_BUDGET_QUERY = graphql(`
 			budget_months {
 				amount
 			}
-			transactions {
+			transactions(order_by: { date: desc }) {
 				amount
 				budget {
 					id

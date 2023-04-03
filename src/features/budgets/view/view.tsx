@@ -23,7 +23,7 @@ const GET_BUDGETS_QUERY = graphql(`
 			label
 			priority
 			icon
-			transactions(order_by: { created_at: desc }) {
+			transactions(order_by: { date: desc }) {
 				amount
 				budget {
 					id

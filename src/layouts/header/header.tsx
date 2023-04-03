@@ -69,7 +69,7 @@ const HeaderLayout: FC = () => {
 		);
 	};
 
-	if (!getUser.isLoading || Object.keys(user || {}).length === 0) {
+	if (!id || (!getUser.isLoading && Object.keys(user || {}).length === 0)) {
 		return <header className={styles.header}></header>;
 	}
 
