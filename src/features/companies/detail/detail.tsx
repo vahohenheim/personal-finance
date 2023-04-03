@@ -6,7 +6,6 @@ import type { Company } from '../../../gql/graphql';
 import TitleComponent from '../../../components/title/title';
 import { Helmet } from 'react-helmet';
 import Section from '../../../components/section/section';
-import ItemTransactionComponent from '../../transactions/components/item/item';
 import styles from './detail.module.css';
 import LinkComponent from '../../../components/link/link';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
@@ -26,6 +25,10 @@ const GET_COMPANY_QUERY = graphql(`
 				}
 				budget {
 					label
+					icon
+					budget_type {
+						color
+					}
 				}
 				label
 				transaction_type

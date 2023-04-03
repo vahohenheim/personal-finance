@@ -2,6 +2,16 @@
     text-decoration: none;
 }
 
+.entry {
+    background-color: rgba(3, 166, 136, .2);
+    border-color: rgba(3, 166, 136, .4);
+    color: rgba(3, 166, 136, 1);
+}
+
+.entry .budget {
+    background-color: rgba(3, 166, 136, .2);
+}
+
 .card:hover {
     border-color: var(--gui-color-primary);
     transition: all 100ms ease-in-out;
@@ -22,7 +32,7 @@
     width: 34px;
     height: 34px;
     border-radius: 100%;
-    background: rgba(55, 58, 66, 0.4);
+    background-color: rgba(55, 58, 66, 0.4);
 }
 
 .budgetBackground {

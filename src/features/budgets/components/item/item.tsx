@@ -5,13 +5,10 @@ import { Link } from 'react-router-dom';
 import ProgressComponent from '../../../../components/progress/progress';
 import { Budget_Month, Transaction } from '../../../../gql/graphql';
 import { formatCurrency } from '../../../../utils/format-currency';
-import { ItemBudgetComponentProps } from './item.model';
+import type { ItemBudgetComponentProps } from './item.model';
 import styles from './item.module.css';
 
-const ItemBudgetComponent: FC<ItemBudgetComponentProps> = ({
-	budget,
-	transactions,
-}) => {
+const ItemBudgetComponent: FC<ItemBudgetComponentProps> = ({ budget }) => {
 	const currentMonthBudget: Budget_Month = budget?.budget_months[0];
 
 	const aggregateAmountTransactions = (
@@ -22,7 +19,7 @@ const ItemBudgetComponent: FC<ItemBudgetComponentProps> = ({
 		return sum;
 	};
 
-	const amountTransactions = transactions.reduce(
+	const amountTransactions = budget.transactions.reduce(
 		aggregateAmountTransactions,
 		0
 	);

@@ -12,7 +12,7 @@
     z-index: 10;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 960px) {
     .header {
         padding: 0 var(--gui-gutter-base);
         height: var(--gui-header-mobile-height);

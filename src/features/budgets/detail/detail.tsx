@@ -26,6 +26,10 @@ const GET_BUDGET_QUERY = graphql(`
 				budget {
 					id
 					label
+					icon
+					budget_type {
+						color
+					}
 					budget_months {
 						month_id
 					}
