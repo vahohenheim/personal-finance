@@ -18,7 +18,7 @@
     width: 34px;
     height: 34px;
     border-radius: 100%;
-    background: rgba(55, 58, 66, 0.4);
+    background: var(--gui-background-color-default);
 }
 
 .content {
@@ -35,7 +35,7 @@
     font-weight: 600;
     font-size: 12px;
     line-height: 15px;
-    color: #FFFFFF;
+    color: var(--gui-color-white);
     margin-bottom: var(--gui-gutter-xs);
 }
 
@@ -43,7 +43,7 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
-    color: #FFFFFF;
+    color: var(--gui-color-white);
 }
 
 .amount {
@@ -51,5 +51,5 @@
     font-size: 14px;
     line-height: 17px;
     text-align: right;
-    color: #FFFFFF;
+    color: var(--gui-color-white);
 }

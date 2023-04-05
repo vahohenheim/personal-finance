@@ -1,19 +1,13 @@
-.info {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: var(--gui-gutter-sm);
-    padding-bottom: var(--gui-gutter-sm);
+.entry {
+    background-color: rgba(3, 166, 136, .2);
+    border-color: rgba(3, 166, 136, .4);
 }
+.entryIcon {
+    background-color: rgba(3, 166, 136, .2);
+    color: rgba(3, 166, 136, 1);
+}
+
 .actions {
-    display: flex;
+    display: grid;
     gap: var(--gui-gutter-base);
-}
-
-.edit {
-    color: var(--gui-color-primary);
-}
-
-.delete {
-    color: var(--gui-color-danger);
 }

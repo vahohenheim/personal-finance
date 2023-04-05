@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import { FC, useCallback } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { NhostProvider } from '@nhost/react';
 import { nhost } from './utils/nhost';

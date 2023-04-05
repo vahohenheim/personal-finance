@@ -1,0 +1,55 @@
+:root {
+
+    --gui-color-white: #FFFFFF;
+    --gui-color-primary: #1668dc;
+    --gui-color-primary-active-darken: #15417e;
+
+    --gui-color-danger: #dc4446;
+
+    --gui-color-border: #303030;
+
+    --gui-text-color: var(--gui-color-white);
+
+    --gui-background-color-body: #111111;
+    --gui-background-color-default: rgba(48, 48, 48, 0.15);
+    --gui-background-color-danger: rgba(48, 48, 48, 0.15);
+
+
+
+
+
+    --gui-text-font-size: 14px;
+
+    --gui-border-radius: 8px;
+
+    --gui-header-height: 50px;
+    --gui-header-mobile-height: 50px;
+
+    --gui-footer-height: 50px;
+    --gui-footer-mobile-height: 80px;
+
+    --gui-grid-width-xs: 100%;
+    --gui-grid-width-sm: 540px;
+    --gui-grid-width-md: 720px;
+    --gui-grid-width-lg: 960px;
+
+    --gui-grid-container: var(--gui-grid-width-lg);
+
+    --gui-gutter-xs: 4px;
+    --gui-gutter-sm: 8px;
+    --gui-gutter-md: 12px;
+    --gui-gutter-base: 16px;
+    --gui-gutter-lg: 24px;
+    --gui-gutter-xl: 32px;
+    --gui-gutter-2xl: 48px;
+    --gui-gutter-3xl: 64px;
+    --gui-gutter-4xl: 80px;
+    --gui-gutter-5xl: 96px;
+    --gui-gutter-6xl: 112px;
+
+    --gui-transition-duration-very-fast: 100ms;
+    --gui-transition-duration-fast: 200ms;
+    --gui-transition-duration-normal: 300ms;
+    --gui-transition-duration-slow: 400ms;
+    --gui-transition-duration-very-slow: 500ms;
+}

@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { graphql } from '../../../gql/gql';
 import { gqlClient } from '../../../utils/graphql-client';
-import type { Company } from '../../../gql/graphql';
+import type { Company, Transaction } from '../../../gql/graphql';
 import TitleComponent from '../../../components/title/title';
 import { Helmet } from 'react-helmet';
 import Section from '../../../components/section/section';
@@ -10,6 +10,9 @@ import styles from './detail.module.css';
 import LinkComponent from '../../../components/link/link';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import ListTransactionsComponent from '../../transactions/components/list/list';
+import { Button } from 'antd';
+import DetailCoverComponent from '../../../components/detail-cover/detail-cover';
+import { formatCurrency } from '../../../utils/format-currency';
 
 const GET_COMPANY_QUERY = graphql(`
 	query GetCompany($id: uuid!) {
@@ -72,16 +75,18 @@ const DetailCompanyPage = () => {
 		return <div>No data</div>;
 	}
 
-	const CompanyActions = () => {
-		return (
-			<div className={styles.actions}>
-				<LinkComponent to={`/companies/${company?.id as string}/edit`}>
-					<EditOutlined className={styles.edit} />
-				</LinkComponent>
-				<DeleteOutlined className={styles.delete} />
-			</div>
-		);
+	const aggregateAmountTransactions = (
+		sum: number,
+		transaction: Transaction
+	) => {
+		sum = (transaction.amount as number) + sum;
+		return sum;
 	};
+
+	const amountTransactions = company?.transactions.reduce(
+		aggregateAmountTransactions,
+		0
+	);
 
 	return (
 		<>
@@ -90,15 +95,29 @@ const DetailCompanyPage = () => {
 			</Helmet>
 
 			<div className="container center-block">
+				<DetailCoverComponent
+					icon={<div className={styles.avatar}></div>}
+					title={company?.label as string}
+					amount={<>{formatCurrency(amountTransactions)}</>}
+				/>
 				<Section>
-					<TitleComponent heading="h2" action={<CompanyActions />}>
-						{company?.label}
-					</TitleComponent>
 					<TitleComponent heading="h3">Transactions</TitleComponent>
 					<ListTransactionsComponent
 						transactions={company?.transactions}
 						loading={getCompany.isLoading}
 					/>
+				</Section>
+				<Section className={styles.actions}>
+					<LinkComponent
+						to={`/companies/${company?.id as string}/edit`}
+					>
+						<Button type="link" block={true}>
+							update
+						</Button>
+					</LinkComponent>
+					<Button type="link" block={true} danger>
+						delete
+					</Button>
 				</Section>
 			</div>
 		</>

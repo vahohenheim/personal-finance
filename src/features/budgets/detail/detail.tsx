@@ -2,22 +2,27 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { graphql } from '../../../gql/gql';
 import { gqlClient } from '../../../utils/graphql-client';
-import TitleComponent from '../../../components/title/title';
 import { Helmet } from 'react-helmet';
 import Section from '../../../components/section/section';
 import styles from './detail.module.css';
 import LinkComponent from '../../../components/link/link';
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import type { Budget } from '../../../gql/graphql';
+import type { Budget, Transaction } from '../../../gql/graphql';
 import { formatCurrency } from '../../../utils/format-currency';
-import dayjs from 'dayjs';
 import ListTransactionsComponent from '../../transactions/components/list/list';
+import { Button } from 'antd';
+import BudgetIconComponent from '../../../components/budget-icon/budget-icon';
+import DetailCoverComponent from '../../../components/detail-cover/detail-cover';
+import classNames from 'classnames';
 
 const GET_BUDGET_QUERY = graphql(`
 	query GetBudget($id: uuid!) {
 		budget(where: { id: { _eq: $id } }) {
 			id
 			label
+			icon
+			budget_type {
+				color
+			}
 			budget_months {
 				amount
 			}
@@ -88,16 +93,21 @@ const DetailBudgetPage = () => {
 		return <div>No data</div>;
 	}
 
-	const BudgetActions = () => {
-		return (
-			<div className={styles.actions}>
-				<LinkComponent to={`/budgets/${budget?.id as string}/edit`}>
-					<EditOutlined className={styles.edit} />
-				</LinkComponent>
-				<DeleteOutlined className={styles.delete} />
-			</div>
-		);
+	const aggregateAmountTransactions = (
+		sum: number,
+		transaction: Transaction
+	) => {
+		sum = (transaction.amount as number) + sum;
+		return sum;
 	};
+
+	const amountTransactions = budget?.transactions.reduce(
+		aggregateAmountTransactions,
+		0
+	);
+
+	const percent =
+		((amountTransactions || 0) * 100) / budget?.budget_months[0]?.amount;
 
 	return (
 		<>
@@ -106,24 +116,42 @@ const DetailBudgetPage = () => {
 			</Helmet>
 
 			<div className="container center-block">
+				<DetailCoverComponent
+					className={classNames({ [styles.exceed]: percent > 100 })}
+					icon={
+						<BudgetIconComponent
+							icon={budget?.icon || ''}
+							color={budget?.budget_type?.color || ''}
+						/>
+					}
+					title={budget?.label || ''}
+					amount={
+						<>
+							<span>{formatCurrency(amountTransactions)}</span>
+							<span className={styles.budgetAmount}>
+								/
+								{formatCurrency(
+									budget?.budget_months[0]?.amount
+								)}
+							</span>
+						</>
+					}
+				/>
 				<Section>
-					<TitleComponent heading="h2" action={<BudgetActions />}>
-						{budget?.label}
-					</TitleComponent>
-					{budget?.budget_months.map((budgetMonth, index) => (
-						<div className={styles.info} key={index}>
-							<p>
-								{dayjs(budgetMonth?.month?.start_at as string)
-									.format('MMMM YYYY')
-									.toLowerCase()}
-							</p>
-							<p>{formatCurrency(budgetMonth.amount)}</p>
-						</div>
-					))}
 					<ListTransactionsComponent
 						transactions={budget?.transactions}
 						loading={getBudget.isLoading}
 					/>
+				</Section>
+				<Section className={styles.actions}>
+					<LinkComponent to={`/budgets/${budget?.id as string}/edit`}>
+						<Button type="link" block={true}>
+							update
+						</Button>
+					</LinkComponent>
+					<Button type="link" block={true} danger>
+						delete
+					</Button>
 				</Section>
 			</div>
 		</>

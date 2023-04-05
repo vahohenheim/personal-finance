@@ -1,0 +1,16 @@
+.ant-card {
+    background: rgba(48, 48, 48, 0.15);
+    border: 1px solid var(--gui-color-border);
+    backdrop-filter: blur(8px);
+  }
+  
+  .ant-card .ant-card-body {
+    padding: var(--gui-gutter-base);
+  }
+  
+  .ant-input-number {
+    width: 100%;
+  }
+  .ant-btn-default {
+    box-shadow: unset;
+  }
