@@ -3,15 +3,18 @@ import { useQuery } from '@tanstack/react-query';
 import { graphql } from '../../../gql/gql';
 import { gqlClient } from '../../../utils/graphql-client';
 import type { Transaction } from '../../../gql/graphql';
-import TitleComponent from '../../../components/title/title';
 import { Helmet } from 'react-helmet';
 import Section from '../../../components/section/section';
 import dayjs from 'dayjs';
 import { formatCurrency } from '../../../utils/format-currency';
 import styles from './detail.module.css';
 import LinkComponent from '../../../components/link/link';
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import InfosComponent from '../../../components/infos/infos';
+import { Button } from 'antd';
+import { TransactionType } from '../../../models/transaction';
+import DetailCoverComponent from '../../../components/detail-cover/detail-cover';
+import BudgetIconComponent from '../../../components/budget-icon/budget-icon';
+import classNames from 'classnames';
 
 const GET_TRANSACTION_QUERY = graphql(`
 	query GetTransaction($id: uuid!) {
@@ -25,6 +28,10 @@ const GET_TRANSACTION_QUERY = graphql(`
 			budget {
 				id
 				label
+				icon
+				budget_type {
+					color
+				}
 			}
 			label
 			transaction_type
@@ -67,18 +74,8 @@ const DetailTransactionPage = () => {
 		return <div>No data</div>;
 	}
 
-	const TransactionActions = () => {
-		return (
-			<div className={styles.actions}>
-				<LinkComponent
-					to={`/transactions/${transaction?.id as string}/edit`}
-				>
-					<EditOutlined className={styles.edit} />
-				</LinkComponent>
-				<DeleteOutlined className={styles.delete} />
-			</div>
-		);
-	};
+	const budgetColor = transaction?.budget?.budget_type?.color as string;
+	const isEntry = transaction?.transaction_type === TransactionType.ENTRY;
 
 	return (
 		<>
@@ -87,18 +84,56 @@ const DetailTransactionPage = () => {
 			</Helmet>
 
 			<div className="container center-block">
+				<DetailCoverComponent
+					className={classNames({
+						[styles.entry]: isEntry,
+					})}
+					icon={
+						isEntry ? (
+							<BudgetIconComponent
+								className={classNames({
+									[styles.entryIcon]: isEntry,
+								})}
+								icon={
+									isEntry
+										? '⊕'
+										: transaction?.budget?.icon || ''
+								}
+								color={budgetColor}
+							/>
+						) : (
+							<LinkComponent
+								to={`/budgets/${
+									transaction?.budget?.id as string
+								}`}
+							>
+								<BudgetIconComponent
+									icon={
+										isEntry
+											? '⊕'
+											: transaction?.budget?.icon || ''
+									}
+									color={budgetColor}
+								/>
+							</LinkComponent>
+						)
+					}
+					title={transaction?.label || ''}
+					amount={
+						<>
+							{isEntry ? '+' : '-'}{' '}
+							{formatCurrency(transaction?.amount)}
+						</>
+					}
+				/>
 				<Section>
-					<TitleComponent
-						heading="h2"
-						action={<TransactionActions />}
-					>
-						{transaction?.label}
-					</TitleComponent>
 					<InfosComponent
 						infos={[
 							{
-								label: 'type',
-								value: transaction?.transaction_type,
+								label: 'date',
+								value: dayjs(
+									transaction?.date as string
+								).format('DD MMMM YYYY'),
 							},
 							{
 								label: 'company',
@@ -113,31 +148,20 @@ const DetailTransactionPage = () => {
 									</LinkComponent>
 								),
 							},
-							{
-								label: 'budget',
-								value: (
-									<LinkComponent
-										active={true}
-										to={`/budgets/${
-											transaction?.budget?.id as string
-										}`}
-									>
-										{transaction?.budget?.label}
-									</LinkComponent>
-								),
-							},
-							{
-								label: 'date',
-								value: dayjs(
-									transaction?.date as string
-								).format('DD MMMM YYYY'),
-							},
-							{
-								label: 'amount',
-								value: formatCurrency(transaction?.amount),
-							},
 						]}
 					/>
+				</Section>
+				<Section className={styles.actions}>
+					<LinkComponent
+						to={`/transactions/${transaction?.id as string}/edit`}
+					>
+						<Button type="link" block={true}>
+							update
+						</Button>
+					</LinkComponent>
+					<Button type="link" block={true} danger>
+						delete
+					</Button>
 				</Section>
 			</div>
 		</>

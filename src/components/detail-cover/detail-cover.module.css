@@ -1,0 +1,23 @@
+.cover {
+    padding-top: var(--gui-gutter-xl);
+    padding-bottom: var(--gui-gutter-xl);
+    background-color: var(--gui-background-color-default);
+    border-radius: var(--gui-border-radius);
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--gui-color-border);
+}
+
+.icon {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: var(--gui-gutter-md);
+}
+
+.title h2 {
+    font-weight: 500;
+}
+
+.amount {
+    margin-bottom: 0;
+}

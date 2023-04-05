@@ -5,7 +5,7 @@
 
 @media (max-width: 960px) {
     .section {
-        padding-left: var(--gui-gutter-base);
-        padding-right: var(--gui-gutter-base);
+        margin-left: var(--gui-gutter-base);
+        margin-right: var(--gui-gutter-base);
     }
 }

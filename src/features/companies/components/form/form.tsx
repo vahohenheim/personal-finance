@@ -22,7 +22,7 @@ const FormCompanyComponent: FC<FormCompanyComponentProps> = ({
 			</Form.Item>
 			<Form.Item>
 				<Button type="primary" block htmlType="submit" size="large">
-					add transaction
+					add company
 				</Button>
 			</Form.Item>
 		</Form>

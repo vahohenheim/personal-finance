@@ -16,6 +16,7 @@ import TitleComponent from '../../../components/title/title';
 import { useUserId } from '@nhost/react';
 import dayjs from 'dayjs';
 import { FormTransactionValues } from '../components/form/form.model';
+import { TransactionType } from '../../../models/transaction';
 
 const INSERT_TRANSACTION_MUTATION = graphql(`
 	mutation InsertTransaction($transaction: transaction_insert_input!) {
@@ -124,7 +125,7 @@ const AddTransactionPage = () => {
 						onFinish={onFinish}
 						form={form}
 						initialValues={{
-							transaction_type: 'spent',
+							transaction_type: TransactionType.SPENT,
 							budget_type: 'month',
 							date: dayjs(),
 						}}

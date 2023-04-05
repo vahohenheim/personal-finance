@@ -14,6 +14,7 @@ import type { Budget, Company } from '../../../../gql/graphql';
 import dayjs from 'dayjs';
 import { FormTransactionComponentProps } from './form.model';
 import { FC } from 'react';
+import { TransactionType } from '../../../../models/transaction';
 
 const GET_COMPANY_QUERY = graphql(`
 	query GetLiteCompanies($limit: Int!) {
@@ -81,8 +82,12 @@ const FormTransactionComponent: FC<FormTransactionComponentProps> = ({
 		>
 			<Form.Item label="Define transaction" name="transaction_type">
 				<Radio.Group size="large">
-					<Radio.Button value="spent">spent</Radio.Button>
-					<Radio.Button value="entry">entry</Radio.Button>
+					<Radio.Button value={TransactionType.SPENT}>
+						{TransactionType.SPENT}
+					</Radio.Button>
+					<Radio.Button value={TransactionType.ENTRY}>
+						{TransactionType.ENTRY}
+					</Radio.Button>
 				</Radio.Group>
 			</Form.Item>
 			{/*<Form.Item label="Select type" name="budget_type">

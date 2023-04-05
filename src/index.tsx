@@ -1,10 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'antd/dist/reset.css';
-import './styles/index.css';
+import './styles/gui.css';
+import './styles/global.css';
+import './styles/ant-design.reset.css';
+import './styles/helpers.css';
 import App from './app';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import {
+	BrowserRouter,
+	Routes,
+	Route,
+	ScrollRestoration,
+} from 'react-router-dom';
 import * as dayjs from 'dayjs';
 import 'dayjs/locale/en';
 import utc from 'dayjs/plugin/utc';

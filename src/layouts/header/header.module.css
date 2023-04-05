@@ -50,7 +50,7 @@
     height: 30px;
     width: 30px;
     border-radius: 100%;
-    background: rgba(55, 58, 66, 0.4);
+    background: var(--gui-background-color-default);
     transition: border var(--gui-transition-duration-very-fast) ease-in-out;
     background-position: center;
     background-size: cover;

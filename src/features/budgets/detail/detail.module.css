@@ -1,19 +1,13 @@
-.info {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: var(--gui-gutter-sm);
-    padding-bottom: var(--gui-gutter-sm);
+.budgetAmount {
+    opacity: .5;
 }
+.exceed {
+    background-color: rgba(166, 48, 3, .35);
+    border-color: #A63003;
+}
+
 .actions {
     display: flex;
+    flex-direction: column;
     gap: var(--gui-gutter-base);
-}
-
-.edit {
-    color: var(--gui-color-primary);
-}
-
-.delete {
-    color: var(--gui-color-danger);
 }

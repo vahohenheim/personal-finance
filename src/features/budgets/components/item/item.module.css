@@ -20,9 +20,9 @@
 
 .label {
     font-weight: 400;
-    font-size: 14px;
+    font-size: var(--gui-text-font-size);
     line-height: 17px;
-    color: #FFFFFF;
+    color: var(--gui-color-white);
     margin-bottom: var(--gui-gutter-xs);
 }
 
@@ -31,7 +31,7 @@
     font-size: 14px;
     line-height: 17px;
     text-align: right;
-    color: #FFFFFF;
+    color: var(--gui-color-white);
     margin-bottom: var(--gui-gutter-xs);
 }
 
