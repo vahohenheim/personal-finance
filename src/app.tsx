@@ -1,13 +1,11 @@
-import { FC, useCallback } from 'react';
+import { FC } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { NhostProvider } from '@nhost/react';
 import { nhost } from './utils/nhost';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './utils/react-query-client';
 import { ConfigProvider, theme } from 'antd';
-import HeaderLayout from './layouts/header/header';
-import FooterLayout from './layouts/footer/footer';
-import { Outlet } from 'react-router-dom';
+import MainLayout from './layouts/main/main';
 
 const App: FC = () => {
 	return (
@@ -19,11 +17,7 @@ const App: FC = () => {
 							algorithm: theme.darkAlgorithm,
 						}}
 					>
-						<HeaderLayout />
-						<main className="main">
-							<Outlet />
-						</main>
-						<FooterLayout />
+						<MainLayout />
 					</ConfigProvider>
 				</QueryClientProvider>
 			</NhostProvider>

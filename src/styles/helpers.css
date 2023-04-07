@@ -1,12 +1,4 @@
-.main {
-    min-height: calc(100vh - var(--gui-header-height) - var(--gui-footer-height));
-}
 
-@media (max-width: 500px) {
-    .main {
-        min-height: calc(100vh - var(--gui-header-mobile-height) - var(--gui-footer-mobile-height));
-    }
-}
 
 .container {
     max-width: var(--gui-grid-container)
