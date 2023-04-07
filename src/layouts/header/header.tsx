@@ -54,9 +54,11 @@ const HeaderLayout: FC = () => {
 		});
 
 		if (getUser.isLoading) {
-			<div className={avatarClassName}>
-				<SpinnerComponent />
-			</div>;
+			return (
+				<div className={avatarClassName}>
+					<SpinnerComponent />
+				</div>
+			);
 		}
 
 		return (
@@ -81,10 +83,12 @@ const HeaderLayout: FC = () => {
 					'container center-block'
 				)}
 			>
+				<div className={styles.logo}>🏛</div>
+				<Link className={styles.avatar} to={'/user/edit'}>
+					<Avatar />
+				</Link>
+
 				<div className={styles.menu}>
-					<Link to={'/user/edit'}>
-						<Avatar />
-					</Link>
 					<LinkComponent active={current === ''} to={'/'}>
 						🖥&nbsp;dashboard
 					</LinkComponent>

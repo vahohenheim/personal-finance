@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import 'antd/dist/reset.css';
 import './styles/gui.css';
 import './styles/global.css';
@@ -8,10 +8,10 @@ import './styles/helpers.css';
 import App from './app';
 import reportWebVitals from './reportWebVitals';
 import {
-	BrowserRouter,
-	Routes,
 	Route,
-	ScrollRestoration,
+	createBrowserRouter,
+	createRoutesFromElements,
+	RouterProvider,
 } from 'react-router-dom';
 import * as dayjs from 'dayjs';
 import 'dayjs/locale/en';
@@ -35,58 +35,46 @@ dayjs.locale('en');
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-const root = ReactDOM.createRoot(
-	document.getElementById('root') as HTMLElement
+const root = createRoot(document.getElementById('root') as HTMLElement);
+
+const router = createBrowserRouter(
+	createRoutesFromElements(
+		<Route path="/" element={<App />}>
+			<Route element={<ProtectedRoute />}>
+				<Route index element={<DashboardPage />} />
+				<Route path="budgets" element={<ViewBudgetsPage />}></Route>
+				<Route
+					path="budgets/:id"
+					element={<DetailBudgetPage />}
+				></Route>
+				<Route
+					path="transactions"
+					element={<ViewTransactionsPage />}
+				></Route>
+				<Route
+					path="transactions/add"
+					element={<AddTransactionPage />}
+				/>
+				<Route
+					path="transactions/:id"
+					element={<DetailTransactionPage />}
+				/>
+				<Route path="companies" element={<ViewCompaniesPage />}></Route>
+				<Route path="companies/add" element={<AddCompanyPage />} />
+				<Route path="companies/:id" element={<DetailCompanyPage />} />
+				<Route path="user/edit" element={<EditUserPage />} />
+			</Route>
+
+			<Route path="register" element={<AddUserPage />} />
+			<Route path="login" element={<LoginPage />} />
+		</Route>
+	)
 );
 
 root.render(
-	<React.StrictMode>
-		<BrowserRouter>
-			<Routes>
-				<Route path="/" element={<App />}>
-					<Route element={<ProtectedRoute />}>
-						<Route index element={<DashboardPage />} />
-						<Route
-							path="budgets"
-							element={<ViewBudgetsPage />}
-						></Route>
-						<Route
-							path="budgets/:id"
-							element={<DetailBudgetPage />}
-						></Route>
-						<Route
-							path="transactions"
-							element={<ViewTransactionsPage />}
-						></Route>
-						<Route
-							path="transactions/add"
-							element={<AddTransactionPage />}
-						/>
-						<Route
-							path="transactions/:id"
-							element={<DetailTransactionPage />}
-						/>
-						<Route
-							path="companies"
-							element={<ViewCompaniesPage />}
-						></Route>
-						<Route
-							path="companies/add"
-							element={<AddCompanyPage />}
-						/>
-						<Route
-							path="companies/:id"
-							element={<DetailCompanyPage />}
-						/>
-						<Route path="user/edit" element={<EditUserPage />} />
-					</Route>
-
-					<Route path="register" element={<AddUserPage />} />
-					<Route path="login" element={<LoginPage />} />
-				</Route>
-			</Routes>
-		</BrowserRouter>
-	</React.StrictMode>
+	<StrictMode>
+		<RouterProvider router={router} />
+	</StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

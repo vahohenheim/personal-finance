@@ -12,6 +12,7 @@
     margin-left: auto;
     margin-right: auto;
     margin-bottom: var(--gui-gutter-md);
+    text-align: center;
 }
 
 .title h2 {
