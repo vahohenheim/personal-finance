@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { FC, ReactNode } from 'react';
+import { FC, ReactNode, createElement } from 'react';
 import styles from './title.module.css';
 
 const TitleComponent: FC<{
@@ -9,7 +9,7 @@ const TitleComponent: FC<{
 	action?: ReactNode;
 	center?: ReactNode;
 }> = ({ heading = 'h1', children, className, action, center = false }) => {
-	const titleComponent = React.createElement(heading, {}, children);
+	const titleComponent = createElement(heading, {}, children);
 
 	return (
 		<div

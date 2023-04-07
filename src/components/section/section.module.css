@@ -1,11 +1,1 @@
-.section {
-    margin-top: var(--gui-gutter-xl);
-    margin-bottom: var(--gui-gutter-xl);
-}
-
-@media (max-width: 960px) {
-    .section {
-        margin-left: var(--gui-gutter-base);
-        margin-right: var(--gui-gutter-base);
-    }
-}
+.section {    margin-top: var(--gui-gutter-xl);    margin-bottom: var(--gui-gutter-xl);}@media (max-width: 960px) {    .section {        margin-left: var(--gui-gutter-base);        margin-right: var(--gui-gutter-base);    }}

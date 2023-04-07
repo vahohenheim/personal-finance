@@ -10,8 +10,8 @@ import { Helmet } from 'react-helmet';
 import SectionComponent from '../../../components/section/section';
 import TitleComponent from '../../../components/title/title';
 import { useUserId } from '@nhost/react';
-import { FormCompanyValues } from '../components/form/form.model';
-import FormCompanyComponent from '../components/form/form';
+import { FormCompanyValues } from '../../../components/company/form/form.model';
+import { FormCompanyComponent } from '../../../components/company/form/form';
 
 const INSERT_COMPANY_MUTATION = graphql(`
 	mutation InsertCompany($company: company_insert_input!) {

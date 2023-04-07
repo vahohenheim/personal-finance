@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { graphql } from '../../../gql/gql';
+import { graphql } from '../../../gql';
 import { gqlClient } from '../../../utils/graphql-client';
 import type { Transaction } from '../../../gql/graphql';
 import { Helmet } from 'react-helmet';
@@ -12,8 +12,8 @@ import LinkComponent from '../../../components/link/link';
 import InfosComponent from '../../../components/infos/infos';
 import { Button } from 'antd';
 import { TransactionType } from '../../../models/transaction';
-import DetailCoverComponent from '../../../components/detail-cover/detail-cover';
-import BudgetIconComponent from '../../../components/budget-icon/budget-icon';
+import { DetailCoverComponent } from '../../../components/detail-cover/detail-cover';
+import { BudgetIconComponent } from '../../../components/budget/icon/icon';
 import classNames from 'classnames';
 
 const GET_TRANSACTION_QUERY = graphql(`

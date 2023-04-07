@@ -8,10 +8,9 @@ import { Helmet } from 'react-helmet';
 import Section from '../../../components/section/section';
 import styles from './detail.module.css';
 import LinkComponent from '../../../components/link/link';
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import ListTransactionsComponent from '../../transactions/components/list/list';
+import { ListTransactionsComponent } from '../../../components/transaction/list/list';
 import { Button } from 'antd';
-import DetailCoverComponent from '../../../components/detail-cover/detail-cover';
+import { DetailCoverComponent } from '../../../components/detail-cover/detail-cover';
 import { formatCurrency } from '../../../utils/format-currency';
 
 const GET_COMPANY_QUERY = graphql(`

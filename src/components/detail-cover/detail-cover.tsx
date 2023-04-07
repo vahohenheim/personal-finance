@@ -5,7 +5,7 @@ import TitleComponent from '../title/title';
 import { DetailCoverComponentProps } from './detail-cover.model';
 import styles from './detail-cover.module.css';
 
-const DetailCoverComponent: FC<DetailCoverComponentProps> = ({
+export const DetailCoverComponent: FC<DetailCoverComponentProps> = ({
 	icon,
 	title,
 	amount,
@@ -33,5 +33,3 @@ const DetailCoverComponent: FC<DetailCoverComponentProps> = ({
 		</Section>
 	);
 };
-
-export default DetailCoverComponent;

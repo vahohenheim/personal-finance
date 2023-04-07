@@ -1,16 +1,1 @@
-.form {
-    max-width: 300px;
-    margin: 0 auto;
-}
-
-.logo {
-    font-weight: 700;
-    font-size: 28px;
-    line-height: 34px;
-    text-align: center;
-    padding: var(--gui-gutter-2xl) 0;
-}
-
-.logo>* {
-    margin: 0
-}
+.form {    max-width: 300px;    margin: 0 auto;}.logo {    font-weight: 700;    font-size: 28px;    line-height: 34px;    text-align: center;    padding: var(--gui-gutter-2xl) 0;}.logo>* {    margin: 0}

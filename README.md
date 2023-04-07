@@ -22,6 +22,8 @@
 
 - `REACT_APP_NHOST_SUBDOMAIN`
 - `REACT_APP_NHOST_REGION`
+- `REACT_APP_NHOST_HASURA_ADMIN_SECRET`
+- `REACT_APP_NHOST_HASURA_GRAPHQL_API`
 
 [How to obtain](https://docs.nhost.io/quickstarts/react#configure-nhost-with-react)
 

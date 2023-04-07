@@ -1,12 +1,1 @@
-.title {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: var(--gui-gutter-base);
-}
-
-.center {
-    justify-content: center;
-    text-align: center;
-}
+.title {    display: flex;    flex-direction: row;    align-items: center;    justify-content: space-between;    margin-bottom: var(--gui-gutter-base);}.center {    justify-content: center;    text-align: center;}

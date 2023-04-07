@@ -1,14 +1,13 @@
 import { Helmet } from 'react-helmet';
 import { toast } from 'react-hot-toast';
 import type { User } from '../../../user.model';
-import { graphql } from '../../../gql/gql';
-import { useOutletContext } from 'react-router-dom';
+import { graphql } from '../../../gql';
 import { Form, Input, Button } from 'antd';
 import Section from '../../../components/section/section';
 import { useSignOut, useUserId } from '@nhost/react';
 import Title from '../../../components/title/title';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { Users_Set_Input, Users_Update_Column } from '../../../gql/graphql';
+import { Users_Set_Input } from '../../../gql/graphql';
 import { gqlClient } from '../../../utils/graphql-client';
 import { queryClient } from '../../../utils/react-query-client';
 

@@ -53,7 +53,7 @@ const HeaderLayout: FC = () => {
 			[styles.active]: current === 'user',
 		});
 
-		if (getUser.isLoading) {
+		if (getUser.isLoading || isLoading) {
 			return (
 				<div className={avatarClassName}>
 					<SpinnerComponent />
