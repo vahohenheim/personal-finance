@@ -1,13 +1,1 @@
-.budgetAmount {
-    opacity: .5;
-}
-.exceed {
-    background-color: rgba(166, 48, 3, .35);
-    border-color: #A63003;
-}
-
-.actions {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gui-gutter-base);
-}
+.budgetAmount {    opacity: .5;}.exceed {    background-color: rgba(166, 48, 3, .35);    border-color: #A63003;}.actions {    display: flex;    flex-direction: column;    gap: var(--gui-gutter-base);}

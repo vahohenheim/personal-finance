@@ -8,10 +8,10 @@ import styles from './detail.module.css';
 import LinkComponent from '../../../components/link/link';
 import type { Budget, Transaction } from '../../../gql/graphql';
 import { formatCurrency } from '../../../utils/format-currency';
-import ListTransactionsComponent from '../../transactions/components/list/list';
+import { ListTransactionsComponent } from '../../../components/transaction/list/list';
 import { Button } from 'antd';
-import BudgetIconComponent from '../../../components/budget-icon/budget-icon';
-import DetailCoverComponent from '../../../components/detail-cover/detail-cover';
+import { BudgetIconComponent } from '../../../components/budget/icon/icon';
+import { DetailCoverComponent } from '../../../components/detail-cover/detail-cover';
 import classNames from 'classnames';
 
 const GET_BUDGET_QUERY = graphql(`

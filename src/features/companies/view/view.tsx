@@ -7,7 +7,7 @@ import TitleComponent from '../../../components/title/title';
 import { graphql } from '../../../gql/gql';
 import type { Company } from '../../../gql/graphql';
 import { gqlClient } from '../../../utils/graphql-client';
-import ListCompaniesComponent from '../components/list/list';
+import { ListCompaniesComponent } from '../../../components/company/list/list';
 
 const GET_COMPANIES_QUERY = graphql(`
 	query GetCompanies($limit: Int!) {

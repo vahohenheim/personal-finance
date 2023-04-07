@@ -1,16 +1,1 @@
-.container {
-    padding: var(--gui-gutter-base) 0;
-}
-
-.info {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: var(--gui-gutter-base);
-    color: rgba(255, 255, 255, .6);
-    font-size: 16px;
-}
-
-.container .info:last-child {
-    margin-bottom: 0;
-}
+.container {    padding: var(--gui-gutter-base) 0;}.info {    display: flex;    align-items: center;    justify-content: space-between;    margin-bottom: var(--gui-gutter-base);    color: rgba(255, 255, 255, .6);    font-size: 16px;}.container .info:last-child {    margin-bottom: 0;}

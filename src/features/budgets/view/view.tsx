@@ -7,7 +7,7 @@ import TitleComponent from '../../../components/title/title';
 import { graphql } from '../../../gql/gql';
 import type { Budget } from '../../../gql/graphql';
 import { gqlClient } from '../../../utils/graphql-client';
-import ListBudgetsComponent from '../components/list/list';
+import { ListBudgetComponent } from '../../../components/budget/list/list';
 
 const GET_BUDGETS_QUERY = graphql(`
 	query GetMonthBudgets($limit: Int!) {
@@ -85,7 +85,7 @@ const ViewBudgetsPage = () => {
 					>
 						Budgets
 					</TitleComponent>
-					<ListBudgetsComponent
+					<ListBudgetComponent
 						budgets={getBudgets.data?.budget}
 						loading={getBudgets.isLoading}
 					/>

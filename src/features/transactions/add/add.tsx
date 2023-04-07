@@ -9,13 +9,13 @@ import type {
 	Company_Insert_Input,
 	Transaction_Insert_Input,
 } from '../../../gql/graphql';
-import FormTransactionComponent from '../components/form/form';
+import { FormTransactionComponent } from '../../../components/transaction/form/form';
 import { Helmet } from 'react-helmet';
 import SectionComponent from '../../../components/section/section';
 import TitleComponent from '../../../components/title/title';
 import { useUserId } from '@nhost/react';
 import dayjs from 'dayjs';
-import { FormTransactionValues } from '../components/form/form.model';
+import { FormTransactionValues } from '../../../components/transaction/form/form.model';
 import { TransactionType } from '../../../models/transaction';
 
 const INSERT_TRANSACTION_MUTATION = graphql(`

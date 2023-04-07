@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 import Section from '../../components/section/section';
 import { Button } from 'antd';
 import Title from '../../components/title/title';
-import ListTransactionsComponent from '../transactions/components/list/list';
+import { ListTransactionsComponent } from '../../components/transaction/list/list';
 import { graphql } from '../../gql/gql';
 import { useQuery } from '@tanstack/react-query';
 import { gqlClient } from '../../utils/graphql-client';

@@ -17,11 +17,11 @@
 		"jsx": "react-jsx"
 	},
 	"include": ["src", "codegen.ts"],
-	"baseUrl": "./src",
+	"baseUrl": ".",
 	"paths": {
-		"@features/*": ["features/*"],
-		"@graphql/*": ["gql/*"],
-		"@components": ["components"],
-		"@utils": ["utils"]
+		"@features/*": ["src/features/*"],
+		"@graphql/*": ["src/gql/*"],
+		"@components/*": ["src/components/*"],
+		"@utils": ["src/utils"]
 	}
 }

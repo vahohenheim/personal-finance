@@ -1,14 +1,14 @@
 import type { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import Section from '../../../components/section/section';
 import { Button } from 'antd';
-import Title from '../../../components/title/title';
-import ListTransactionsComponent from '../components/list/list';
-import { graphql } from '../../../gql/gql';
+import { graphql } from '../../../gql';
 import { gqlClient } from '../../../utils/graphql-client';
 import { useQuery } from '@tanstack/react-query';
 import { Transaction } from '../../../gql/graphql';
+import SectionComponent from '../../../components/section/section';
+import TitleComponent from '../../../components/title/title';
+import { ListTransactionsComponent } from '../../../components/transaction/list/list';
 
 const GET_TRANSACTIONS_QUERY = graphql(`
 	query GetTransactions($limit: Int!) {
@@ -60,8 +60,8 @@ const ViewTransactionsPage: FC = () => {
 				<title>transactions | finance</title>
 			</Helmet>
 			<div className="container center-block">
-				<Section>
-					<Title
+				<SectionComponent>
+					<TitleComponent
 						heading={'h2'}
 						action={
 							<Link to="/transactions/add">
@@ -72,12 +72,12 @@ const ViewTransactionsPage: FC = () => {
 						}
 					>
 						Transactions
-					</Title>
+					</TitleComponent>
 					<ListTransactionsComponent
 						transactions={getTransactions?.data?.transaction}
 						loading={getTransactions?.isLoading}
 					/>
-				</Section>
+				</SectionComponent>
 			</div>
 		</>
 	);
