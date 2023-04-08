@@ -1,3 +1,4 @@
+export * from './entry-icon/entry-icon';
 export * from './form/form';
 export * from './form/form.model';
 export * from './item/item';

@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { ItemCompanyComponentProps } from './item.model';
 import styles from './item.module.css';
+import { IconCompanyComponent } from '../icon/icon';
 
 export const ItemCompanyComponent: FC<ItemCompanyComponentProps> = ({
 	company,
@@ -12,7 +13,7 @@ export const ItemCompanyComponent: FC<ItemCompanyComponentProps> = ({
 			<Card className={styles.card}>
 				<div className={styles.body}>
 					<div className={styles.content}>
-						<div className={styles.avatar}></div>
+						<IconCompanyComponent />
 						<div className={styles.title}>
 							<p className={styles.label}>{company?.label}</p>
 						</div>

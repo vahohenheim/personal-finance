@@ -17,7 +17,10 @@ export const ListTransactionsComponent: FC<ListTransactionsComponentProps> = ({
 	if (!transactions || transactions.length === 0) {
 		return (
 			<div className={styles.empty}>
-				<Empty description={'Any transaction'} />
+				<Empty
+					image={Empty.PRESENTED_IMAGE_SIMPLE}
+					description={'Any transaction'}
+				/>
 			</div>
 		);
 	}

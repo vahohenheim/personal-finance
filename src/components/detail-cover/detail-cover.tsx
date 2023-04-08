@@ -4,16 +4,24 @@ import Section from '../section/section';
 import TitleComponent from '../title/title';
 import { DetailCoverComponentProps } from './detail-cover.model';
 import styles from './detail-cover.module.css';
+import { BackComponent } from '../back/back';
 
 export const DetailCoverComponent: FC<DetailCoverComponentProps> = ({
 	icon,
 	title,
 	amount,
-	className,
+	className = '',
+	backgroundColor = '',
 }) => {
 	return (
 		<Section>
-			<div className={classNames(styles.cover, className as string)}>
+			<BackComponent />
+			<div
+				className={classNames(styles.cover, className)}
+				style={{
+					backgroundColor,
+				}}
+			>
 				<div className={styles.icon}>{icon}</div>
 				<TitleComponent
 					heading="h2"

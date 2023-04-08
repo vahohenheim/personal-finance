@@ -1,0 +1,5 @@
+.back {
+    cursor: pointer;
+    color: var(--gui-color-primary);
+    margin-bottom: var(--gui-gutter-md);
+}

@@ -14,5 +14,7 @@ export type FormTransactionValues = {
 export type FormTransactionComponentProps = {
 	onFinish: (values: FormTransactionValues) => void;
 	form: FormInstance<FormTransactionValues>;
-	initialValues?: Partial<FormTransactionValues>;
+	transaction?: Partial<FormTransactionValues>;
+	submitLabel: string;
+	loading: boolean;
 };

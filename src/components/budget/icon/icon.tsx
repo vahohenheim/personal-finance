@@ -4,12 +4,12 @@ import { BudgetIconComponentProps } from './icon.model';
 import styles from './icon.module.css';
 
 export const BudgetIconComponent: FC<BudgetIconComponentProps> = ({
-	color,
+	color = '',
 	icon,
-	className,
+	className = '',
 }) => {
 	return (
-		<div className={classNames(styles.budget, className as string)}>
+		<div className={classNames(styles.budget, className)}>
 			<div
 				className={styles.background}
 				style={{

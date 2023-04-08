@@ -32,7 +32,7 @@
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
 		"codegen": "graphql-codegen --require dotenv/config --config codegen.ts",
-		"codegen:watch": "DEBUG=1 graphql-codegen -w --require dotenv/config --config codegen.ts",
+		"codegen:watch": "graphql-codegen -w --require dotenv/config --config codegen.ts",
 		"lint": "tsc --noEmit && eslint src/**/*.ts{,x} --cache --max-warnings=0",
 		"lint:fix": "eslint src/**/*.ts{,x} --fix"
 	},

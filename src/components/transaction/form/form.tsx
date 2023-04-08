@@ -14,6 +14,7 @@ import type { Budget, Company } from '../../../gql/graphql';
 import { FormTransactionComponentProps } from './form.model';
 import { FC } from 'react';
 import { TransactionType } from '../../../models/transaction';
+import dayjs from 'dayjs';
 
 const GET_COMPANY_QUERY = graphql(`
 	query GetLiteCompanies($limit: Int!) {
@@ -30,6 +31,7 @@ const GET_BUDGET_QUERY = graphql(`
 		budget(order_by: { label: asc }, limit: $limit) {
 			id
 			label
+			icon
 		}
 	}
 `);
@@ -37,8 +39,12 @@ const GET_BUDGET_QUERY = graphql(`
 export const FormTransactionComponent: FC<FormTransactionComponentProps> = ({
 	onFinish,
 	form,
-	initialValues,
+	transaction,
+	submitLabel,
+	loading = false,
 }) => {
+	const initialValues = Object.assign({}, transaction);
+
 	const getCompanies = useQuery({
 		queryKey: ['companies'],
 		queryFn: async () => {
@@ -62,15 +68,26 @@ export const FormTransactionComponent: FC<FormTransactionComponentProps> = ({
 	const companies = getCompanies?.data?.company || [];
 	const budgets = getBudgets?.data?.budget || [];
 
-	const companiesItems = companies.map((company: Company) => ({
+	const transformCompanyToSelectItem = (company: Company) => ({
 		label: company.label,
 		value: company.id,
-	}));
+	});
 
-	const budgetsItems = budgets.map((budget: Budget) => ({
-		label: budget.label,
+	const transformBudgetToSelectItem = (budget: Budget) => ({
+		label: `${budget.icon} ${budget.label}`,
 		value: budget.id,
-	}));
+	});
+
+	const companiesItems = companies.map(transformCompanyToSelectItem);
+	const budgetsItems = budgets.map(transformBudgetToSelectItem);
+
+	if (initialValues?.date) {
+		initialValues.date = dayjs(initialValues.date);
+	}
+
+	if (getCompanies.isLoading || getBudgets.isLoading) {
+		return <div>Loading...</div>;
+	}
 
 	return (
 		<Form
@@ -78,6 +95,7 @@ export const FormTransactionComponent: FC<FormTransactionComponentProps> = ({
 			layout="vertical"
 			initialValues={initialValues}
 			onFinish={onFinish}
+			disabled={loading}
 		>
 			<Form.Item label="Define transaction" name="transaction_type">
 				<Radio.Group size="large">
@@ -89,13 +107,6 @@ export const FormTransactionComponent: FC<FormTransactionComponentProps> = ({
 					</Radio.Button>
 				</Radio.Group>
 			</Form.Item>
-			{/*<Form.Item label="Select type" name="budget_type">
-						<Radio.Group>
-							<Radio.Button value="month">month</Radio.Button>
-							<Radio.Button value="annual">annual</Radio.Button>
-							<Radio.Button value="project">project</Radio.Button>
-						</Radio.Group>
-					</Form.Item>*/}
 			<Form.Item label="Select budget" name="budget_id">
 				<Select
 					showSearch
@@ -142,8 +153,14 @@ export const FormTransactionComponent: FC<FormTransactionComponentProps> = ({
 				/>
 			</Form.Item>
 			<Form.Item>
-				<Button type="primary" block htmlType="submit" size="large">
-					add transaction
+				<Button
+					type="primary"
+					block
+					htmlType="submit"
+					size="large"
+					loading={loading}
+				>
+					{submitLabel}
 				</Button>
 			</Form.Item>
 		</Form>

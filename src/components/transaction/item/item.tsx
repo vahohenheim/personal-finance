@@ -7,6 +7,7 @@ import { formatCurrency } from '../../../utils/format-currency';
 import { ItemTransactionComponentProps } from './item.model';
 import styles from './item.module.css';
 import { BudgetIconComponent } from '../../budget';
+import { TransactionEntryIconComponent } from '../entry-icon/entry-icon';
 
 export const ItemTransactionComponent: FC<ItemTransactionComponentProps> = ({
 	transaction,
@@ -24,15 +25,14 @@ export const ItemTransactionComponent: FC<ItemTransactionComponentProps> = ({
 			>
 				<div className={styles.body}>
 					<div className={styles.content}>
-						<BudgetIconComponent
-							className={classNames({
-								[styles.entryIcon]: isEntry,
-							})}
-							icon={
-								isEntry ? '⊕' : transaction?.budget?.icon || ''
-							}
-							color={budgetColor || ''}
-						/>
+						{isEntry ? (
+							<TransactionEntryIconComponent />
+						) : (
+							<BudgetIconComponent
+								icon={transaction?.budget?.icon || ''}
+								color={budgetColor || ''}
+							/>
+						)}
 						<div className={styles.title}>
 							<p className={styles.company}>
 								{transaction?.company?.label}

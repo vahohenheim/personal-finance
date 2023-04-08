@@ -19,7 +19,10 @@ export const ListBudgetComponent: FC<ListBudgetComponentProps> = ({
 	if (budgets?.length === 0) {
 		return (
 			<div className={styles.empty}>
-				<Empty description={'Any budget'} />
+				<Empty
+					image={Empty.PRESENTED_IMAGE_SIMPLE}
+					description={'Any budget'}
+				/>
 			</div>
 		);
 	}

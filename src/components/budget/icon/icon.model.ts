@@ -1,5 +1,5 @@
 export type BudgetIconComponentProps = {
-	color: string;
+	color?: string;
 	icon: string;
 	className?: string;
 };
