@@ -13,67 +13,16 @@ import { Button } from 'antd';
 import { DetailCoverComponent } from '../../../components/detail-cover/detail-cover';
 import { formatCurrency } from '../../../utils/format-currency';
 import { IconCompanyComponent } from '../../../components/company';
-import { BackComponent } from '../../../components/back/back';
-
-const GET_COMPANY_QUERY = graphql(`
-	query GetCompany($id: uuid!) {
-		company(where: { id: { _eq: $id } }) {
-			id
-			label
-			logo
-			transactions(order_by: { date: desc }) {
-				amount
-				company {
-					label
-					logo
-				}
-				budget {
-					label
-					icon
-					budget_type {
-						color
-					}
-				}
-				label
-				transaction_type
-				created_at
-				updated_at
-				id
-				user_id
-			}
-		}
-	}
-`);
+import { useGetCompany } from '../api/get-company.hook';
+import { DetailEmptyComponent } from '../../../components/detail-empty/detail-empty';
 
 const DetailCompanyPage = () => {
 	const { id } = useParams();
-
-	const getCompany = useQuery({
-		queryKey: [`company-${id || ''}`],
-		enabled: !!id,
-		queryFn: () => {
-			return gqlClient.request<
-				{ company: Array<Company> },
-				{ id: string }
-			>(GET_COMPANY_QUERY, {
-				id: id || '',
-			});
-		},
-	});
-
+	const getCompany = useGetCompany(id || '');
 	const company = getCompany?.data?.company[0];
 
 	if (getCompany.isLoading) {
 		return <div>Loading...</div>;
-	}
-
-	if (getCompany.isError) {
-		console.error(getCompany.error);
-		return <div>Error</div>;
-	}
-
-	if (!getCompany.data) {
-		return <div>No data</div>;
 	}
 
 	const aggregateAmountTransactions = (
@@ -88,6 +37,14 @@ const DetailCompanyPage = () => {
 		aggregateAmountTransactions,
 		0
 	);
+
+	const hasNoData =
+		!getCompany.isLoading &&
+		(!getCompany?.data?.company || getCompany?.data?.company?.length === 0);
+
+	if (hasNoData) {
+		return <DetailEmptyComponent />;
+	}
 
 	return (
 		<>

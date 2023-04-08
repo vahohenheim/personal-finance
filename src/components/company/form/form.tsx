@@ -5,16 +5,16 @@ import { FC } from 'react';
 export const FormCompanyComponent: FC<FormCompanyComponentProps> = ({
 	onFinish,
 	form,
-	initialValues,
+	company,
 }) => {
 	return (
 		<Form
 			form={form}
-			initialValues={initialValues}
+			initialValues={company}
 			layout="vertical"
 			onFinish={onFinish}
 		>
-			<Form.Item label="Define label" name="label">
+			<Form.Item label="Define label" name="label" required={true}>
 				<Input size="large" placeholder="typing company label" />
 			</Form.Item>
 			<Form.Item label="Define logo" name="logo">
