@@ -1,4 +1,4 @@
-import toast from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Form } from 'antd';
 import { Helmet } from 'react-helmet';
@@ -9,7 +9,6 @@ import {
 	FormCompanyValues,
 	FormCompanyComponent,
 } from '../../../components/company';
-import { useInsertCompany } from '../api/insert-company.hook';
 import { useUpdateCompany } from '../api/update-company.hook';
 import { useGetCompany } from '../api/get-company.hook';
 import { BackComponent } from '../../../components/back/back';
@@ -59,6 +58,7 @@ const EditCompanyPage = () => {
 						onFinish={onFinish}
 						form={form}
 						company={company}
+						submitLabel={'edit company'}
 					/>
 				</SectionComponent>
 			</div>

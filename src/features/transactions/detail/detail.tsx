@@ -11,7 +11,7 @@ import { TransactionType } from '../../../models/transaction';
 import { DetailCoverComponent } from '../../../components/detail-cover/detail-cover';
 import { BudgetIconComponent } from '../../../components/budget';
 import classNames from 'classnames';
-import toast from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 import { useState } from 'react';
 import SectionComponent from '../../../components/section/section';
 import { DetailEmptyComponent } from '../../../components/detail-empty/detail-empty';

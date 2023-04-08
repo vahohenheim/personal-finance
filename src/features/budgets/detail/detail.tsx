@@ -1,58 +1,16 @@
 import { useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { graphql } from '../../../gql/gql';
-import { gqlClient } from '../../../utils/graphql-client';
 import { Helmet } from 'react-helmet';
 import Section from '../../../components/section/section';
 import styles from './detail.module.css';
 import LinkComponent from '../../../components/link/link';
-import type { Budget, Transaction } from '../../../gql/graphql';
+import type { Transaction } from '../../../gql/graphql';
 import { formatCurrency } from '../../../utils/format-currency';
-import { ListTransactionsComponent } from '../../../components/transaction/list/list';
+import { ListTransactionsComponent } from '../../../components/transaction';
 import { Button } from 'antd';
-import { BudgetIconComponent } from '../../../components/budget/icon/icon';
+import { BudgetIconComponent } from '../../../components/budget';
 import { DetailCoverComponent } from '../../../components/detail-cover/detail-cover';
 import classNames from 'classnames';
-
-const GET_BUDGET_QUERY = graphql(`
-	query GetBudget($id: uuid!) {
-		budget(where: { id: { _eq: $id } }) {
-			id
-			label
-			icon
-			budget_type {
-				color
-			}
-			budget_months {
-				amount
-			}
-			transactions(order_by: { date: desc }) {
-				amount
-				budget {
-					id
-					label
-					icon
-					budget_type {
-						color
-					}
-					budget_months {
-						month_id
-					}
-				}
-				company {
-					label
-					logo
-				}
-				label
-				transaction_type
-				created_at
-				updated_at
-				id
-				user_id
-			}
-		}
-	}
-`);
+import { useGetBudget } from '../api/get-budget.hook';
 
 /*
 {
@@ -64,33 +22,11 @@ const GET_BUDGET_QUERY = graphql(`
 
 const DetailBudgetPage = () => {
 	const { id } = useParams();
-
-	const getBudget = useQuery({
-		queryKey: [`budget-${id || ''}`],
-		enabled: !!id,
-		queryFn: () => {
-			return gqlClient.request<{ budget: Array<Budget> }, { id: string }>(
-				GET_BUDGET_QUERY,
-				{
-					id: id || '',
-				}
-			);
-		},
-	});
-
+	const getBudget = useGetBudget(id || '');
 	const budget = getBudget?.data?.budget[0];
 
 	if (getBudget.isLoading) {
 		return <div>Loading...</div>;
-	}
-
-	if (getBudget.isError) {
-		console.error(getBudget.error);
-		return <div>Error</div>;
-	}
-
-	if (!getBudget.data) {
-		return <div>No data</div>;
 	}
 
 	const aggregateAmountTransactions = (
@@ -145,9 +81,6 @@ const DetailBudgetPage = () => {
 							update
 						</Button>
 					</LinkComponent>
-					<Button type="link" block={true} danger>
-						delete
-					</Button>
 				</Section>
 			</div>
 		</>

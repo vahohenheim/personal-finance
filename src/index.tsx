@@ -32,6 +32,7 @@ import ViewBudgetsPage from './features/budgets/view/view';
 import DetailBudgetPage from './features/budgets/detail/detail';
 import EditTransactionPage from './features/transactions/edit/edit';
 import EditCompanyPage from './features/companies/edit/edit';
+import EditBudgetMonthPage from './features/budgets/edit/edit';
 
 dayjs.locale('en');
 dayjs.extend(utc);
@@ -48,6 +49,10 @@ const router = createBrowserRouter(
 				<Route
 					path="budgets/:id"
 					element={<DetailBudgetPage />}
+				></Route>
+				<Route
+					path="budgets/:id/edit"
+					element={<EditBudgetMonthPage />}
 				></Route>
 				<Route
 					path="transactions"

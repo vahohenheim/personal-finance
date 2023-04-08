@@ -8,7 +8,7 @@ import {
 	EyeTwoTone,
 } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
-import toast from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 
 const LoginPage = () => {
 	const {
@@ -25,7 +25,9 @@ const LoginPage = () => {
 	}
 
 	if (isError) {
-		return <p className={styles['error-text']}>{error?.message}</p>;
+		toast.error(error?.message || '', {
+			id: 'login-failed',
+		});
 	}
 
 	const disableForm = isLoading || needsEmailVerification;
@@ -41,10 +43,12 @@ const LoginPage = () => {
 	};
 
 	if (needsEmailVerification) {
-		<p className={styles['verification-text']}>
-			Please check your mailbox and follow the verification link to verify
-			your email.
-		</p>;
+		toast(
+			'Please check your mailbox and follow the verification link to verify your email.',
+			{
+				id: 'email-verification',
+			}
+		);
 	}
 
 	return (

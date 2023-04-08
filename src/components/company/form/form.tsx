@@ -6,6 +6,7 @@ export const FormCompanyComponent: FC<FormCompanyComponentProps> = ({
 	onFinish,
 	form,
 	company,
+	submitLabel,
 }) => {
 	return (
 		<Form
@@ -22,7 +23,7 @@ export const FormCompanyComponent: FC<FormCompanyComponentProps> = ({
 			</Form.Item>
 			<Form.Item>
 				<Button type="primary" block htmlType="submit" size="large">
-					add company
+					{submitLabel}
 				</Button>
 			</Form.Item>
 		</Form>
