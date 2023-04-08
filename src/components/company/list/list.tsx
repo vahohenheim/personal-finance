@@ -15,7 +15,10 @@ export const ListCompaniesComponent: FC<ListCompaniesComponentProps> = ({
 	if (companies.length === 0) {
 		return (
 			<div className={styles.empty}>
-				<Empty description={'Any companies'} />
+				<Empty
+					image={Empty.PRESENTED_IMAGE_SIMPLE}
+					description={'Any companies'}
+				/>
 			</div>
 		);
 	}

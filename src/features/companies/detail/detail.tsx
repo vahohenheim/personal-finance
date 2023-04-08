@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { graphql } from '../../../gql/gql';
+import { graphql } from '../../../gql';
 import { gqlClient } from '../../../utils/graphql-client';
 import type { Company, Transaction } from '../../../gql/graphql';
 import TitleComponent from '../../../components/title/title';
@@ -8,10 +8,12 @@ import { Helmet } from 'react-helmet';
 import Section from '../../../components/section/section';
 import styles from './detail.module.css';
 import LinkComponent from '../../../components/link/link';
-import { ListTransactionsComponent } from '../../../components/transaction/list/list';
+import { ListTransactionsComponent } from '../../../components/transaction';
 import { Button } from 'antd';
 import { DetailCoverComponent } from '../../../components/detail-cover/detail-cover';
 import { formatCurrency } from '../../../utils/format-currency';
+import { IconCompanyComponent } from '../../../components/company';
+import { BackComponent } from '../../../components/back/back';
 
 const GET_COMPANY_QUERY = graphql(`
 	query GetCompany($id: uuid!) {
@@ -95,7 +97,7 @@ const DetailCompanyPage = () => {
 
 			<div className="container center-block">
 				<DetailCoverComponent
-					icon={<div className={styles.avatar}></div>}
+					icon={<IconCompanyComponent />}
 					title={company?.label as string}
 					amount={<>{formatCurrency(amountTransactions)}</>}
 				/>

@@ -118,12 +118,8 @@ const DetailBudgetPage = () => {
 			<div className="container center-block">
 				<DetailCoverComponent
 					className={classNames({ [styles.exceed]: percent > 100 })}
-					icon={
-						<BudgetIconComponent
-							icon={budget?.icon || ''}
-							color={budget?.budget_type?.color || ''}
-						/>
-					}
+					backgroundColor={budget?.budget_type?.color || ''}
+					icon={<BudgetIconComponent icon={budget?.icon || ''} />}
 					title={budget?.label || ''}
 					amount={
 						<>

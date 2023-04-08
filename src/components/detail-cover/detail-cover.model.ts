@@ -5,4 +5,5 @@ export type DetailCoverComponentProps = {
 	title: string;
 	amount: ReactNode;
 	className?: string;
+	backgroundColor?: string;
 };

@@ -1,81 +1,111 @@
-import { useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { graphql } from '../../../gql';
-import { gqlClient } from '../../../utils/graphql-client';
+import { useNavigate, useParams } from 'react-router-dom';
 import type { Transaction } from '../../../gql/graphql';
 import { Helmet } from 'react-helmet';
-import Section from '../../../components/section/section';
 import dayjs from 'dayjs';
 import { formatCurrency } from '../../../utils/format-currency';
 import styles from './detail.module.css';
 import LinkComponent from '../../../components/link/link';
 import InfosComponent from '../../../components/infos/infos';
-import { Button } from 'antd';
+import { Button, Modal } from 'antd';
 import { TransactionType } from '../../../models/transaction';
 import { DetailCoverComponent } from '../../../components/detail-cover/detail-cover';
-import { BudgetIconComponent } from '../../../components/budget/icon/icon';
+import { BudgetIconComponent } from '../../../components/budget';
 import classNames from 'classnames';
-
-const GET_TRANSACTION_QUERY = graphql(`
-	query GetTransaction($id: uuid!) {
-		transaction(where: { id: { _eq: $id } }) {
-			amount
-			company {
-				id
-				label
-				logo
-			}
-			budget {
-				id
-				label
-				icon
-				budget_type {
-					color
-				}
-			}
-			label
-			transaction_type
-			created_at
-			updated_at
-			id
-			user_id
-		}
-	}
-`);
+import toast from 'react-hot-toast';
+import { useState } from 'react';
+import SectionComponent from '../../../components/section/section';
+import { DetailEmptyComponent } from '../../../components/detail-empty/detail-empty';
+import { useDeleteTransactions } from '../api/delete-transaction.hook';
+import { useGetTransaction } from '../api/get-transaction.hook';
+import { TransactionEntryIconComponent } from '../../../components/transaction';
 
 const DetailTransactionPage = () => {
 	const { id } = useParams();
-
-	const getTransaction = useQuery({
-		queryKey: [`transation-${id || ''}`],
-		enabled: !!id,
-		queryFn: () => {
-			return gqlClient.request<
-				{ transaction: Array<Transaction> },
-				{ id: string }
-			>(GET_TRANSACTION_QUERY, {
-				id: id || '',
-			});
-		},
-	});
-
+	const navigate = useNavigate();
+	const [openDeleteConfirm, setOpenDeleteConfirm] = useState(false);
+	const deleteTransaction = useDeleteTransactions(id || '');
+	const getTransaction = useGetTransaction(id || '');
 	const transaction = getTransaction?.data?.transaction[0];
+	const budgetColor = transaction?.budget?.budget_type?.color as string;
+	const isEntry = transaction?.transaction_type === TransactionType.ENTRY;
 
 	if (getTransaction.isLoading) {
 		return <div>Loading...</div>;
 	}
 
-	if (getTransaction.isError) {
-		console.error(getTransaction.error);
-		return <div>Error</div>;
+	if (deleteTransaction.data) {
+		toast.success('Delete transaction successfully', {
+			id: 'transaction-deleted',
+		});
+		navigate(-1);
 	}
 
-	if (!getTransaction.data) {
-		return <div>No data</div>;
+	if (deleteTransaction.isError) {
+		toast.error('Unable to delete transaction', {
+			id: 'transaction-deleted',
+		});
+		console.error(deleteTransaction?.error);
 	}
 
-	const budgetColor = transaction?.budget?.budget_type?.color as string;
-	const isEntry = transaction?.transaction_type === TransactionType.ENTRY;
+	const handleOkDeleteConfirm = () => {
+		deleteTransaction.mutate(id || '');
+		if (!deleteTransaction.isLoading && !!deleteTransaction.data) {
+			setOpenDeleteConfirm(false);
+			navigate(-1);
+		}
+	};
+
+	const getTransactionInfos = (transactionInfos?: Transaction) => {
+		const infos = [
+			{
+				label: 'date',
+				value: dayjs(transactionInfos?.date as string).format(
+					'DD MMMM YYYY'
+				),
+			},
+			{
+				label: 'company',
+				value: (
+					<LinkComponent
+						active={true}
+						to={`/companies/${
+							transactionInfos?.company?.id as string
+						}`}
+					>
+						{transactionInfos?.company?.label}
+					</LinkComponent>
+				),
+			},
+		];
+
+		if (transactionInfos?.budget) {
+			infos.push({
+				label: 'budget',
+				value: (
+					<LinkComponent
+						active={true}
+						to={`/budgets/${transactionInfos?.budget_id as string}`}
+					>
+						{transactionInfos?.budget?.icon}{' '}
+						{transactionInfos?.budget?.label}
+					</LinkComponent>
+				),
+			});
+		}
+
+		return infos;
+	};
+
+	const infos = getTransactionInfos(transaction);
+
+	const hasNoData =
+		!getTransaction.isLoading &&
+		(!getTransaction?.data?.transaction ||
+			getTransaction?.data?.transaction?.length === 0);
+
+	if (hasNoData) {
+		return <DetailEmptyComponent />;
+	}
 
 	return (
 		<>
@@ -90,17 +120,7 @@ const DetailTransactionPage = () => {
 					})}
 					icon={
 						isEntry ? (
-							<BudgetIconComponent
-								className={classNames({
-									[styles.entryIcon]: isEntry,
-								})}
-								icon={
-									isEntry
-										? '⊕'
-										: transaction?.budget?.icon || ''
-								}
-								color={budgetColor}
-							/>
+							<TransactionEntryIconComponent />
 						) : (
 							<LinkComponent
 								to={`/budgets/${
@@ -108,11 +128,7 @@ const DetailTransactionPage = () => {
 								}`}
 							>
 								<BudgetIconComponent
-									icon={
-										isEntry
-											? '⊕'
-											: transaction?.budget?.icon || ''
-									}
+									icon={transaction?.budget?.icon || ''}
 									color={budgetColor}
 								/>
 							</LinkComponent>
@@ -126,32 +142,10 @@ const DetailTransactionPage = () => {
 						</>
 					}
 				/>
-				<Section>
-					<InfosComponent
-						infos={[
-							{
-								label: 'date',
-								value: dayjs(
-									transaction?.date as string
-								).format('DD MMMM YYYY'),
-							},
-							{
-								label: 'company',
-								value: (
-									<LinkComponent
-										active={true}
-										to={`/companies/${
-											transaction?.company?.id as string
-										}`}
-									>
-										{transaction?.company?.label}
-									</LinkComponent>
-								),
-							},
-						]}
-					/>
-				</Section>
-				<Section className={styles.actions}>
+				<SectionComponent>
+					<InfosComponent infos={infos} />
+				</SectionComponent>
+				<SectionComponent className={styles.actions}>
 					<LinkComponent
 						to={`/transactions/${transaction?.id as string}/edit`}
 					>
@@ -159,10 +153,25 @@ const DetailTransactionPage = () => {
 							update
 						</Button>
 					</LinkComponent>
-					<Button type="link" block={true} danger>
+					<Button
+						type="link"
+						block={true}
+						danger
+						onClick={() => setOpenDeleteConfirm(true)}
+					>
 						delete
 					</Button>
-				</Section>
+				</SectionComponent>
+				<Modal
+					title="Do you want to delete these transaction ?"
+					centered={true}
+					closable={false}
+					confirmLoading={deleteTransaction.isLoading}
+					open={openDeleteConfirm}
+					onOk={handleOkDeleteConfirm}
+					onCancel={() => setOpenDeleteConfirm(false)}
+					okButtonProps={{ danger: true }}
+				></Modal>
 			</div>
 		</>
 	);
