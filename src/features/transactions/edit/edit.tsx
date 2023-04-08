@@ -12,6 +12,8 @@ import { BackComponent } from '../../../components/back/back';
 import { useGetSettableTransaction } from '../api/get-settable-transaction.hook';
 import { useUpdateTransaction } from '../api/update-transaction.hook';
 import { formatInsertableDate } from '../../../utils/format-insertable-date';
+import { useGetItemCompanies } from '../api/get-item-companies.hook';
+import { useGetItemBudgets } from '../api/get-item-budgets.hook';
 
 const EditTransactionPage = () => {
 	const [form] = Form.useForm();
@@ -19,7 +21,11 @@ const EditTransactionPage = () => {
 	const { id } = useParams();
 	const getSettableTransaction = useGetSettableTransaction(id || '');
 	const updateTransaction = useUpdateTransaction(id || '');
+	const getCompanies = useGetItemCompanies();
+	const getBudgets = useGetItemBudgets();
 	const transaction = getSettableTransaction.data?.transaction[0];
+	const companies = getCompanies?.data?.company || [];
+	const budgets = getBudgets?.data?.budget || [];
 
 	const onFinish = (values: FormTransactionValues) => {
 		updateTransaction.mutate({
@@ -47,7 +53,11 @@ const EditTransactionPage = () => {
 		console.error(updateTransaction.error);
 	}
 
-	if (getSettableTransaction.isLoading) {
+	if (
+		getSettableTransaction.isLoading ||
+		getBudgets.isLoading ||
+		getCompanies.isLoading
+	) {
 		return <div>Loading...</div>;
 	}
 
@@ -66,6 +76,8 @@ const EditTransactionPage = () => {
 						submitLabel={'edit transaction'}
 						onFinish={onFinish}
 						form={form}
+						budgets={budgets}
+						companies={companies}
 						transaction={transaction}
 						loading={updateTransaction.isLoading}
 					/>

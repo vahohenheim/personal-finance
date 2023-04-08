@@ -18,7 +18,7 @@ const config: CodegenConfig = {
 	ignoreNoDocuments: true,
 	generates: {
 		'./src/gql/': {
-			documents: ['src/**/*.tsx'],
+			documents: ['src/**/*.tsx', 'src/**/*.ts'],
 			preset: 'client',
 			plugins: [],
 		},

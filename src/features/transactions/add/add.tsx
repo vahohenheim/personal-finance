@@ -13,12 +13,18 @@ import dayjs from 'dayjs';
 import { TransactionType } from '../../../models/transaction';
 import { BackComponent } from '../../../components/back/back';
 import { useInsertTransaction } from '../api/insert-transaction.hook';
+import { useGetItemCompanies } from '../api/get-item-companies.hook';
+import { useGetItemBudgets } from '../api/get-item-budgets.hook';
 
 const AddTransactionPage = () => {
 	const userId = useUserId() as string;
 	const [form] = Form.useForm();
 	const navigate = useNavigate();
 	const insertTransaction = useInsertTransaction(userId);
+	const getCompanies = useGetItemCompanies();
+	const getBudgets = useGetItemBudgets();
+	const companies = getCompanies?.data?.company || [];
+	const budgets = getBudgets?.data?.budget || [];
 
 	const onFinish = (values: FormTransactionValues) => {
 		insertTransaction.mutate({
@@ -44,6 +50,10 @@ const AddTransactionPage = () => {
 		console.error(insertTransaction.error);
 	}
 
+	if (getBudgets.isLoading || getCompanies.isLoading) {
+		return <div>Loading...</div>;
+	}
+
 	return (
 		<>
 			<Helmet>
@@ -59,6 +69,8 @@ const AddTransactionPage = () => {
 						submitLabel={'add transaction'}
 						onFinish={onFinish}
 						form={form}
+						budgets={budgets}
+						companies={companies}
 						transaction={{
 							transaction_type: TransactionType.SPENT,
 							budget_type: 'month',

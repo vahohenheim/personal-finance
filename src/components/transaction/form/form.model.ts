@@ -1,5 +1,6 @@
 import { FormInstance } from 'antd/es/form/Form';
 import { Dayjs } from 'dayjs';
+import { Budget, Company } from '../../../gql/graphql';
 
 export type FormTransactionValues = {
 	label: string;
@@ -15,6 +16,8 @@ export type FormTransactionComponentProps = {
 	onFinish: (values: FormTransactionValues) => void;
 	form: FormInstance<FormTransactionValues>;
 	transaction?: Partial<FormTransactionValues>;
+	budgets?: Array<Budget>;
+	companies?: Array<Company>;
 	submitLabel: string;
 	loading: boolean;
 };

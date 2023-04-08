@@ -1,6 +1,3 @@
-import { useQuery } from '@tanstack/react-query';
-import { graphql } from '../../../gql';
-import { gqlClient } from '../../../utils/graphql-client';
 import {
 	Button,
 	Form,
@@ -16,77 +13,29 @@ import { FC } from 'react';
 import { TransactionType } from '../../../models/transaction';
 import dayjs from 'dayjs';
 
-const GET_COMPANY_QUERY = graphql(`
-	query GetLiteCompanies($limit: Int!) {
-		company(order_by: { label: asc }, limit: $limit) {
-			id
-			label
-			logo
-		}
-	}
-`);
-
-const GET_BUDGET_QUERY = graphql(`
-	query GetBudgets($limit: Int!) {
-		budget(order_by: { label: asc }, limit: $limit) {
-			id
-			label
-			icon
-		}
-	}
-`);
-
 export const FormTransactionComponent: FC<FormTransactionComponentProps> = ({
 	onFinish,
 	form,
 	transaction,
 	submitLabel,
+	budgets = [],
+	companies = [],
 	loading = false,
 }) => {
 	const initialValues = Object.assign({}, transaction);
 
-	const getCompanies = useQuery({
-		queryKey: ['companies'],
-		queryFn: async () => {
-			return gqlClient.request<
-				{ company: Array<Company> },
-				{ limit: number }
-			>(GET_COMPANY_QUERY, { limit: 100 });
-		},
-	});
-
-	const getBudgets = useQuery({
-		queryKey: ['budgets'],
-		queryFn: async () => {
-			return gqlClient.request<
-				{ budget: Array<Budget> },
-				{ limit: number }
-			>(GET_BUDGET_QUERY, { limit: 100 });
-		},
-	});
-
-	const companies = getCompanies?.data?.company || [];
-	const budgets = getBudgets?.data?.budget || [];
-
-	const transformCompanyToSelectItem = (company: Company) => ({
+	const companiesItems = companies.map((company: Company) => ({
 		label: company.label,
 		value: company.id,
-	});
+	}));
 
-	const transformBudgetToSelectItem = (budget: Budget) => ({
+	const budgetsItems = budgets.map((budget: Budget) => ({
 		label: `${budget.icon} ${budget.label}`,
 		value: budget.id,
-	});
-
-	const companiesItems = companies.map(transformCompanyToSelectItem);
-	const budgetsItems = budgets.map(transformBudgetToSelectItem);
+	}));
 
 	if (initialValues?.date) {
 		initialValues.date = dayjs(initialValues.date);
-	}
-
-	if (getCompanies.isLoading || getBudgets.isLoading) {
-		return <div>Loading...</div>;
 	}
 
 	return (
@@ -97,7 +46,11 @@ export const FormTransactionComponent: FC<FormTransactionComponentProps> = ({
 			onFinish={onFinish}
 			disabled={loading}
 		>
-			<Form.Item label="Define transaction" name="transaction_type">
+			<Form.Item
+				label="Define transaction"
+				name="transaction_type"
+				required={true}
+			>
 				<Radio.Group size="large">
 					<Radio.Button value={TransactionType.SPENT}>
 						{TransactionType.SPENT}
@@ -107,7 +60,7 @@ export const FormTransactionComponent: FC<FormTransactionComponentProps> = ({
 					</Radio.Button>
 				</Radio.Group>
 			</Form.Item>
-			<Form.Item label="Select budget" name="budget_id">
+			<Form.Item label="Select budget" name="budget_id" required={true}>
 				<Select
 					showSearch
 					size="large"
@@ -120,7 +73,7 @@ export const FormTransactionComponent: FC<FormTransactionComponentProps> = ({
 					options={budgetsItems}
 				></Select>
 			</Form.Item>
-			<Form.Item label="Select company" name="company_id">
+			<Form.Item label="Select company" name="company_id" required={true}>
 				<Select
 					showSearch
 					size="large"
@@ -134,10 +87,10 @@ export const FormTransactionComponent: FC<FormTransactionComponentProps> = ({
 					options={companiesItems}
 				/>
 			</Form.Item>
-			<Form.Item label="Define label" name="label">
+			<Form.Item label="Define label" name="label" required={true}>
 				<Input size="large" placeholder="typing transaction label" />
 			</Form.Item>
-			<Form.Item label="Amount" name="amount">
+			<Form.Item label="Amount" name="amount" required={true}>
 				<InputNumber
 					prefix="€"
 					size="large"
@@ -145,7 +98,7 @@ export const FormTransactionComponent: FC<FormTransactionComponentProps> = ({
 					style={{ width: '100%' }}
 				/>
 			</Form.Item>
-			<Form.Item label="Date" name="date">
+			<Form.Item label="Date" name="date" required={true}>
 				<DatePicker
 					size="large"
 					placeholder="typing date"
