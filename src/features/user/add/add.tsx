@@ -2,6 +2,7 @@ import { useSignUpEmailPassword } from '@nhost/react';
 import { Link, Navigate } from 'react-router-dom';
 import { Form, Input, Button } from 'antd';
 import styles from './add.module.css';
+import { toast } from 'react-hot-toast';
 
 const AddUserPage = () => {
 	const {
@@ -13,8 +14,24 @@ const AddUserPage = () => {
 		error,
 	} = useSignUpEmailPassword();
 
+	if (needsEmailVerification) {
+		toast(
+			'Please check your mailbox and follow the verification link to verify your email.',
+			{
+				id: 'email-verification',
+			}
+		);
+	}
+
+	if (isError) {
+		toast.error('Unable to add user', {
+			id: 'user-added',
+		});
+		console.error(error);
+	}
+
 	if (isSuccess) {
-		return <Navigate to="/" replace={true} />;
+		return <Navigate to="/login" replace={true} />;
 	}
 
 	const disableForm = isLoading || needsEmailVerification;

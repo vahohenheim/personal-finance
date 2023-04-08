@@ -10,4 +10,5 @@ export type FormCompanyComponentProps = {
 	onFinish: (values: FormCompanyValues) => void;
 	form: FormInstance<FormCompanyValues>;
 	company?: Company;
+	submitLabel: string;
 };

@@ -2,19 +2,17 @@ import styles from './list.module.css';
 import dayjs from 'dayjs';
 import { FC } from 'react';
 import type { Transaction } from '../../../gql/graphql';
-import { Empty } from 'antd';
+import { Empty, Skeleton } from 'antd';
 import type { ListTransactionsComponentProps } from './list.model';
 import { ItemTransactionComponent } from '../item/item';
+import { ItemSkeletonTransactionComponent } from '../item/item.skeleton';
+import { ListSkeletonTransactionsComponent } from './list.skeleton';
 
 export const ListTransactionsComponent: FC<ListTransactionsComponentProps> = ({
 	transactions = [],
 	loading = false,
 }) => {
-	if (loading) {
-		return <p>Loading...</p>;
-	}
-
-	if (!transactions || transactions.length === 0) {
+	if (!loading && (!transactions || transactions.length === 0)) {
 		return (
 			<div className={styles.empty}>
 				<Empty
@@ -69,32 +67,38 @@ export const ListTransactionsComponent: FC<ListTransactionsComponentProps> = ({
 
 	return (
 		<div className={styles.list}>
-			{(Object.keys(transactionByDayByMonth) || []).map((month) => (
-				<div key={month} className={styles.month}>
-					<h3>
-						{currentMonth === month ? 'this month, ' : ''}
-						{dayjs(month).format('MMMM YYYY').toLowerCase()}
-					</h3>
-					{Object.keys(transactionByDayByMonth[month]).map((day) => (
-						<div key={day} className={styles.day}>
-							<p>
-								{dayjs(day)
-									.format('DD dddd, MMMM')
-									.toLowerCase()}
-							</p>
-							{transactionByDayByMonth[month][day].map(
-								(transaction) => (
-									<div key={transaction.id as string}>
-										<ItemTransactionComponent
-											transaction={transaction}
-										/>
-									</div>
-								)
-							)}
-						</div>
-					))}
-				</div>
-			))}
+			{loading ? (
+				<ListSkeletonTransactionsComponent />
+			) : (
+				(Object.keys(transactionByDayByMonth) || []).map((month) => (
+					<div key={month} className={styles.month}>
+						<h3>
+							{currentMonth === month ? 'this month, ' : ''}
+							{dayjs(month).format('MMMM YYYY').toLowerCase()}
+						</h3>
+						{Object.keys(transactionByDayByMonth[month]).map(
+							(day) => (
+								<div key={day} className={styles.day}>
+									<p>
+										{dayjs(day)
+											.format('DD dddd, MMMM')
+											.toLowerCase()}
+									</p>
+									{transactionByDayByMonth[month][day].map(
+										(transaction) => (
+											<div key={transaction.id as string}>
+												<ItemTransactionComponent
+													transaction={transaction}
+												/>
+											</div>
+										)
+									)}
+								</div>
+							)
+						)}
+					</div>
+				))
+			)}
 		</div>
 	);
 };

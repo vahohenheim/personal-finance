@@ -73,9 +73,6 @@ const DetailCompanyPage = () => {
 							update
 						</Button>
 					</LinkComponent>
-					<Button type="link" block={true} danger>
-						delete
-					</Button>
 				</Section>
 			</div>
 		</>

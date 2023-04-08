@@ -1,4 +1,4 @@
-import toast from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { Form } from 'antd';
 import { Helmet } from 'react-helmet';
@@ -48,7 +48,11 @@ const AddCompanyPage = () => {
 				<SectionComponent>
 					<BackComponent />
 					<TitleComponent heading="h2">Add a company</TitleComponent>
-					<FormCompanyComponent onFinish={onFinish} form={form} />
+					<FormCompanyComponent
+						onFinish={onFinish}
+						form={form}
+						submitLabel={'add company'}
+					/>
 				</SectionComponent>
 			</div>
 		</>
