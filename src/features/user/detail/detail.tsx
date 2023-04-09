@@ -4,22 +4,29 @@ import dayjs from 'dayjs';
 import styles from './detail.module.css';
 import LinkComponent from '../../../components/link/link';
 import InfosComponent from '../../../components/infos/infos';
-import { Button } from 'antd';
+import { Button, Form } from 'antd';
 import { DetailCoverComponent } from '../../../components/detail-cover/detail-cover';
 import SectionComponent from '../../../components/section/section';
-import { useUserId } from '@nhost/react';
+import { useSignOut, useUserId } from '@nhost/react';
 import { useGetUser } from '../../../api/user/get-user.hook';
 import { AvatarUserComponent } from '../../../components/user/avatar/avatar';
+import { queryClient } from '../../../utils/react-query-client';
 
 const DetailUserPage = () => {
 	const userId = useUserId() as string;
 	const getUser = useGetUser(userId);
+	const { signOut } = useSignOut();
 	const user = getUser?.data?.user;
 	const userMonth = user?.user_months || [];
 	const currentUserMonth =
-		userMonth && userMonth.length > 0 ? userMonth[0] : { month: {} };
+		userMonth.length > 0 ? userMonth[0] : { month: {} };
 	const currentMonth = currentUserMonth?.month as Month;
 	const metadata = user?.metadata as { firstName: string; lastName: string };
+
+	const handleLogout = () => {
+		signOut();
+		queryClient.invalidateQueries(['user']);
+	};
 
 	return (
 		<>
@@ -65,6 +72,9 @@ const DetailUserPage = () => {
 							update
 						</Button>
 					</LinkComponent>
+					<Button type="link" block={true} onClick={handleLogout}>
+						logout
+					</Button>
 				</SectionComponent>
 			</div>
 		</>

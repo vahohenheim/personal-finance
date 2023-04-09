@@ -1,9 +1,8 @@
 import { useAuthenticationStatus } from '@nhost/react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { Fragment } from 'react';
 import SpinnerComponent from '../spinner/spinner';
 import styles from './protected-route.module.css';
-import classNames from 'classnames';
+import { motion } from 'framer-motion';
 
 const ProtectedRoute = () => {
 	const { isAuthenticated, isLoading } = useAuthenticationStatus();
@@ -11,8 +10,8 @@ const ProtectedRoute = () => {
 
 	if (isLoading) {
 		return (
-			<div className={classNames(styles.loading, 'main')}>
-				<SpinnerComponent />
+			<div className={styles.loading}>
+				<SpinnerComponent size={45} />
 			</div>
 		);
 	}
@@ -22,9 +21,13 @@ const ProtectedRoute = () => {
 	}
 
 	return (
-		<Fragment>
+		<motion.div
+			initial={{ opacity: 0 }}
+			animate={{ opacity: 1 }}
+			transition={{ duration: 0.5 }}
+		>
 			<Outlet />
-		</Fragment>
+		</motion.div>
 	);
 };
 

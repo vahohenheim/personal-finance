@@ -12,15 +12,26 @@ import { Budget } from '../../../gql/graphql';
 import { FormBudgetMonthValues } from '../../../components/budget/form/form.model';
 import dayjs from 'dayjs';
 import { FormSkeletonBudgetMonthComponent } from '../../../components/budget/form/form.skeleton';
+import { useUserId } from '@nhost/react';
+import { useGetUser } from '../../../api/user/get-user.hook';
+import { getCurrentMonthFromUser } from '../../../utils/get-current-month-from-user';
 
 const EditBudgetMonthPage = () => {
 	const [form] = Form.useForm();
 	const navigate = useNavigate();
 	const { id } = useParams();
-	const getBudget = useGetBudget(id || '');
+	const userId = useUserId() as string;
+	const getUser = useGetUser(userId);
+	const currentMonth = getCurrentMonthFromUser(getUser?.data?.user);
+	const getBudget = useGetBudget(
+		id || '',
+		currentMonth?.start_at as string,
+		currentMonth?.end_at as string
+	);
 	const budget = getBudget.data?.budget[0] as Budget;
 	const budgetMonth = budget?.budget_months[0];
 	const updateBudget = useUpdateBudgetMonth(budgetMonth?.budget_id as string);
+	const loading = getBudget.isLoading || getUser.isLoading;
 
 	const onFinish = (values: FormBudgetMonthValues) => {
 		updateBudget.mutate({
@@ -58,7 +69,7 @@ const EditBudgetMonthPage = () => {
 							'MMMM YYYY'
 						)}
 					</TitleComponent>
-					{getBudget.isLoading ? (
+					{loading ? (
 						<FormSkeletonBudgetMonthComponent />
 					) : (
 						<FormBudgetMonthComponent

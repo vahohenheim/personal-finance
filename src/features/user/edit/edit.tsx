@@ -11,7 +11,6 @@ import { useNavigate } from 'react-router-dom';
 import { BackComponent } from '../../../components/back/back';
 
 const EditUserPage = () => {
-	const { signOut } = useSignOut();
 	const navigate = useNavigate();
 	const id = useUserId() as string;
 	const getUser = useGetUser(id);
@@ -89,19 +88,6 @@ const EditUserPage = () => {
 									block={true}
 								>
 									update profile
-								</Button>
-							</Form.Item>
-							<Form.Item>
-								<Button
-									size="large"
-									type="link"
-									block={true}
-									onClick={() => {
-										signOut();
-										queryClient.invalidateQueries(['user']);
-									}}
-								>
-									logout
 								</Button>
 							</Form.Item>
 						</Form>

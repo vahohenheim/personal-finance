@@ -12,8 +12,10 @@ const GET_USER_QUERY = graphql(`
 			metadata
 			avatarUrl
 			user_months(where: { current: { _eq: true } }) {
+				month_id
 				month {
 					start_at
+					end_at
 				}
 			}
 		}
