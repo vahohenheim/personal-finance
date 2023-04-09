@@ -8,6 +8,7 @@ import { queryClient } from '../../../utils/react-query-client';
 import { useGetUser } from '../api/get-user.hook';
 import { useUpdateUser } from '../api/update-user.hook';
 import { useNavigate } from 'react-router-dom';
+import { BackComponent } from '../../../components/back/back';
 
 const EditUserPage = () => {
 	const { signOut } = useSignOut();
@@ -16,6 +17,7 @@ const EditUserPage = () => {
 	const getUser = useGetUser(id);
 	const user = getUser.data?.user;
 	const updateUser = useUpdateUser();
+	const metadata = user?.metadata as { firstName: string; lastName: string };
 
 	if (updateUser.data) {
 		toast.success('Edit user successfully', { id: 'user-edited' });
@@ -31,12 +33,14 @@ const EditUserPage = () => {
 
 	const onFinish = (values: {
 		displayName: string;
+		avatarUrl: string;
 		firstName: string;
 		lastName: string;
 	}) => {
 		updateUser.mutate({
 			id: user?.id,
 			displayName: values.displayName,
+			avatarUrl: values.avatarUrl,
 			metadata: {
 				firstName: values.firstName,
 				lastName: values.lastName,
@@ -52,14 +56,16 @@ const EditUserPage = () => {
 
 			<div className="container center-block">
 				<Section>
+					<BackComponent />
 					<Title heading="h2">Profile</Title>
 					<div>
 						<Form
 							layout="vertical"
 							initialValues={{
 								displayName: user?.displayName,
-								firstName: user?.metadata?.firstName,
-								lastName: user?.metadata?.lastName,
+								avatarUrl: user?.avatarUrl,
+								firstName: metadata.firstName,
+								lastName: metadata.lastName,
 							}}
 							onFinish={onFinish}
 						>
@@ -70,6 +76,9 @@ const EditUserPage = () => {
 								<Input size="large" />
 							</Form.Item>
 							<Form.Item label="lastname" name="lastName">
+								<Input size="large" />
+							</Form.Item>
+							<Form.Item label="avatar" name="avatarUrl">
 								<Input size="large" />
 							</Form.Item>
 							<Form.Item>

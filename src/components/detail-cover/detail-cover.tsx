@@ -14,10 +14,11 @@ export const DetailCoverComponent: FC<DetailCoverComponentProps> = ({
 	className = '',
 	backgroundColor = '',
 	loading = false,
+	hasBack = true,
 }) => {
 	return (
 		<Section>
-			<BackComponent />
+			{hasBack && <BackComponent />}
 			<div
 				className={classNames(styles.cover, className)}
 				style={{
@@ -38,13 +39,19 @@ export const DetailCoverComponent: FC<DetailCoverComponentProps> = ({
 				>
 					{loading ? <Skeleton.Button active size="small" /> : title}
 				</TitleComponent>
-				<TitleComponent
-					heading="h2"
-					center={true}
-					className={styles.amount}
-				>
-					{loading ? <Skeleton.Button active size="small" /> : amount}
-				</TitleComponent>
+				{amount && (
+					<TitleComponent
+						heading="h2"
+						center={true}
+						className={styles.amount}
+					>
+						{loading ? (
+							<Skeleton.Button active size="small" />
+						) : (
+							amount
+						)}
+					</TitleComponent>
+				)}
 			</div>
 		</Section>
 	);

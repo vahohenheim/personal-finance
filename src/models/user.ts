@@ -1,7 +1,7 @@
-import type { User as NhostUser } from '@nhost/react';
+import { Users } from '../gql/graphql';
 
 export type User =
-	| (Partial<NhostUser> & {
+	| (Partial<Users> & {
 			metadata: { firstName: string; lastName: string };
 	  })
 	| undefined;

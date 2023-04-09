@@ -55,7 +55,7 @@ const AddTransactionPage = () => {
 	return (
 		<>
 			<Helmet>
-				<title>add transation | finance</title>
+				<title>add transaction | finance</title>
 			</Helmet>
 			<div className="container center-block">
 				<SectionComponent>

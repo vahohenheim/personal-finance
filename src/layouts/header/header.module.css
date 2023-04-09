@@ -41,18 +41,5 @@
 }
 
 .avatar {
-    height: 30px;
-    width: 30px;
-    border-radius: 100%;
-    background: var(--gui-background-color-default);
-    transition: border var(--gui-transition-duration-very-fast) ease-in-out;
-    background-position: center;
-    background-size: cover;
-    border: 1px var(--gui-color-border) solid;
-    justify-self: end;
-    margin-left: auto;
-}
-
-.avatar.active {
-    border: 1px var(--gui-color-primary) solid;
+    text-align: right;
 }

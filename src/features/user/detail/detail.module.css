@@ -1,0 +1,4 @@
+.actions {
+    display: grid;
+    gap: var(--gui-gutter-base);
+}
