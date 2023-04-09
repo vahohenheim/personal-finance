@@ -11,11 +11,22 @@ import { BudgetIconComponent } from '../../../components/budget';
 import { DetailCoverComponent } from '../../../components/detail-cover/detail-cover';
 import classNames from 'classnames';
 import { useGetBudget } from '../../../api/budget/get-budget.hook';
+import { useGetUser } from '../../../api/user/get-user.hook';
+import { useUserId } from '@nhost/react';
+import { getCurrentMonthFromUser } from '../../../utils/get-current-month-from-user';
 
 const DetailBudgetPage = () => {
 	const { id } = useParams();
-	const getBudget = useGetBudget(id || '');
+	const userId = useUserId() as string;
+	const getUser = useGetUser(userId);
+	const currentMonth = getCurrentMonthFromUser(getUser?.data?.user);
+	const getBudget = useGetBudget(
+		id || '',
+		currentMonth?.start_at as string,
+		currentMonth?.end_at as string
+	);
 	const budget = getBudget?.data?.budget[0];
+	const loading = getBudget.isLoading || getUser.isLoading;
 
 	const aggregateAmountTransactions = (
 		sum: number,
@@ -41,7 +52,7 @@ const DetailBudgetPage = () => {
 
 			<div className="container center-block">
 				<DetailCoverComponent
-					loading={getBudget.isLoading}
+					loading={loading}
 					className={classNames({
 						[styles.exceed]: percent > 100,
 					})}
@@ -70,7 +81,7 @@ const DetailBudgetPage = () => {
 				<Section>
 					<ListTransactionsComponent
 						transactions={budget?.transactions}
-						loading={getBudget.isLoading}
+						loading={loading}
 					/>
 				</Section>
 			</div>

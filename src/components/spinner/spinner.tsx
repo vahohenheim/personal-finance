@@ -2,8 +2,8 @@ import { FC } from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
 
-const SpinnerComponent: FC = () => {
-	const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+const SpinnerComponent: FC<{ size?: number }> = ({ size = 24 }) => {
+	const antIcon = <LoadingOutlined style={{ fontSize: size }} spin />;
 
 	return <Spin indicator={antIcon} />;
 };

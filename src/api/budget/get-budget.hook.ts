@@ -4,7 +4,11 @@ import { gqlClient } from '../../utils/graphql-client';
 import { Budget } from '../../gql/graphql';
 
 const GET_BUDGET_QUERY = graphql(`
-	query GetBudget($id: uuid!) {
+	query GetBudget(
+		$id: uuid!
+		$start_at: timestamptz!
+		$end_at: timestamptz!
+	) {
 		budget(where: { id: { _eq: $id } }) {
 			id
 			label
@@ -21,7 +25,10 @@ const GET_BUDGET_QUERY = graphql(`
 					end_at
 				}
 			}
-			transactions(order_by: { date: desc }) {
+			transactions(
+				order_by: { date: desc }
+				where: { date: { _gte: $start_at, _lte: $end_at } }
+			) {
 				amount
 				budget {
 					id
@@ -57,17 +64,19 @@ const GET_BUDGET_QUERY = graphql(`
 }
 */
 
-export const useGetBudget = (id: string) => {
+export const useGetBudget = (id: string, start_at: string, end_at: string) => {
 	return useQuery({
 		queryKey: [`budget-${id}`],
-		enabled: !!id,
+		enabled: !!id && !!start_at && !!end_at,
 		queryFn: () => {
-			return gqlClient.request<{ budget: Array<Budget> }, { id: string }>(
-				GET_BUDGET_QUERY,
-				{
-					id,
-				}
-			);
+			return gqlClient.request<
+				{ budget: Array<Budget> },
+				{ id: string; start_at: string; end_at: string }
+			>(GET_BUDGET_QUERY, {
+				id,
+				start_at,
+				end_at,
+			});
 		},
 	});
 };

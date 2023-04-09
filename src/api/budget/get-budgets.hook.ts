@@ -4,7 +4,11 @@ import { gqlClient } from '../../utils/graphql-client';
 import { Budget } from '../../gql/graphql';
 
 const GET_BUDGETS_QUERY = graphql(`
-	query GetMonthBudgets($limit: Int!) {
+	query GetBudgets(
+		$limit: Int!
+		$start_at: timestamptz!
+		$end_at: timestamptz!
+	) {
 		budget(order_by: { priority: asc }, limit: $limit) {
 			budget_months {
 				amount
@@ -17,7 +21,10 @@ const GET_BUDGETS_QUERY = graphql(`
 			label
 			priority
 			icon
-			transactions(order_by: { date: desc }) {
+			transactions(
+				order_by: { date: desc }
+				where: { date: { _gte: $start_at, _lte: $end_at } }
+			) {
 				amount
 				budget {
 					id
@@ -49,14 +56,19 @@ const GET_BUDGETS_QUERY = graphql(`
 	}
 `);
 
-export const useGetBudgets = (limit: number) => {
+export const useGetBudgets = (
+	limit: number,
+	start_at: string,
+	end_at: string
+) => {
 	return useQuery({
 		queryKey: ['month-budgets'],
+		enabled: !!start_at && !!end_at,
 		queryFn: async () => {
 			return gqlClient.request<
 				{ budget: Array<Budget> },
-				{ limit: number }
-			>(GET_BUDGETS_QUERY, { limit });
+				{ limit: number; start_at: string; end_at: string }
+			>(GET_BUDGETS_QUERY, { limit, start_at, end_at });
 		},
 	});
 };
