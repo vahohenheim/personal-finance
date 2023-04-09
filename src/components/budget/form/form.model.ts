@@ -10,4 +10,5 @@ export type FormBudgetMonthComponentProps = {
 	form: FormInstance<FormBudgetMonthValues>;
 	budgetMonth?: Budget_Month;
 	submitLabel?: string;
+	submitting: boolean;
 };

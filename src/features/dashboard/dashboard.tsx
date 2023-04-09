@@ -4,67 +4,15 @@ import { Helmet } from 'react-helmet';
 import Section from '../../components/section/section';
 import { Button } from 'antd';
 import Title from '../../components/title/title';
-import { ListTransactionsComponent } from '../../components/transaction/list/list';
-import { graphql } from '../../gql/gql';
-import { useQuery } from '@tanstack/react-query';
-import { gqlClient } from '../../utils/graphql-client';
+import { ListTransactionsComponent } from '../../components/transaction';
+import { useGetTransactions } from '../transactions/api/get-transactions.hook';
 import { Transaction } from '../../gql/graphql';
 
-const GET_TRANSACTIONS_DASHOBARD_QUERY = graphql(`
-	query GetTransactionsDashboard($limit: Int!) {
-		transaction(order_by: { created_at: desc }, limit: $limit) {
-			amount
-			budget {
-				id
-				label
-				icon
-				budget_type {
-					color
-				}
-				budget_months {
-					amount
-					month {
-						start_at
-						end_at
-					}
-				}
-			}
-			company {
-				label
-				logo
-			}
-			label
-			transaction_type
-			created_at
-			updated_at
-			id
-			user_id
-		}
-	}
-`);
-
 const DashboardPage: FC = () => {
-	const transactionsLimit = 4;
-
-	const getTransactions = useQuery({
-		queryKey: ['transactions'],
-		queryFn: async () => {
-			return gqlClient.request<
-				{ transaction: Array<Transaction> },
-				{ limit: number }
-			>(GET_TRANSACTIONS_DASHOBARD_QUERY, { limit: transactionsLimit });
-		},
-	});
-
-	if (!getTransactions?.data?.transaction || getTransactions.isLoading) {
-		return <div>Loading...</div>;
-	}
-
-	if (getTransactions.isError) {
-		console.error(getTransactions.error);
-		return <div>Error</div>;
-	}
-
+	const transactionsLimit = 100;
+	const getTransactions = useGetTransactions(transactionsLimit);
+	const transactions = [...(getTransactions?.data?.transaction || [])];
+	transactions.length = 4;
 	return (
 		<>
 			<Helmet>
@@ -90,10 +38,7 @@ const DashboardPage: FC = () => {
 						Last transactions
 					</Title>
 					<ListTransactionsComponent
-						transactions={getTransactions?.data?.transaction.slice(
-							0,
-							transactionsLimit
-						)}
+						transactions={transactions}
 						loading={getTransactions?.isLoading}
 					/>
 				</Section>

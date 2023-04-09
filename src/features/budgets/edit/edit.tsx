@@ -11,6 +11,7 @@ import { FormBudgetMonthComponent } from '../../../components/budget/form/form';
 import { Budget } from '../../../gql/graphql';
 import { FormBudgetMonthValues } from '../../../components/budget/form/form.model';
 import dayjs from 'dayjs';
+import { FormSkeletonBudgetMonthComponent } from '../../../components/budget/form/form.skeleton';
 
 const EditBudgetMonthPage = () => {
 	const [form] = Form.useForm();
@@ -43,10 +44,6 @@ const EditBudgetMonthPage = () => {
 		console.error(updateBudget.error);
 	}
 
-	if (getBudget.isLoading) {
-		return <div>Loading...</div>;
-	}
-
 	return (
 		<>
 			<Helmet>
@@ -61,12 +58,17 @@ const EditBudgetMonthPage = () => {
 							'MMMM YYYY'
 						)}
 					</TitleComponent>
-					<FormBudgetMonthComponent
-						submitLabel={'edit budget month'}
-						onFinish={onFinish}
-						form={form}
-						budgetMonth={budgetMonth}
-					/>
+					{getBudget.isLoading ? (
+						<FormSkeletonBudgetMonthComponent />
+					) : (
+						<FormBudgetMonthComponent
+							submitLabel={'edit budget month'}
+							onFinish={onFinish}
+							form={form}
+							budgetMonth={budgetMonth}
+							submitting={updateBudget.isLoading}
+						/>
+					)}
 				</SectionComponent>
 			</div>
 		</>

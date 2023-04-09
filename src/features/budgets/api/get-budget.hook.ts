@@ -49,6 +49,14 @@ const GET_BUDGET_QUERY = graphql(`
 	}
 `);
 
+/*
+{
+  transaction(where: {date: {_gte: "2023-04-01T00:00:00.000000+00:00", _lte: "2023-05-01T00:00:00.000000+00:00"}}) {
+    date
+  }
+}
+*/
+
 export const useGetBudget = (id: string) => {
 	return useQuery({
 		queryKey: [`budget-${id}`],

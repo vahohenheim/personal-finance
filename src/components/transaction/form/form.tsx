@@ -20,7 +20,7 @@ export const FormTransactionComponent: FC<FormTransactionComponentProps> = ({
 	submitLabel,
 	budgets = [],
 	companies = [],
-	loading = false,
+	submitting = false,
 }) => {
 	const initialValues = Object.assign({}, transaction);
 
@@ -44,7 +44,7 @@ export const FormTransactionComponent: FC<FormTransactionComponentProps> = ({
 			layout="vertical"
 			initialValues={initialValues}
 			onFinish={onFinish}
-			disabled={loading}
+			disabled={submitting}
 		>
 			<Form.Item
 				label="Define transaction"
@@ -111,7 +111,7 @@ export const FormTransactionComponent: FC<FormTransactionComponentProps> = ({
 					block
 					htmlType="submit"
 					size="large"
-					loading={loading}
+					loading={submitting}
 				>
 					{submitLabel}
 				</Button>

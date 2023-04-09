@@ -6,6 +6,7 @@
     border-width: 1px;
     border-style: solid;
     border-color: var(--gui-color-border);
+    transition: all var(--gui-transition-duration-very-fast) linear;
 }
 
 .icon {

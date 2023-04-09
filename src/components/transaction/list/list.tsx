@@ -1,89 +1,46 @@
 import styles from './list.module.css';
 import dayjs from 'dayjs';
 import { FC } from 'react';
-import type { Transaction } from '../../../gql/graphql';
-import { Empty, Skeleton } from 'antd';
+import { Empty } from 'antd';
 import type { ListTransactionsComponentProps } from './list.model';
 import { ItemTransactionComponent } from '../item/item';
-import { ItemSkeletonTransactionComponent } from '../item/item.skeleton';
 import { ListSkeletonTransactionsComponent } from './list.skeleton';
+import { ListTransactionAdapter } from './list.adapter';
 
 export const ListTransactionsComponent: FC<ListTransactionsComponentProps> = ({
 	transactions = [],
 	loading = false,
 }) => {
-	if (!loading && (!transactions || transactions.length === 0)) {
-		return (
-			<div className={styles.empty}>
-				<Empty
-					image={Empty.PRESENTED_IMAGE_SIMPLE}
-					description={'Any transaction'}
-				/>
-			</div>
-		);
-	}
-
-	const aggregateByDay = (
-		acc: Record<string, Array<Transaction>>,
-		cur: Transaction
-	) => {
-		const date = dayjs(cur.created_at as string).format('YYYY-MM-DD');
-		if (!acc[date]) {
-			acc[date] = [cur];
-		} else {
-			acc[date].push(cur);
-		}
-		return acc;
-	};
-
-	const transactionByDay = transactions.reduce<
-		Record<string, Array<Transaction>>
-	>(aggregateByDay, {});
-
-	const aggregateByDayByMonth = (
-		acc: Record<string, Record<string, Array<Transaction>>>,
-		day: string
-	) => {
-		const date = dayjs(day).format('YYYY-MM');
-		if (!acc[date]) {
-			acc[date] = {
-				[day]: transactionByDay[day],
-			};
-		} else {
-			acc[date] = {
-				...acc[date],
-				[day]: transactionByDay[day],
-			};
-		}
-		return acc;
-	};
-
-	const transactionByDayByMonth = Object.keys(transactionByDay).reduce(
-		aggregateByDayByMonth,
-		{}
-	);
-
+	const empty = !transactions || transactions.length === 0;
+	const transactionByDayByMonth =
+		ListTransactionAdapter.groupTransactions(transactions);
 	const currentMonth = dayjs().format('YYYY-MM');
 
+	const formatMonth = (month: string) =>
+		dayjs(month).format('MMMM YYYY').toLowerCase();
+
+	const formatDay = (day: string) =>
+		dayjs(day).format('DD dddd, MMMM').toLowerCase();
 	return (
 		<div className={styles.list}>
 			{loading ? (
 				<ListSkeletonTransactionsComponent />
+			) : empty ? (
+				<Empty
+					image={Empty.PRESENTED_IMAGE_SIMPLE}
+					description={'Any transaction'}
+				/>
 			) : (
 				(Object.keys(transactionByDayByMonth) || []).map((month) => (
 					<div key={month} className={styles.month}>
 						<h3>
 							{currentMonth === month ? 'this month, ' : ''}
-							{dayjs(month).format('MMMM YYYY').toLowerCase()}
+							{formatMonth(month)}
 						</h3>
 						{Object.keys(transactionByDayByMonth[month]).map(
 							(day) => (
 								<div key={day} className={styles.day}>
-									<p>
-										{dayjs(day)
-											.format('DD dddd, MMMM')
-											.toLowerCase()}
-									</p>
+									<p>{formatDay(day)}</p>
 									{transactionByDayByMonth[month][day].map(
 										(transaction) => (
 											<div key={transaction.id as string}>

@@ -5,55 +5,35 @@ import InfosComponent from '../../infos/infos';
 import { formatCurrency } from '../../../utils/format-currency';
 import { ListBudgetComponentProps } from './list.model';
 import { ItemBudgetComponent } from '../item/item';
+import { ListSkeletonBudgetsComponent } from './list.skeleton';
+import { ListBudgetAdapter } from './list.adapter';
 
 export const ListBudgetComponent: FC<ListBudgetComponentProps> = ({
 	budgets = [],
 	loading = false,
 }) => {
 	// TODO: replace with user current month
-
-	if (loading) {
-		return <div>Loading...</div>;
-	}
-
-	if (budgets?.length === 0) {
-		return (
-			<div className={styles.empty}>
-				<Empty
-					image={Empty.PRESENTED_IMAGE_SIMPLE}
-					description={'Any budget'}
-				/>
-			</div>
-		);
-	}
-
-	const transactionsAmount = budgets?.map((budget) => {
-		return (budget.transactions || []).reduce((sum, transaction) => {
-			sum = (transaction.amount as number) + sum;
-			return sum;
-		}, 0);
-	});
-
-	const totalTransactions = transactionsAmount.reduce((sum, amount) => {
-		sum = amount + sum;
-		return sum;
-	}, 0);
-
-	const totalBudget = budgets?.reduce((sum, budget) => {
-		sum = (budget.budget_months[0].amount as number) + sum;
-		return sum;
-	}, 0);
-
-	const rest = totalBudget - totalTransactions;
+	const empty = !budgets || budgets.length === 0;
+	const { totalTransactions, totalBudget, rest } =
+		ListBudgetAdapter.getBudgetTotal(budgets);
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.list}>
-				{budgets?.map((budget) => (
-					<div key={budget.id as string}>
-						<ItemBudgetComponent budget={budget} />
-					</div>
-				))}
+				{loading ? (
+					<ListSkeletonBudgetsComponent />
+				) : empty ? (
+					<Empty
+						image={Empty.PRESENTED_IMAGE_SIMPLE}
+						description={'Any budget'}
+					/>
+				) : (
+					budgets?.map((budget) => (
+						<div key={budget.id as string}>
+							<ItemBudgetComponent budget={budget} />
+						</div>
+					))
+				)}
 			</div>
 			<InfosComponent
 				infos={[

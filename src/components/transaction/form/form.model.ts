@@ -19,5 +19,5 @@ export type FormTransactionComponentProps = {
 	budgets?: Array<Budget>;
 	companies?: Array<Company>;
 	submitLabel: string;
-	loading: boolean;
+	submitting: boolean;
 };
