@@ -9,11 +9,11 @@ import { Helmet } from 'react-helmet';
 import SectionComponent from '../../../components/section/section';
 import TitleComponent from '../../../components/title/title';
 import { BackComponent } from '../../../components/back/back';
-import { useGetSettableTransaction } from '../api/get-settable-transaction.hook';
-import { useUpdateTransaction } from '../api/update-transaction.hook';
+import { useGetSettableTransaction } from '../../../api/transaction/get-settable-transaction.hook';
+import { useUpdateTransaction } from '../../../api/transaction/update-transaction.hook';
 import { formatInsertableDate } from '../../../utils/format-insertable-date';
-import { useGetItemCompanies } from '../api/get-item-companies.hook';
-import { useGetItemBudgets } from '../api/get-item-budgets.hook';
+import { useGetItemCompanies } from '../../../api/transaction/get-item-companies.hook';
+import { useGetItemBudgets } from '../../../api/transaction/get-item-budgets.hook';
 import { FormSkeletonTransactionComponent } from '../../../components/transaction/form/form.skeleton';
 
 const EditTransactionPage = () => {

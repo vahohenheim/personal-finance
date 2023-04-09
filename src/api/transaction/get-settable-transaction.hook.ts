@@ -1,7 +1,7 @@
-import { graphql } from '../../../gql';
+import { graphql } from '../../gql';
 import { useQuery } from '@tanstack/react-query';
-import { gqlClient } from '../../../utils/graphql-client';
-import { Transaction } from '../../../gql/graphql';
+import { gqlClient } from '../../utils/graphql-client';
+import { Transaction } from '../../gql/graphql';
 
 const GET_SETTABLE_TRANSACTION_QUERY = graphql(`
 	query GetSettableTransaction($id: uuid!) {

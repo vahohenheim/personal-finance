@@ -1,4 +1,4 @@
-import type { User_Month } from '../../../gql/graphql';
+import type { Month } from '../../../gql/graphql';
 import { Helmet } from 'react-helmet';
 import dayjs from 'dayjs';
 import styles from './detail.module.css';
@@ -8,14 +8,17 @@ import { Button } from 'antd';
 import { DetailCoverComponent } from '../../../components/detail-cover/detail-cover';
 import SectionComponent from '../../../components/section/section';
 import { useUserId } from '@nhost/react';
-import { useGetUser } from '../api/get-user.hook';
+import { useGetUser } from '../../../api/user/get-user.hook';
 import { AvatarUserComponent } from '../../../components/user/avatar/avatar';
 
 const DetailUserPage = () => {
 	const userId = useUserId() as string;
 	const getUser = useGetUser(userId);
 	const user = getUser?.data?.user;
-	const currentMonth = (user?.user_months as Array<User_Month>)[0]?.month;
+	const userMonth = user?.user_months || [];
+	const currentUserMonth =
+		userMonth && userMonth.length > 0 ? userMonth[0] : { month: {} };
+	const currentMonth = currentUserMonth?.month as Month;
 	const metadata = user?.metadata as { firstName: string; lastName: string };
 
 	return (
@@ -41,11 +44,11 @@ const DetailUserPage = () => {
 						infos={[
 							{
 								label: 'Firstname',
-								value: metadata.firstName,
+								value: metadata?.firstName,
 							},
 							{
 								label: 'Lastname',
-								value: metadata.lastName,
+								value: metadata?.lastName,
 							},
 							{
 								label: 'Current Month',

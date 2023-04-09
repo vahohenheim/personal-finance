@@ -13,7 +13,7 @@ import { Button } from 'antd';
 import { DetailCoverComponent } from '../../../components/detail-cover/detail-cover';
 import { formatCurrency } from '../../../utils/format-currency';
 import { IconCompanyComponent } from '../../../components/company';
-import { useGetCompany } from '../api/get-company.hook';
+import { useGetCompany } from '../../../api/company/get-company.hook';
 import { DetailEmptyComponent } from '../../../components/detail-empty/detail-empty';
 
 const DetailCompanyPage = () => {

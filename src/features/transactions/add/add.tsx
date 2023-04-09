@@ -12,9 +12,9 @@ import { useUserId } from '@nhost/react';
 import dayjs from 'dayjs';
 import { TransactionType } from '../../../models/transaction';
 import { BackComponent } from '../../../components/back/back';
-import { useInsertTransaction } from '../api/insert-transaction.hook';
-import { useGetItemCompanies } from '../api/get-item-companies.hook';
-import { useGetItemBudgets } from '../api/get-item-budgets.hook';
+import { useInsertTransaction } from '../../../api/transaction/insert-transaction.hook';
+import { useGetItemCompanies } from '../../../api/transaction/get-item-companies.hook';
+import { useGetItemBudgets } from '../../../api/transaction/get-item-budgets.hook';
 import { FormSkeletonTransactionComponent } from '../../../components/transaction/form/form.skeleton';
 
 const AddTransactionPage = () => {

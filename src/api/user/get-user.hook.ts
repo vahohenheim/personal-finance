@@ -1,7 +1,7 @@
-import { graphql } from '../../../gql';
+import { graphql } from '../../gql';
 import { useQuery } from '@tanstack/react-query';
-import { gqlClient } from '../../../utils/graphql-client';
-import { User } from '../../../models/user';
+import { gqlClient } from '../../utils/graphql-client';
+import { User } from '../../models/user';
 
 const GET_USER_QUERY = graphql(`
 	query GetUser($id: uuid!) {

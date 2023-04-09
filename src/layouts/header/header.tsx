@@ -6,7 +6,7 @@ import styles from './header.module.css';
 import classNames from 'classnames';
 import LinkComponent from '../../components/link/link';
 import { useAuthenticationStatus, useUserId } from '@nhost/react';
-import { useGetUser } from '../../features/user/api/get-user.hook';
+import { useGetUser } from '../../api/user/get-user.hook';
 import { AvatarUserComponent } from '../../components/user/avatar/avatar';
 
 const HeaderLayout: FC = () => {

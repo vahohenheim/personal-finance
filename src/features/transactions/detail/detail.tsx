@@ -15,8 +15,8 @@ import { toast } from 'react-hot-toast';
 import { useState } from 'react';
 import SectionComponent from '../../../components/section/section';
 import { DetailEmptyComponent } from '../../../components/detail-empty/detail-empty';
-import { useDeleteTransactions } from '../api/delete-transaction.hook';
-import { useGetTransaction } from '../api/get-transaction.hook';
+import { useDeleteTransactions } from '../../../api/transaction/delete-transaction.hook';
+import { useGetTransaction } from '../../../api/transaction/get-transaction.hook';
 import { TransactionEntryIconComponent } from '../../../components/transaction';
 
 const DetailTransactionPage = () => {

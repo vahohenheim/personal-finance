@@ -9,7 +9,7 @@ import {
 	FormCompanyValues,
 	FormCompanyComponent,
 } from '../../../components/company';
-import { useInsertCompany } from '../api/insert-company.hook';
+import { useInsertCompany } from '../../../api/company/insert-company.hook';
 import { BackComponent } from '../../../components/back/back';
 
 const AddCompanyPage = () => {

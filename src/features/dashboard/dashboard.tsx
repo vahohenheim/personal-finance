@@ -5,7 +5,7 @@ import Section from '../../components/section/section';
 import { Button } from 'antd';
 import Title from '../../components/title/title';
 import { ListTransactionsComponent } from '../../components/transaction';
-import { useGetTransactions } from '../transactions/api/get-transactions.hook';
+import { useGetTransactions } from '../../api/transaction/get-transactions.hook';
 import { Transaction } from '../../gql/graphql';
 
 const DashboardPage: FC = () => {

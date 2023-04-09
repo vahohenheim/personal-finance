@@ -5,8 +5,8 @@ import Section from '../../../components/section/section';
 import { useSignOut, useUserId } from '@nhost/react';
 import Title from '../../../components/title/title';
 import { queryClient } from '../../../utils/react-query-client';
-import { useGetUser } from '../api/get-user.hook';
-import { useUpdateUser } from '../api/update-user.hook';
+import { useGetUser } from '../../../api/user/get-user.hook';
+import { useUpdateUser } from '../../../api/user/update-user.hook';
 import { useNavigate } from 'react-router-dom';
 import { BackComponent } from '../../../components/back/back';
 
