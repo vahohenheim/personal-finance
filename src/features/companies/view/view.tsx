@@ -1,10 +1,9 @@
-import { useQuery } from '@tanstack/react-query';
 import { Button } from 'antd';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import SectionComponent from '../../../components/section/section';
 import TitleComponent from '../../../components/title/title';
-import { ListCompaniesComponent } from '../../../components/company/list/list';
+import { ListCompaniesComponent } from '../../../components/company';
 import { useGetCompanies } from '../api/get-companies.hook';
 
 const ViewCompaniesPage = () => {

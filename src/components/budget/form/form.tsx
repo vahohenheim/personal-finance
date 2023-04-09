@@ -1,12 +1,14 @@
 import { Button, Form, InputNumber } from 'antd';
 import { FormBudgetMonthComponentProps } from './form.model';
 import { FC } from 'react';
+import { FormItemSuspenseComponent } from '../../form-item-suspense/form-item-suspense';
 
 export const FormBudgetMonthComponent: FC<FormBudgetMonthComponentProps> = ({
 	onFinish,
 	form,
 	budgetMonth,
 	submitLabel,
+	submitting,
 }) => {
 	return (
 		<Form
@@ -14,6 +16,7 @@ export const FormBudgetMonthComponent: FC<FormBudgetMonthComponentProps> = ({
 			initialValues={budgetMonth}
 			layout="vertical"
 			onFinish={onFinish}
+			disabled={submitting}
 		>
 			<Form.Item label="Amount" name="amount" required={true}>
 				<InputNumber
@@ -24,7 +27,13 @@ export const FormBudgetMonthComponent: FC<FormBudgetMonthComponentProps> = ({
 				/>
 			</Form.Item>
 			<Form.Item>
-				<Button type="primary" block htmlType="submit" size="large">
+				<Button
+					type="primary"
+					block
+					htmlType="submit"
+					size="large"
+					loading={submitting}
+				>
 					{submitLabel}
 				</Button>
 			</Form.Item>

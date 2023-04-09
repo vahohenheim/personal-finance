@@ -6,41 +6,15 @@ import styles from './header.module.css';
 import classNames from 'classnames';
 import LinkComponent from '../../components/link/link';
 import { useAuthenticationStatus, useUserId } from '@nhost/react';
-import { graphql } from '../../gql/gql';
-import { gqlClient } from '../../utils/graphql-client';
-import { useQuery } from '@tanstack/react-query';
 import SpinnerComponent from '../../components/spinner/spinner';
-
-const GET_USER_QUERY = graphql(`
-	query GetUser($id: uuid!) {
-		user(id: $id) {
-			id
-			email
-			displayName
-			metadata
-			avatarUrl
-		}
-	}
-`);
+import { useGetUser } from '../../features/user/api/get-user.hook';
 
 const HeaderLayout: FC = () => {
 	const [current, setCurrent] = useState('/');
 	const { isAuthenticated, isLoading } = useAuthenticationStatus();
 	const id = useUserId() as string;
 	const location = useLocation();
-
-	const getUser = useQuery({
-		queryKey: ['user'],
-		enabled: !!id && isAuthenticated,
-		queryFn: () => {
-			return gqlClient.request<{ user: User }, { id: string }>(
-				GET_USER_QUERY,
-				{
-					id,
-				}
-			);
-		},
-	});
+	const getUser = useGetUser(id);
 
 	const user = !!id && isAuthenticated ? getUser.data?.user : {};
 
@@ -84,7 +58,7 @@ const HeaderLayout: FC = () => {
 				)}
 			>
 				<div className={styles.logo}>🏛</div>
-				<Link className={styles.avatar} to={'/user/edit'}>
+				<Link to={'/user/edit'}>
 					<Avatar />
 				</Link>
 

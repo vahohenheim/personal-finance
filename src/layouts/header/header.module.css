@@ -27,10 +27,6 @@
     font-size: 24px;
 }
 
-.avatar {
-    justify-self: end;
-}
-
 .menu {
     grid-column: 1 / span 2;
     display: flex;
@@ -53,6 +49,8 @@
     background-position: center;
     background-size: cover;
     border: 1px var(--gui-color-border) solid;
+    justify-self: end;
+    margin-left: auto;
 }
 
 .avatar.active {

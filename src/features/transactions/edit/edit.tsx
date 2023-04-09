@@ -14,6 +14,7 @@ import { useUpdateTransaction } from '../api/update-transaction.hook';
 import { formatInsertableDate } from '../../../utils/format-insertable-date';
 import { useGetItemCompanies } from '../api/get-item-companies.hook';
 import { useGetItemBudgets } from '../api/get-item-budgets.hook';
+import { FormSkeletonTransactionComponent } from '../../../components/transaction/form/form.skeleton';
 
 const EditTransactionPage = () => {
 	const [form] = Form.useForm();
@@ -26,6 +27,10 @@ const EditTransactionPage = () => {
 	const transaction = getSettableTransaction.data?.transaction[0];
 	const companies = getCompanies?.data?.company || [];
 	const budgets = getBudgets?.data?.budget || [];
+	const loading =
+		getBudgets.isLoading ||
+		getCompanies.isLoading ||
+		getSettableTransaction.isLoading;
 
 	const onFinish = (values: FormTransactionValues) => {
 		updateTransaction.mutate({
@@ -53,14 +58,6 @@ const EditTransactionPage = () => {
 		console.error(updateTransaction.error);
 	}
 
-	if (
-		getSettableTransaction.isLoading ||
-		getBudgets.isLoading ||
-		getCompanies.isLoading
-	) {
-		return <div>Loading...</div>;
-	}
-
 	return (
 		<>
 			<Helmet>
@@ -72,15 +69,19 @@ const EditTransactionPage = () => {
 					<TitleComponent heading="h2">
 						Edit a transaction : {transaction?.label}
 					</TitleComponent>
-					<FormTransactionComponent
-						submitLabel={'edit transaction'}
-						onFinish={onFinish}
-						form={form}
-						budgets={budgets}
-						companies={companies}
-						transaction={transaction}
-						loading={updateTransaction.isLoading}
-					/>
+					{loading ? (
+						<FormSkeletonTransactionComponent />
+					) : (
+						<FormTransactionComponent
+							submitLabel={'edit transaction'}
+							onFinish={onFinish}
+							form={form}
+							budgets={budgets}
+							companies={companies}
+							transaction={transaction}
+							submitting={updateTransaction.isLoading}
+						/>
+					)}
 				</SectionComponent>
 			</div>
 		</>

@@ -29,10 +29,6 @@ const DetailTransactionPage = () => {
 	const budgetColor = transaction?.budget?.budget_type?.color as string;
 	const isEntry = transaction?.transaction_type === TransactionType.ENTRY;
 
-	if (getTransaction.isLoading) {
-		return <div>Loading...</div>;
-	}
-
 	if (deleteTransaction.data) {
 		toast.success('Delete transaction successfully', {
 			id: 'transaction-deleted',
@@ -115,6 +111,7 @@ const DetailTransactionPage = () => {
 
 			<div className="container center-block">
 				<DetailCoverComponent
+					loading={getTransaction.isLoading}
 					className={classNames({
 						[styles.entry]: isEntry,
 					})}

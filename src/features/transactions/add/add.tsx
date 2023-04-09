@@ -15,6 +15,7 @@ import { BackComponent } from '../../../components/back/back';
 import { useInsertTransaction } from '../api/insert-transaction.hook';
 import { useGetItemCompanies } from '../api/get-item-companies.hook';
 import { useGetItemBudgets } from '../api/get-item-budgets.hook';
+import { FormSkeletonTransactionComponent } from '../../../components/transaction/form/form.skeleton';
 
 const AddTransactionPage = () => {
 	const userId = useUserId() as string;
@@ -25,6 +26,7 @@ const AddTransactionPage = () => {
 	const getBudgets = useGetItemBudgets();
 	const companies = getCompanies?.data?.company || [];
 	const budgets = getBudgets?.data?.budget || [];
+	const loading = getBudgets.isLoading || getCompanies.isLoading;
 
 	const onFinish = (values: FormTransactionValues) => {
 		insertTransaction.mutate({
@@ -50,10 +52,6 @@ const AddTransactionPage = () => {
 		console.error(insertTransaction.error);
 	}
 
-	if (getBudgets.isLoading || getCompanies.isLoading) {
-		return <div>Loading...</div>;
-	}
-
 	return (
 		<>
 			<Helmet>
@@ -65,19 +63,23 @@ const AddTransactionPage = () => {
 					<TitleComponent heading="h2">
 						Add a transaction
 					</TitleComponent>
-					<FormTransactionComponent
-						submitLabel={'add transaction'}
-						onFinish={onFinish}
-						form={form}
-						budgets={budgets}
-						companies={companies}
-						transaction={{
-							transaction_type: TransactionType.SPENT,
-							budget_type: 'month',
-							date: dayjs(),
-						}}
-						loading={insertTransaction.isLoading}
-					/>
+					{loading ? (
+						<FormSkeletonTransactionComponent />
+					) : (
+						<FormTransactionComponent
+							submitLabel={'add transaction'}
+							onFinish={onFinish}
+							form={form}
+							budgets={budgets}
+							companies={companies}
+							transaction={{
+								transaction_type: TransactionType.SPENT,
+								budget_type: 'month',
+								date: dayjs(),
+							}}
+							submitting={insertTransaction.isLoading}
+						/>
+					)}
 				</SectionComponent>
 			</div>
 		</>

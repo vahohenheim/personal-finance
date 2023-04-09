@@ -11,4 +11,5 @@ export type FormCompanyComponentProps = {
 	form: FormInstance<FormCompanyValues>;
 	company?: Company;
 	submitLabel: string;
+	submitting: boolean;
 };

@@ -52,6 +52,7 @@ const AddCompanyPage = () => {
 						onFinish={onFinish}
 						form={form}
 						submitLabel={'add company'}
+						submitting={insertCompany.isLoading}
 					/>
 				</SectionComponent>
 			</div>

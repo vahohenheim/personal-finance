@@ -12,6 +12,7 @@ import {
 import { useUpdateCompany } from '../api/update-company.hook';
 import { useGetCompany } from '../api/get-company.hook';
 import { BackComponent } from '../../../components/back/back';
+import { FormSkeletonCompanyComponent } from '../../../components/company/form/form.skeleton';
 
 const EditCompanyPage = () => {
 	const userId = useUserId() as string;
@@ -54,12 +55,17 @@ const EditCompanyPage = () => {
 					<TitleComponent heading="h2">
 						Edit a company : {company?.label}
 					</TitleComponent>
-					<FormCompanyComponent
-						onFinish={onFinish}
-						form={form}
-						company={company}
-						submitLabel={'edit company'}
-					/>
+					{getCompany.isLoading ? (
+						<FormSkeletonCompanyComponent />
+					) : (
+						<FormCompanyComponent
+							onFinish={onFinish}
+							form={form}
+							company={company}
+							submitLabel={'edit company'}
+							submitting={updateCompany.isLoading}
+						/>
+					)}
 				</SectionComponent>
 			</div>
 		</>

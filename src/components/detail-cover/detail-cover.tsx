@@ -5,6 +5,7 @@ import TitleComponent from '../title/title';
 import { DetailCoverComponentProps } from './detail-cover.model';
 import styles from './detail-cover.module.css';
 import { BackComponent } from '../back/back';
+import { Skeleton } from 'antd';
 
 export const DetailCoverComponent: FC<DetailCoverComponentProps> = ({
 	icon,
@@ -12,6 +13,7 @@ export const DetailCoverComponent: FC<DetailCoverComponentProps> = ({
 	amount,
 	className = '',
 	backgroundColor = '',
+	loading = false,
 }) => {
 	return (
 		<Section>
@@ -22,20 +24,26 @@ export const DetailCoverComponent: FC<DetailCoverComponentProps> = ({
 					backgroundColor,
 				}}
 			>
-				<div className={styles.icon}>{icon}</div>
+				<div className={styles.icon}>
+					{loading ? (
+						<Skeleton.Avatar active size="small"></Skeleton.Avatar>
+					) : (
+						icon
+					)}
+				</div>
 				<TitleComponent
 					heading="h2"
 					center={true}
 					className={styles.title}
 				>
-					{title}
+					{loading ? <Skeleton.Button active size="small" /> : title}
 				</TitleComponent>
 				<TitleComponent
 					heading="h2"
 					center={true}
 					className={styles.amount}
 				>
-					{amount}
+					{loading ? <Skeleton.Button active size="small" /> : amount}
 				</TitleComponent>
 			</div>
 		</Section>
