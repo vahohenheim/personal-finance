@@ -9,8 +9,8 @@ import {
 	FormCompanyValues,
 	FormCompanyComponent,
 } from '../../../components/company';
-import { useUpdateCompany } from '../api/update-company.hook';
-import { useGetCompany } from '../api/get-company.hook';
+import { useUpdateCompany } from '../../../api/company/update-company.hook';
+import { useGetCompany } from '../../../api/company/get-company.hook';
 import { BackComponent } from '../../../components/back/back';
 import { FormSkeletonCompanyComponent } from '../../../components/company/form/form.skeleton';
 

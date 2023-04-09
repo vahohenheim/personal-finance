@@ -10,7 +10,7 @@ import { Button } from 'antd';
 import { BudgetIconComponent } from '../../../components/budget';
 import { DetailCoverComponent } from '../../../components/detail-cover/detail-cover';
 import classNames from 'classnames';
-import { useGetBudget } from '../api/get-budget.hook';
+import { useGetBudget } from '../../../api/budget/get-budget.hook';
 
 const DetailBudgetPage = () => {
 	const { id } = useParams();

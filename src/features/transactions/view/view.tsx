@@ -5,7 +5,7 @@ import { Button } from 'antd';
 import SectionComponent from '../../../components/section/section';
 import TitleComponent from '../../../components/title/title';
 import { ListTransactionsComponent } from '../../../components/transaction';
-import { useGetTransactions } from '../api/get-transactions.hook';
+import { useGetTransactions } from '../../../api/transaction/get-transactions.hook';
 
 const ViewTransactionsPage: FC = () => {
 	const getTransactions = useGetTransactions(100);

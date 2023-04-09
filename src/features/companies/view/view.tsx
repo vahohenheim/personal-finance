@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import SectionComponent from '../../../components/section/section';
 import TitleComponent from '../../../components/title/title';
 import { ListCompaniesComponent } from '../../../components/company';
-import { useGetCompanies } from '../api/get-companies.hook';
+import { useGetCompanies } from '../../../api/company/get-companies.hook';
 
 const ViewCompaniesPage = () => {
 	const getCompanies = useGetCompanies();

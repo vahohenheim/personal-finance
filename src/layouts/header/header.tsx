@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import type { FC } from 'react';
-import type { User } from '../../user.model';
+import type { User } from '../../models/user';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './header.module.css';
 import classNames from 'classnames';
 import LinkComponent from '../../components/link/link';
 import { useAuthenticationStatus, useUserId } from '@nhost/react';
-import SpinnerComponent from '../../components/spinner/spinner';
-import { useGetUser } from '../../features/user/api/get-user.hook';
+import { useGetUser } from '../../api/user/get-user.hook';
+import { AvatarUserComponent } from '../../components/user/avatar/avatar';
 
 const HeaderLayout: FC = () => {
 	const [current, setCurrent] = useState('/');
@@ -22,29 +22,6 @@ const HeaderLayout: FC = () => {
 		setCurrent(location.pathname.split('/')[1]);
 	}, [location]);
 
-	const Avatar = () => {
-		const avatarClassName = classNames(styles.avatar, {
-			[styles.active]: current === 'user',
-		});
-
-		if (getUser.isLoading || isLoading) {
-			return (
-				<div className={avatarClassName}>
-					<SpinnerComponent />
-				</div>
-			);
-		}
-
-		return (
-			<div
-				className={avatarClassName}
-				style={{
-					backgroundImage: `url(${(user as User)?.avatarUrl || ''})`,
-				}}
-			></div>
-		);
-	};
-
 	if (!id || (!getUser.isLoading && Object.keys(user || {}).length === 0)) {
 		return <header className={styles.header}></header>;
 	}
@@ -58,10 +35,13 @@ const HeaderLayout: FC = () => {
 				)}
 			>
 				<div className={styles.logo}>🏛</div>
-				<Link to={'/user/edit'}>
-					<Avatar />
+				<Link className={styles.avatar} to={'/user'}>
+					<AvatarUserComponent
+						url={`url(${(user as User)?.avatarUrl || ''})`}
+						loading={getUser.isLoading || isLoading}
+						active={current === 'user'}
+					/>
 				</Link>
-
 				<div className={styles.menu}>
 					<LinkComponent active={current === ''} to={'/'}>
 						🖥&nbsp;dashboard

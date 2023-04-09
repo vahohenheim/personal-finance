@@ -1,8 +1,8 @@
-import { graphql } from '../../../gql';
+import { graphql } from '../../gql';
 import { useMutation } from '@tanstack/react-query';
-import { Company } from '../../../gql/graphql';
-import { gqlClient } from '../../../utils/graphql-client';
-import { queryClient } from '../../../utils/react-query-client';
+import { Company } from '../../gql/graphql';
+import { gqlClient } from '../../utils/graphql-client';
+import { queryClient } from '../../utils/react-query-client';
 
 const UPDATE_COMPANY_MUTATION = graphql(`
 	mutation UpdateCompany($id: uuid!, $label: String!, $logo: String!) {

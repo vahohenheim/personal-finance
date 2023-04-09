@@ -1,8 +1,8 @@
-import { graphql } from '../../../gql';
+import { graphql } from '../../gql';
 import { useMutation } from '@tanstack/react-query';
-import { Transaction } from '../../../gql/graphql';
-import { gqlClient } from '../../../utils/graphql-client';
-import { queryClient } from '../../../utils/react-query-client';
+import { Transaction } from '../../gql/graphql';
+import { gqlClient } from '../../utils/graphql-client';
+import { queryClient } from '../../utils/react-query-client';
 
 const UPDATE_TRANSACTION_MUTATION = graphql(`
 	mutation UpdateTransaction(

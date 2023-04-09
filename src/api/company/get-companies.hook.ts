@@ -1,7 +1,7 @@
-import { graphql } from '../../../gql';
+import { graphql } from '../../gql';
 import { useQuery } from '@tanstack/react-query';
-import { gqlClient } from '../../../utils/graphql-client';
-import { Company } from '../../../gql/graphql';
+import { gqlClient } from '../../utils/graphql-client';
+import { Company } from '../../gql/graphql';
 
 const GET_COMPANIES_QUERY = graphql(`
 	query GetCompanies($limit: Int!) {

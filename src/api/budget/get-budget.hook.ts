@@ -1,7 +1,7 @@
-import { graphql } from '../../../gql';
+import { graphql } from '../../gql';
 import { useQuery } from '@tanstack/react-query';
-import { gqlClient } from '../../../utils/graphql-client';
-import { Budget } from '../../../gql/graphql';
+import { gqlClient } from '../../utils/graphql-client';
+import { Budget } from '../../gql/graphql';
 
 const GET_BUDGET_QUERY = graphql(`
 	query GetBudget($id: uuid!) {

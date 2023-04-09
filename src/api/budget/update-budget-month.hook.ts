@@ -1,8 +1,8 @@
-import { graphql } from '../../../gql';
+import { graphql } from '../../gql';
 import { useMutation } from '@tanstack/react-query';
-import { gqlClient } from '../../../utils/graphql-client';
-import { queryClient } from '../../../utils/react-query-client';
-import { Budget_Month } from '../../../gql/graphql';
+import { gqlClient } from '../../utils/graphql-client';
+import { queryClient } from '../../utils/react-query-client';
+import { Budget_Month } from '../../gql/graphql';
 
 const UPDATE_BUDGET_MONTH_MUTATION = graphql(`
 	mutation UpdateBudgetMonth(

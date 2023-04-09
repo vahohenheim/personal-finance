@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet';
 import SectionComponent from '../../../components/section/section';
 import TitleComponent from '../../../components/title/title';
 import { ListBudgetComponent } from '../../../components/budget';
-import { useGetBudgets } from '../api/get-budgets.hook';
+import { useGetBudgets } from '../../../api/budget/get-budgets.hook';
 
 const ViewBudgetsPage = () => {
 	const getBudgets = useGetBudgets(100);
