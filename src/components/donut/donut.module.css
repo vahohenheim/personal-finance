@@ -21,6 +21,6 @@
 .text {
     fill: var(--gui-color-white);
     font-size: var(--gui-font-size-small);
-    dominant-baseline: middle;
+    dominant-baseline: central;
     text-anchor: middle;
 }

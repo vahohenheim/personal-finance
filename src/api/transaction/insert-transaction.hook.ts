@@ -39,7 +39,10 @@ export const useInsertTransaction = (userId: string) => {
 			});
 		},
 		onSuccess: async () => {
-			await queryClient.invalidateQueries(['transactions']);
+			await queryClient.invalidateQueries([
+				'transactions',
+				'transactions-by-month',
+			]);
 		},
 	});
 };

@@ -5,11 +5,13 @@
     align-items: center;
 }
 
-.amount {
+.month {
+    font-size: var(--gui-font-size-large);
     margin-bottom: 0;
+    opacity: .6;
 }
 
-.month {
+.amount {
     margin-bottom: 0;
 }
 

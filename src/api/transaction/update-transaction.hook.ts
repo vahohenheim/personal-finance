@@ -47,6 +47,7 @@ export const useUpdateTransaction = (id: string) => {
 		onSuccess: async () => {
 			await queryClient.invalidateQueries([
 				'transactions',
+				'transactions-by-month',
 				`transation-${id || ''}`,
 			]);
 		},

@@ -1,0 +1,13 @@
+.link {
+    text-decoration: none;
+}
+
+.label {
+    font-size: var(--gui-font-size-large);
+    opacity: .6;
+}
+
+.amount {
+    margin-bottom: 0;
+    color: rgba(3, 166, 136, 1);
+}

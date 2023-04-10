@@ -59,6 +59,12 @@ const HeaderLayout: FC = () => {
 						💳&nbsp;transactions
 					</LinkComponent>
 					<LinkComponent
+						active={current === 'entries'}
+						to={'/entries'}
+					>
+						⊕&nbsp;entries
+					</LinkComponent>
+					<LinkComponent
 						active={current === 'companies'}
 						to={'/companies'}
 					>

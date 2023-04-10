@@ -48,18 +48,18 @@ export const BalanceBudgetComponent: FC<BalanceBudgetComponentProps> = ({
 					/>
 				</div>
 				<div>
+					<p className={styles.month}>
+						{loading ? (
+							<Skeleton.Button active size="small" />
+						) : (
+							month
+						)}
+					</p>
 					<Title className={styles.amount} heading="h1">
 						{loading ? (
 							<Skeleton.Button active size="small" />
 						) : (
 							amount
-						)}
-					</Title>
-					<Title className={styles.month} heading="h3">
-						{loading ? (
-							<Skeleton.Button active size="small" />
-						) : (
-							month
 						)}
 					</Title>
 				</div>
