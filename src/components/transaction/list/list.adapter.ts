@@ -1,7 +1,30 @@
 import { Transaction } from '../../../gql/graphql';
 import dayjs from 'dayjs';
+import { TransactionType } from '../../../models/transaction';
 
 export class ListTransactionAdapter {
+	public static sliceTransactions(
+		transactions: Array<Transaction>,
+		max?: number
+	) {
+		if (max) {
+			return transactions.slice(0, max);
+		}
+		return transactions;
+	}
+
+	public static filterTransactions(
+		transactions: Array<Transaction>,
+		transactionType?: TransactionType
+	) {
+		if (transactionType) {
+			const filterTransaction = (transaction: Transaction) =>
+				transaction.transaction_type === transactionType;
+			return transactions.filter(filterTransaction);
+		}
+		return transactions;
+	}
+
 	public static groupTransactions(
 		transactions: Array<Transaction>
 	): Record<string, Record<string, Array<Transaction>>> {

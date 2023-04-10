@@ -22,6 +22,7 @@ export const useDeleteTransactions = (id: string) => {
 		onSuccess: async () => {
 			await queryClient.invalidateQueries([
 				'transactions',
+				'transactions-by-month',
 				`transation-${id}`,
 			]);
 		},

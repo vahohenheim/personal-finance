@@ -9,11 +9,21 @@ import { ListTransactionAdapter } from './list.adapter';
 
 export const ListTransactionsComponent: FC<ListTransactionsComponentProps> = ({
 	transactions = [],
+	transactionType,
 	loading = false,
+	max,
 }) => {
 	const empty = !transactions || transactions.length === 0;
+	const slicedTransactions = ListTransactionAdapter.sliceTransactions(
+		transactions,
+		max
+	);
+	const filtredTransactions = ListTransactionAdapter.filterTransactions(
+		slicedTransactions,
+		transactionType
+	);
 	const transactionByDayByMonth =
-		ListTransactionAdapter.groupTransactions(transactions);
+		ListTransactionAdapter.groupTransactions(filtredTransactions);
 	const currentMonth = dayjs().format('YYYY-MM');
 
 	const formatMonth = (month: string) =>

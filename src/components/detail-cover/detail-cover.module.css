@@ -16,10 +16,15 @@
     text-align: center;
 }
 
+.title {
+    margin-bottom: 0;
+}
+
 .title h2 {
     font-weight: 500;
 }
 
 .amount {
+    margin-top: var(--gui-gutter-base);
     margin-bottom: 0;
 }

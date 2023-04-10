@@ -5,18 +5,17 @@ import SectionComponent from '../../components/section/section';
 import { Button } from 'antd';
 import Title from '../../components/title/title';
 import { ListTransactionsComponent } from '../../components/transaction';
-import { useGetTransactions } from '../../api/transaction/get-transactions.hook';
 import { BalanceBudgetComponent } from '../../components/budget';
 import { useUserId } from '@nhost/react';
 import { useGetUser } from '../../api/user/get-user.hook';
 import { getCurrentMonthFromUser } from '../../utils/get-current-month-from-user';
 import { useGetBudgets } from '../../api/budget/get-budgets.hook';
+import { useGetTransactionsByMonth } from '../../api/transaction/get-transactions-by-month.hook';
+import { EntriesComponent } from '../../components/entries/entries';
+import { TransactionType } from '../../models/transaction';
 
 const DashboardPage: FC = () => {
 	const transactionsLimit = 100;
-	const getTransactions = useGetTransactions(transactionsLimit);
-	const transactions = [...(getTransactions?.data?.transaction || [])];
-	transactions.length = 4;
 	const userId = useUserId() as string;
 	const getUser = useGetUser(userId);
 	const currentMonth = getCurrentMonthFromUser(getUser?.data?.user);
@@ -26,6 +25,13 @@ const DashboardPage: FC = () => {
 		currentMonth?.end_at as string
 	);
 	const budgets = getBudgets.data?.budget || [];
+	const getTransactions = useGetTransactionsByMonth(
+		transactionsLimit,
+		currentMonth?.start_at as string,
+		currentMonth?.end_at as string
+	);
+	const transactions = [...(getTransactions?.data?.transaction || [])];
+
 	return (
 		<>
 			<Helmet>
@@ -47,6 +53,9 @@ const DashboardPage: FC = () => {
 					</Link>
 				</SectionComponent>
 				<SectionComponent>
+					<EntriesComponent transactions={transactions} />
+				</SectionComponent>
+				<SectionComponent>
 					<Title
 						heading={'h2'}
 						action={
@@ -55,10 +64,12 @@ const DashboardPage: FC = () => {
 							</Link>
 						}
 					>
-						Last transactions
+						Month last transactions
 					</Title>
 					<ListTransactionsComponent
 						transactions={transactions}
+						max={4}
+						transactionType={TransactionType.SPENT}
 						loading={getTransactions?.isLoading}
 					/>
 				</SectionComponent>

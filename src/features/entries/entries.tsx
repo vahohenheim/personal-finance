@@ -2,18 +2,18 @@ import type { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { Button } from 'antd';
-import SectionComponent from '../../../components/section/section';
-import TitleComponent from '../../../components/title/title';
-import { ListTransactionsComponent } from '../../../components/transaction';
-import { useGetTransactions } from '../../../api/transaction/get-transactions.hook';
-import { TransactionType } from '../../../models/transaction';
+import SectionComponent from '../../components/section/section';
+import TitleComponent from '../../components/title/title';
+import { ListTransactionsComponent } from '../../components/transaction';
+import { useGetTransactions } from '../../api/transaction/get-transactions.hook';
+import { TransactionType } from '../../models/transaction';
 
-const ViewTransactionsPage: FC = () => {
+const EntriesPage: FC = () => {
 	const getTransactions = useGetTransactions(100);
 	return (
 		<>
 			<Helmet>
-				<title>transactions | finance</title>
+				<title>entries | finance</title>
 			</Helmet>
 			<div className="container center-block">
 				<SectionComponent>
@@ -27,11 +27,11 @@ const ViewTransactionsPage: FC = () => {
 							</Link>
 						}
 					>
-						Transactions
+						Entries
 					</TitleComponent>
 					<ListTransactionsComponent
 						transactions={getTransactions?.data?.transaction}
-						transactionType={TransactionType.SPENT}
+						transactionType={TransactionType.ENTRY}
 						loading={getTransactions?.isLoading}
 					/>
 				</SectionComponent>
@@ -40,4 +40,4 @@ const ViewTransactionsPage: FC = () => {
 	);
 };
 
-export default ViewTransactionsPage;
+export default EntriesPage;
