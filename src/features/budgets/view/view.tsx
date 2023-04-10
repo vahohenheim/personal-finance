@@ -1,7 +1,10 @@
 import { Helmet } from 'react-helmet';
 import SectionComponent from '../../../components/section/section';
 import TitleComponent from '../../../components/title/title';
-import { ListBudgetComponent } from '../../../components/budget';
+import {
+	BalanceBudgetComponent,
+	ListBudgetComponent,
+} from '../../../components/budget';
 import { useGetBudgets } from '../../../api/budget/get-budgets.hook';
 import { useUserId } from '@nhost/react';
 import { useGetUser } from '../../../api/user/get-user.hook';
@@ -16,6 +19,9 @@ const ViewBudgetsPage = () => {
 		currentMonth?.start_at as string,
 		currentMonth?.end_at as string
 	);
+	const budgets = getBudgets.data?.budget || [];
+	const loading = getBudgets.isLoading || getUser.isLoading;
+
 	return (
 		<>
 			<Helmet>
@@ -23,11 +29,15 @@ const ViewBudgetsPage = () => {
 			</Helmet>
 			<div className="container center-block">
 				<SectionComponent>
-					<TitleComponent heading={'h2'}>Budgets</TitleComponent>
-					<ListBudgetComponent
-						budgets={getBudgets.data?.budget}
-						loading={getBudgets.isLoading || getUser.isLoading}
+					<BalanceBudgetComponent
+						loading={loading}
+						currentMonth={currentMonth}
+						budgets={budgets}
 					/>
+				</SectionComponent>
+				<SectionComponent>
+					<TitleComponent heading={'h2'}>Budgets</TitleComponent>
+					<ListBudgetComponent budgets={budgets} loading={loading} />
 				</SectionComponent>
 			</div>
 		</>

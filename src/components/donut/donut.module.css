@@ -1,0 +1,26 @@
+.track {
+    fill: transparent;
+    stroke: #1A3936;
+    stroke-width: 26;
+}
+
+.indicator {
+    fill: transparent;
+    stroke: #009688;
+    stroke-width: 26;
+    stroke-dasharray: 0 10000;
+    transition: stroke-dasharray .3s ease;
+}
+
+.donut {
+    margin: 0 auto;
+    border-radius: 50%;
+    display: block;
+}
+
+.text {
+    fill: var(--gui-color-white);
+    font-size: var(--gui-font-size-small);
+    dominant-baseline: middle;
+    text-anchor: middle;
+}

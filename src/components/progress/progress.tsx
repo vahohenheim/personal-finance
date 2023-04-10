@@ -2,9 +2,7 @@ import classNames from 'classnames';
 import { FC } from 'react';
 import styles from './progress.module.css';
 
-export const BudgetProgressComponent: FC<{ percent: number }> = ({
-	percent = 0,
-}) => {
+export const ProgressComponent: FC<{ percent: number }> = ({ percent = 0 }) => {
 	const renderedPercent = percent > 100 ? 100 : percent;
 	return (
 		<div

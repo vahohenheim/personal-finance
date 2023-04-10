@@ -2,7 +2,7 @@ import { Card } from 'antd';
 import classNames from 'classnames';
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { BudgetProgressComponent } from '../progress/progress';
+import { ProgressComponent } from '../../progress/progress';
 import { Budget_Month, Transaction } from '../../../gql/graphql';
 import { formatCurrency } from '../../../utils/format-currency';
 import type { ItemBudgetComponentProps } from './item.model';
@@ -46,7 +46,7 @@ export const ItemBudgetComponent: FC<ItemBudgetComponentProps> = ({
 							/{formatCurrency(budget?.budget_months[0]?.amount)}
 						</span>
 					</p>
-					<BudgetProgressComponent percent={percent} />
+					<ProgressComponent percent={percent} />
 				</div>
 			</Card>
 		</Link>
