@@ -1,6 +1,6 @@
 import { Card, Skeleton } from 'antd';
 import { FC } from 'react';
-import { BudgetProgressComponent } from '../progress/progress';
+import { ProgressComponent } from '../../progress/progress';
 import styles from './item.module.css';
 
 export const ItemSkeletonBudgetComponent: FC = () => {
@@ -13,7 +13,7 @@ export const ItemSkeletonBudgetComponent: FC = () => {
 				<p className={styles.amount}>
 					<Skeleton.Button active size="small" />
 				</p>
-				<BudgetProgressComponent percent={0} />
+				<ProgressComponent percent={0} />
 			</div>
 		</Card>
 	);

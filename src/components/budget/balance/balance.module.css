@@ -1,0 +1,18 @@
+.balance {
+    display: flex;
+    margin-bottom: var(--gui-gutter-base);
+    gap: var(--gui-gutter-md);
+    align-items: center;
+}
+
+.amount {
+    margin-bottom: 0;
+}
+
+.month {
+    margin-bottom: 0;
+}
+
+.progress {
+    margin-top: var(--gui-gutter-base);
+}

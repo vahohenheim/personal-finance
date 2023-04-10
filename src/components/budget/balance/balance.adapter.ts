@@ -1,7 +1,7 @@
 import { Budget } from '../../../gql/graphql';
 
 export class ListBudgetAdapter {
-	public static getBudgetTotal(budgets: Array<Budget>) {
+	public static getBudgetTotal(budgets?: Array<Budget>) {
 		const transactionsAmount = budgets?.map((budget) => {
 			return (budget.transactions || []).reduce((sum, transaction) => {
 				sum = (transaction.amount as number) + sum;
@@ -9,7 +9,7 @@ export class ListBudgetAdapter {
 			}, 0);
 		});
 
-		const totalTransactions = transactionsAmount.reduce((sum, amount) => {
+		const totalTransactions = transactionsAmount?.reduce((sum, amount) => {
 			sum = amount + sum;
 			return sum;
 		}, 0);
@@ -22,7 +22,7 @@ export class ListBudgetAdapter {
 		return {
 			totalBudget,
 			totalTransactions,
-			rest: totalBudget - totalTransactions,
+			rest: (totalBudget || 0) - (totalTransactions || 0),
 		};
 	}
 }

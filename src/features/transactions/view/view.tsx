@@ -21,7 +21,7 @@ const ViewTransactionsPage: FC = () => {
 						action={
 							<Link to="/transactions/add">
 								<Button type="primary" block={true}>
-									Add transaction
+									Add a transaction
 								</Button>
 							</Link>
 						}

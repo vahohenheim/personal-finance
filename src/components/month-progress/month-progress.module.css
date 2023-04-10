@@ -1,0 +1,6 @@
+.label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--gui-gutter-sm);
+    opacity: .6;
+}

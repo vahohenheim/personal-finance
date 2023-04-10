@@ -22,19 +22,18 @@ const MainLayout = () => {
 	return (
 		<div className={styles.container}>
 			<HeaderLayout />
-			<main className={styles.main}>
-				<AnimatePresence mode="wait">
-					<motion.div
-						key={location.pathname}
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-						exit={{ opacity: 0 }}
-						transition={{ duration: 0.1 }}
-					>
-						<AnimatedOutlet />
-					</motion.div>
-				</AnimatePresence>
-			</main>
+			<AnimatePresence mode="wait">
+				<motion.main
+					className={styles.main}
+					key={location.pathname}
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					exit={{ opacity: 0 }}
+					transition={{ duration: 0.1 }}
+				>
+					<AnimatedOutlet />
+				</motion.main>
+			</AnimatePresence>
 			<FooterLayout />
 			<ScrollRestoration
 				getKey={(currentLocation) => currentLocation.key}

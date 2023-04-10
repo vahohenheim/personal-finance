@@ -73,6 +73,8 @@
 		"@typescript-eslint/no-misused-promises": "off",
 		"@typescript-eslint/no-floating-promises": "off",
 		"@typescript-eslint/no-unsafe-assignment": "warn", //remove
-		"@typescript-eslint/no-unsafe-call": "warn" //remove
+		"@typescript-eslint/no-unsafe-call": "warn", //remove
+		"@typescript-eslint/no-unsafe-argument": "warn", //remove
+		"@typescript-eslint/no-unsafe-member-access": "warn" //remove
 	}
 }
