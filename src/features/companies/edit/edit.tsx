@@ -25,6 +25,7 @@ const EditCompanyPage = () => {
 
 	const onFinish = (values: FormCompanyValues) => {
 		updateCompany.mutate({
+			id: company?.id,
 			label: values.label,
 			logo: values.logo,
 		});

@@ -8,6 +8,7 @@ import LinkComponent from '../../components/link/link';
 import { useAuthenticationStatus, useUserId } from '@nhost/react';
 import { useGetUser } from '../../api/user/get-user.hook';
 import { AvatarUserComponent } from '../../components/user/avatar/avatar';
+import { HEADER_NAVIGATION } from './header.constants';
 
 const HeaderLayout: FC = () => {
 	const [current, setCurrent] = useState('/');
@@ -43,33 +44,15 @@ const HeaderLayout: FC = () => {
 					/>
 				</Link>
 				<div className={styles.menu}>
-					<LinkComponent active={current === ''} to={'/'}>
-						🖥&nbsp;dashboard
-					</LinkComponent>
-					<LinkComponent
-						active={current === 'budgets'}
-						to={'/budgets'}
-					>
-						💰&nbsp;budgets
-					</LinkComponent>
-					<LinkComponent
-						active={current === 'transactions'}
-						to={'/transactions'}
-					>
-						💳&nbsp;transactions
-					</LinkComponent>
-					<LinkComponent
-						active={current === 'entries'}
-						to={'/entries'}
-					>
-						⊕&nbsp;entries
-					</LinkComponent>
-					<LinkComponent
-						active={current === 'companies'}
-						to={'/companies'}
-					>
-						🏢&nbsp;companies
-					</LinkComponent>
+					{HEADER_NAVIGATION.map((item) => (
+						<LinkComponent
+							key={item.key}
+							active={current === item.key}
+							to={item.link}
+						>
+							{item.icon}&nbsp;{item.label}
+						</LinkComponent>
+					))}
 				</div>
 			</div>
 		</header>
