@@ -35,6 +35,7 @@ import EditCompanyPage from './features/companies/edit/edit';
 import EditBudgetMonthPage from './features/budgets/edit/edit';
 import DetailUserPage from './features/user/detail/detail';
 import EntriesPage from './features/entries/entries';
+import { NotFoundPage } from './features/not-found/not-found';
 
 dayjs.locale('en');
 dayjs.extend(utc);
@@ -44,7 +45,7 @@ const root = createRoot(document.getElementById('root') as HTMLElement);
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
-		<Route path="/" element={<App />}>
+		<Route errorElement={<NotFoundPage />} path="/" element={<App />}>
 			<Route element={<ProtectedRoute />}>
 				<Route index element={<DashboardPage />} />
 				<Route path="budgets" element={<ViewBudgetsPage />}></Route>

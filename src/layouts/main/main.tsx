@@ -22,7 +22,7 @@ const MainLayout = () => {
 	return (
 		<div className={styles.container}>
 			<HeaderLayout />
-			<AnimatePresence mode="wait">
+			{/*<AnimatePresence mode="wait">
 				<motion.main
 					className={styles.main}
 					key={location.pathname}
@@ -31,9 +31,12 @@ const MainLayout = () => {
 					exit={{ opacity: 0 }}
 					transition={{ duration: 0.1 }}
 				>
-					<AnimatedOutlet />
+					<Outlet />
 				</motion.main>
-			</AnimatePresence>
+			</AnimatePresence>*/}
+			<main className={styles.main}>
+				<Outlet />
+			</main>
 			<FooterLayout />
 			<ScrollRestoration
 				getKey={(currentLocation) => currentLocation.key}
