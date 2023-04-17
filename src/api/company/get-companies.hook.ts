@@ -2,6 +2,7 @@ import { graphql } from '../../gql';
 import { useQuery } from '@tanstack/react-query';
 import { gqlClient } from '../../utils/graphql-client';
 import { Company } from '../../gql/graphql';
+import { QUERIES } from '../constants';
 
 const GET_COMPANIES_QUERY = graphql(`
 	query GetCompanies($limit: Int!) {
@@ -15,7 +16,7 @@ const GET_COMPANIES_QUERY = graphql(`
 
 export const useGetCompanies = () => {
 	return useQuery({
-		queryKey: ['companies'],
+		queryKey: [QUERIES.COMPANIES],
 		queryFn: async () => {
 			return gqlClient.request<
 				{ company: Array<Company> },

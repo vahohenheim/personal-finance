@@ -14,6 +14,12 @@ export const HEADER_NAVIGATION: Array<HeaderNavigationItem> = [
 		link: '/budgets',
 	},
 	{
+		key: 'chests',
+		icon: '💎',
+		label: 'chests',
+		link: '/chests',
+	},
+	{
 		key: 'transactions',
 		icon: '💳',
 		label: 'transactions',

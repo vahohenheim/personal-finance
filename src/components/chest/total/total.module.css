@@ -1,0 +1,15 @@
+.total {
+    text-align: center;
+}
+
+.amount {
+    margin-bottom: var(--gui-gutter-xs);
+}
+
+.text {
+    font-size: var(--gui-font-size-large);
+}
+
+.amount {
+    font-size: var(--gui-font-size-small);
+}

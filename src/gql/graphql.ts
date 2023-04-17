@@ -3359,6 +3359,326 @@ export type Bytea_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['bytea']>>;
 };
 
+/** columns and relationships of "chest" */
+export type Chest = {
+  __typename?: 'chest';
+  amount?: Maybe<Scalars['float8']>;
+  created_at: Scalars['timestamptz'];
+  end_at: Scalars['timestamptz'];
+  icon: Scalars['String'];
+  id: Scalars['uuid'];
+  label: Scalars['String'];
+  start_at: Scalars['timestamptz'];
+  /** An array relationship */
+  transactions: Array<Transaction>;
+  /** An aggregate relationship */
+  transactions_aggregate: Transaction_Aggregate;
+  updated_at: Scalars['timestamptz'];
+  /** An object relationship */
+  user: Users;
+  user_id: Scalars['uuid'];
+};
+
+
+/** columns and relationships of "chest" */
+export type ChestTransactionsArgs = {
+  distinct_on?: InputMaybe<Array<Transaction_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Transaction_Order_By>>;
+  where?: InputMaybe<Transaction_Bool_Exp>;
+};
+
+
+/** columns and relationships of "chest" */
+export type ChestTransactions_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Transaction_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Transaction_Order_By>>;
+  where?: InputMaybe<Transaction_Bool_Exp>;
+};
+
+/** aggregated selection of "chest" */
+export type Chest_Aggregate = {
+  __typename?: 'chest_aggregate';
+  aggregate?: Maybe<Chest_Aggregate_Fields>;
+  nodes: Array<Chest>;
+};
+
+/** aggregate fields of "chest" */
+export type Chest_Aggregate_Fields = {
+  __typename?: 'chest_aggregate_fields';
+  avg?: Maybe<Chest_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Chest_Max_Fields>;
+  min?: Maybe<Chest_Min_Fields>;
+  stddev?: Maybe<Chest_Stddev_Fields>;
+  stddev_pop?: Maybe<Chest_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Chest_Stddev_Samp_Fields>;
+  sum?: Maybe<Chest_Sum_Fields>;
+  var_pop?: Maybe<Chest_Var_Pop_Fields>;
+  var_samp?: Maybe<Chest_Var_Samp_Fields>;
+  variance?: Maybe<Chest_Variance_Fields>;
+};
+
+
+/** aggregate fields of "chest" */
+export type Chest_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Chest_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Chest_Avg_Fields = {
+  __typename?: 'chest_avg_fields';
+  amount?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "chest". All fields are combined with a logical 'AND'. */
+export type Chest_Bool_Exp = {
+  _and?: InputMaybe<Array<Chest_Bool_Exp>>;
+  _not?: InputMaybe<Chest_Bool_Exp>;
+  _or?: InputMaybe<Array<Chest_Bool_Exp>>;
+  amount?: InputMaybe<Float8_Comparison_Exp>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  end_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  icon?: InputMaybe<String_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  label?: InputMaybe<String_Comparison_Exp>;
+  start_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  transactions?: InputMaybe<Transaction_Bool_Exp>;
+  transactions_aggregate?: InputMaybe<Transaction_Aggregate_Bool_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  user?: InputMaybe<Users_Bool_Exp>;
+  user_id?: InputMaybe<Uuid_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "chest" */
+export enum Chest_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  ChestPkey = 'chest_pkey'
+}
+
+/** input type for incrementing numeric columns in table "chest" */
+export type Chest_Inc_Input = {
+  amount?: InputMaybe<Scalars['float8']>;
+};
+
+/** input type for inserting data into table "chest" */
+export type Chest_Insert_Input = {
+  amount?: InputMaybe<Scalars['float8']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  end_at?: InputMaybe<Scalars['timestamptz']>;
+  icon?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  label?: InputMaybe<Scalars['String']>;
+  start_at?: InputMaybe<Scalars['timestamptz']>;
+  transactions?: InputMaybe<Transaction_Arr_Rel_Insert_Input>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+  user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
+  user_id?: InputMaybe<Scalars['uuid']>;
+};
+
+/** aggregate max on columns */
+export type Chest_Max_Fields = {
+  __typename?: 'chest_max_fields';
+  amount?: Maybe<Scalars['float8']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  end_at?: Maybe<Scalars['timestamptz']>;
+  icon?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['uuid']>;
+  label?: Maybe<Scalars['String']>;
+  start_at?: Maybe<Scalars['timestamptz']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  user_id?: Maybe<Scalars['uuid']>;
+};
+
+/** aggregate min on columns */
+export type Chest_Min_Fields = {
+  __typename?: 'chest_min_fields';
+  amount?: Maybe<Scalars['float8']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  end_at?: Maybe<Scalars['timestamptz']>;
+  icon?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['uuid']>;
+  label?: Maybe<Scalars['String']>;
+  start_at?: Maybe<Scalars['timestamptz']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  user_id?: Maybe<Scalars['uuid']>;
+};
+
+/** response of any mutation on the table "chest" */
+export type Chest_Mutation_Response = {
+  __typename?: 'chest_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Chest>;
+};
+
+/** input type for inserting object relation for remote table "chest" */
+export type Chest_Obj_Rel_Insert_Input = {
+  data: Chest_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Chest_On_Conflict>;
+};
+
+/** on_conflict condition type for table "chest" */
+export type Chest_On_Conflict = {
+  constraint: Chest_Constraint;
+  update_columns?: Array<Chest_Update_Column>;
+  where?: InputMaybe<Chest_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "chest". */
+export type Chest_Order_By = {
+  amount?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  end_at?: InputMaybe<Order_By>;
+  icon?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  label?: InputMaybe<Order_By>;
+  start_at?: InputMaybe<Order_By>;
+  transactions_aggregate?: InputMaybe<Transaction_Aggregate_Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  user?: InputMaybe<Users_Order_By>;
+  user_id?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: chest */
+export type Chest_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "chest" */
+export enum Chest_Select_Column {
+  /** column name */
+  Amount = 'amount',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  EndAt = 'end_at',
+  /** column name */
+  Icon = 'icon',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Label = 'label',
+  /** column name */
+  StartAt = 'start_at',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  UserId = 'user_id'
+}
+
+/** input type for updating data in table "chest" */
+export type Chest_Set_Input = {
+  amount?: InputMaybe<Scalars['float8']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  end_at?: InputMaybe<Scalars['timestamptz']>;
+  icon?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  label?: InputMaybe<Scalars['String']>;
+  start_at?: InputMaybe<Scalars['timestamptz']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+  user_id?: InputMaybe<Scalars['uuid']>;
+};
+
+/** aggregate stddev on columns */
+export type Chest_Stddev_Fields = {
+  __typename?: 'chest_stddev_fields';
+  amount?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Chest_Stddev_Pop_Fields = {
+  __typename?: 'chest_stddev_pop_fields';
+  amount?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Chest_Stddev_Samp_Fields = {
+  __typename?: 'chest_stddev_samp_fields';
+  amount?: Maybe<Scalars['Float']>;
+};
+
+/** Streaming cursor of the table "chest" */
+export type Chest_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Chest_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Chest_Stream_Cursor_Value_Input = {
+  amount?: InputMaybe<Scalars['float8']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  end_at?: InputMaybe<Scalars['timestamptz']>;
+  icon?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  label?: InputMaybe<Scalars['String']>;
+  start_at?: InputMaybe<Scalars['timestamptz']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+  user_id?: InputMaybe<Scalars['uuid']>;
+};
+
+/** aggregate sum on columns */
+export type Chest_Sum_Fields = {
+  __typename?: 'chest_sum_fields';
+  amount?: Maybe<Scalars['float8']>;
+};
+
+/** update columns of table "chest" */
+export enum Chest_Update_Column {
+  /** column name */
+  Amount = 'amount',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  EndAt = 'end_at',
+  /** column name */
+  Icon = 'icon',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Label = 'label',
+  /** column name */
+  StartAt = 'start_at',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  UserId = 'user_id'
+}
+
+export type Chest_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Chest_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Chest_Set_Input>;
+  where: Chest_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Chest_Var_Pop_Fields = {
+  __typename?: 'chest_var_pop_fields';
+  amount?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Chest_Var_Samp_Fields = {
+  __typename?: 'chest_var_samp_fields';
+  amount?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Chest_Variance_Fields = {
+  __typename?: 'chest_variance_fields';
+  amount?: Maybe<Scalars['Float']>;
+};
+
 /** Boolean expression to compare columns of type "citext". All fields are combined with logical 'AND'. */
 export type Citext_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['citext']>;
@@ -4420,6 +4740,10 @@ export type Mutation_Root = {
   delete_budget_type?: Maybe<Budget_Type_Mutation_Response>;
   /** delete single row from the table: "budget_type" */
   delete_budget_type_by_pk?: Maybe<Budget_Type>;
+  /** delete data from the table: "chest" */
+  delete_chest?: Maybe<Chest_Mutation_Response>;
+  /** delete single row from the table: "chest" */
+  delete_chest_by_pk?: Maybe<Chest>;
   /** delete data from the table: "company" */
   delete_company?: Maybe<Company_Mutation_Response>;
   /** delete single row from the table: "company" */
@@ -4492,6 +4816,10 @@ export type Mutation_Root = {
   insert_budget_type?: Maybe<Budget_Type_Mutation_Response>;
   /** insert a single row into the table: "budget_type" */
   insert_budget_type_one?: Maybe<Budget_Type>;
+  /** insert data into the table: "chest" */
+  insert_chest?: Maybe<Chest_Mutation_Response>;
+  /** insert a single row into the table: "chest" */
+  insert_chest_one?: Maybe<Chest>;
   /** insert data into the table: "company" */
   insert_company?: Maybe<Company_Mutation_Response>;
   /** insert a single row into the table: "company" */
@@ -4588,6 +4916,12 @@ export type Mutation_Root = {
   update_budget_type_by_pk?: Maybe<Budget_Type>;
   /** update multiples rows of table: "budget_type" */
   update_budget_type_many?: Maybe<Array<Maybe<Budget_Type_Mutation_Response>>>;
+  /** update data of the table: "chest" */
+  update_chest?: Maybe<Chest_Mutation_Response>;
+  /** update single row of the table: "chest" */
+  update_chest_by_pk?: Maybe<Chest>;
+  /** update multiples rows of table: "chest" */
+  update_chest_many?: Maybe<Array<Maybe<Chest_Mutation_Response>>>;
   /** update data of the table: "company" */
   update_company?: Maybe<Company_Mutation_Response>;
   /** update single row of the table: "company" */
@@ -4784,6 +5118,18 @@ export type Mutation_RootDelete_Budget_TypeArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Budget_Type_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_ChestArgs = {
+  where: Chest_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Chest_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
@@ -5030,6 +5376,20 @@ export type Mutation_RootInsert_Budget_TypeArgs = {
 export type Mutation_RootInsert_Budget_Type_OneArgs = {
   object: Budget_Type_Insert_Input;
   on_conflict?: InputMaybe<Budget_Type_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_ChestArgs = {
+  objects: Array<Chest_Insert_Input>;
+  on_conflict?: InputMaybe<Chest_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Chest_OneArgs = {
+  object: Chest_Insert_Input;
+  on_conflict?: InputMaybe<Chest_On_Conflict>;
 };
 
 
@@ -5390,6 +5750,28 @@ export type Mutation_RootUpdate_Budget_Type_ManyArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_ChestArgs = {
+  _inc?: InputMaybe<Chest_Inc_Input>;
+  _set?: InputMaybe<Chest_Set_Input>;
+  where: Chest_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Chest_By_PkArgs = {
+  _inc?: InputMaybe<Chest_Inc_Input>;
+  _set?: InputMaybe<Chest_Set_Input>;
+  pk_columns: Chest_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Chest_ManyArgs = {
+  updates: Array<Chest_Updates>;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_CompanyArgs = {
   _set?: InputMaybe<Company_Set_Input>;
   where: Company_Bool_Exp;
@@ -5574,6 +5956,12 @@ export type Query_Root = {
   budget_type_aggregate: Budget_Type_Aggregate;
   /** fetch data from the table: "budget_type" using primary key columns */
   budget_type_by_pk?: Maybe<Budget_Type>;
+  /** fetch data from the table: "chest" */
+  chest: Array<Chest>;
+  /** fetch aggregated fields from the table: "chest" */
+  chest_aggregate: Chest_Aggregate;
+  /** fetch data from the table: "chest" using primary key columns */
+  chest_by_pk?: Maybe<Chest>;
   /** fetch data from the table: "company" */
   company: Array<Company>;
   /** fetch aggregated fields from the table: "company" */
@@ -5890,6 +6278,29 @@ export type Query_RootBudget_Type_By_PkArgs = {
 };
 
 
+export type Query_RootChestArgs = {
+  distinct_on?: InputMaybe<Array<Chest_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Chest_Order_By>>;
+  where?: InputMaybe<Chest_Bool_Exp>;
+};
+
+
+export type Query_RootChest_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Chest_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Chest_Order_By>>;
+  where?: InputMaybe<Chest_Bool_Exp>;
+};
+
+
+export type Query_RootChest_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
 export type Query_RootCompanyArgs = {
   distinct_on?: InputMaybe<Array<Company_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -6126,6 +6537,14 @@ export type Subscription_Root = {
   budget_type_by_pk?: Maybe<Budget_Type>;
   /** fetch data from the table in a streaming manner: "budget_type" */
   budget_type_stream: Array<Budget_Type>;
+  /** fetch data from the table: "chest" */
+  chest: Array<Chest>;
+  /** fetch aggregated fields from the table: "chest" */
+  chest_aggregate: Chest_Aggregate;
+  /** fetch data from the table: "chest" using primary key columns */
+  chest_by_pk?: Maybe<Chest>;
+  /** fetch data from the table in a streaming manner: "chest" */
+  chest_stream: Array<Chest>;
   /** fetch data from the table: "company" */
   company: Array<Company>;
   /** fetch aggregated fields from the table: "company" */
@@ -6538,6 +6957,36 @@ export type Subscription_RootBudget_Type_StreamArgs = {
 };
 
 
+export type Subscription_RootChestArgs = {
+  distinct_on?: InputMaybe<Array<Chest_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Chest_Order_By>>;
+  where?: InputMaybe<Chest_Bool_Exp>;
+};
+
+
+export type Subscription_RootChest_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Chest_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Chest_Order_By>>;
+  where?: InputMaybe<Chest_Bool_Exp>;
+};
+
+
+export type Subscription_RootChest_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootChest_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Chest_Stream_Cursor_Input>>;
+  where?: InputMaybe<Chest_Bool_Exp>;
+};
+
+
 export type Subscription_RootCompanyArgs = {
   distinct_on?: InputMaybe<Array<Company_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -6752,6 +7201,9 @@ export type Transaction = {
   budget?: Maybe<Budget>;
   budget_id?: Maybe<Scalars['uuid']>;
   /** An object relationship */
+  chest?: Maybe<Chest>;
+  chest_id?: Maybe<Scalars['uuid']>;
+  /** An object relationship */
   company: Company;
   company_id: Scalars['uuid'];
   created_at: Scalars['timestamptz'];
@@ -6921,6 +7373,8 @@ export type Transaction_Bool_Exp = {
   amount?: InputMaybe<Float8_Comparison_Exp>;
   budget?: InputMaybe<Budget_Bool_Exp>;
   budget_id?: InputMaybe<Uuid_Comparison_Exp>;
+  chest?: InputMaybe<Chest_Bool_Exp>;
+  chest_id?: InputMaybe<Uuid_Comparison_Exp>;
   company?: InputMaybe<Company_Bool_Exp>;
   company_id?: InputMaybe<Uuid_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
@@ -6949,6 +7403,8 @@ export type Transaction_Insert_Input = {
   amount?: InputMaybe<Scalars['float8']>;
   budget?: InputMaybe<Budget_Obj_Rel_Insert_Input>;
   budget_id?: InputMaybe<Scalars['uuid']>;
+  chest?: InputMaybe<Chest_Obj_Rel_Insert_Input>;
+  chest_id?: InputMaybe<Scalars['uuid']>;
   company?: InputMaybe<Company_Obj_Rel_Insert_Input>;
   company_id?: InputMaybe<Scalars['uuid']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
@@ -6966,6 +7422,7 @@ export type Transaction_Max_Fields = {
   __typename?: 'transaction_max_fields';
   amount?: Maybe<Scalars['float8']>;
   budget_id?: Maybe<Scalars['uuid']>;
+  chest_id?: Maybe<Scalars['uuid']>;
   company_id?: Maybe<Scalars['uuid']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   date?: Maybe<Scalars['timestamptz']>;
@@ -6980,6 +7437,7 @@ export type Transaction_Max_Fields = {
 export type Transaction_Max_Order_By = {
   amount?: InputMaybe<Order_By>;
   budget_id?: InputMaybe<Order_By>;
+  chest_id?: InputMaybe<Order_By>;
   company_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   date?: InputMaybe<Order_By>;
@@ -6995,6 +7453,7 @@ export type Transaction_Min_Fields = {
   __typename?: 'transaction_min_fields';
   amount?: Maybe<Scalars['float8']>;
   budget_id?: Maybe<Scalars['uuid']>;
+  chest_id?: Maybe<Scalars['uuid']>;
   company_id?: Maybe<Scalars['uuid']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   date?: Maybe<Scalars['timestamptz']>;
@@ -7009,6 +7468,7 @@ export type Transaction_Min_Fields = {
 export type Transaction_Min_Order_By = {
   amount?: InputMaybe<Order_By>;
   budget_id?: InputMaybe<Order_By>;
+  chest_id?: InputMaybe<Order_By>;
   company_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   date?: InputMaybe<Order_By>;
@@ -7040,6 +7500,8 @@ export type Transaction_Order_By = {
   amount?: InputMaybe<Order_By>;
   budget?: InputMaybe<Budget_Order_By>;
   budget_id?: InputMaybe<Order_By>;
+  chest?: InputMaybe<Chest_Order_By>;
+  chest_id?: InputMaybe<Order_By>;
   company?: InputMaybe<Company_Order_By>;
   company_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
@@ -7063,6 +7525,8 @@ export enum Transaction_Select_Column {
   Amount = 'amount',
   /** column name */
   BudgetId = 'budget_id',
+  /** column name */
+  ChestId = 'chest_id',
   /** column name */
   CompanyId = 'company_id',
   /** column name */
@@ -7133,6 +7597,7 @@ export enum Transaction_Select_Column_Transaction_Aggregate_Bool_Exp_Var_Samp_Ar
 export type Transaction_Set_Input = {
   amount?: InputMaybe<Scalars['float8']>;
   budget_id?: InputMaybe<Scalars['uuid']>;
+  chest_id?: InputMaybe<Scalars['uuid']>;
   company_id?: InputMaybe<Scalars['uuid']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   date?: InputMaybe<Scalars['timestamptz']>;
@@ -7188,6 +7653,7 @@ export type Transaction_Stream_Cursor_Input = {
 export type Transaction_Stream_Cursor_Value_Input = {
   amount?: InputMaybe<Scalars['float8']>;
   budget_id?: InputMaybe<Scalars['uuid']>;
+  chest_id?: InputMaybe<Scalars['uuid']>;
   company_id?: InputMaybe<Scalars['uuid']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   date?: InputMaybe<Scalars['timestamptz']>;
@@ -7215,6 +7681,8 @@ export enum Transaction_Update_Column {
   Amount = 'amount',
   /** column name */
   BudgetId = 'budget_id',
+  /** column name */
+  ChestId = 'chest_id',
   /** column name */
   CompanyId = 'company_id',
   /** column name */
@@ -8620,6 +9088,13 @@ export type GetBudgetsQueryVariables = Exact<{
 
 export type GetBudgetsQuery = { __typename?: 'query_root', budget: Array<{ __typename?: 'budget', id: any, label: string, priority: number, icon: string, budget_months: Array<{ __typename?: 'budget_month', amount: any, month: { __typename?: 'month', start_at: any, end_at: any } }>, transactions: Array<{ __typename?: 'transaction', amount: any, label: string, transaction_type: string, created_at: any, updated_at: any, id: any, user_id: any, budget?: { __typename?: 'budget', id: any, label: string, icon: string, budget_type: { __typename?: 'budget_type', color: string }, budget_months: Array<{ __typename?: 'budget_month', amount: any, month: { __typename?: 'month', start_at: any, end_at: any } }> } | null, company: { __typename?: 'company', label: string, logo?: string | null } }> }> };
 
+export type GetItemBudgetsQueryVariables = Exact<{
+  limit: Scalars['Int'];
+}>;
+
+
+export type GetItemBudgetsQuery = { __typename?: 'query_root', budget: Array<{ __typename?: 'budget', id: any, label: string, icon: string }> };
+
 export type UpdateBudgetMonthMutationVariables = Exact<{
   budget_id: Scalars['uuid'];
   month_id: Scalars['uuid'];
@@ -8628,6 +9103,20 @@ export type UpdateBudgetMonthMutationVariables = Exact<{
 
 
 export type UpdateBudgetMonthMutation = { __typename?: 'mutation_root', update_budget_month_by_pk?: { __typename?: 'budget_month', amount: any } | null };
+
+export type GetChestQueryVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+
+export type GetChestQuery = { __typename?: 'query_root', chest: Array<{ __typename?: 'chest', id: any, icon: string, label: string, start_at: any, end_at: any, transactions: Array<{ __typename?: 'transaction', amount: any, label: string, transaction_type: string, created_at: any, updated_at: any, id: any, user_id: any, budget?: { __typename?: 'budget', id: any, label: string, icon: string, budget_type: { __typename?: 'budget_type', color: string }, budget_months: Array<{ __typename?: 'budget_month', month_id: any }> } | null, company: { __typename?: 'company', label: string, logo?: string | null } }> }> };
+
+export type GetChestsQueryVariables = Exact<{
+  limit: Scalars['Int'];
+}>;
+
+
+export type GetChestsQuery = { __typename?: 'query_root', chest: Array<{ __typename?: 'chest', id: any, icon: string, label: string, start_at: any, end_at: any, transactions: Array<{ __typename?: 'transaction', amount: any }> }> };
 
 export type GetCompaniesQueryVariables = Exact<{
   limit: Scalars['Int'];
@@ -8642,6 +9131,13 @@ export type GetCompanyQueryVariables = Exact<{
 
 
 export type GetCompanyQuery = { __typename?: 'query_root', company: Array<{ __typename?: 'company', id: any, label: string, logo?: string | null, transactions: Array<{ __typename?: 'transaction', amount: any, label: string, transaction_type: string, created_at: any, updated_at: any, id: any, user_id: any, company: { __typename?: 'company', label: string, logo?: string | null }, budget?: { __typename?: 'budget', label: string, icon: string, budget_type: { __typename?: 'budget_type', color: string } } | null }> }> };
+
+export type GetItemCompaniesQueryVariables = Exact<{
+  limit: Scalars['Int'];
+}>;
+
+
+export type GetItemCompaniesQuery = { __typename?: 'query_root', company: Array<{ __typename?: 'company', id: any, label: string, logo?: string | null }> };
 
 export type InsertCompanyMutationVariables = Exact<{
   company: Company_Insert_Input;
@@ -8665,20 +9161,6 @@ export type DeleteTransactionMutationVariables = Exact<{
 
 
 export type DeleteTransactionMutation = { __typename?: 'mutation_root', delete_transaction?: { __typename?: 'transaction_mutation_response', affected_rows: number } | null };
-
-export type GetItemBudgetsQueryVariables = Exact<{
-  limit: Scalars['Int'];
-}>;
-
-
-export type GetItemBudgetsQuery = { __typename?: 'query_root', budget: Array<{ __typename?: 'budget', id: any, label: string, icon: string }> };
-
-export type GetItemCompaniesQueryVariables = Exact<{
-  limit: Scalars['Int'];
-}>;
-
-
-export type GetItemCompaniesQuery = { __typename?: 'query_root', company: Array<{ __typename?: 'company', id: any, label: string, logo?: string | null }> };
 
 export type GetSettableTransactionQueryVariables = Exact<{
   id: Scalars['uuid'];
@@ -8750,14 +9232,16 @@ export type UpdateUserMutation = { __typename?: 'mutation_root', updateUser?: { 
 
 export const GetBudgetDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetBudget"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"start_at"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"end_at"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"budget"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"icon"}},{"kind":"Field","name":{"kind":"Name","value":"budget_type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"color"}}]}},{"kind":"Field","name":{"kind":"Name","value":"budget_months"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"budget_id"}},{"kind":"Field","name":{"kind":"Name","value":"month_id"}},{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"month"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"start_at"}},{"kind":"Field","name":{"kind":"Name","value":"end_at"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"transactions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"date"},"value":{"kind":"EnumValue","value":"desc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"date"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"start_at"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_lte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"end_at"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"budget"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"icon"}},{"kind":"Field","name":{"kind":"Name","value":"budget_type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"color"}}]}},{"kind":"Field","name":{"kind":"Name","value":"budget_months"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"month_id"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"company"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"transaction_type"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}}]}}]}}]}}]} as unknown as DocumentNode<GetBudgetQuery, GetBudgetQueryVariables>;
 export const GetBudgetsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetBudgets"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"start_at"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"end_at"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"budget"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"priority"},"value":{"kind":"EnumValue","value":"asc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"budget_months"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"month"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"start_at"}},{"kind":"Field","name":{"kind":"Name","value":"end_at"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"priority"}},{"kind":"Field","name":{"kind":"Name","value":"icon"}},{"kind":"Field","name":{"kind":"Name","value":"transactions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"date"},"value":{"kind":"EnumValue","value":"desc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"date"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"start_at"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_lte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"end_at"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"budget"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"icon"}},{"kind":"Field","name":{"kind":"Name","value":"budget_type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"color"}}]}},{"kind":"Field","name":{"kind":"Name","value":"budget_months"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"month"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"start_at"}},{"kind":"Field","name":{"kind":"Name","value":"end_at"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"company"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"transaction_type"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}}]}}]}}]}}]} as unknown as DocumentNode<GetBudgetsQuery, GetBudgetsQueryVariables>;
+export const GetItemBudgetsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetItemBudgets"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"budget"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"label"},"value":{"kind":"EnumValue","value":"asc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"icon"}}]}}]}}]} as unknown as DocumentNode<GetItemBudgetsQuery, GetItemBudgetsQueryVariables>;
 export const UpdateBudgetMonthDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateBudgetMonth"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"budget_id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"month_id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"amount"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"float8"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_budget_month_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"pk_columns"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"budget_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"budget_id"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"month_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"month_id"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"amount"},"value":{"kind":"Variable","name":{"kind":"Name","value":"amount"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}}]}}]}}]} as unknown as DocumentNode<UpdateBudgetMonthMutation, UpdateBudgetMonthMutationVariables>;
+export const GetChestDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetChest"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"chest"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"icon"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"start_at"}},{"kind":"Field","name":{"kind":"Name","value":"end_at"}},{"kind":"Field","name":{"kind":"Name","value":"transactions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"date"},"value":{"kind":"EnumValue","value":"desc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"budget"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"icon"}},{"kind":"Field","name":{"kind":"Name","value":"budget_type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"color"}}]}},{"kind":"Field","name":{"kind":"Name","value":"budget_months"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"month_id"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"company"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"transaction_type"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}}]}}]}}]}}]} as unknown as DocumentNode<GetChestQuery, GetChestQueryVariables>;
+export const GetChestsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetChests"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"chest"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"start_at"},"value":{"kind":"EnumValue","value":"asc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"icon"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"start_at"}},{"kind":"Field","name":{"kind":"Name","value":"end_at"}},{"kind":"Field","name":{"kind":"Name","value":"transactions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"date"},"value":{"kind":"EnumValue","value":"desc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}}]}}]}}]}}]} as unknown as DocumentNode<GetChestsQuery, GetChestsQueryVariables>;
 export const GetCompaniesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCompanies"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"company"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"created_at"},"value":{"kind":"EnumValue","value":"desc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}}]}}]} as unknown as DocumentNode<GetCompaniesQuery, GetCompaniesQueryVariables>;
 export const GetCompanyDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCompany"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"company"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}},{"kind":"Field","name":{"kind":"Name","value":"transactions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"date"},"value":{"kind":"EnumValue","value":"desc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"company"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}},{"kind":"Field","name":{"kind":"Name","value":"budget"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"icon"}},{"kind":"Field","name":{"kind":"Name","value":"budget_type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"color"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"transaction_type"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}}]}}]}}]}}]} as unknown as DocumentNode<GetCompanyQuery, GetCompanyQueryVariables>;
+export const GetItemCompaniesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetItemCompanies"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"company"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"label"},"value":{"kind":"EnumValue","value":"asc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}}]}}]} as unknown as DocumentNode<GetItemCompaniesQuery, GetItemCompaniesQueryVariables>;
 export const InsertCompanyDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"InsertCompany"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"company"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"company_insert_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_company"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"objects"},"value":{"kind":"ListValue","values":[{"kind":"Variable","name":{"kind":"Name","value":"company"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}},{"kind":"Field","name":{"kind":"Name","value":"returning"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}}]}}]}}]} as unknown as DocumentNode<InsertCompanyMutation, InsertCompanyMutationVariables>;
 export const UpdateCompanyDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateCompany"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"label"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"logo"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_company_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"pk_columns"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"label"},"value":{"kind":"Variable","name":{"kind":"Name","value":"label"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"logo"},"value":{"kind":"Variable","name":{"kind":"Name","value":"logo"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}}]}}]} as unknown as DocumentNode<UpdateCompanyMutation, UpdateCompanyMutationVariables>;
 export const DeleteTransactionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteTransaction"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_transaction"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<DeleteTransactionMutation, DeleteTransactionMutationVariables>;
-export const GetItemBudgetsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetItemBudgets"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"budget"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"label"},"value":{"kind":"EnumValue","value":"asc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"icon"}}]}}]}}]} as unknown as DocumentNode<GetItemBudgetsQuery, GetItemBudgetsQueryVariables>;
-export const GetItemCompaniesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetItemCompanies"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"company"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"label"},"value":{"kind":"EnumValue","value":"asc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}}]}}]} as unknown as DocumentNode<GetItemCompaniesQuery, GetItemCompaniesQueryVariables>;
 export const GetSettableTransactionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetSettableTransaction"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"transaction"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"budget_id"}},{"kind":"Field","name":{"kind":"Name","value":"company_id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"transaction_type"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<GetSettableTransactionQuery, GetSettableTransactionQueryVariables>;
 export const GetTransactionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetTransaction"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"transaction"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"company"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}},{"kind":"Field","name":{"kind":"Name","value":"budget"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"icon"}},{"kind":"Field","name":{"kind":"Name","value":"budget_type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"color"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"transaction_type"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"budget_id"}},{"kind":"Field","name":{"kind":"Name","value":"company_id"}},{"kind":"Field","name":{"kind":"Name","value":"date"}}]}}]}}]} as unknown as DocumentNode<GetTransactionQuery, GetTransactionQueryVariables>;
 export const GetTransactionsByMonthDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetTransactionsByMonth"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"start_at"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"end_at"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"transaction"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"created_at"},"value":{"kind":"EnumValue","value":"desc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"date"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"start_at"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_lte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"end_at"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"budget_id"}},{"kind":"Field","name":{"kind":"Name","value":"company_id"}},{"kind":"Field","name":{"kind":"Name","value":"budget"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"icon"}},{"kind":"Field","name":{"kind":"Name","value":"budget_type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"color"}}]}},{"kind":"Field","name":{"kind":"Name","value":"budget_months"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"month"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"start_at"}},{"kind":"Field","name":{"kind":"Name","value":"end_at"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"company"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"transaction_type"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"date"}}]}}]}}]} as unknown as DocumentNode<GetTransactionsByMonthQuery, GetTransactionsByMonthQueryVariables>;

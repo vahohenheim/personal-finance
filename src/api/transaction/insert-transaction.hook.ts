@@ -3,6 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { Transaction_Insert_Input } from '../../gql/graphql';
 import { gqlClient } from '../../utils/graphql-client';
 import { queryClient } from '../../utils/react-query-client';
+import { QUERIES } from '../constants';
 
 const INSERT_TRANSACTION_MUTATION = graphql(`
 	mutation InsertTransaction($transaction: transaction_insert_input!) {
@@ -40,8 +41,10 @@ export const useInsertTransaction = (userId: string) => {
 		},
 		onSuccess: async () => {
 			await queryClient.invalidateQueries([
-				'transactions',
-				'transactions-by-month',
+				QUERIES.TRANSACTIONS,
+				QUERIES.TRANSACTIONS_BY_MONTH,
+				QUERIES.BUDGETS,
+				QUERIES.MONTH_BUDGETS,
 			]);
 		},
 	});

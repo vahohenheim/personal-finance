@@ -1,12 +1,12 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import 'antd/dist/reset.css';
+import './styles/reset.css';
 import './styles/gui.css';
 import './styles/global.css';
 import './styles/ant-design.reset.css';
 import './styles/helpers.css';
 import App from './app';
-import reportWebVitals from './reportWebVitals';
 import {
 	Route,
 	createBrowserRouter,
@@ -23,8 +23,8 @@ import AddTransactionPage from './features/transactions/add/add';
 import ViewTransactionsPage from './features/transactions/view/view';
 import DetailTransactionPage from './features/transactions/detail/detail';
 import EditUserPage from './features/user/edit/edit';
-import AddUserPage from './features/user/add/add';
-import LoginPage from './features/user/login/login';
+import RegisterPage from './features/register/register';
+import LoginPage from './features/login/login';
 import ViewCompaniesPage from './features/companies/view/view';
 import DetailCompanyPage from './features/companies/detail/detail';
 import AddCompanyPage from './features/companies/add/add';
@@ -36,6 +36,8 @@ import EditBudgetMonthPage from './features/budgets/edit/edit';
 import DetailUserPage from './features/user/detail/detail';
 import EntriesPage from './features/entries/entries';
 import { NotFoundPage } from './features/not-found/not-found';
+import ViewChestsPage from './features/chest/view/view';
+import DetailChestPage from './features/chest/detail/detail';
 
 dayjs.locale('en');
 dayjs.extend(utc);
@@ -57,6 +59,8 @@ const router = createBrowserRouter(
 					path="budgets/:id/edit"
 					element={<EditBudgetMonthPage />}
 				></Route>
+				<Route path="chests" element={<ViewChestsPage />}></Route>
+				<Route path="chests/:id" element={<DetailChestPage />}></Route>
 				<Route path="entries" element={<EntriesPage />}></Route>
 				<Route
 					path="transactions"
@@ -84,8 +88,7 @@ const router = createBrowserRouter(
 				<Route path="user" element={<DetailUserPage />} />
 				<Route path="user/edit" element={<EditUserPage />} />
 			</Route>
-
-			<Route path="register" element={<AddUserPage />} />
+			<Route path="register" element={<RegisterPage />} />
 			<Route path="login" element={<LoginPage />} />
 		</Route>
 	)
@@ -96,8 +99,3 @@ root.render(
 		<RouterProvider router={router} />
 	</StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals(console.log);

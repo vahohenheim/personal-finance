@@ -2,6 +2,7 @@ import { graphql } from '../../gql';
 import { useQuery } from '@tanstack/react-query';
 import { gqlClient } from '../../utils/graphql-client';
 import { Budget } from '../../gql/graphql';
+import { QUERIES } from '../constants';
 
 const GET_BUDGETS_QUERY = graphql(`
 	query GetBudgets(
@@ -62,7 +63,7 @@ export const useGetBudgets = (
 	end_at: string
 ) => {
 	return useQuery({
-		queryKey: ['month-budgets'],
+		queryKey: [QUERIES.MONTH_BUDGETS],
 		enabled: !!start_at && !!end_at,
 		queryFn: async () => {
 			return gqlClient.request<

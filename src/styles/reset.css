@@ -1,0 +1,6 @@
+input:-internal-autofill-selected {
+    appearance: none;
+    background-image: none !important;
+    background-color: #141414 !important;
+    color: var(--gui-color-white) !important;
+}

@@ -9,14 +9,14 @@ import { ListTransactionsComponent } from '../../../components/transaction';
 import { Button } from 'antd';
 import { DetailCoverComponent } from '../../../components/detail-cover/detail-cover';
 import { formatCurrency } from '../../../utils/format-currency';
-import { IconCompanyComponent } from '../../../components/company';
-import { useGetCompany } from '../../../api/company/get-company.hook';
 import { DetailEmptyComponent } from '../../../components/detail-empty/detail-empty';
+import { useGetChest } from '../../../api/chest/get-chest.hook';
+import { ChestIconComponent } from '../../../components/chest/icon/icon';
 
-const DetailCompanyPage = () => {
+const DetailChestPage = () => {
 	const { id } = useParams();
-	const getCompany = useGetCompany(id || '');
-	const company = getCompany?.data?.company[0];
+	const getChest = useGetChest(id || '');
+	const chest = getChest?.data?.chest[0];
 
 	const aggregateAmountTransactions = (
 		sum: number,
@@ -26,14 +26,14 @@ const DetailCompanyPage = () => {
 		return sum;
 	};
 
-	const amountTransactions = company?.transactions.reduce(
+	const amountTransactions = chest?.transactions.reduce(
 		aggregateAmountTransactions,
 		0
 	);
 
 	const hasNoData =
-		!getCompany.isLoading &&
-		(!getCompany?.data?.company || getCompany?.data?.company?.length === 0);
+		!getChest.isLoading &&
+		(!getChest?.data?.chest || getChest?.data?.chest?.length === 0);
 
 	if (hasNoData) {
 		return <DetailEmptyComponent />;
@@ -42,20 +42,18 @@ const DetailCompanyPage = () => {
 	return (
 		<>
 			<Helmet>
-				<title>company {company?.label || ''} - finance</title>
+				<title>chest {chest?.label || ''} - finance</title>
 			</Helmet>
 
 			<div className="container center-block">
 				<DetailCoverComponent
-					loading={getCompany.isLoading}
-					icon={<IconCompanyComponent />}
-					title={company?.label as string}
+					loading={getChest.isLoading}
+					icon={<ChestIconComponent icon={chest?.icon as string} />}
+					title={chest?.label as string}
 					amount={<>{formatCurrency(amountTransactions)}</>}
 				/>
 				<Section className={styles.actions}>
-					<LinkComponent
-						to={`/companies/${company?.id as string}/edit`}
-					>
+					<LinkComponent to={`/chests/${chest?.id as string}/edit`}>
 						<Button type="link" block={true}>
 							update
 						</Button>
@@ -64,8 +62,8 @@ const DetailCompanyPage = () => {
 				<Section>
 					<TitleComponent heading="h3">Transactions</TitleComponent>
 					<ListTransactionsComponent
-						transactions={company?.transactions}
-						loading={getCompany.isLoading}
+						transactions={chest?.transactions}
+						loading={getChest.isLoading}
 					/>
 				</Section>
 			</div>
@@ -73,4 +71,4 @@ const DetailCompanyPage = () => {
 	);
 };
 
-export default DetailCompanyPage;
+export default DetailChestPage;

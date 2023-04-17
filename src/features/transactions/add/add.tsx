@@ -13,8 +13,8 @@ import dayjs from 'dayjs';
 import { TransactionType } from '../../../models/transaction';
 import { BackComponent } from '../../../components/back/back';
 import { useInsertTransaction } from '../../../api/transaction/insert-transaction.hook';
-import { useGetItemCompanies } from '../../../api/transaction/get-item-companies.hook';
-import { useGetItemBudgets } from '../../../api/transaction/get-item-budgets.hook';
+import { useGetItemCompanies } from '../../../api/company/get-item-companies.hook';
+import { useGetItemBudgets } from '../../../api/budget/get-item-budgets.hook';
 import { FormSkeletonTransactionComponent } from '../../../components/transaction/form/form.skeleton';
 
 const AddTransactionPage = () => {

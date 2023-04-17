@@ -1,27 +1,33 @@
 import { graphql } from '../../gql';
 import { useQuery } from '@tanstack/react-query';
 import { gqlClient } from '../../utils/graphql-client';
-import { Company } from '../../gql/graphql';
+import { Chest } from '../../gql/graphql';
 import { QUERIES } from '../constants';
 
-const GET_COMPANY_QUERY = graphql(`
-	query GetCompany($id: uuid!) {
-		company(where: { id: { _eq: $id } }) {
+const GET_CHEST_QUERY = graphql(`
+	query GetChest($id: uuid!) {
+		chest(where: { id: { _eq: $id } }) {
 			id
+			icon
 			label
-			logo
+			start_at
+			end_at
 			transactions(order_by: { date: desc }) {
 				amount
-				company {
-					label
-					logo
-				}
 				budget {
+					id
 					label
 					icon
 					budget_type {
 						color
 					}
+					budget_months {
+						month_id
+					}
+				}
+				company {
+					label
+					logo
 				}
 				label
 				transaction_type
@@ -34,17 +40,17 @@ const GET_COMPANY_QUERY = graphql(`
 	}
 `);
 
-export const useGetCompany = (id: string) => {
+export const useGetChest = (id: string) => {
 	return useQuery({
-		queryKey: [QUERIES.COMPANY(id)],
+		queryKey: [QUERIES.CHEST(id)],
 		enabled: !!id,
 		queryFn: () => {
-			return gqlClient.request<
-				{ company: Array<Company> },
-				{ id: string }
-			>(GET_COMPANY_QUERY, {
-				id,
-			});
+			return gqlClient.request<{ chest: Array<Chest> }, { id: string }>(
+				GET_CHEST_QUERY,
+				{
+					id,
+				}
+			);
 		},
 	});
 };

@@ -2,6 +2,7 @@ import { graphql } from '../../gql';
 import { useQuery } from '@tanstack/react-query';
 import { gqlClient } from '../../utils/graphql-client';
 import { Budget } from '../../gql/graphql';
+import { QUERIES } from '../constants';
 
 const GET_BUDGET_QUERY = graphql(`
 	query GetBudget(
@@ -56,17 +57,9 @@ const GET_BUDGET_QUERY = graphql(`
 	}
 `);
 
-/*
-{
-  transaction(where: {date: {_gte: "2023-04-01T00:00:00.000000+00:00", _lte: "2023-05-01T00:00:00.000000+00:00"}}) {
-    date
-  }
-}
-*/
-
 export const useGetBudget = (id: string, start_at: string, end_at: string) => {
 	return useQuery({
-		queryKey: [`budget-${id}`],
+		queryKey: [QUERIES.BUDGET(id)],
 		enabled: !!id && !!start_at && !!end_at,
 		queryFn: () => {
 			return gqlClient.request<

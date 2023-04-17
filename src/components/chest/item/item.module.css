@@ -1,0 +1,46 @@
+.link {
+    text-decoration: none;
+}
+
+.card:hover {
+    width: 100%;
+    border-color: var(--gui-color-primary);
+    transition: all 100ms ease-in-out;
+}
+
+.body {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-grow: 1;
+    gap: var(--gui-gutter-sm);
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.label {
+    max-width: calc(100vw - 90px);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: var(--gui-color-white);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-bottom: var(--gui-gutter-xs);
+}
+
+.amount {
+    font-weight: 500;
+    font-size: var(--gui-font-size-large);
+    line-height: 17px;
+    color: var(--gui-color-white);
+}
+
+.expectedAmount {
+    opacity: .6;
+}
