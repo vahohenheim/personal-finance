@@ -9,6 +9,7 @@ const GET_SETTABLE_TRANSACTION_QUERY = graphql(`
 		transaction(where: { id: { _eq: $id } }) {
 			amount
 			budget_id
+			chest_id
 			company_id
 			label
 			date

@@ -30,7 +30,10 @@ export const useInsertCompany = (userId: string) => {
 			});
 		},
 		onSuccess: async () => {
-			await queryClient.invalidateQueries([QUERIES.COMPANIES]);
+			await queryClient.invalidateQueries([
+				QUERIES.COMPANIES,
+				QUERIES.COMPANY_ITEMS,
+			]);
 		},
 	});
 };

@@ -26,6 +26,13 @@ const ViewChestsPage = () => {
 					<TotalChestsComponent loading={loading} chests={chests} />
 				</SectionComponent>
 				<SectionComponent>
+					<Link to="/transactions/add">
+						<Button type="primary" block={true} size="large">
+							Add a transaction
+						</Button>
+					</Link>
+				</SectionComponent>
+				<SectionComponent>
 					<TitleComponent
 						heading={'h2'}
 						action={

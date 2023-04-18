@@ -38,6 +38,8 @@ import EntriesPage from './features/entries/entries';
 import { NotFoundPage } from './features/not-found/not-found';
 import ViewChestsPage from './features/chest/view/view';
 import DetailChestPage from './features/chest/detail/detail';
+import EditChestPage from './features/chest/edit/edit';
+import AddChestPage from './features/chest/add/add';
 
 dayjs.locale('en');
 dayjs.extend(utc);
@@ -60,7 +62,12 @@ const router = createBrowserRouter(
 					element={<EditBudgetMonthPage />}
 				></Route>
 				<Route path="chests" element={<ViewChestsPage />}></Route>
+				<Route path="chests/add" element={<AddChestPage />}></Route>
 				<Route path="chests/:id" element={<DetailChestPage />}></Route>
+				<Route
+					path="chests/:id/edit"
+					element={<EditChestPage />}
+				></Route>
 				<Route path="entries" element={<EntriesPage />}></Route>
 				<Route
 					path="transactions"

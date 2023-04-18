@@ -30,6 +30,7 @@ export const useUpdateCompany = (id: string) => {
 			await queryClient.invalidateQueries([
 				QUERIES.COMPANIES,
 				QUERIES.COMPANY(id),
+				QUERIES.COMPANY_ITEMS,
 			]);
 		},
 	});

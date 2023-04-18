@@ -1,15 +1,15 @@
 import {
 	Button,
+	DatePicker,
 	Form,
 	Input,
+	InputNumber,
 	Radio,
 	Select,
-	InputNumber,
-	DatePicker,
 } from 'antd';
-import type { Budget, Company } from '../../../gql/graphql';
+import type { Budget, Chest, Company } from '../../../gql/graphql';
 import { FormTransactionComponentProps } from './form.model';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { TransactionType } from '../../../models/transaction';
 import dayjs from 'dayjs';
 
@@ -20,8 +20,12 @@ export const FormTransactionComponent: FC<FormTransactionComponentProps> = ({
 	submitLabel,
 	budgets = [],
 	companies = [],
+	chests = [],
 	submitting = false,
 }) => {
+	const [transactionType, setTransactionType] = useState<TransactionType>(
+		transaction?.transaction_type as TransactionType
+	);
 	const initialValues = Object.assign({}, transaction);
 
 	const companiesItems = companies.map((company: Company) => ({
@@ -34,9 +38,20 @@ export const FormTransactionComponent: FC<FormTransactionComponentProps> = ({
 		value: budget.id,
 	}));
 
+	const chestsItems = chests.map((chest: Chest) => ({
+		label: `${chest.icon} ${chest.label}`,
+		value: chest.id,
+	}));
+
 	if (initialValues?.date) {
 		initialValues.date = dayjs(initialValues.date);
 	}
+
+	const onChange = (changedValues: Record<string, any>) => {
+		if (changedValues.transaction_type) {
+			setTransactionType(changedValues.transaction_type);
+		}
+	};
 
 	return (
 		<Form
@@ -45,6 +60,7 @@ export const FormTransactionComponent: FC<FormTransactionComponentProps> = ({
 			initialValues={initialValues}
 			onFinish={onFinish}
 			disabled={submitting}
+			onValuesChange={onChange}
 		>
 			<Form.Item
 				label="Define transaction"
@@ -58,21 +74,56 @@ export const FormTransactionComponent: FC<FormTransactionComponentProps> = ({
 					<Radio.Button value={TransactionType.ENTRY}>
 						{TransactionType.ENTRY}
 					</Radio.Button>
+					<Radio.Button value={TransactionType.SAVING}>
+						{TransactionType.SAVING}
+					</Radio.Button>
+					<Radio.Button value={TransactionType.PICK}>
+						{TransactionType.PICK}
+					</Radio.Button>
 				</Radio.Group>
 			</Form.Item>
-			<Form.Item label="Select budget" name="budget_id" required={true}>
-				<Select
-					showSearch
-					size="large"
-					optionFilterProp="children"
-					filterOption={(input, option) =>
-						(option?.label || '')
-							.toLowerCase()
-							.includes(input.toLowerCase())
-					}
-					options={budgetsItems}
-				></Select>
-			</Form.Item>
+			{[TransactionType.SPENT].includes(transactionType) ? (
+				<Form.Item
+					label="Select budget"
+					name="budget_id"
+					required={true}
+				>
+					<Select
+						showSearch
+						size="large"
+						placeholder="typing budget name"
+						optionFilterProp="children"
+						filterOption={(input, option) =>
+							(option?.label || '')
+								.toLowerCase()
+								.includes(input.toLowerCase())
+						}
+						options={budgetsItems}
+					></Select>
+				</Form.Item>
+			) : (
+				''
+			)}
+			{[TransactionType.SAVING, TransactionType.PICK].includes(
+				transactionType
+			) ? (
+				<Form.Item label="Select chest" name="chest_id" required={true}>
+					<Select
+						showSearch
+						size="large"
+						placeholder="typing chest name"
+						optionFilterProp="children"
+						filterOption={(input, option) =>
+							(option?.label || '')
+								.toLowerCase()
+								.includes(input.toLowerCase())
+						}
+						options={chestsItems}
+					></Select>
+				</Form.Item>
+			) : (
+				''
+			)}
 			<Form.Item label="Select company" name="company_id" required={true}>
 				<Select
 					showSearch

@@ -11,6 +11,7 @@ const UPDATE_TRANSACTION_MUTATION = graphql(`
 		$label: String!
 		$amount: float8!
 		$budget_id: uuid!
+		$chest_id: uuid!
 		$company_id: uuid!
 		$transaction_type: String!
 		$date: timestamptz!
@@ -21,6 +22,7 @@ const UPDATE_TRANSACTION_MUTATION = graphql(`
 				label: $label
 				amount: $amount
 				budget_id: $budget_id
+				chest_id: $chest_id
 				company_id: $company_id
 				transaction_type: $transaction_type
 				date: $date
@@ -30,6 +32,7 @@ const UPDATE_TRANSACTION_MUTATION = graphql(`
 			label
 			amount
 			budget_id
+			chest_id
 			company_id
 			transaction_type
 			date

@@ -32,6 +32,7 @@ export const useUpdateBudgetMonth = (id: string) => {
 			await queryClient.invalidateQueries([
 				QUERIES.BUDGETS,
 				QUERIES.BUDGET(id),
+				QUERIES.BUDGET_ITEMS,
 			]);
 		},
 	});

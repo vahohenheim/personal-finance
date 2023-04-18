@@ -12,9 +12,10 @@ import { BackComponent } from '../../../components/back/back';
 import { useGetSettableTransaction } from '../../../api/transaction/get-settable-transaction.hook';
 import { useUpdateTransaction } from '../../../api/transaction/update-transaction.hook';
 import { formatInsertableDate } from '../../../utils/format-insertable-date';
-import { useGetItemCompanies } from '../../../api/company/get-item-companies.hook';
-import { useGetItemBudgets } from '../../../api/budget/get-item-budgets.hook';
+import { useGetCompanyItems } from '../../../api/company/get-company-items.hook';
+import { useGetBudgetItems } from '../../../api/budget/get-budget-items.hook';
 import { FormSkeletonTransactionComponent } from '../../../components/transaction/form/form.skeleton';
+import { useGetChestItems } from '../../../api/chest/get-chest-items.hook';
 
 const EditTransactionPage = () => {
 	const [form] = Form.useForm();
@@ -22,14 +23,17 @@ const EditTransactionPage = () => {
 	const { id } = useParams();
 	const getSettableTransaction = useGetSettableTransaction(id || '');
 	const updateTransaction = useUpdateTransaction(id || '');
-	const getCompanies = useGetItemCompanies();
-	const getBudgets = useGetItemBudgets();
+	const getCompanies = useGetCompanyItems();
+	const getBudgets = useGetBudgetItems();
+	const getChests = useGetChestItems();
 	const transaction = getSettableTransaction.data?.transaction[0];
 	const companies = getCompanies?.data?.company || [];
 	const budgets = getBudgets?.data?.budget || [];
+	const chests = getChests?.data?.chest || [];
 	const loading =
 		getBudgets.isLoading ||
 		getCompanies.isLoading ||
+		getChests.isLoading ||
 		getSettableTransaction.isLoading;
 
 	const onFinish = (values: FormTransactionValues) => {
@@ -40,6 +44,7 @@ const EditTransactionPage = () => {
 			transaction_type: values.transaction_type || '',
 			company_id: values.company_id,
 			budget_id: values.budget_id || null,
+			chest_id: values.chest_id || null,
 			date: formatInsertableDate(values.date),
 		});
 	};
@@ -78,6 +83,7 @@ const EditTransactionPage = () => {
 							form={form}
 							budgets={budgets}
 							companies={companies}
+							chests={chests}
 							transaction={transaction}
 							submitting={updateTransaction.isLoading}
 						/>

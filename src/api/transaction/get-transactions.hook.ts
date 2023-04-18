@@ -25,6 +25,10 @@ const GET_TRANSACTIONS_QUERY = graphql(`
 					}
 				}
 			}
+			chest {
+				icon
+				label
+			}
 			company {
 				label
 				logo
@@ -35,6 +39,7 @@ const GET_TRANSACTIONS_QUERY = graphql(`
 			updated_at
 			id
 			user_id
+			chest_id
 			date
 		}
 	}

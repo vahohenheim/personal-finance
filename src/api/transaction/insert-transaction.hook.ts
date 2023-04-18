@@ -14,6 +14,7 @@ const INSERT_TRANSACTION_MUTATION = graphql(`
 				label
 				amount
 				budget_id
+				chest_id
 				company_id
 				user_id
 				transaction_type
@@ -32,6 +33,7 @@ export const useInsertTransaction = (userId: string) => {
 				transaction: {
 					amount: transaction.amount,
 					budget_id: transaction.budget_id || null,
+					chest_id: transaction.chest_id || null,
 					label: transaction.label,
 					transaction_type: transaction.transaction_type,
 					company_id: transaction.company_id,

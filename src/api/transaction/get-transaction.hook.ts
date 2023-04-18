@@ -13,6 +13,10 @@ const GET_TRANSACTION_QUERY = graphql(`
 				label
 				logo
 			}
+			chest {
+				icon
+				label
+			}
 			budget {
 				id
 				label
@@ -28,6 +32,7 @@ const GET_TRANSACTION_QUERY = graphql(`
 			id
 			user_id
 			budget_id
+			chest_id
 			company_id
 			date
 		}

@@ -12,24 +12,34 @@ import { formatCurrency } from '../../../utils/format-currency';
 import { DetailEmptyComponent } from '../../../components/detail-empty/detail-empty';
 import { useGetChest } from '../../../api/chest/get-chest.hook';
 import { ChestIconComponent } from '../../../components/chest/icon/icon';
+import { DetailChestAmounts } from './detail.model';
+import { TransactionType } from '../../../models/transaction';
 
 const DetailChestPage = () => {
 	const { id } = useParams();
 	const getChest = useGetChest(id || '');
 	const chest = getChest?.data?.chest[0];
 
+	// TODO: move to service/chest.ts
 	const aggregateAmountTransactions = (
-		sum: number,
+		amounts: DetailChestAmounts,
 		transaction: Transaction
-	) => {
-		sum = (transaction.amount as number) + sum;
-		return sum;
+	): DetailChestAmounts => {
+		if (transaction.transaction_type === TransactionType.SAVING) {
+			amounts.savings = (transaction.amount as number) + amounts.savings;
+		}
+		if (transaction.transaction_type === TransactionType.PICK) {
+			amounts.picks = (transaction.amount as number) + amounts.picks;
+		}
+		return amounts;
 	};
 
-	const amountTransactions = chest?.transactions.reduce(
-		aggregateAmountTransactions,
-		0
-	);
+	const amountTransactions: DetailChestAmounts = (
+		chest?.transactions || []
+	).reduce(aggregateAmountTransactions, {
+		picks: 0,
+		savings: 0,
+	});
 
 	const hasNoData =
 		!getChest.isLoading &&
@@ -50,7 +60,14 @@ const DetailChestPage = () => {
 					loading={getChest.isLoading}
 					icon={<ChestIconComponent icon={chest?.icon as string} />}
 					title={chest?.label as string}
-					amount={<>{formatCurrency(amountTransactions)}</>}
+					amount={
+						<>
+							{formatCurrency(
+								amountTransactions.savings -
+									amountTransactions.picks
+							)}
+						</>
+					}
 				/>
 				<Section className={styles.actions}>
 					<LinkComponent to={`/chests/${chest?.id as string}/edit`}>

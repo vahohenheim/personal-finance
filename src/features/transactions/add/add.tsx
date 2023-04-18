@@ -13,20 +13,25 @@ import dayjs from 'dayjs';
 import { TransactionType } from '../../../models/transaction';
 import { BackComponent } from '../../../components/back/back';
 import { useInsertTransaction } from '../../../api/transaction/insert-transaction.hook';
-import { useGetItemCompanies } from '../../../api/company/get-item-companies.hook';
-import { useGetItemBudgets } from '../../../api/budget/get-item-budgets.hook';
+import { useGetCompanyItems } from '../../../api/company/get-company-items.hook';
+import { useGetBudgetItems } from '../../../api/budget/get-budget-items.hook';
 import { FormSkeletonTransactionComponent } from '../../../components/transaction/form/form.skeleton';
+import { formatInsertableDate } from '../../../utils/format-insertable-date';
+import { useGetChestItems } from '../../../api/chest/get-chest-items.hook';
 
 const AddTransactionPage = () => {
 	const userId = useUserId() as string;
 	const [form] = Form.useForm();
 	const navigate = useNavigate();
 	const insertTransaction = useInsertTransaction(userId);
-	const getCompanies = useGetItemCompanies();
-	const getBudgets = useGetItemBudgets();
+	const getCompanies = useGetCompanyItems();
+	const getBudgets = useGetBudgetItems();
+	const getChests = useGetChestItems();
 	const companies = getCompanies?.data?.company || [];
 	const budgets = getBudgets?.data?.budget || [];
-	const loading = getBudgets.isLoading || getCompanies.isLoading;
+	const chests = getChests?.data?.chest || [];
+	const loading =
+		getBudgets.isLoading || getCompanies.isLoading || getChests.isLoading;
 
 	const onFinish = (values: FormTransactionValues) => {
 		insertTransaction.mutate({
@@ -35,6 +40,8 @@ const AddTransactionPage = () => {
 			transaction_type: values.transaction_type,
 			company_id: values.company_id,
 			budget_id: values.budget_id,
+			chest_id: values.chest_id,
+			date: formatInsertableDate(values.date),
 		});
 	};
 
@@ -72,6 +79,7 @@ const AddTransactionPage = () => {
 							form={form}
 							budgets={budgets}
 							companies={companies}
+							chests={chests}
 							transaction={{
 								transaction_type: TransactionType.SPENT,
 								budget_type: 'month',

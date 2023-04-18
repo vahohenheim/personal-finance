@@ -8,6 +8,25 @@ import { ItemTransactionComponentProps } from './item.model';
 import styles from './item.module.css';
 import { BudgetIconComponent } from '../../budget';
 import { TransactionEntryIconComponent } from '../entry-icon/entry-icon';
+import { TransactionSavingIconComponent } from '../saving-icon/saving-icon';
+import { ChestIconComponent } from '../../chest/icon/icon';
+
+const getTransactionIcon = (
+	transaction_type: TransactionType,
+	icon = '',
+	budgetColor = ''
+) => {
+	switch (transaction_type) {
+		case TransactionType.SPENT:
+			return <BudgetIconComponent icon={icon} color={budgetColor} />;
+		case TransactionType.PICK:
+			return <ChestIconComponent icon={icon} />;
+		case TransactionType.ENTRY:
+			return <TransactionEntryIconComponent />;
+		case TransactionType.SAVING:
+			return <TransactionSavingIconComponent />;
+	}
+};
 
 export const ItemTransactionComponent: FC<ItemTransactionComponentProps> = ({
 	transaction,
@@ -15,6 +34,8 @@ export const ItemTransactionComponent: FC<ItemTransactionComponentProps> = ({
 	const amount = formatCurrency(transaction.amount);
 	const budgetColor = transaction.budget?.budget_type?.color as string;
 	const isEntry = transaction.transaction_type === TransactionType.ENTRY;
+	const icon = transaction.budget?.icon || transaction.chest?.icon || '';
+
 	return (
 		<Link
 			className={styles.link}
@@ -25,13 +46,10 @@ export const ItemTransactionComponent: FC<ItemTransactionComponentProps> = ({
 			>
 				<div className={styles.body}>
 					<div className={styles.content}>
-						{isEntry ? (
-							<TransactionEntryIconComponent />
-						) : (
-							<BudgetIconComponent
-								icon={transaction?.budget?.icon || ''}
-								color={budgetColor || ''}
-							/>
+						{getTransactionIcon(
+							transaction.transaction_type as TransactionType,
+							icon,
+							budgetColor
 						)}
 						<div className={styles.title}>
 							<p className={styles.company}>

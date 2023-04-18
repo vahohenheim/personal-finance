@@ -3,8 +3,7 @@ import { Card, Skeleton } from 'antd';
 import Title from '../../title/title';
 import styles from './total.module.css';
 import { TotalChestsComponentProps } from './total.model';
-import { Transaction } from '../../../gql/graphql';
-import { Chest } from '../item/item.model';
+import { Chest, Transaction } from '../../../gql/graphql';
 import { formatCurrency } from '../../../utils/format-currency';
 
 export const TotalChestsComponent: FC<TotalChestsComponentProps> = ({
@@ -24,7 +23,7 @@ export const TotalChestsComponent: FC<TotalChestsComponentProps> = ({
 
 	const aggregateAmountChests = (sum: number, chest: Chest): number => {
 		sum =
-			chest.transactions
+			chest?.transactions
 				.map(getTransactionAmount)
 				.reduce(aggregateAmountTransactions, 0) + sum;
 		return sum;

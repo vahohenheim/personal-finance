@@ -25,6 +25,10 @@ const GET_CHEST_QUERY = graphql(`
 						month_id
 					}
 				}
+				chest {
+					icon
+					label
+				}
 				company {
 					label
 					logo

@@ -4,24 +4,24 @@ import { gqlClient } from '../../utils/graphql-client';
 import { Budget } from '../../gql/graphql';
 import { QUERIES } from '../constants';
 
-const GET_ITEM_BUDGETS_QUERY = graphql(`
-	query GetItemBudgets($limit: Int!) {
+const GET_BUDGET_ITEMS_QUERY = graphql(`
+	query GetBudgetItems($limit: Int!) {
 		budget(order_by: { label: asc }, limit: $limit) {
 			id
-			label
 			icon
+			label
 		}
 	}
 `);
 
-export const useGetItemBudgets = () => {
+export const useGetBudgetItems = () => {
 	return useQuery({
-		queryKey: [QUERIES.BUDGETS],
+		queryKey: [QUERIES.BUDGET_ITEMS],
 		queryFn: async () => {
 			return gqlClient.request<
 				{ budget: Array<Budget> },
 				{ limit: number }
-			>(GET_ITEM_BUDGETS_QUERY, { limit: 100 });
+			>(GET_BUDGET_ITEMS_QUERY, { limit: 100 });
 		},
 	});
 };
