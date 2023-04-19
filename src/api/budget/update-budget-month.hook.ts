@@ -3,6 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { gqlClient } from '../../utils/graphql-client';
 import { queryClient } from '../../utils/react-query-client';
 import { Budget_Month } from '../../gql/graphql';
+import { QUERIES } from '../constants';
 
 const UPDATE_BUDGET_MONTH_MUTATION = graphql(`
 	mutation UpdateBudgetMonth(
@@ -28,7 +29,11 @@ export const useUpdateBudgetMonth = (id: string) => {
 			);
 		},
 		onSuccess: async () => {
-			await queryClient.invalidateQueries(['budgets', `budget-${id}`]);
+			await queryClient.invalidateQueries([
+				QUERIES.BUDGETS,
+				QUERIES.BUDGET(id),
+				QUERIES.BUDGET_ITEMS,
+			]);
 		},
 	});
 };

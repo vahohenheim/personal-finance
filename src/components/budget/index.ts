@@ -6,4 +6,3 @@ export * from './item/item';
 export * from './item/item.model';
 export * from './list/list';
 export * from './list/list.model';
-export * from '../progress/progress';

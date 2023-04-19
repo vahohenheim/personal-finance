@@ -1,0 +1,16 @@
+.empty {
+    margin: var(--gui-gutter-2xl) 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gui-gutter-lg);
+    width: 100%;
+}
+
+.list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--gui-gutter-base);
+}

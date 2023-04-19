@@ -3,6 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { Transaction } from '../../gql/graphql';
 import { gqlClient } from '../../utils/graphql-client';
 import { queryClient } from '../../utils/react-query-client';
+import { QUERIES } from '../constants';
 
 const UPDATE_TRANSACTION_MUTATION = graphql(`
 	mutation UpdateTransaction(
@@ -10,6 +11,7 @@ const UPDATE_TRANSACTION_MUTATION = graphql(`
 		$label: String!
 		$amount: float8!
 		$budget_id: uuid!
+		$chest_id: uuid!
 		$company_id: uuid!
 		$transaction_type: String!
 		$date: timestamptz!
@@ -20,6 +22,7 @@ const UPDATE_TRANSACTION_MUTATION = graphql(`
 				label: $label
 				amount: $amount
 				budget_id: $budget_id
+				chest_id: $chest_id
 				company_id: $company_id
 				transaction_type: $transaction_type
 				date: $date
@@ -29,6 +32,7 @@ const UPDATE_TRANSACTION_MUTATION = graphql(`
 			label
 			amount
 			budget_id
+			chest_id
 			company_id
 			transaction_type
 			date
@@ -46,9 +50,11 @@ export const useUpdateTransaction = (id: string) => {
 		},
 		onSuccess: async () => {
 			await queryClient.invalidateQueries([
-				'transactions',
-				'transactions-by-month',
-				`transation-${id || ''}`,
+				QUERIES.TRANSACTIONS,
+				QUERIES.TRANSACTIONS_BY_MONTH,
+				QUERIES.TRANSACTION(id),
+				QUERIES.BUDGETS,
+				QUERIES.MONTH_BUDGETS,
 			]);
 		},
 	});

@@ -1,0 +1,16 @@
+export const QUERIES = {
+	USER: 'user',
+	TRANSACTIONS: 'transactions',
+	TRANSACTIONS_BY_MONTH: 'transactions-by-month',
+	TRANSACTION: (id: string) => `transaction-${id}`,
+	COMPANIES: 'companies',
+	COMPANY_ITEMS: 'company_items',
+	COMPANY: (id: string) => `company-${id}`,
+	BUDGETS: 'budgets',
+	BUDGET_ITEMS: 'budget-items',
+	MONTH_BUDGETS: 'month-budgets',
+	BUDGET: (id: string) => `budget-${id}`,
+	CHESTS: 'chests',
+	CHEST_ITEMS: 'chest-items',
+	CHEST: (id: string) => `chest-${id}`,
+};

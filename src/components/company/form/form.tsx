@@ -1,7 +1,6 @@
 import { Button, Form, Input } from 'antd';
 import { FormCompanyComponentProps } from './form.model';
 import { FC } from 'react';
-import { FormItemSuspenseComponent } from '../../form-item-suspense/form-item-suspense';
 
 export const FormCompanyComponent: FC<FormCompanyComponentProps> = ({
 	onFinish,

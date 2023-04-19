@@ -18,6 +18,8 @@ import { DetailEmptyComponent } from '../../../components/detail-empty/detail-em
 import { useDeleteTransactions } from '../../../api/transaction/delete-transaction.hook';
 import { useGetTransaction } from '../../../api/transaction/get-transaction.hook';
 import { TransactionEntryIconComponent } from '../../../components/transaction';
+import { ChestIconComponent } from '../../../components/chest/icon/icon';
+import { TransactionSavingIconComponent } from '../../../components/transaction/saving-icon/saving-icon';
 
 const DetailTransactionPage = () => {
 	const { id } = useParams();
@@ -28,6 +30,9 @@ const DetailTransactionPage = () => {
 	const transaction = getTransaction?.data?.transaction[0];
 	const budgetColor = transaction?.budget?.budget_type?.color as string;
 	const isEntry = transaction?.transaction_type === TransactionType.ENTRY;
+	const associateIcon =
+		transaction?.budget?.icon || transaction?.chest?.icon || '';
+	const associateId = transaction?.budget?.id || transaction?.chest?.id || '';
 
 	if (deleteTransaction.data) {
 		toast.success('Delete transaction successfully', {
@@ -48,6 +53,35 @@ const DetailTransactionPage = () => {
 		if (!deleteTransaction.isLoading && !!deleteTransaction.data) {
 			setOpenDeleteConfirm(false);
 			navigate(-1);
+		}
+	};
+
+	const getTransactionIcon = (
+		transaction_type: TransactionType,
+		link = '',
+		icon = '',
+		budgetIconColor = ''
+	) => {
+		switch (transaction_type) {
+			case TransactionType.SPENT:
+				return (
+					<LinkComponent to={`/budgets/${link}`}>
+						<BudgetIconComponent
+							icon={icon}
+							color={budgetIconColor}
+						/>
+					</LinkComponent>
+				);
+			case TransactionType.PICK:
+				return (
+					<LinkComponent to={`/chests/${link}`}>
+						<ChestIconComponent icon={icon} />
+					</LinkComponent>
+				);
+			case TransactionType.ENTRY:
+				return <TransactionEntryIconComponent />;
+			case TransactionType.SAVING:
+				return <TransactionSavingIconComponent />;
 		}
 	};
 
@@ -89,6 +123,21 @@ const DetailTransactionPage = () => {
 			});
 		}
 
+		if (transactionInfos?.chest) {
+			infos.push({
+				label: 'chest',
+				value: (
+					<LinkComponent
+						active={true}
+						to={`/chests/${transactionInfos?.chest_id as string}`}
+					>
+						{transactionInfos?.chest?.icon}{' '}
+						{transactionInfos?.chest?.label}
+					</LinkComponent>
+				),
+			});
+		}
+
 		return infos;
 	};
 
@@ -115,22 +164,12 @@ const DetailTransactionPage = () => {
 					className={classNames({
 						[styles.entry]: isEntry,
 					})}
-					icon={
-						isEntry ? (
-							<TransactionEntryIconComponent />
-						) : (
-							<LinkComponent
-								to={`/budgets/${
-									transaction?.budget?.id as string
-								}`}
-							>
-								<BudgetIconComponent
-									icon={transaction?.budget?.icon || ''}
-									color={budgetColor}
-								/>
-							</LinkComponent>
-						)
-					}
+					icon={getTransactionIcon(
+						transaction?.transaction_type as TransactionType,
+						associateId,
+						associateIcon,
+						budgetColor
+					)}
 					title={transaction?.label || ''}
 					amount={
 						<>

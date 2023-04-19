@@ -2,6 +2,7 @@ import { graphql } from '../../gql';
 import { useMutation } from '@tanstack/react-query';
 import { gqlClient } from '../../utils/graphql-client';
 import { queryClient } from '../../utils/react-query-client';
+import { QUERIES } from '../constants';
 
 const DELETE_TRANSACTION_MUTATION = graphql(`
 	mutation DeleteTransaction($id: uuid!) {
@@ -21,9 +22,9 @@ export const useDeleteTransactions = (id: string) => {
 		},
 		onSuccess: async () => {
 			await queryClient.invalidateQueries([
-				'transactions',
-				'transactions-by-month',
-				`transation-${id}`,
+				QUERIES.TRANSACTIONS,
+				QUERIES.TRANSACTIONS_BY_MONTH,
+				QUERIES.TRANSACTION(id),
 			]);
 		},
 	});

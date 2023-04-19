@@ -2,6 +2,7 @@ import { graphql } from '../../gql';
 import { useQuery } from '@tanstack/react-query';
 import { gqlClient } from '../../utils/graphql-client';
 import { Transaction } from '../../gql/graphql';
+import { QUERIES } from '../constants';
 
 const GET_TRANSACTION_QUERY = graphql(`
 	query GetTransaction($id: uuid!) {
@@ -11,6 +12,10 @@ const GET_TRANSACTION_QUERY = graphql(`
 				id
 				label
 				logo
+			}
+			chest {
+				icon
+				label
 			}
 			budget {
 				id
@@ -27,6 +32,7 @@ const GET_TRANSACTION_QUERY = graphql(`
 			id
 			user_id
 			budget_id
+			chest_id
 			company_id
 			date
 		}
@@ -35,7 +41,7 @@ const GET_TRANSACTION_QUERY = graphql(`
 
 export const useGetTransaction = (id: string) => {
 	return useQuery({
-		queryKey: [`transation-${id || ''}`],
+		queryKey: [QUERIES.TRANSACTION(id)],
 		enabled: !!id,
 		queryFn: () => {
 			return gqlClient.request<

@@ -8,40 +8,74 @@ import { ItemTransactionComponentProps } from './item.model';
 import styles from './item.module.css';
 import { BudgetIconComponent } from '../../budget';
 import { TransactionEntryIconComponent } from '../entry-icon/entry-icon';
+import { TransactionSavingIconComponent } from '../saving-icon/saving-icon';
+import { ChestIconComponent } from '../../chest/icon/icon';
+
+const getTransactionIcon = (
+	transaction_type: TransactionType,
+	icon = '',
+	budgetColor = ''
+) => {
+	switch (transaction_type) {
+		case TransactionType.SPENT:
+			return <BudgetIconComponent icon={icon} color={budgetColor} />;
+		case TransactionType.PICK:
+			return <ChestIconComponent icon={icon} />;
+		case TransactionType.ENTRY:
+			return <TransactionEntryIconComponent />;
+		case TransactionType.SAVING:
+			return <TransactionSavingIconComponent />;
+	}
+};
 
 export const ItemTransactionComponent: FC<ItemTransactionComponentProps> = ({
 	transaction,
 }) => {
 	const amount = formatCurrency(transaction.amount);
 	const budgetColor = transaction.budget?.budget_type?.color as string;
-	const isEntry = transaction.transaction_type === TransactionType.ENTRY;
+	const icon = transaction.budget?.icon || transaction.chest?.icon || '';
+	const transactionType = transaction.transaction_type as TransactionType;
+
 	return (
 		<Link
 			className={styles.link}
 			to={`/transactions/${transaction.id as string}`}
 		>
 			<Card
-				className={classNames(styles.card, { [styles.entry]: isEntry })}
+				className={classNames(
+					styles.card,
+					styles[transaction.transaction_type]
+				)}
 			>
 				<div className={styles.body}>
 					<div className={styles.content}>
-						{isEntry ? (
-							<TransactionEntryIconComponent />
-						) : (
-							<BudgetIconComponent
-								icon={transaction?.budget?.icon || ''}
-								color={budgetColor || ''}
-							/>
-						)}
+						{getTransactionIcon(transactionType, icon, budgetColor)}
 						<div className={styles.title}>
-							<p className={styles.company}>
-								{transaction?.company?.label}
-							</p>
+							{![TransactionType.SAVING].includes(
+								transactionType
+							) ? (
+								<p className={styles.from}>
+									{transaction?.company?.label}
+								</p>
+							) : (
+								<p className={styles.from}>
+									{transaction?.chest?.icon}{' '}
+									{transaction?.chest?.label}
+								</p>
+							)}
 							<p className={styles.label}>{transaction?.label}</p>
 						</div>
 					</div>
 					<div className={styles.amount}>
-						<p>{amount}</p>
+						<p>
+							{[
+								TransactionType.SPENT,
+								TransactionType.PICK,
+							].includes(transactionType)
+								? '- '
+								: '+ '}
+							{amount}
+						</p>
 					</div>
 				</div>
 			</Card>

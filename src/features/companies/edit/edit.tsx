@@ -19,7 +19,7 @@ const EditCompanyPage = () => {
 	const [form] = Form.useForm();
 	const { id } = useParams();
 	const navigate = useNavigate();
-	const updateCompany = useUpdateCompany(userId);
+	const updateCompany = useUpdateCompany(id || '');
 	const getCompany = useGetCompany(id || '');
 	const company = getCompany.data?.company[0];
 

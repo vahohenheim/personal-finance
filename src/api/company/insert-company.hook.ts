@@ -3,6 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { Company_Insert_Input } from '../../gql/graphql';
 import { gqlClient } from '../../utils/graphql-client';
 import { queryClient } from '../../utils/react-query-client';
+import { QUERIES } from '../constants';
 
 const INSERT_COMPANY_MUTATION = graphql(`
 	mutation InsertCompany($company: company_insert_input!) {
@@ -29,7 +30,10 @@ export const useInsertCompany = (userId: string) => {
 			});
 		},
 		onSuccess: async () => {
-			await queryClient.invalidateQueries(['companies']);
+			await queryClient.invalidateQueries([
+				QUERIES.COMPANIES,
+				QUERIES.COMPANY_ITEMS,
+			]);
 		},
 	});
 };

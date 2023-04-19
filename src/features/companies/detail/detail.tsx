@@ -1,8 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { graphql } from '../../../gql';
-import { gqlClient } from '../../../utils/graphql-client';
-import type { Company, Transaction } from '../../../gql/graphql';
+import type { Transaction } from '../../../gql/graphql';
 import TitleComponent from '../../../components/title/title';
 import { Helmet } from 'react-helmet';
 import Section from '../../../components/section/section';
@@ -45,7 +42,7 @@ const DetailCompanyPage = () => {
 	return (
 		<>
 			<Helmet>
-				<title>transaction {company?.label || ''} - finance</title>
+				<title>company {company?.label || ''} - finance</title>
 			</Helmet>
 
 			<div className="container center-block">

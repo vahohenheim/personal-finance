@@ -13,6 +13,9 @@ import { useGetBudgets } from '../../api/budget/get-budgets.hook';
 import { useGetTransactionsByMonth } from '../../api/transaction/get-transactions-by-month.hook';
 import { EntriesComponent } from '../../components/entries/entries';
 import { TransactionType } from '../../models/transaction';
+import { PatrimonyComponent } from '../../components/patrimony/patrimony';
+import { useGetChests } from '../../api/chest/get-chests.hook';
+import styles from './dashboard.module.css';
 
 const DashboardPage: FC = () => {
 	const transactionsLimit = 100;
@@ -24,6 +27,7 @@ const DashboardPage: FC = () => {
 		currentMonth?.start_at as string,
 		currentMonth?.end_at as string
 	);
+	const getChests = useGetChests(100);
 	const budgets = getBudgets.data?.budget || [];
 	const getTransactions = useGetTransactionsByMonth(
 		transactionsLimit,
@@ -31,6 +35,7 @@ const DashboardPage: FC = () => {
 		currentMonth?.end_at as string
 	);
 	const transactions = [...(getTransactions?.data?.transaction || [])];
+	const chests = [...(getChests?.data?.chest || [])];
 
 	return (
 		<>
@@ -43,6 +48,7 @@ const DashboardPage: FC = () => {
 						loading={getBudgets.isLoading}
 						currentMonth={currentMonth}
 						budgets={budgets}
+						lite={true}
 					/>
 				</SectionComponent>
 				<SectionComponent>
@@ -52,8 +58,15 @@ const DashboardPage: FC = () => {
 						</Button>
 					</Link>
 				</SectionComponent>
-				<SectionComponent>
-					<EntriesComponent transactions={transactions} />
+				<SectionComponent className={styles.gap}>
+					<EntriesComponent
+						loading={getTransactions.isLoading}
+						transactions={transactions}
+					/>
+					<PatrimonyComponent
+						loading={getChests.isLoading}
+						chests={chests}
+					/>
 				</SectionComponent>
 				<SectionComponent>
 					<Title

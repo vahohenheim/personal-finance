@@ -3,6 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { gqlClient } from '../../utils/graphql-client';
 import { queryClient } from '../../utils/react-query-client';
 import { User } from '../../models/user';
+import { QUERIES } from '../constants';
 
 const UPDATE_USER_MUTATION = graphql(`
 	mutation UpdateUser(
@@ -36,7 +37,7 @@ export const useUpdateUser = () => {
 			);
 		},
 		onSuccess: async () => {
-			await queryClient.invalidateQueries(['user']);
+			await queryClient.invalidateQueries([QUERIES.USER]);
 		},
 	});
 };

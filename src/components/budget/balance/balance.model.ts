@@ -4,4 +4,5 @@ export type BalanceBudgetComponentProps = {
 	budgets: Array<Budget> | undefined;
 	currentMonth: Partial<Month> | undefined;
 	loading: boolean;
+	lite?: boolean;
 };

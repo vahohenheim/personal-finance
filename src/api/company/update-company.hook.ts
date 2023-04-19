@@ -3,6 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { Company } from '../../gql/graphql';
 import { gqlClient } from '../../utils/graphql-client';
 import { queryClient } from '../../utils/react-query-client';
+import { QUERIES } from '../constants';
 
 const UPDATE_COMPANY_MUTATION = graphql(`
 	mutation UpdateCompany($id: uuid!, $label: String!, $logo: String!) {
@@ -26,7 +27,11 @@ export const useUpdateCompany = (id: string) => {
 			);
 		},
 		onSuccess: async () => {
-			await queryClient.invalidateQueries(['companies', `company-${id}`]);
+			await queryClient.invalidateQueries([
+				QUERIES.COMPANIES,
+				QUERIES.COMPANY(id),
+				QUERIES.COMPANY_ITEMS,
+			]);
 		},
 	});
 };

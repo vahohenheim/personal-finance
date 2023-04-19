@@ -2,6 +2,7 @@ import { graphql } from '../../gql';
 import { useQuery } from '@tanstack/react-query';
 import { gqlClient } from '../../utils/graphql-client';
 import { User } from '../../models/user';
+import { QUERIES } from '../constants';
 
 const GET_USER_QUERY = graphql(`
 	query GetUser($id: uuid!) {
@@ -24,7 +25,7 @@ const GET_USER_QUERY = graphql(`
 
 export const useGetUser = (id: string) => {
 	return useQuery({
-		queryKey: ['user'],
+		queryKey: [QUERIES.USER],
 		enabled: !!id,
 		queryFn: () => {
 			return gqlClient.request<{ user: User }, { id: string }>(
