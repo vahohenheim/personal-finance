@@ -26,12 +26,6 @@ export const HEADER_NAVIGATION: Array<HeaderNavigationItem> = [
 		link: '/transactions',
 	},
 	{
-		key: 'entries',
-		icon: '🍏',
-		label: 'entries',
-		link: '/entries',
-	},
-	{
 		key: 'companies',
 		icon: '🏢',
 		label: 'companies',
