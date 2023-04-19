@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { Button, Radio, RadioChangeEvent } from 'antd';
 import SectionComponent from '../../../components/section/section';
@@ -10,8 +10,9 @@ import { TransactionType } from '../../../models/transaction';
 import { useState } from 'react';
 
 const ViewTransactionsPage: FC = () => {
+	const [searchParams] = useSearchParams();
 	const [transactionType, setTransactionType] = useState<TransactionType>(
-		TransactionType.SPENT
+		(searchParams.get('type') as TransactionType) || TransactionType.SPENT
 	);
 	const getTransactions = useGetTransactions(100);
 

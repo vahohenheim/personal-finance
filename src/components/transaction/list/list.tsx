@@ -14,16 +14,16 @@ export const ListTransactionsComponent: FC<ListTransactionsComponentProps> = ({
 	max,
 }) => {
 	const empty = !transactions || transactions.length === 0;
-	const slicedTransactions = ListTransactionAdapter.sliceTransactions(
-		transactions,
-		max
-	);
 	const filtredTransactions = ListTransactionAdapter.filterTransactions(
-		slicedTransactions,
+		transactions,
 		transactionType
 	);
+	const slicedTransactions = ListTransactionAdapter.sliceTransactions(
+		filtredTransactions,
+		max
+	);
 	const transactionByDayByMonth =
-		ListTransactionAdapter.groupTransactions(filtredTransactions);
+		ListTransactionAdapter.groupTransactions(slicedTransactions);
 	const currentMonth = dayjs().format('YYYY-MM');
 
 	const formatMonth = (month: string) =>
