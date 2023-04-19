@@ -36,13 +36,15 @@ const HeaderLayout: FC = () => {
 				)}
 			>
 				<div className={styles.logo}>🏛</div>
-				<Link className={styles.avatar} to={'/user'}>
-					<AvatarUserComponent
-						url={`url(${(user as User)?.avatarUrl || ''})`}
-						loading={getUser.isLoading || isLoading}
-						active={current === 'user'}
-					/>
-				</Link>
+				<div className={styles.avatar}>
+					<Link to={'/user'}>
+						<AvatarUserComponent
+							url={`url(${(user as User)?.avatarUrl || ''})`}
+							loading={getUser.isLoading || isLoading}
+							active={current === 'user'}
+						/>
+					</Link>
+				</div>
 				<div className={styles.menu}>
 					{HEADER_NAVIGATION.map((item) => (
 						<LinkComponent

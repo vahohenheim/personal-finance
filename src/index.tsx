@@ -34,7 +34,6 @@ import EditTransactionPage from './features/transactions/edit/edit';
 import EditCompanyPage from './features/companies/edit/edit';
 import EditBudgetMonthPage from './features/budgets/edit/edit';
 import DetailUserPage from './features/user/detail/detail';
-import EntriesPage from './features/entries/entries';
 import { NotFoundPage } from './features/not-found/not-found';
 import ViewChestsPage from './features/chest/view/view';
 import DetailChestPage from './features/chest/detail/detail';
@@ -68,7 +67,6 @@ const router = createBrowserRouter(
 					path="chests/:id/edit"
 					element={<EditChestPage />}
 				></Route>
-				<Route path="entries" element={<EntriesPage />}></Route>
 				<Route
 					path="transactions"
 					element={<ViewTransactionsPage />}

@@ -33,8 +33,8 @@ export const ItemTransactionComponent: FC<ItemTransactionComponentProps> = ({
 }) => {
 	const amount = formatCurrency(transaction.amount);
 	const budgetColor = transaction.budget?.budget_type?.color as string;
-	const isEntry = transaction.transaction_type === TransactionType.ENTRY;
 	const icon = transaction.budget?.icon || transaction.chest?.icon || '';
+	const transactionType = transaction.transaction_type as TransactionType;
 
 	return (
 		<Link
@@ -42,24 +42,40 @@ export const ItemTransactionComponent: FC<ItemTransactionComponentProps> = ({
 			to={`/transactions/${transaction.id as string}`}
 		>
 			<Card
-				className={classNames(styles.card, { [styles.entry]: isEntry })}
+				className={classNames(
+					styles.card,
+					styles[transaction.transaction_type]
+				)}
 			>
 				<div className={styles.body}>
 					<div className={styles.content}>
-						{getTransactionIcon(
-							transaction.transaction_type as TransactionType,
-							icon,
-							budgetColor
-						)}
+						{getTransactionIcon(transactionType, icon, budgetColor)}
 						<div className={styles.title}>
-							<p className={styles.company}>
-								{transaction?.company?.label}
-							</p>
+							{![TransactionType.SAVING].includes(
+								transactionType
+							) ? (
+								<p className={styles.from}>
+									{transaction?.company?.label}
+								</p>
+							) : (
+								<p className={styles.from}>
+									{transaction?.chest?.icon}{' '}
+									{transaction?.chest?.label}
+								</p>
+							)}
 							<p className={styles.label}>{transaction?.label}</p>
 						</div>
 					</div>
 					<div className={styles.amount}>
-						<p>{amount}</p>
+						<p>
+							{[
+								TransactionType.SPENT,
+								TransactionType.PICK,
+							].includes(transactionType)
+								? '- '
+								: '+ '}
+							{amount}
+						</p>
 					</div>
 				</div>
 			</Card>

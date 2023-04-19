@@ -10,10 +10,12 @@ const GET_CHESTS_QUERY = graphql(`
 			id
 			icon
 			label
+			amount
 			start_at
 			end_at
 			transactions(order_by: { date: desc }) {
 				amount
+				transaction_type
 			}
 		}
 	}

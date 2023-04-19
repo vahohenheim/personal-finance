@@ -124,20 +124,28 @@ export const FormTransactionComponent: FC<FormTransactionComponentProps> = ({
 			) : (
 				''
 			)}
-			<Form.Item label="Select company" name="company_id" required={true}>
-				<Select
-					showSearch
-					size="large"
-					placeholder="typing company name"
-					optionFilterProp="children"
-					filterOption={(input, option) =>
-						(option?.label || '')
-							.toLowerCase()
-							.includes(input.toLowerCase())
-					}
-					options={companiesItems}
-				/>
-			</Form.Item>
+			{![TransactionType.SAVING].includes(transactionType) ? (
+				<Form.Item
+					label="Select company"
+					name="company_id"
+					required={true}
+				>
+					<Select
+						showSearch
+						size="large"
+						placeholder="typing company name"
+						optionFilterProp="children"
+						filterOption={(input, option) =>
+							(option?.label || '')
+								.toLowerCase()
+								.includes(input.toLowerCase())
+						}
+						options={companiesItems}
+					/>
+				</Form.Item>
+			) : (
+				''
+			)}
 			<Form.Item label="Define label" name="label" required={true}>
 				<Input size="large" placeholder="typing transaction label" />
 			</Form.Item>

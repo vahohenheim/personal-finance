@@ -5,32 +5,13 @@ import styles from './total.module.css';
 import { TotalChestsComponentProps } from './total.model';
 import { Chest, Transaction } from '../../../gql/graphql';
 import { formatCurrency } from '../../../utils/format-currency';
+import { ChestService } from '../../../services/chest';
 
 export const TotalChestsComponent: FC<TotalChestsComponentProps> = ({
 	chests = [],
 	loading = false,
 }) => {
-	const aggregateAmountTransactions = (
-		sum: number,
-		amount: number
-	): number => {
-		sum = amount + sum;
-		return sum;
-	};
-
-	const getTransactionAmount = (transaction: Partial<Transaction>) =>
-		transaction.amount as number;
-
-	const aggregateAmountChests = (sum: number, chest: Chest): number => {
-		sum =
-			chest?.transactions
-				.map(getTransactionAmount)
-				.reduce(aggregateAmountTransactions, 0) + sum;
-		return sum;
-	};
-
-	const amount = chests.reduce(aggregateAmountChests, 0);
-
+	const amount = ChestService.getChestsAmount(chests);
 	return (
 		<Card>
 			<div className={styles.total}>

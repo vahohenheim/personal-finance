@@ -43,6 +43,7 @@ const DashboardPage: FC = () => {
 						loading={getBudgets.isLoading}
 						currentMonth={currentMonth}
 						budgets={budgets}
+						lite={true}
 					/>
 				</SectionComponent>
 				<SectionComponent>

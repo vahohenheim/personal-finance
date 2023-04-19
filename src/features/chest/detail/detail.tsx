@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import type { Transaction } from '../../../gql/graphql';
+import type { Chest, Transaction } from '../../../gql/graphql';
 import TitleComponent from '../../../components/title/title';
 import { Helmet } from 'react-helmet';
 import Section from '../../../components/section/section';
@@ -12,34 +12,15 @@ import { formatCurrency } from '../../../utils/format-currency';
 import { DetailEmptyComponent } from '../../../components/detail-empty/detail-empty';
 import { useGetChest } from '../../../api/chest/get-chest.hook';
 import { ChestIconComponent } from '../../../components/chest/icon/icon';
-import { DetailChestAmounts } from './detail.model';
-import { TransactionType } from '../../../models/transaction';
+import { ChestService } from '../../../services/chest';
 
 const DetailChestPage = () => {
 	const { id } = useParams();
 	const getChest = useGetChest(id || '');
 	const chest = getChest?.data?.chest[0];
-
-	// TODO: move to service/chest.ts
-	const aggregateAmountTransactions = (
-		amounts: DetailChestAmounts,
-		transaction: Transaction
-	): DetailChestAmounts => {
-		if (transaction.transaction_type === TransactionType.SAVING) {
-			amounts.savings = (transaction.amount as number) + amounts.savings;
-		}
-		if (transaction.transaction_type === TransactionType.PICK) {
-			amounts.picks = (transaction.amount as number) + amounts.picks;
-		}
-		return amounts;
-	};
-
-	const amountTransactions: DetailChestAmounts = (
-		chest?.transactions || []
-	).reduce(aggregateAmountTransactions, {
-		picks: 0,
-		savings: 0,
-	});
+	const amounts = ChestService.getChestAmounts(chest as Chest);
+	const hasExpectedAmount = !!chest?.amount;
+	const amount = amounts.savings - amounts.picks;
 
 	const hasNoData =
 		!getChest.isLoading &&
@@ -62,9 +43,13 @@ const DetailChestPage = () => {
 					title={chest?.label as string}
 					amount={
 						<>
-							{formatCurrency(
-								amountTransactions.savings -
-									amountTransactions.picks
+							{formatCurrency(amount)}
+							{hasExpectedAmount ? (
+								<span className={styles.expectedAmount}>
+									/{formatCurrency(chest.amount)}
+								</span>
+							) : (
+								''
 							)}
 						</>
 					}

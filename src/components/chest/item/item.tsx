@@ -5,28 +5,16 @@ import { formatCurrency } from '../../../utils/format-currency';
 import { ItemChestComponentProps } from './item.model';
 import styles from './item.module.css';
 import { DonutComponent } from '../../donut/donut';
-import { Transaction } from '../../../gql/graphql';
+import { ChestService } from '../../../services/chest';
 
 export const ItemChestComponent: FC<ItemChestComponentProps> = ({ chest }) => {
-	const aggregateAmountTransactions = (
-		sum: number,
-		amount: number
-	): number => {
-		sum = amount + sum;
-		return sum;
-	};
-
-	const getTransactionAmount = (transaction: Partial<Transaction>) =>
-		transaction.amount as number;
-
-	const amount = chest.transactions
-		.map(getTransactionAmount)
-		.reduce(aggregateAmountTransactions, 0);
 	const hasExpectedAmount = !!chest.amount;
+	const amounts = ChestService.getChestAmounts(chest);
+	const amount = amounts.savings - amounts.picks;
 	const percent = chest.amount ? (amount * 100) / chest?.amount : 0;
 
 	return (
-		<Link className={styles.link} to={`/chests/${chest.id}`}>
+		<Link className={styles.link} to={`/chests/${chest?.id as string}`}>
 			<Card className={styles.card}>
 				<div className={styles.body}>
 					{hasExpectedAmount ? (

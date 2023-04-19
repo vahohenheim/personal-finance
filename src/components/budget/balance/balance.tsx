@@ -14,6 +14,7 @@ export const BalanceBudgetComponent: FC<BalanceBudgetComponentProps> = ({
 	budgets = [],
 	currentMonth,
 	loading = false,
+	lite = false,
 }) => {
 	const { totalTransactions, totalBudget, rest } =
 		ListBudgetAdapter.getBudgetTotal(budgets);
@@ -64,18 +65,22 @@ export const BalanceBudgetComponent: FC<BalanceBudgetComponentProps> = ({
 					</Title>
 				</div>
 			</div>
-			<InfosComponent
-				infos={[
-					{
-						label: '💰 month budget',
-						value: formatCurrency(totalBudget),
-					},
-					{
-						label: '💸 month spent',
-						value: formatCurrency(totalTransactions),
-					},
-				]}
-			/>
+			{!lite ? (
+				<InfosComponent
+					infos={[
+						{
+							label: '💰 month budget',
+							value: formatCurrency(totalBudget),
+						},
+						{
+							label: '💸 month spent',
+							value: formatCurrency(totalTransactions),
+						},
+					]}
+				/>
+			) : (
+				''
+			)}
 			<MonthProgressComponent className={styles.progress} />
 		</Card>
 	);

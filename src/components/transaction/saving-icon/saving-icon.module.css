@@ -1,5 +1,5 @@
 /* TODO: mutualize in a /component/icon */
-.entry {
+.saving {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -9,8 +9,8 @@
     width: 34px;
     height: 34px;
     border-radius: 100%;
-    background-color: rgba(3, 166, 136, .2);
-    border-color: rgba(3, 166, 136, .4);
+    background-color: rgba(22, 104, 220, .2);
+    border-color: rgba(22, 104, 220, .4);
 }
 
 .background {
@@ -21,11 +21,10 @@
     width: 100%;
     height: 100%;
     opacity: .2;
-    background-color: rgba(3, 166, 136, .2);
-
+    background-color: rgba(22, 104, 220, .2);
 }
 
 .icon {
     z-index: 2;
-    color: rgba(3, 166, 136, 1);
+    color: rgba(22, 104, 220, 1);
 }
