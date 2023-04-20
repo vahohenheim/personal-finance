@@ -20,6 +20,7 @@ import { useGetTransaction } from '../../../api/transaction/get-transaction.hook
 import { TransactionEntryIconComponent } from '../../../components/transaction';
 import { ChestIconComponent } from '../../../components/chest/icon/icon';
 import { TransactionSavingIconComponent } from '../../../components/transaction/saving-icon/saving-icon';
+import { Info } from '../../../components/infos/infos.model';
 
 const DetailTransactionPage = () => {
 	const { id } = useParams();
@@ -86,14 +87,17 @@ const DetailTransactionPage = () => {
 	};
 
 	const getTransactionInfos = (transactionInfos?: Transaction) => {
-		const infos = [
+		const infos: Array<Info> = [
 			{
 				label: 'date',
 				value: dayjs(transactionInfos?.date as string).format(
 					'DD MMMM YYYY'
 				),
 			},
-			{
+		];
+
+		if (transactionInfos?.transaction_type !== TransactionType.SAVING) {
+			infos.push({
 				label: 'company',
 				value: (
 					<LinkComponent
@@ -105,8 +109,8 @@ const DetailTransactionPage = () => {
 						{transactionInfos?.company?.label}
 					</LinkComponent>
 				),
-			},
-		];
+			});
+		}
 
 		if (transactionInfos?.budget) {
 			infos.push({
@@ -161,9 +165,9 @@ const DetailTransactionPage = () => {
 			<div className="container center-block">
 				<DetailCoverComponent
 					loading={getTransaction.isLoading}
-					className={classNames({
-						[styles.entry]: isEntry,
-					})}
+					className={classNames(
+						styles[transaction?.transaction_type || '']
+					)}
 					icon={getTransactionIcon(
 						transaction?.transaction_type as TransactionType,
 						associateId,
@@ -173,7 +177,14 @@ const DetailTransactionPage = () => {
 					title={transaction?.label || ''}
 					amount={
 						<>
-							{isEntry ? '+' : '-'}{' '}
+							{[
+								TransactionType.ENTRY,
+								TransactionType.SAVING,
+							].includes(
+								transaction?.transaction_type as TransactionType
+							)
+								? '+'
+								: '-'}{' '}
 							{formatCurrency(transaction?.amount)}
 						</>
 					}

@@ -9,7 +9,7 @@
 .container {
     position: relative;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     align-items: center;
     justify-content: space-between;
     flex-grow: 1;
@@ -41,5 +41,5 @@
 }
 
 .avatar {
-    text-align: right;
+    text-align: left;
 }

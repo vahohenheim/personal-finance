@@ -12,7 +12,7 @@ export const PatrimonyComponent: FC<PatrimonyComponentProps> = ({
 	chests = [],
 	loading = false,
 }) => {
-	const amount = ChestService.getChestsAmount(chests);
+	const amount = ChestService.getChestsSavingAndPicks(chests);
 
 	if (loading) {
 		return <PatrimonySkeletonComponent />;

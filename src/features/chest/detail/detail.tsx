@@ -13,6 +13,9 @@ import { DetailEmptyComponent } from '../../../components/detail-empty/detail-em
 import { useGetChest } from '../../../api/chest/get-chest.hook';
 import { ChestIconComponent } from '../../../components/chest/icon/icon';
 import { ChestService } from '../../../services/chest';
+import InfosComponent from '../../../components/infos/infos';
+import { Info } from '../../../components/infos/infos.model';
+import dayjs from 'dayjs';
 
 const DetailChestPage = () => {
 	const { id } = useParams();
@@ -29,6 +32,17 @@ const DetailChestPage = () => {
 	if (hasNoData) {
 		return <DetailEmptyComponent />;
 	}
+
+	const infos: Array<Info> = [
+		{
+			label: 'Start date',
+			value: dayjs(chest?.start_at as string).format('DD MMMM YYYY'),
+		},
+		{
+			label: 'End date',
+			value: dayjs(chest?.end_at as string).format('DD MMMM YYYY'),
+		},
+	];
 
 	return (
 		<>
@@ -54,6 +68,9 @@ const DetailChestPage = () => {
 						</>
 					}
 				/>
+				<Section>
+					<InfosComponent infos={infos}></InfosComponent>
+				</Section>
 				<Section className={styles.actions}>
 					<LinkComponent to={`/chests/${chest?.id as string}/edit`}>
 						<Button type="link" block={true}>

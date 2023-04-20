@@ -63,7 +63,15 @@ export const ItemTransactionComponent: FC<ItemTransactionComponentProps> = ({
 									{transaction?.chest?.label}
 								</p>
 							)}
-							<p className={styles.label}>{transaction?.label}</p>
+							{![TransactionType.SAVING].includes(
+								transactionType
+							) ? (
+								<p className={styles.label}>
+									{transaction?.label}
+								</p>
+							) : (
+								''
+							)}
 						</div>
 					</div>
 					<div className={styles.amount}>

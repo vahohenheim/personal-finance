@@ -9,6 +9,7 @@ import { useAuthenticationStatus, useUserId } from '@nhost/react';
 import { useGetUser } from '../../api/user/get-user.hook';
 import { AvatarUserComponent } from '../../components/user/avatar/avatar';
 import { HEADER_NAVIGATION } from './header.constants';
+import { Button } from 'antd';
 
 const HeaderLayout: FC = () => {
 	const [current, setCurrent] = useState('/');
@@ -35,7 +36,6 @@ const HeaderLayout: FC = () => {
 					'container center-block'
 				)}
 			>
-				<div className={styles.logo}>🏛</div>
 				<div className={styles.avatar}>
 					<Link to={'/user'}>
 						<AvatarUserComponent
@@ -45,6 +45,11 @@ const HeaderLayout: FC = () => {
 						/>
 					</Link>
 				</div>
+				<Link to="/transactions/add">
+					<Button type="primary" block={true} size="middle">
+						Add a transaction
+					</Button>
+				</Link>
 				<div className={styles.menu}>
 					{HEADER_NAVIGATION.map((item) => (
 						<LinkComponent

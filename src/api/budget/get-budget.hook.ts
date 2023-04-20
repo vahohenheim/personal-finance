@@ -47,6 +47,7 @@ const GET_BUDGET_QUERY = graphql(`
 					logo
 				}
 				label
+				date
 				transaction_type
 				created_at
 				updated_at

@@ -8,6 +8,10 @@ import { TotalChestsComponent } from '../../../components/chest/total/total';
 import { ListChestComponent } from '../../../components/chest/list/list';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
+import { Info } from '../../../components/infos/infos.model';
+import { ChestService } from '../../../services/chest';
+import { formatCurrency } from '../../../utils/format-currency';
+import InfosComponent from '../../../components/infos/infos';
 
 const ViewChestsPage = () => {
 	const userId = useUserId() as string;
@@ -15,6 +19,19 @@ const ViewChestsPage = () => {
 	const getChests = useGetChests(100);
 	const chests = getChests.data?.chest || [];
 	const loading = getChests.isLoading || getUser.isLoading;
+	const expectedAmount = ChestService.getChestsAmount(chests);
+	const amount = ChestService.getChestsSavingAndPicks(chests);
+
+	const infos: Array<Info> = [
+		{
+			label: 'Expected chests total',
+			value: formatCurrency(expectedAmount),
+		},
+		{
+			label: 'Needed rest',
+			value: formatCurrency(expectedAmount - amount),
+		},
+	];
 
 	return (
 		<>
@@ -24,13 +41,6 @@ const ViewChestsPage = () => {
 			<div className="container center-block">
 				<SectionComponent>
 					<TotalChestsComponent loading={loading} chests={chests} />
-				</SectionComponent>
-				<SectionComponent>
-					<Link to="/transactions/add">
-						<Button type="primary" block={true} size="large">
-							Add a transaction
-						</Button>
-					</Link>
 				</SectionComponent>
 				<SectionComponent>
 					<TitleComponent
@@ -48,9 +58,7 @@ const ViewChestsPage = () => {
 					<ListChestComponent chests={chests} loading={loading} />
 				</SectionComponent>
 				<SectionComponent>
-					<p style={{ textAlign: 'center' }}>
-						ADD INFOS : total budget, total saving, rest
-					</p>
+					<InfosComponent infos={infos}></InfosComponent>
 				</SectionComponent>
 			</div>
 		</>

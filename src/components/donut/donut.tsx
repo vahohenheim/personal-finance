@@ -38,7 +38,7 @@ export const DonutComponent: FC<DonutComponentProps> = ({
 				className={styles.indicator}
 			/>
 			<text className={styles.text} x={halfsize} y={halfsize}>
-				{value}%
+				{Math.round(value)}%
 			</text>
 		</svg>
 	);

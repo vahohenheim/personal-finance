@@ -50,23 +50,16 @@ const DashboardPage: FC = () => {
 						budgets={budgets}
 						lite={true}
 					/>
-				</SectionComponent>
-				<SectionComponent>
-					<Link to="/transactions/add">
-						<Button type="primary" block={true} size="large">
-							Add a transaction
-						</Button>
-					</Link>
-				</SectionComponent>
-				<SectionComponent className={styles.gap}>
-					<EntriesComponent
-						loading={getTransactions.isLoading}
-						transactions={transactions}
-					/>
-					<PatrimonyComponent
-						loading={getChests.isLoading}
-						chests={chests}
-					/>
+					<div className={styles.amounts}>
+						<EntriesComponent
+							loading={getTransactions.isLoading}
+							transactions={transactions}
+						/>
+						<PatrimonyComponent
+							loading={getChests.isLoading}
+							chests={chests}
+						/>
+					</div>
 				</SectionComponent>
 				<SectionComponent>
 					<Title

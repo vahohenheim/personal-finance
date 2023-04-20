@@ -31,7 +31,7 @@ export const EntriesComponent: FC<EntriesComponentProps> = ({
 			<Card>
 				<p className={styles.label}>month entries</p>
 				<TitleComponent heading={'h1'} className={styles.amount}>
-					+ {formatCurrency(entriesAmount)}
+					{formatCurrency(entriesAmount)}
 				</TitleComponent>
 			</Card>
 		</Link>

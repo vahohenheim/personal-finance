@@ -1,1 +1,1 @@
-.entry {    background-color: rgba(3, 166, 136, .2);    border-color: rgba(3, 166, 136, .4);}.actions {    display: grid;    gap: var(--gui-gutter-base);}
+.entry {    background-color: rgba(3, 166, 136, .2);    border-color: rgba(3, 166, 136, .4);}.saving {    background-color: rgba(22, 104, 220, .2);    border-color: rgba(22, 104, 220, .4);}.actions {    display: grid;    gap: var(--gui-gutter-base);}

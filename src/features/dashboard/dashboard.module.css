@@ -1,5 +1,6 @@
-.gap {
-    display: flex;
-    flex-direction: column;
+.amounts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: var(--gui-gutter-base);
     gap: var(--gui-gutter-base);
 }
