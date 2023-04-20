@@ -1,9 +1,9 @@
 import { FormInstance } from 'antd/es/form/Form';
 import { Dayjs } from 'dayjs';
-import { Budget, Chest, Company } from '../../../gql/graphql';
+import { Budget, Chest, Company, Maybe } from '../../../gql/graphql';
 
 export type FormTransactionValues = {
-	label: string;
+	label: Maybe<string>;
 	transaction_type: string;
 	budget_type: string;
 	chest_id: string;
@@ -22,4 +22,5 @@ export type FormTransactionComponentProps = {
 	chests?: Array<Chest>;
 	submitLabel: string;
 	submitting: boolean;
+	editing?: boolean;
 };

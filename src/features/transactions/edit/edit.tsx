@@ -38,13 +38,9 @@ const EditTransactionPage = () => {
 
 	const onFinish = (values: FormTransactionValues) => {
 		updateTransaction.mutate({
+			...transaction,
+			...values,
 			id: transaction?.id || '',
-			label: values.label || '',
-			amount: values.amount,
-			transaction_type: values.transaction_type || '',
-			company_id: values.company_id,
-			budget_id: values.budget_id || null,
-			chest_id: values.chest_id || null,
 			date: formatInsertableDate(values.date),
 		});
 	};
@@ -79,6 +75,7 @@ const EditTransactionPage = () => {
 					) : (
 						<FormTransactionComponent
 							submitLabel={'edit transaction'}
+							editing={true}
 							onFinish={onFinish}
 							form={form}
 							budgets={budgets}

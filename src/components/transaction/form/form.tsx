@@ -22,6 +22,7 @@ export const FormTransactionComponent: FC<FormTransactionComponentProps> = ({
 	companies = [],
 	chests = [],
 	submitting = false,
+	editing = false,
 }) => {
 	const [transactionType, setTransactionType] = useState<TransactionType>(
 		transaction?.transaction_type as TransactionType
@@ -62,26 +63,31 @@ export const FormTransactionComponent: FC<FormTransactionComponentProps> = ({
 			disabled={submitting}
 			onValuesChange={onChange}
 		>
-			<Form.Item
-				label="Define transaction"
-				name="transaction_type"
-				required={true}
-			>
-				<Radio.Group size="large">
-					<Radio.Button value={TransactionType.SPENT}>
-						{TransactionType.SPENT}
-					</Radio.Button>
-					<Radio.Button value={TransactionType.ENTRY}>
-						{TransactionType.ENTRY}
-					</Radio.Button>
-					<Radio.Button value={TransactionType.SAVING}>
-						{TransactionType.SAVING}
-					</Radio.Button>
-					<Radio.Button value={TransactionType.PICK}>
-						{TransactionType.PICK}
-					</Radio.Button>
-				</Radio.Group>
-			</Form.Item>
+			{!editing ? (
+				<Form.Item
+					label="Define transaction"
+					name="transaction_type"
+					required={true}
+				>
+					<Radio.Group size="large">
+						<Radio.Button value={TransactionType.SPENT}>
+							{TransactionType.SPENT}
+						</Radio.Button>
+						<Radio.Button value={TransactionType.ENTRY}>
+							{TransactionType.ENTRY}
+						</Radio.Button>
+						<Radio.Button value={TransactionType.SAVING}>
+							{TransactionType.SAVING}
+						</Radio.Button>
+						<Radio.Button value={TransactionType.PICK}>
+							{TransactionType.PICK}
+						</Radio.Button>
+					</Radio.Group>
+				</Form.Item>
+			) : (
+				''
+			)}
+
 			{[TransactionType.SPENT].includes(transactionType) ? (
 				<Form.Item
 					label="Select budget"
@@ -146,9 +152,17 @@ export const FormTransactionComponent: FC<FormTransactionComponentProps> = ({
 			) : (
 				''
 			)}
-			<Form.Item label="Define label" name="label" required={true}>
-				<Input size="large" placeholder="typing transaction label" />
-			</Form.Item>
+			{![TransactionType.SAVING].includes(transactionType) ? (
+				<Form.Item label="Define label" name="label" required={true}>
+					<Input
+						size="large"
+						placeholder="typing transaction label"
+					/>
+				</Form.Item>
+			) : (
+				''
+			)}
+
 			<Form.Item label="Amount" name="amount" required={true}>
 				<InputNumber
 					prefix="€"

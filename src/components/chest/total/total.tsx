@@ -11,7 +11,7 @@ export const TotalChestsComponent: FC<TotalChestsComponentProps> = ({
 	chests = [],
 	loading = false,
 }) => {
-	const amount = ChestService.getChestsAmount(chests);
+	const amount = ChestService.getChestsSavingAndPicks(chests);
 	return (
 		<Card>
 			<div className={styles.total}>

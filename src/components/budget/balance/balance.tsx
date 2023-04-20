@@ -26,10 +26,7 @@ export const BalanceBudgetComponent: FC<BalanceBudgetComponentProps> = ({
 	const today = dayjs();
 	const isCurrentMonth =
 		today.month() === dayjs(currentMonth?.start_at).month();
-	const percent = Math.round(
-		((totalTransactions || 0) * 100) / (totalBudget || 0)
-	);
-
+	const percent = ((totalTransactions || 0) * 100) / (totalBudget || 0);
 	if (!isCurrentMonth && !loading) {
 		return (
 			<Button type="primary" block={true} size="large">

@@ -24,6 +24,7 @@ const GET_COMPANY_QUERY = graphql(`
 					}
 				}
 				label
+				date
 				transaction_type
 				created_at
 				updated_at

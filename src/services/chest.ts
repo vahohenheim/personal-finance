@@ -3,6 +3,13 @@ import { TransactionType } from '../models/transaction';
 import { ChestAmounts } from '../models/chest';
 
 export class ChestService {
+	public static getChestsSavingAndPicks(chests: Array<Chest>): number {
+		return chests.reduce(
+			ChestService.aggregateChestsSavingAndPicks.bind(ChestService),
+			0
+		);
+	}
+
 	public static getChestsAmount(chests: Array<Chest>): number {
 		return chests.reduce(
 			ChestService.aggregateChestsAmount.bind(ChestService),
@@ -20,9 +27,14 @@ export class ChestService {
 		) as ChestAmounts;
 	}
 
-	private static aggregateChestsAmount(amount: number, chest: Chest) {
+	private static aggregateChestsSavingAndPicks(amount: number, chest: Chest) {
 		const chestAmounts = ChestService.getChestAmounts(chest);
 		amount = chestAmounts.savings - chestAmounts.picks + amount;
+		return amount;
+	}
+
+	private static aggregateChestsAmount(amount: number, chest: Chest) {
+		amount = (chest?.amount as number) + amount;
 		return amount;
 	}
 

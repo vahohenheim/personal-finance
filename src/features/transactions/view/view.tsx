@@ -1,13 +1,13 @@
 import type { FC } from 'react';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { Button, Radio, RadioChangeEvent } from 'antd';
+import { Radio, RadioChangeEvent } from 'antd';
 import SectionComponent from '../../../components/section/section';
 import TitleComponent from '../../../components/title/title';
 import { ListTransactionsComponent } from '../../../components/transaction';
 import { useGetTransactions } from '../../../api/transaction/get-transactions.hook';
 import { TransactionType } from '../../../models/transaction';
-import { useState } from 'react';
 
 const ViewTransactionsPage: FC = () => {
 	const [searchParams] = useSearchParams();
@@ -17,7 +17,7 @@ const ViewTransactionsPage: FC = () => {
 	const getTransactions = useGetTransactions(100);
 
 	const handleTransactionTypeChange = (event: RadioChangeEvent) => {
-		setTransactionType(event.target.value);
+		setTransactionType(event?.target?.value as TransactionType);
 	};
 
 	return (
@@ -27,18 +27,7 @@ const ViewTransactionsPage: FC = () => {
 			</Helmet>
 			<div className="container center-block">
 				<SectionComponent>
-					<TitleComponent
-						heading={'h2'}
-						action={
-							<Link to="/transactions/add">
-								<Button type="primary" block={true}>
-									Add a transaction
-								</Button>
-							</Link>
-						}
-					>
-						Transactions
-					</TitleComponent>
+					<TitleComponent heading={'h2'}>Transactions</TitleComponent>
 					<Radio.Group
 						size="large"
 						defaultValue={transactionType}

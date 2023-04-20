@@ -12,7 +12,6 @@ export const ItemChestComponent: FC<ItemChestComponentProps> = ({ chest }) => {
 	const amounts = ChestService.getChestAmounts(chest);
 	const amount = amounts.savings - amounts.picks;
 	const percent = chest.amount ? (amount * 100) / chest?.amount : 0;
-
 	return (
 		<Link className={styles.link} to={`/chests/${chest?.id as string}`}>
 			<Card className={styles.card}>
