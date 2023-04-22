@@ -9,6 +9,7 @@ import {
 } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
 import { toast } from 'react-hot-toast';
+import SectionComponent from '../../components/section/section';
 
 const LoginPage = () => {
 	const {
@@ -52,11 +53,7 @@ const LoginPage = () => {
 	}
 
 	return (
-		<div className={styles.login}>
-			<div className={styles.logo}>
-				<p>🏛</p>
-				<p>finance</p>
-			</div>
+		<SectionComponent>
 			<Form
 				name="login"
 				className={styles.form}
@@ -66,7 +63,10 @@ const LoginPage = () => {
 				<Form.Item
 					name="email"
 					rules={[
-						{ required: true, message: 'Please input your email' },
+						{
+							required: true,
+							message: 'Please input your email',
+						},
 					]}
 				>
 					<Input
@@ -122,7 +122,7 @@ const LoginPage = () => {
 					</Link>
 				</Form.Item>
 			</Form>
-		</div>
+		</SectionComponent>
 	);
 };
 

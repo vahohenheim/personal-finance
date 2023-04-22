@@ -1,11 +1,11 @@
 import styles from './list.module.css';
-import dayjs from 'dayjs';
 import { FC } from 'react';
 import { Empty } from 'antd';
 import type { ListTransactionsComponentProps } from './list.model';
 import { ItemTransactionComponent } from '../item/item';
 import { ListSkeletonTransactionsComponent } from './list.skeleton';
-import { ListTransactionAdapter } from './list.adapter';
+import { useListTransactions } from './list.hook';
+import { DateService } from '../../../services/date';
 
 export const ListTransactionsComponent: FC<ListTransactionsComponentProps> = ({
 	transactions = [],
@@ -14,23 +14,10 @@ export const ListTransactionsComponent: FC<ListTransactionsComponentProps> = ({
 	max,
 }) => {
 	const empty = !transactions || transactions.length === 0;
-	const filtredTransactions = ListTransactionAdapter.filterTransactions(
-		transactions,
-		transactionType
-	);
-	const slicedTransactions = ListTransactionAdapter.sliceTransactions(
-		filtredTransactions,
-		max
-	);
-	const transactionByDayByMonth =
-		ListTransactionAdapter.groupTransactions(slicedTransactions);
-	const currentMonth = dayjs().format('YYYY-MM');
-
-	const formatMonth = (month: string) =>
-		dayjs(month).format('MMMM YYYY').toLowerCase();
-
-	const formatDay = (day: string) =>
-		dayjs(day).format('DD dddd, MMMM').toLowerCase();
+	const transactionByDayByMonth = useListTransactions(transactions, {
+		transactionType,
+		max,
+	});
 	return (
 		<div className={styles.list}>
 			{loading ? (
@@ -44,13 +31,15 @@ export const ListTransactionsComponent: FC<ListTransactionsComponentProps> = ({
 				(Object.keys(transactionByDayByMonth) || []).map((month) => (
 					<div key={month} className={styles.month}>
 						<h3>
-							{currentMonth === month ? 'this month, ' : ''}
-							{formatMonth(month)}
+							{DateService.getCurrentMonth() === month
+								? 'this month, '
+								: ''}
+							{DateService.formatMonth(month)}
 						</h3>
 						{Object.keys(transactionByDayByMonth[month]).map(
 							(day) => (
 								<div key={day} className={styles.day}>
-									<p>{formatDay(day)}</p>
+									<p>{DateService.formatDay(day)}</p>
 									{transactionByDayByMonth[month][day].map(
 										(transaction) => (
 											<div key={transaction.id as string}>

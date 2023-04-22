@@ -5,10 +5,10 @@ import {
 	useLocation,
 	useOutlet,
 } from 'react-router-dom';
-import FooterLayout from '../footer/footer';
-import styles from './main.module.css';
+import styles from './online.module.css';
 import { AnimatePresence, motion } from 'framer-motion';
 import { FC, useState } from 'react';
+import { NavigationLayout } from '../navigation/navigation';
 
 const AnimatedOutlet: FC = () => {
 	const o = useOutlet();
@@ -16,7 +16,7 @@ const AnimatedOutlet: FC = () => {
 	return <>{outlet}</>;
 };
 
-const MainLayout = () => {
+const OnlineLayout = () => {
 	const location = useLocation();
 
 	return (
@@ -37,7 +37,7 @@ const MainLayout = () => {
 			<main className={styles.main}>
 				<Outlet />
 			</main>
-			<FooterLayout />
+			<NavigationLayout></NavigationLayout>
 			<ScrollRestoration
 				getKey={(currentLocation) => currentLocation.key}
 			/>
@@ -45,4 +45,4 @@ const MainLayout = () => {
 	);
 };
 
-export default MainLayout;
+export default OnlineLayout;

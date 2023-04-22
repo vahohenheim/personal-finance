@@ -7,3 +7,8 @@ export type ListTransactionsComponentProps = {
 	loading: boolean;
 	max?: number;
 };
+
+export type ListTransactionsOptions = {
+	transactionType?: TransactionType;
+	max?: number;
+};

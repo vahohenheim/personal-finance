@@ -3,6 +3,8 @@ import { Link, Navigate } from 'react-router-dom';
 import { Form, Input, Button } from 'antd';
 import styles from './register.module.css';
 import { toast } from 'react-hot-toast';
+import FooterLayout from '../../layouts/footer/footer';
+import SectionComponent from '../../components/section/section';
 
 const RegisterPage = () => {
 	const {
@@ -52,11 +54,7 @@ const RegisterPage = () => {
 	};
 
 	return (
-		<div>
-			<div className={styles.logo}>
-				<p>🏛</p>
-				<p>finance</p>
-			</div>
+		<SectionComponent>
 			<Form
 				name="register"
 				layout="vertical"
@@ -92,7 +90,10 @@ const RegisterPage = () => {
 					label="mail address"
 					name="email"
 					rules={[
-						{ required: true, message: 'Please input your email' },
+						{
+							required: true,
+							message: 'Please input your email',
+						},
 					]}
 				>
 					<Input size="large" disabled={disableForm} />
@@ -128,7 +129,7 @@ const RegisterPage = () => {
 					</Link>
 				</Form.Item>
 			</Form>
-		</div>
+		</SectionComponent>
 	);
 };
 

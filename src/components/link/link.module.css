@@ -12,3 +12,7 @@
 .link.active {
     color: var(--gui-color-primary);
 }
+
+.link.active svg {
+    fill: var(--gui-color-primary);
+}

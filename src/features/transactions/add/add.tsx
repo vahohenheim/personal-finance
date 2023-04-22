@@ -11,15 +11,18 @@ import TitleComponent from '../../../components/title/title';
 import { useUserId } from '@nhost/react';
 import dayjs from 'dayjs';
 import { TransactionType } from '../../../models/transaction';
-import { BackComponent } from '../../../components/back/back';
 import { useInsertTransaction } from '../../../api/transaction/insert-transaction.hook';
 import { useGetCompanyItems } from '../../../api/company/get-company-items.hook';
 import { useGetBudgetItems } from '../../../api/budget/get-budget-items.hook';
 import { FormSkeletonTransactionComponent } from '../../../components/transaction/form/form.skeleton';
 import { formatInsertableDate } from '../../../utils/format-insertable-date';
 import { useGetChestItems } from '../../../api/chest/get-chest-items.hook';
+import styles from '../../../components/back/back.module.css';
+import { ArrowLeftIcon } from '../../../icons/arrow-left';
+import { FC } from 'react';
+import { AddTransactionPageProps } from './add.model';
 
-const AddTransactionPage = () => {
+const AddTransactionPage: FC<AddTransactionPageProps> = ({ handleBack }) => {
 	const userId = useUserId() as string;
 	const [form] = Form.useForm();
 	const navigate = useNavigate();
@@ -66,7 +69,9 @@ const AddTransactionPage = () => {
 			</Helmet>
 			<div className="container center-block">
 				<SectionComponent>
-					<BackComponent />
+					<div className={styles.back} onClick={handleBack}>
+						<ArrowLeftIcon />
+					</div>
 					<TitleComponent heading="h2">
 						Add a transaction
 					</TitleComponent>
