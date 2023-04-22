@@ -5,7 +5,7 @@ import { nhost } from './utils/nhost';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './utils/react-query-client';
 import { ConfigProvider, theme } from 'antd';
-import MainLayout from './layouts/main/main';
+import { Outlet } from 'react-router-dom';
 
 const App: FC = () => {
 	return (
@@ -17,7 +17,7 @@ const App: FC = () => {
 							algorithm: theme.darkAlgorithm,
 						}}
 					>
-						<MainLayout />
+						<Outlet />
 					</ConfigProvider>
 				</QueryClientProvider>
 			</NhostProvider>

@@ -9,6 +9,8 @@ export const AvatarUserComponent: FC<AvatarUserComponentProps> = ({
 	active = false,
 	url,
 	className,
+	width = 30,
+	height = 30,
 }) => {
 	const avatarClassName = classNames(
 		styles.avatar,
@@ -27,6 +29,8 @@ export const AvatarUserComponent: FC<AvatarUserComponentProps> = ({
 			className={avatarClassName}
 			style={{
 				backgroundImage: url,
+				width,
+				height,
 			}}
 		></div>
 	);

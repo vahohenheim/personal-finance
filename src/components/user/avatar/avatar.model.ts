@@ -3,4 +3,6 @@ export type AvatarUserComponentProps = {
 	active?: boolean;
 	loading?: boolean;
 	url: string;
+	width?: number;
+	height?: number;
 };

@@ -8,6 +8,7 @@ import TitleComponent from '../../../components/title/title';
 import { ListTransactionsComponent } from '../../../components/transaction';
 import { useGetTransactions } from '../../../api/transaction/get-transactions.hook';
 import { TransactionType } from '../../../models/transaction';
+import { BackComponent } from '../../../components/back/back';
 
 const ViewTransactionsPage: FC = () => {
 	const [searchParams] = useSearchParams();
@@ -27,6 +28,7 @@ const ViewTransactionsPage: FC = () => {
 			</Helmet>
 			<div className="container center-block">
 				<SectionComponent>
+					<BackComponent />
 					<TitleComponent heading={'h2'}>Transactions</TitleComponent>
 					<Radio.Group
 						size="large"

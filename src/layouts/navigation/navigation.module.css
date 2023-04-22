@@ -1,0 +1,42 @@
+.navigation {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 90px;
+    backdrop-filter: blur(3px);
+    background-color: var(--gui-background-color-navigation);
+    border-top-left-radius: var(--gui-border-radius-large);
+    border-top-right-radius: var(--gui-border-radius-large);
+}
+
+.menu {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    padding-left: var(--gui-gutter-lg);
+    padding-right: var(--gui-gutter-lg);
+}
+
+.menu > * {
+    margin-top: var(--gui-gutter-sm);
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--gui-gutter-xs);
+}
+
+.active {
+    fill: var(--gui-color-primary);
+}
+
+.label {
+    text-align: center;
+}
+

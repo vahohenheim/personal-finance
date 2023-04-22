@@ -1,8 +1,8 @@
 import { Transaction } from '../../../gql/graphql';
-import dayjs from 'dayjs';
 import { TransactionType } from '../../../models/transaction';
+import dayjs from 'dayjs';
 
-export class ListTransactionAdapter {
+export class ListTransactionsService {
 	public static sliceTransactions(
 		transactions: Array<Transaction>,
 		max?: number
@@ -30,10 +30,10 @@ export class ListTransactionAdapter {
 	): Record<string, Record<string, Array<Transaction>>> {
 		const transactionByDay = transactions.reduce<
 			Record<string, Array<Transaction>>
-		>(ListTransactionAdapter.aggregateByDay.bind(this), {});
+		>(ListTransactionsService.aggregateByDay.bind(this), {});
 
 		return Object.keys(transactionByDay).reduce(
-			ListTransactionAdapter.aggregateByDayByMonth(transactionByDay),
+			ListTransactionsService.aggregateByDayByMonth(transactionByDay),
 			{}
 		);
 	}
@@ -42,7 +42,9 @@ export class ListTransactionAdapter {
 		transactionByDay: Record<string, Array<Transaction>>,
 		transaction: Transaction
 	) {
-		const date = dayjs(transaction.date as string).format('YYYY-MM-DD');
+		const date = dayjs(transaction.created_at as string).format(
+			'YYYY-MM-DD'
+		);
 		if (!transactionByDay[date]) {
 			transactionByDay[date] = [transaction];
 		} else {

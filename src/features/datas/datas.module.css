@@ -1,0 +1,14 @@
+.list {
+    display: grid;
+    gap: var(--gui-gutter-lg);
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    gap: var(--gui-gutter-sm);
+}
+
+.label {
+    flex-grow: 1;
+}
