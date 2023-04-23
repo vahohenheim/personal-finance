@@ -16,6 +16,7 @@ import { TransactionType } from '../../models/transaction';
 import { PatrimonyComponent } from '../../components/patrimony/patrimony';
 import { useGetChests } from '../../api/chest/get-chests.hook';
 import styles from './dashboard.module.css';
+import LinkComponent from '../../components/link/link/link';
 
 const DashboardPage: FC = () => {
 	const transactionsLimit = 100;
@@ -44,12 +45,14 @@ const DashboardPage: FC = () => {
 			</Helmet>
 			<div className="container center-block">
 				<SectionComponent>
-					<BalanceBudgetComponent
-						loading={getBudgets.isLoading}
-						currentMonth={currentMonth}
-						budgets={budgets}
-						lite={true}
-					/>
+					<LinkComponent className={styles.balance} to="/budgets">
+						<BalanceBudgetComponent
+							loading={getBudgets.isLoading}
+							currentMonth={currentMonth}
+							budgets={budgets}
+							lite={true}
+						/>
+					</LinkComponent>
 					<div className={styles.amounts}>
 						<EntriesComponent
 							loading={getTransactions.isLoading}

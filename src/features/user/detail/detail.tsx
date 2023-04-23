@@ -2,7 +2,7 @@ import type { Month } from '../../../gql/graphql';
 import { Helmet } from 'react-helmet';
 import dayjs from 'dayjs';
 import styles from './detail.module.css';
-import LinkComponent from '../../../components/link/link';
+import LinkComponent from '../../../components/link/link/link';
 import InfosComponent from '../../../components/infos/infos';
 import { Button, Form } from 'antd';
 import { DetailCoverComponent } from '../../../components/detail-cover/detail-cover';

@@ -13,8 +13,9 @@
 .menu {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    padding-left: var(--gui-gutter-lg);
-    padding-right: var(--gui-gutter-lg);
+    padding-left: var(--gui-gutter-base);
+    padding-right: var(--gui-gutter-base);
+    gap: var(--gui-gutter-base);
 }
 
 .menu > * {

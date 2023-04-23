@@ -1,4 +1,5 @@
 import {
+	AutoComplete,
 	Button,
 	DatePicker,
 	Form,
@@ -31,7 +32,7 @@ export const FormTransactionComponent: FC<FormTransactionComponentProps> = ({
 
 	const companiesItems = companies.map((company: Company) => ({
 		label: company.label,
-		value: company.id,
+		value: company.label,
 	}));
 
 	const budgetsItems = budgets.map((budget: Budget) => ({
@@ -136,7 +137,18 @@ export const FormTransactionComponent: FC<FormTransactionComponentProps> = ({
 					name="company_id"
 					required={true}
 				>
-					<Select
+					<AutoComplete
+						size="large"
+						optionFilterProp="children"
+						filterOption={(input, option) =>
+							(option?.label || '')
+								.toLowerCase()
+								.includes(input.toLowerCase())
+						}
+						options={companiesItems}
+						placeholder="typing company name"
+					/>
+					{/*<Select
 						showSearch
 						size="large"
 						placeholder="typing company name"
@@ -147,7 +159,7 @@ export const FormTransactionComponent: FC<FormTransactionComponentProps> = ({
 								.includes(input.toLowerCase())
 						}
 						options={companiesItems}
-					/>
+					/>*/}
 				</Form.Item>
 			) : (
 				''

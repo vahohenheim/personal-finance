@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Form } from 'antd';
@@ -16,11 +17,16 @@ import { useGetCompanyItems } from '../../../api/company/get-company-items.hook'
 import { useGetBudgetItems } from '../../../api/budget/get-budget-items.hook';
 import { FormSkeletonTransactionComponent } from '../../../components/transaction/form/form.skeleton';
 import { useGetChestItems } from '../../../api/chest/get-chest-items.hook';
+import { AddCompanyTransaction } from '../add-company/add-company';
+import { useUserId } from '@nhost/react';
 
 const EditTransactionPage = () => {
+	const userId = useUserId() as string;
 	const [form] = Form.useForm();
 	const navigate = useNavigate();
 	const { id } = useParams();
+	const [requestCompany, setRequestCompany] = useState<string>('');
+	const [needNewCompany, setNeedNewCompany] = useState<boolean>(false);
 	const getSettableTransaction = useGetSettableTransaction(id || '');
 	const updateTransaction = useUpdateTransaction(id || '');
 	const getCompanies = useGetCompanyItems();
@@ -37,12 +43,22 @@ const EditTransactionPage = () => {
 		getSettableTransaction.isLoading;
 
 	const onFinish = (values: FormTransactionValues) => {
-		updateTransaction.mutate({
-			...transaction,
-			...values,
-			id: transaction?.id || '',
-			date: formatInsertableDate(values.date),
-		});
+		const requestCompanyFromCompanies = companies.find(
+			(company) => company.label === values.company_id.trim()
+		);
+
+		if (requestCompanyFromCompanies) {
+			updateTransaction.mutate({
+				...transaction,
+				...values,
+				company_id: requestCompanyFromCompanies.id,
+				id: transaction?.id || '',
+				date: formatInsertableDate(values.date),
+			});
+		} else {
+			setRequestCompany(values.company_id);
+			setNeedNewCompany(true);
+		}
 	};
 
 	if (updateTransaction.data) {
@@ -86,6 +102,13 @@ const EditTransactionPage = () => {
 						/>
 					)}
 				</SectionComponent>
+				<AddCompanyTransaction
+					open={needNewCompany}
+					requestCompany={requestCompany}
+					userId={userId}
+					getCompanies={getCompanies}
+					onSuccess={() => setNeedNewCompany(false)}
+				/>
 			</div>
 		</>
 	);
