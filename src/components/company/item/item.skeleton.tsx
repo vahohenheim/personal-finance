@@ -10,9 +10,9 @@ export const ItemSkeletonCompanyComponent: FC = () => {
 				<div className={styles.content}>
 					<IconCompanyComponent />
 					<div className={styles.title}>
-						<p className={styles.label}>
+						<div className={styles.label}>
 							<Skeleton.Button active size="small" />
-						</p>
+						</div>
 					</div>
 				</div>
 			</div>

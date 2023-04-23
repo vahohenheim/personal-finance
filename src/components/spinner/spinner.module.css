@@ -1,0 +1,23 @@
+.label {
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 34px;
+    text-align: center;
+}
+
+.logo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--gui-gutter-sm);
+}
+
+.icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    font-size: 18px;
+    text-align: center;
+}

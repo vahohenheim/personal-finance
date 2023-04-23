@@ -5,6 +5,7 @@ import styles from './register.module.css';
 import { toast } from 'react-hot-toast';
 import FooterLayout from '../../layouts/footer/footer';
 import SectionComponent from '../../components/section/section';
+import { Helmet } from 'react-helmet';
 
 const RegisterPage = () => {
 	const {
@@ -54,82 +55,92 @@ const RegisterPage = () => {
 	};
 
 	return (
-		<SectionComponent>
-			<Form
-				name="register"
-				layout="vertical"
-				className={styles.form}
-				initialValues={{ remember: true }}
-				onFinish={onFinish}
-			>
-				<Form.Item
-					label="firstname"
-					name="firstName"
-					rules={[
-						{
-							required: true,
-							message: 'Please input your firstname',
-						},
-					]}
-				>
-					<Input size="large" />
-				</Form.Item>
-				<Form.Item
-					label="lastname"
-					name="lastName"
-					rules={[
-						{
-							required: true,
-							message: 'Please input your lastname',
-						},
-					]}
-				>
-					<Input size="large" />
-				</Form.Item>
-				<Form.Item
-					label="mail address"
-					name="email"
-					rules={[
-						{
-							required: true,
-							message: 'Please input your email',
-						},
-					]}
-				>
-					<Input size="large" disabled={disableForm} />
-				</Form.Item>
-				<Form.Item
-					label="password"
-					name="new-password"
-					rules={[
-						{
-							required: true,
-							message: 'Please input your password',
-						},
-					]}
-				>
-					<Input.Password size="large" disabled={disableForm} />
-				</Form.Item>
-				<Form.Item>
-					<Button
-						type="primary"
-						htmlType="submit"
-						loading={isLoading}
-						block={true}
-						size="large"
+		<>
+			<Helmet>
+				<title>register | finance</title>
+			</Helmet>
+			<div className="container center-block">
+				<SectionComponent>
+					<Form
+						name="register"
+						layout="vertical"
+						className={styles.form}
+						initialValues={{ remember: true }}
+						onFinish={onFinish}
 					>
-						create a account
-					</Button>
-				</Form.Item>
-				<Form.Item>
-					<Link to="/login">
-						<Button type="link" block={true} size="large">
-							connexion
-						</Button>
-					</Link>
-				</Form.Item>
-			</Form>
-		</SectionComponent>
+						<Form.Item
+							label="firstname"
+							name="firstName"
+							rules={[
+								{
+									required: true,
+									message: 'Please input your firstname',
+								},
+							]}
+						>
+							<Input size="large" />
+						</Form.Item>
+						<Form.Item
+							label="lastname"
+							name="lastName"
+							rules={[
+								{
+									required: true,
+									message: 'Please input your lastname',
+								},
+							]}
+						>
+							<Input size="large" />
+						</Form.Item>
+						<Form.Item
+							label="mail address"
+							name="email"
+							rules={[
+								{
+									required: true,
+									message: 'Please input your email',
+								},
+							]}
+						>
+							<Input size="large" disabled={disableForm} />
+						</Form.Item>
+						<Form.Item
+							label="password"
+							name="new-password"
+							rules={[
+								{
+									required: true,
+									message: 'Please input your password',
+								},
+							]}
+						>
+							<Input.Password
+								size="large"
+								disabled={disableForm}
+							/>
+						</Form.Item>
+						<Form.Item>
+							<Button
+								type="primary"
+								htmlType="submit"
+								loading={isLoading}
+								block={true}
+								size="large"
+							>
+								create a account
+							</Button>
+						</Form.Item>
+						<Form.Item>
+							<Link to="/login">
+								<Button type="link" block={true} size="large">
+									connexion
+								</Button>
+							</Link>
+						</Form.Item>
+					</Form>
+				</SectionComponent>
+			</div>
+		</>
 	);
 };
 

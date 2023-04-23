@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 import dayjs from 'dayjs';
 import { formatCurrency } from '../../../utils/format-currency';
 import styles from './detail.module.css';
-import LinkComponent from '../../../components/link/link';
+import LinkComponent from '../../../components/link/link/link';
 import InfosComponent from '../../../components/infos/infos';
 import { Button, Modal } from 'antd';
 import { TransactionType } from '../../../models/transaction';
@@ -30,7 +30,6 @@ const DetailTransactionPage = () => {
 	const getTransaction = useGetTransaction(id || '');
 	const transaction = getTransaction?.data?.transaction[0];
 	const budgetColor = transaction?.budget?.budget_type?.color as string;
-	const isEntry = transaction?.transaction_type === TransactionType.ENTRY;
 	const associateIcon =
 		transaction?.budget?.icon || transaction?.chest?.icon || '';
 	const associateId = transaction?.budget?.id || transaction?.chest?.id || '';

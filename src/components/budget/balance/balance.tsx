@@ -9,6 +9,7 @@ import dayjs from 'dayjs';
 import styles from './balance.module.css';
 import { MonthProgressComponent } from '../../month-progress/month-progress';
 import { DonutComponent } from '../../donut/donut';
+import LinkComponent from '../../link/link/link';
 
 export const BalanceBudgetComponent: FC<BalanceBudgetComponentProps> = ({
 	budgets = [],
@@ -29,9 +30,11 @@ export const BalanceBudgetComponent: FC<BalanceBudgetComponentProps> = ({
 	const percent = ((totalTransactions || 0) * 100) / (totalBudget || 0);
 	if (!isCurrentMonth && !loading) {
 		return (
-			<Button type="primary" block={true} size="large">
-				close {monthLabel} ?
-			</Button>
+			<LinkComponent to={'/close'}>
+				<Button type="primary" block={true} size="large">
+					close {monthLabel} ?
+				</Button>
+			</LinkComponent>
 		);
 	}
 

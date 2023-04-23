@@ -1,14 +1,5 @@
 .list {
     display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--gui-gutter-lg);
-}
-
-.item {
-    display: flex;
-    align-items: center;
-    gap: var(--gui-gutter-sm);
-}
-
-.label {
-    flex-grow: 1;
 }

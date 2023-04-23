@@ -6,7 +6,7 @@ import styles from './patrimony.module.css';
 import { formatCurrency } from '../../utils/format-currency';
 import { ChestService } from '../../services/chest';
 import { PatrimonySkeletonComponent } from './patrimony.skeleton';
-import LinkComponent from '../link/link';
+import LinkComponent from '../link/link/link';
 
 export const PatrimonyComponent: FC<PatrimonyComponentProps> = ({
 	chests = [],

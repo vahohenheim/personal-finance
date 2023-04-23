@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet';
 import SectionComponent from '../../components/section/section';
 import TitleComponent from '../../components/title/title';
-import LinkComponent from '../../components/link/link';
+import LinkComponent from '../../components/link/link/link';
 import { Button } from 'antd';
 import styles from './not-found.module.css';
 import classNames from 'classnames';

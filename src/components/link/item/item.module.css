@@ -1,0 +1,21 @@
+.link {
+    text-decoration: none;
+}
+
+.link:hover .label {
+    color: var(--gui-color-primary-active-darken);
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.label {
+    flex-grow: 1;
+    font-weight: 500;
+    font-size: var(--gui-font-size-large);
+}

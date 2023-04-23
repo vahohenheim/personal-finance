@@ -42,9 +42,7 @@ export class ListTransactionsService {
 		transactionByDay: Record<string, Array<Transaction>>,
 		transaction: Transaction
 	) {
-		const date = dayjs(transaction.created_at as string).format(
-			'YYYY-MM-DD'
-		);
+		const date = dayjs(transaction.date as string).format('YYYY-MM-DD');
 		if (!transactionByDay[date]) {
 			transactionByDay[date] = [transaction];
 		} else {

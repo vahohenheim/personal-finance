@@ -9,6 +9,10 @@
     color: var(--gui-color-primary-active-darken);
 }
 
+.link:hover svg {
+    fill: var(--gui-color-primary-active-darken);
+}
+
 .link.active {
     color: var(--gui-color-primary);
 }

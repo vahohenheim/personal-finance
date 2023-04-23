@@ -4,7 +4,7 @@ import TitleComponent from '../../../components/title/title';
 import { Helmet } from 'react-helmet';
 import Section from '../../../components/section/section';
 import styles from './detail.module.css';
-import LinkComponent from '../../../components/link/link';
+import LinkComponent from '../../../components/link/link/link';
 import { ListTransactionsComponent } from '../../../components/transaction';
 import { Button } from 'antd';
 import { DetailCoverComponent } from '../../../components/detail-cover/detail-cover';

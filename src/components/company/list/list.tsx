@@ -15,6 +15,7 @@ export const ListCompaniesComponent: FC<ListCompaniesComponentProps> = ({
 	const [filteredCompanies, setFilteredCompanies] = useState([...companies]);
 
 	useEffect(() => {
+		console.log('useEffectcompanies');
 		setInitialCompanies(companies);
 		setFilteredCompanies(companies);
 	}, [companies]);

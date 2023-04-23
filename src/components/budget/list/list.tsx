@@ -4,10 +4,12 @@ import { Empty } from 'antd';
 import { ListBudgetComponentProps } from './list.model';
 import { ItemBudgetComponent } from '../item/item';
 import { ListSkeletonBudgetsComponent } from './list.skeleton';
+import { ItemInputBudgetComponent } from '../item/item.input';
 
 export const ListBudgetComponent: FC<ListBudgetComponentProps> = ({
 	budgets = [],
 	loading = false,
+	settable = false,
 }) => {
 	const empty = !budgets || budgets.length === 0;
 
@@ -24,7 +26,11 @@ export const ListBudgetComponent: FC<ListBudgetComponentProps> = ({
 				) : (
 					budgets?.map((budget) => (
 						<div key={budget.id as string}>
-							<ItemBudgetComponent budget={budget} />
+							{settable ? (
+								<ItemInputBudgetComponent budget={budget} />
+							) : (
+								<ItemBudgetComponent budget={budget} />
+							)}
 						</div>
 					))
 				)}

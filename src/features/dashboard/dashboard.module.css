@@ -4,3 +4,7 @@
     margin-top: var(--gui-gutter-base);
     gap: var(--gui-gutter-base);
 }
+
+.balance {
+    width: 100%;
+}

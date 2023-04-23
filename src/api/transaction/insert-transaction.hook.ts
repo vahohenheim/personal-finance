@@ -46,6 +46,7 @@ export const useInsertTransaction = (userId: string) => {
 				QUERIES.TRANSACTIONS,
 				QUERIES.TRANSACTIONS_BY_MONTH,
 				QUERIES.BUDGETS,
+				QUERIES.BUDGET_ITEMS,
 				QUERIES.MONTH_BUDGETS,
 			]);
 		},

@@ -18,6 +18,8 @@ export const ListTransactionsComponent: FC<ListTransactionsComponentProps> = ({
 		transactionType,
 		max,
 	});
+
+	console.log('transactionByDayByMonth', transactionByDayByMonth);
 	return (
 		<div className={styles.list}>
 			{loading ? (

@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Section from '../../../components/section/section';
 import styles from './detail.module.css';
-import LinkComponent from '../../../components/link/link';
+import LinkComponent from '../../../components/link/link/link';
 import type { Transaction } from '../../../gql/graphql';
 import { formatCurrency } from '../../../utils/format-currency';
 import { ListTransactionsComponent } from '../../../components/transaction';
