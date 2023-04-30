@@ -6,6 +6,9 @@ import { ItemChestComponentProps } from './item.model';
 import styles from './item.module.css';
 import { DonutComponent } from '../../donut/donut';
 import { ChestService } from '../../../services/chest';
+import { ChestType } from '../../../models/chest';
+import { CalendarIcon } from '../../../icons/calendar';
+import { formatDate } from '../../../utils/format-date';
 
 export const ItemChestComponent: FC<ItemChestComponentProps> = ({ chest }) => {
 	const hasExpectedAmount = !!chest.amount;
@@ -39,6 +42,14 @@ export const ItemChestComponent: FC<ItemChestComponentProps> = ({ chest }) => {
 								''
 							)}
 						</p>
+						{chest.type === ChestType.PROJECT ? (
+							<p className={styles.date}>
+								<CalendarIcon height={14} width={14} />
+								{formatDate(chest?.end_at)}
+							</p>
+						) : (
+							''
+						)}
 					</div>
 				</div>
 			</Card>

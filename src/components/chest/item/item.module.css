@@ -11,7 +11,7 @@
 .body {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     flex-grow: 1;
     gap: var(--gui-gutter-sm);
 }
@@ -39,8 +39,17 @@
     font-size: var(--gui-font-size-large);
     line-height: 17px;
     color: var(--gui-color-white);
+    margin-top: var(--gui-gutter-xs);
 }
 
 .expectedAmount {
     opacity: .6;
+}
+
+.date {
+    display: flex;
+    align-items: center;
+    gap: var(--gui-gutter-xs);
+    margin-top: var(--gui-gutter-xs);
+    font-size: var(--gui-font-size-small);
 }

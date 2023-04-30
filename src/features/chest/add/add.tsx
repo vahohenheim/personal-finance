@@ -16,12 +16,12 @@ const AddChestPage = () => {
 	const [form] = Form.useForm();
 	const navigate = useNavigate();
 	const insertChest = useInsertChest(userId);
-
 	const onFinish = (values: FormChestValues) => {
 		insertChest.mutate({
 			icon: values.icon,
 			label: values.label,
 			amount: values.amount,
+			type: values.type as string,
 			start_at: formatInsertableDate(values.start_at),
 			end_at: formatInsertableDate(values.end_at),
 		});

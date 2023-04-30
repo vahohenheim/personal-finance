@@ -26,6 +26,7 @@ const EditChestPage = () => {
 			icon: values.icon,
 			label: values.label,
 			amount: values.amount,
+			type: values.type as string,
 			start_at: formatInsertableDate(values.start_at),
 			end_at: formatInsertableDate(values.end_at),
 		});

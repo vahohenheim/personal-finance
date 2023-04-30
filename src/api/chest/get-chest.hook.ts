@@ -13,6 +13,7 @@ const GET_CHEST_QUERY = graphql(`
 			amount
 			start_at
 			end_at
+			type
 			transactions(order_by: { date: desc }) {
 				amount
 				transaction_type
