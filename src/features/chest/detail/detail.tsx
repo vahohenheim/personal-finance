@@ -15,7 +15,8 @@ import { ChestIconComponent } from '../../../components/chest/icon/icon';
 import { ChestService } from '../../../services/chest';
 import InfosComponent from '../../../components/infos/infos';
 import { Info } from '../../../components/infos/infos.model';
-import dayjs from 'dayjs';
+import { ChestType } from '../../../models/chest';
+import { formatDate } from '../../../utils/format-date';
 
 const DetailChestPage = () => {
 	const { id } = useParams();
@@ -33,16 +34,27 @@ const DetailChestPage = () => {
 		return <DetailEmptyComponent />;
 	}
 
-	const infos: Array<Info> = [
+	const projectInfos: Array<Info> = [
 		{
 			label: 'Start date',
-			value: dayjs(chest?.start_at as string).format('DD MMMM YYYY'),
+			value: formatDate(chest?.start_at as string),
 		},
 		{
 			label: 'End date',
-			value: dayjs(chest?.end_at as string).format('DD MMMM YYYY'),
+			value: formatDate(chest?.end_at as string),
 		},
 	];
+
+	const infos: Array<Info> = [
+		{
+			label: 'type',
+			value: chest?.type,
+		},
+	];
+
+	if (chest?.type === ChestType.PROJECT) {
+		infos.push(...projectInfos);
+	}
 
 	return (
 		<>

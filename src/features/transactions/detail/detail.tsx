@@ -21,6 +21,7 @@ import { TransactionEntryIconComponent } from '../../../components/transaction';
 import { ChestIconComponent } from '../../../components/chest/icon/icon';
 import { TransactionSavingIconComponent } from '../../../components/transaction/saving-icon/saving-icon';
 import { Info } from '../../../components/infos/infos.model';
+import { formatDate } from '../../../utils/format-date';
 
 const DetailTransactionPage = () => {
 	const { id } = useParams();
@@ -89,9 +90,7 @@ const DetailTransactionPage = () => {
 		const infos: Array<Info> = [
 			{
 				label: 'date',
-				value: dayjs(transactionInfos?.date as string).format(
-					'DD MMMM YYYY'
-				),
+				value: formatDate(transactionInfos?.date as string),
 			},
 		];
 

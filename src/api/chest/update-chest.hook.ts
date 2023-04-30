@@ -10,6 +10,7 @@ const UPDATE_CHEST_MUTATION = graphql(`
 		$id: uuid!
 		$icon: String!
 		$label: String!
+		$type: String!
 		$amount: float8!
 		$start_at: timestamptz!
 		$end_at: timestamptz!
@@ -19,6 +20,7 @@ const UPDATE_CHEST_MUTATION = graphql(`
 			_set: {
 				label: $label
 				icon: $icon
+				type: $type
 				amount: $amount
 				start_at: $start_at
 				end_at: $end_at
@@ -27,6 +29,7 @@ const UPDATE_CHEST_MUTATION = graphql(`
 			id
 			icon
 			label
+			type
 			amount
 			start_at
 			end_at

@@ -1,7 +1,8 @@
 import { FC } from 'react';
-import { Button, DatePicker, Form, Input, InputNumber } from 'antd';
+import { Button, DatePicker, Form, Input, InputNumber, Radio } from 'antd';
 import { FormChestComponentProps } from './form.model';
 import dayjs from 'dayjs';
+import { ChestType } from '../../../models/chest';
 
 export const FormChestComponent: FC<FormChestComponentProps> = ({
 	onFinish,
@@ -27,6 +28,16 @@ export const FormChestComponent: FC<FormChestComponentProps> = ({
 			layout="vertical"
 			onFinish={onFinish}
 		>
+			<Form.Item label="Define type" name="type">
+				<Radio.Group size="large">
+					<Radio.Button value={ChestType.PROJECT}>
+						{ChestType.PROJECT}
+					</Radio.Button>
+					<Radio.Button value={ChestType.BUCKET}>
+						{ChestType.BUCKET}
+					</Radio.Button>
+				</Radio.Group>
+			</Form.Item>
 			<Form.Item label="Define icon" name="icon">
 				<Input size="large" placeholder="typing icon" max={1} />
 			</Form.Item>

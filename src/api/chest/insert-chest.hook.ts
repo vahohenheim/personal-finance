@@ -16,6 +16,7 @@ const INSERT_CHEST_MUTATION = graphql(`
 				amount
 				start_at
 				end_at
+				type
 			}
 		}
 	}
@@ -31,6 +32,7 @@ export const useInsertChest = (userId: string) => {
 					amount: chest.amount,
 					start_at: chest.start_at,
 					end_at: chest.end_at,
+					type: chest.type,
 					user_id: userId,
 				},
 			});
