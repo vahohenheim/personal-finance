@@ -10,7 +10,7 @@ const GET_CHEST_ITEMS_QUERY = graphql(`
 			id
 			icon
 			label
-            type
+			type
 		}
 	}
 `);
